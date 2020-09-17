@@ -1,0 +1,249 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Options - Admin | documentation</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="favicon.ico" />
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <style>
+        body {
+            padding-top: 80px;
+            padding-bottom: 20px;
+        }
+
+        .affix {
+            top: 80px;
+        }
+    </style>
+    <link rel="stylesheet" href="css/main.css">
+
+    <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+</head>
+
+<body>
+    <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">
+                    <img src="../images/logo-light.svg" alt="Options" height="30" />
+                </a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <div class="navbar-form navbar-right">
+                    <a href="https://salttechno.ticksy.com/" target="_blank" class="btn btn-default">Online Support</a>
+                </div>
+            </div>
+            <!--/.navbar-collapse -->
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row" style="position: relative;">
+            <div class="col-md-3" >
+                <div class="list-group table-of-contents">
+                    <a class="list-group-item" href="#html">Folder & HTML Structure</a>
+                    <a class="list-group-item" href="#css">CSS, Fonts & Javascripts</a>
+                    <a class="list-group-item" href="#code">Header Background</a>
+                    <a class="list-group-item" href="#credits">Credits</a>
+                </div>
+            </div>
+
+            <div class="col-md-9">
+                <div class="jumbotron" id="home">
+                    <div class="container">
+                        <h1>Thank You!</h1>
+                        <p>Thank you for purchasing Options - Admin Template. This documentation will help you understand basic structure of the template. If you have any questions that are beyond the scope of this help file, you can create support
+                            ticket at
+                            <a href="https://salttechno.ticksy.com/" target="_blank">https://salttechno.ticksy.com/</a> or email us on support@themesease.com.</p>
+                        <p>
+                            <small class="mr10">Created on: 19-Apr-2017</small>
+                            <small class="mr10">Version: 1.0</small>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="alert alert-dismissible alert-warning">
+                    <!-- <button type="button" class="close" data-dismiss="alert">&times;</button> -->
+                    <h4>For Quicker Support: </h4>
+                    <p>We have dedicated team for support. For quicker response, we request you to use online ticket system at <a href="https://salttechno.ticksy.com/" target="_blank">https://salttechno.ticksy.com/</a>. Email support & comment on ThemeForest might take some extra time for turnaround.</p>
+                </div>
+
+                <div class="pt60" id="html">
+                    <h4>Folder & HTML Structure</h4>
+                    <p>'Options' is a responsive Admin Site-Template. So, you will need all .html files & supporting .css, .js, .php files with some images. 'documentation' folder contains help document and other files are actual template files. Structure of your folder would look like following image.</p>
+                    <img src="img/folder-structure.png" alt="Folder Structure" width="280">
+                    <ul class="mt20">
+                        <li>All .html files are in the root directory.</li>
+                        <li>Separate folders are created for .css, .js, .scss files, for fonts & for images.</li>
+                        <li>All fonts other than web-fonts are located in fonts folder.</li>
+                        <li>All third party plugins or libraries are located in respective folders.</li>
+                    </ul>
+                    <h6 class="mt30">What do you need to upload to server?</h6>
+                    <p>You will need to upload .html files along with supporting folders provided with this theme. Uploading complete HTML folder (provided with your download) would make it easy for you to setup the theme as shown on demo link.</p>
+                    <h5 class="mt30">HTML Structure</h5>
+                    <p>We are using Bootstrap framework. So, basic HTML structure is same as it is used in Bootstrap.</p>
+                    <p>Following is the basic structure of home page. You can change it as per your need.</p>
+                    <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+    &lt;head&gt;
+        &lt;!-- Bootstrap & Other CSS files --&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;header&gt;
+            &lt;!-- Logo & social links in .container --&gt;
+            &lt;nav&gt;
+                &lt;!-- Navigation Links --&gt;
+            &lt;/nav&gt;
+        &lt;/header&gt;
+
+        &lt;section&gt;
+            &lt;!-- page content --&gt;
+        &lt;/section&gt;
+
+        &lt;div&gt;
+            &lt;!-- Footer --&gt;
+        &lt;/div&gt;
+        &lt;!-- Bootstrap, jQuery & other js files --&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+                    </pre>
+                </div>
+
+                <div class="pt60" id="css">
+                    <h4>CSS, Fonts & Javascripts</h4>
+                    <p>All plugins / vendor css files are in folder named 'css'. Our theme's main.css file is generated via Sass. main.scss, bootstrap-sass, bourbon are stored in another folder named 'sass'. main.scss file is complied to save as main.css in css folder. We also compress the css file and save it in main.min.css file.</p>
+                    <pre>
+&lt;!-- ========== COMMON STYLES ========== --&gt;
+&lt;link rel="stylesheet" href="css/bootstrap.min.css" media="screen" &gt;
+&lt;link rel="stylesheet" href="css/font-awesome.min.css" media="screen" &gt;
+&lt;link rel="stylesheet" href="css/animate.min.css" media="screen"&gt;
+&lt;link rel="stylesheet" href="css/lobipanel/lobipanel.min.css" media="screen"&gt;
+
+&lt;!-- ========== PAGE STYLES ========== --&gt;
+&lt;link rel="stylesheet" href="css/prism/prism.css" media="screen" &gt; &lt;!-- USED FOR DEMO HELP - YOU CAN REMOVE IT --&gt;
+&lt;link rel="stylesheet" href="css/toastr/toastr.min.css" media="screen" &gt;
+&lt;link rel="stylesheet" href="css/icheck/skins/line/blue.css" &gt;
+&lt;link rel="stylesheet" href="css/icheck/skins/line/red.css" &gt;
+&lt;link rel="stylesheet" href="css/icheck/skins/line/green.css" &gt;
+
+&lt;!-- ========== THEME CSS ========== --&gt;
+&lt;link rel="stylesheet" href="css/main.min.css" media="screen" &gt;
+                    </pre>
+                    <p>We have view / edit main.scss file stored in sass folder if you are comfortable with it.</p>
+                    <p>Few css or js files are required when you are using particular plugin / library. </p>
+
+
+                    <h5 class="mt30">Fonts</h5>
+                    We have used single web fonts for text in this theme. 'Poppins' is used for headlines as well as body text. Following line of code used in main.scss fetches web fonts from Google.
+                    <pre>
+@import 'https://fonts.googleapis.com/css?family=Poppins:300,400,600';
+                    </pre>
+                    <p>You can change this template's fonts very easily & quickly using main.scss file. Add font in above line to fetch from Google. We have used two variables in scss file. <code>$st-body-font</code> is used for body font and <code>$st-heading-font</code> is used for heading font. Just replace these font names in these variables and fonts will be replaced in complete template.</p>
+
+                    <p>We have used two different font icons for wider variety of icons. Following two lines are for these font icons:</p>
+                    <pre>
+&lt;link rel="stylesheet" href="css/font-awesome.min.css" media="screen" &gt;
+                    </pre>
+
+                    <h5 class="mt30">Javascripts</h5>
+                    <p>main.js & main.min.js files are located in folder named 'js'. This file is used for theme's common javascript functions. Other vendor js files are also in same folder and we call them in .html file before end of body tag.</p>
+                    <pre>
+&lt;!-- ========== COMMON JS FILES ========== --&gt;
+&lt;script src="js/jquery/jquery-2.2.4.min.js"&gt;&lt;/script&gt;
+&lt;script src="js/jquery-ui/jquery-ui.min.js"&gt;&lt;/script&gt;
+&lt;script src="js/bootstrap/bootstrap.min.js"&gt;&lt;/script&gt;
+&lt;script src="js/pace/pace.min.js"&gt;&lt;/script&gt;
+&lt;script src="js/lobipanel/lobipanel.min.js"&gt;&lt;/script&gt;
+&lt;script src="js/iscroll/iscroll.js"&gt;&lt;/script&gt;
+
+&lt;!-- ========== PAGE JS FILES ========== --&gt;
+&lt;script src="js/prism/prism.js"&gt;&lt;/script&gt;
+&lt;script src="js/waypoint/waypoints.min.js"&gt;&lt;/script&gt;
+&lt;script src="js/counterUp/jquery.counterup.min.js"&gt;&lt;/script&gt;
+&lt;script src="js/amcharts/amcharts.js"&gt;&lt;/script&gt;
+&lt;script src="js/amcharts/serial.js"&gt;&lt;/script&gt;
+&lt;script src="js/amcharts/plugins/export/export.min.js"&gt;&lt;/script&gt;
+&lt;link rel="stylesheet" href="js/amcharts/plugins/export/export.css" type="text/css" media="all" /&gt;
+&lt;script src="js/amcharts/themes/light.js"&gt;&lt;/script&gt;
+&lt;script src="js/toastr/toastr.min.js"&gt;&lt;/script&gt;
+&lt;script src="js/icheck/icheck.min.js"&gt;&lt;/script&gt;
+
+&lt;!-- ========== THEME JS ========== --&gt;
+&lt;script src="js/main.js"&gt;&lt;/script&gt;
+&lt;script src="js/production-chart.js"&gt;&lt;/script&gt;
+&lt;script src="js/traffic-chart.js"&gt;&lt;/script&gt;
+&lt;script src="js/task-list.js"&gt;&lt;/script&gt;
+                    </pre>
+                </div>
+
+
+
+
+                <div class="pt60" id="code">
+                    <h4>Code Toggle</h4>
+                    <p>We have made it easy for you to copy components' code without searching for it in .html file. Just click on 'Toggle Code' button in upper right corner to see component's code. You can just copy and paste it in your .html file.</p>
+
+                </div>
+
+
+
+                <div class="pt60" id="credits">
+                    <h4>Credits</h4>
+                    <ul>
+                        <li>jQuery - <a href="http://jquery.com/" target="_blank">http://jquery.com/</a></li>
+                        <li>Bootstrap - <a href="http://getbootstrap.com/" target="_blank">http://getbootstrap.com/</a> </li>
+                        <li>animate.css - <a href="https://daneden.github.io/animate.css/" target="_blank">https://daneden.github.io/animate.css/</a></li>
+                        <li>FontAwesome - <a href="http://fortawesome.github.io/Font-Awesome/" target="_blank">http://fortawesome.github.io/Font-Awesome/</a></li>
+                        <li>jQuery.Form - <a href="http://malsup.com/jquery/form/" target="_blank">http://malsup.com/jquery/form/</a></li>
+                        <li>amCharts - <a href="https://www.amcharts.com/" target="_blank">https://www.amcharts.com/</a></li>
+                        <li>counterUp - <a href="https://github.com/bfintal/Counter-Up" target="_blank">https://github.com/bfintal/Counter-Up</a></li>
+                        <li>DataTables - <a href="https://datatables.net/" target="_blank">https://datatables.net/</a></li>
+                        <li>CKEditor - <a href="http://ckeditor.com/" target="_blank">http://ckeditor.com/</a></li>
+                        <li>Pixabay - <a href="https://pixabay.com" target="_blank">https://pixabay.com</a></li>
+                    </ul>
+                </div>
+
+                <!-- <div class="pt80" id="" style="height: 500px;">
+
+                </div> -->
+            </div>
+        </div>
+
+        <hr>
+
+        <footer>
+            <p>&copy; Salt Web Technologies Pvt Ltd 2017</p>
+        </footer>
+    </div>
+    <!-- /container -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script>
+        window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')
+    </script>
+
+    <script src="js/vendor/bootstrap.min.js"></script>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>

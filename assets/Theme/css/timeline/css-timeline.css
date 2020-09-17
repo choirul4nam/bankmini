@@ -1,0 +1,128 @@
+/* apply a natural box layout model to all elements, but allowing components to change */
+html {
+  box-sizing: border-box;
+  font-family: georgia;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+img {
+  max-width: 100%;
+}
+
+.css-timeline {
+  text-align: center;
+}
+.css-timeline .year {
+  display: inline-block;
+  font-size: 36px;
+  font-weight: bold;
+  position: relative;
+}
+.css-timeline .year span {
+  display: inline-block;
+  padding-bottom: 6px;
+}
+.css-timeline .year:after {
+  content: "";
+  display: block;
+  width: 80%;
+  margin: auto;
+  height: 1px;
+  background: green;
+}
+.css-timeline .year--end:before {
+  content: "";
+  display: block;
+  width: 80%;
+  margin: auto;
+  height: 1px;
+  background: green;
+}
+.css-timeline .year--end:after {
+  content: none;
+}
+.css-timeline .days {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.css-timeline .days .day {
+  width: 100%;
+  float: left;
+}
+.css-timeline .days .day .events {
+  position: relative;
+  float: left;
+  border-right: 1px solid green;
+  padding: 30px;
+  text-align: right;
+  width: 50%;
+}
+.css-timeline .days .day .events:after {
+  content: "";
+  width: 40%;
+  display: inline-block;
+  height: 1px;
+  background: green;
+  position: absolute;
+  right: 0;
+}
+.css-timeline .days .day .events .date {
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  transform: translateY(-50%);
+  padding: 30px;
+  text-align: left;
+  color: green;
+  font-size: 20px;
+  white-space: nowrap;
+}
+.css-timeline .days .day .events .day__img {
+  margin-right: -30px;
+  position: relative;
+  overflow: hidden;
+}
+.css-timeline .days .day .events .day__img img {
+  display: block;
+  float: right;
+}
+.css-timeline .days .day .events .day__img .caption {
+  position: absolute;
+  margin: 0;
+  bottom: 0;
+  right: 0;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+}
+.css-timeline .days .day:nth-child(odd) .events {
+  width: calc(50% + 1px);
+  float: right;
+  border-right: 0;
+  border-left: 1px solid green;
+  text-align: left;
+}
+.css-timeline .days .day:nth-child(odd) .events:after {
+  right: auto;
+  left: 0;
+}
+.css-timeline .days .day:nth-child(odd) .events .date {
+  left: auto;
+  right: 100%;
+  text-align: right;
+}
+.css-timeline .days .day:nth-child(odd) .events .day__img {
+  margin-right: auto;
+  margin-left: -30px;
+}
+.css-timeline .days .day:nth-child(odd) .events .day__img img {
+  float: left;
+}
+.css-timeline .days .day:nth-child(odd) .events .day__img .caption {
+  right: auto;
+  left: 0;
+}
