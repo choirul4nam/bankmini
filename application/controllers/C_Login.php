@@ -23,9 +23,9 @@ class C_Login extends CI_Controller {
 		$user = $this->M_login->get($username);
 
 		if(empty($user)){
-			// $this->session->set_flashdata('pesan','salah');
-			// $this->load->view('v_login');
-			echo "kosong";
+			echo "<script>
+					alert('Data yang anda masukkan salah');history.go(-1);</script>";
+
 		} else {
 		    if($password == $user->password){ // Jika password yang diinput sama dengan password yang didatabase
         		$session = array(
@@ -40,6 +40,9 @@ class C_Login extends CI_Controller {
 		        redirect('Welcome'); // Redirect ke halaman welcome
 		    }else{
 		        $this->session->set_flashdata('message', 'Password salah'); // Buat session flashdata
+		        echo "<script>
+					alert('Selamat Datang Di Website Kami')
+				</script>";
 		        redirect('C_Login'); // Redirect ke halaman login
 		    }
    		}

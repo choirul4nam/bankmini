@@ -73,20 +73,12 @@
                                                     </form>
 
                                                     <hr>
-
-                                                    <h5 class="text-center mt-10 mb-20">Or Login With</h5>
-
-                                                    <div class="text-center">
-                                                        <button type="button" class="btn btn-primary bg-primary-600 btn-labeled">Facebook<span class="btn-label btn-label-right"><i class="fa fa-facebook"></i></span></button>
-                                                        <button type="button" class="btn btn-primary bg-primary-300 btn-labeled ml-5">Twitter<span class="btn-label btn-label-right"><i class="fa fa-twitter"></i></span></button>
-                                                        <button type="button" class="btn btn-danger bg-danger-300 btn-labeled ml-5">Google<span class="btn-label btn-label-right"><i class="fa fa-google-plus"></i></span></button>
-                                                    </div>
                                                     <!-- /.text-center -->
 
                                                 </div>
                                             </div>
                                             <!-- /.panel -->
-                                            <p class="text-muted text-center"><small>Copyright © SaltTechno 2017</small></p>
+                                            <p class="text-muted text-center"><small>Development By &copy; 2020 <a href="https://hosterweb.co.id">HOSTERWEB INDONESIA</a></small></p>
                                         </div>
                                         <!-- /.col-md-11 -->
                                     </div>
