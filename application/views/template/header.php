@@ -60,7 +60,7 @@
                 						<li><a href="<?php echo base_url() ?>assets/Theme/#"><i class="fa fa-cog"></i> Settings</a></li>
                 						<li><a href="<?php echo base_url() ?>assets/Theme/#"><i class="fa fa-sliders"></i> Account Details</a></li>
                 						<li role="separator" class="divider"></li>
-                						<li><a href="<?php echo base_url() ?>assets/Theme/#" class="color-danger text-center"><i class="fa fa-sign-out"></i> Logout</a></li>
+                						<li><a href="<?php echo site_url('C_Login/logout'); ?>" class="color-danger text-center"><i class="fa fa-sign-out"></i> Logout</a></li>
                 					</ul>
                 				</li>
                 			</ul>
