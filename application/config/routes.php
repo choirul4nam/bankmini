@@ -50,5 +50,42 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 $route['default_controller'] = 'C_Login';
+
+$route['login'] = 'c_login';
+
+//route siswa
+$route['siswa-det/(:any)'] = 'siswa/siswa_detail/$1';
+$route['siswa-add'] = 'siswa/siswa_add';
+$route['siswa-hps/(:any)'] = 'siswa/siswa_delete/$1';
+$route['siswa-edt/(:any)'] = 'siswa/siswa_edit/$1';
+$route['siswa-grad'] = 'siswa/siswa_graduate/';
+//akhir route siswa
+
+//route kelas
+$route['kelas-add'] = 'kelas/kelas_add';
+$route['kelas-hps/(:any)'] = 'kelas/kelas_delete/$1';
+$route['kelas-edt/(:any)'] = 'kelas/kelas_edit/$1';
+// akhir route kelas
+
+//route transaksi
+$route['transaksi-add'] = 'transaksi/transaksi_add';
+$route['transaksi-hps/(:any)'] = 'transaksi/transaksi_delete/$1';
+$route['transaksi-edt/(:any)'] = 'transaksi/transaksi_edit/$1';
+//akhir route transaksi
+
+//tipe user
+$route['tipeuser-det/(:any)'] = 'tipeuser/detail/$1';
+$route['tipeuser-add'] = 'tipeuser/tambahData';
+$route['tipeuser-ubah/(:any)'] = 'tipeuser/ubahData/$1';
+//tahun akademik
+$route['tahunakademik-det/(:any)'] = 'tahunakademik/detail/$1';
+$route['tahunakademik-add'] = 'tahunakademik/tambahdata';
+$route['tahunakademik-ubah/(:any)'] = 'tahunakademik/ubahdata/$1';
+//staff
+$route['staff-add'] = 'staff/tambahdata';
+$route['staff-det/(:any)'] = 'staff/detail/$1';
+$route['staff-ubah/(:any)'] = 'staff/ubahdata/$1';
+
+
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

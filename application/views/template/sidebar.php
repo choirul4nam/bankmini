@@ -18,8 +18,8 @@
                                     <li class="nav-header">
                                         <span class="">Main Category</span>
                                     </li>
-                                    <li class="has-children">
-                                        <a href=""><i class="fa fa-dashboard"></i> <span>Dashboard</span> <i class="fa fa-angle-right arrow"></i></a>
+                                    <li >
+                                        <a href="<?= base_url('') ?>"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
                                     </li>
 
                                     <li class="nav-header">

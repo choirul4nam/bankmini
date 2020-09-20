@@ -24,13 +24,13 @@ class Welcome extends CI_Controller {
         $this->load->helper(array('form','url'));
         $this->load->library('session');
         $this->load->model('M_Setting');
+        cek_login_user();
     }
 
 	public function index()
-	{
-		$this->load->view('template/header');
-		// $id = $this->session->userdata('tipeuser');
+	{	
         $data['menu'] = $this->M_Setting->getmenu1();
+		$this->load->view('template/header');
 		$this->load->view('template/sidebar', $data);
 		$this->load->view('template/index');
 		$this->load->view('template/footer');

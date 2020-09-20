@@ -15,9 +15,11 @@
         <!-- ========== PAGE STYLES ========== -->
         <link rel="stylesheet" href="<?php echo base_url() ?>assets/Theme/css/prism/prism.css" media="screen" > <!-- USED FOR DEMO HELP - YOU CAN REMOVE IT -->
         <link rel="stylesheet" href="<?php echo base_url() ?>assets/Theme/css/toastr/toastr.min.css" media="screen" >
+        <link rel="stylesheet" href="<?php echo base_url() ?>assets/Theme/css/icheck/skins/square/blue.css" >
+        <link rel="stylesheet" href="<?php echo base_url() ?>assets/Theme/css/icheck/skins/square/green.css" >
+        <link rel="stylesheet" href="<?php echo base_url() ?>assets/Theme/css/icheck/skins/square/red.css" >
+        <link rel="stylesheet" href="<?php echo base_url() ?>assets/Theme/css/icheck/skins/flat/flat.css" >
         <link rel="stylesheet" href="<?php echo base_url() ?>assets/Theme/css/icheck/skins/line/blue.css" >
-        <link rel="stylesheet" href="<?php echo base_url() ?>assets/Theme/css/icheck/skins/line/red.css" >
-        <link rel="stylesheet" href="<?php echo base_url() ?>assets/Theme/css/icheck/skins/line/green.css" >
         <link rel="stylesheet" href="<?php echo base_url() ?>assets/Theme/css/bootstrap-tour/bootstrap-tour.css" >
 
         <!-- ========== THEME CSS ========== -->
@@ -45,20 +47,19 @@
 
                 			<ul class="nav navbar-nav navbar-right" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
                 				<li class="dropdown tour-two">
-                					<a href="<?php echo base_url() ?>assets/Theme/#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">John Doe <span class="caret"></span></a>
+                					<a href="<?php echo base_url() ?>assets/Theme/#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?= $this->session->userdata('nama'); ?><span class="caret"></span></a>
                 					<ul class="dropdown-menu profile-dropdown">
                 						<li class="profile-menu bg-gray">
                 						    <div class="">
-                						        <img src="http://placehold.it/60/c2c2c2?text=User" alt="John Doe" class="img-circle profile-img">
+                						        <img src="<?php echo base_url() ?>assets/Theme/images/avatar-1.svg" alt="John Doe" class="img-circle profile-img">
                                                 <div class="profile-name">
-                                                    <h6>John Doe</h6>
+                                                    <h6><?= $this->session->userdata('nama'); ?></h6>
                                                     <a href="<?php echo base_url() ?>assets/Theme/pages-profile.html">View Profile</a>
                                                 </div>
                                                 <div class="clearfix"></div>
                 						    </div>
                 						</li>
-                						<li><a href="<?php echo base_url() ?>assets/Theme/#"><i class="fa fa-cog"></i> Settings</a></li>
-                						<li><a href="<?php echo base_url() ?>assets/Theme/#"><i class="fa fa-sliders"></i> Account Details</a></li>
+                						<li><a href=""><i class="fa fa-cog"></i> Settings</a></li>
                 						<li role="separator" class="divider"></li>
                 						<li><a href="<?php echo site_url('C_Login/logout'); ?>" class="color-danger text-center"><i class="fa fa-sign-out"></i> Logout</a></li>
                 					</ul>

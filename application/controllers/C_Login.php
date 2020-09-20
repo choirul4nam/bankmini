@@ -7,11 +7,14 @@ class C_Login extends CI_Controller {
 		parent::__construct();
 		
 		$this->load->model('M_login');
-		$this->load->library('session');
+		$this->load->library('session');		
 	}
 
 	function index()
 	{
+		if ($this->session->userdata('login') === true) {			
+			redirect('welcome');
+		}
 		$this->load->view('v_login');
 		
 	}
@@ -23,27 +26,54 @@ class C_Login extends CI_Controller {
 		$user = $this->M_login->get($username);
 
 		if(empty($user)){
-			echo "<script>
+			$siswa = $this->M_login->getsiswa($username);
+			if(empty($siswa)){
+				echo "<script>
 					alert('Data yang anda masukkan salah');history.go(-1);</script>";
-
+			}else{
+				if($password == $siswa->password){
+		    		$session = array(
+			          'authenticated'=>true, 
+			          'nis'=> $username, 
+			          'nama'=> $siswa->namasiswa,			          
+			          'id_user'=> $username,
+			          'tipeuser'=>$siswa->id_tipeuser,
+			          'login' => true
+			        );
+			        $this->session->set_userdata($session);
+			        $this->M_login->userlog();
+			        redirect('Welcome'); 
+					// echo  'siswa login';
+			    }else{
+			        // $this->session->set_flashdata('message', 'Password salah'); // Buat session flashdata
+			        echo "<script>
+						alert('Password salah');history.go(-1);
+					</script>";
+			        // redirect('C_Login'); 
+			        // Redirect ke halaman login
+			    }	
+			}	
+			
 		} else {
 		    if($password == $user->password){ // Jika password yang diinput sama dengan password yang didatabase
         		$session = array(
 		          'authenticated'=>true, // Buat session authenticated dengan value true
-		          'nopegawai'=>$user->username,  // Buat session nip
-		          'nama'=>$user->nama,
-		          'id_user'=>$user->id_user, // Buat session authenticated
-		          'tipeuser'=>$user->id_tipeuser
+		          'nopegawai'=> $username,  // Buat session nip
+		          'nama'=> $user->nama,
+		          'id_user'=>$user->id_staf, // Buat session authenticated
+		          'tipeuser'=>$user->id_tipeuser,
+		          'login' => true
 		        );
 		        $this->session->set_userdata($session); // Buat session sesuai $session
 		        $this->M_login->userlog();
 		        redirect('Welcome'); // Redirect ke halaman welcome
 		    }else{
-		        $this->session->set_flashdata('message', 'Password salah'); // Buat session flashdata
+		        // $this->session->set_flashdata('message', 'Password salah'); // Buat session flashdata
 		        echo "<script>
-					alert('Selamat Datang Di Website Kami')
+					alert('Password salah');history.go(-1);
 				</script>";
-		        redirect('C_Login'); // Redirect ke halaman login
+		        // redirect('C_Login'); 
+		        // Redirect ke halaman login
 		    }
    		}
    	}
@@ -51,6 +81,6 @@ class C_Login extends CI_Controller {
 	public function logout(){
 		$this->M_login->logout();
 	    $this->session->sess_destroy(); // Hapus semua session
-	    redirect('C_Login'); // Redirect ke halaman login
+	    redirect('login'); // Redirect ke halaman login
 	}
 }
