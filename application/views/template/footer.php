@@ -37,7 +37,9 @@
         <script src="<?php echo base_url() ?>assets/Theme/js/task-list.js"></script>        
         <script src="<?php echo base_url() ?>assets/Theme/js/script.js"></script>
         <script>
-            $('#dataTableSiswa').DataTable();
+            $('#dataTableSiswa').DataTable({
+                'scrollX' : true
+            });
                  $(function($) {
                 $('input.blue-style').iCheck({
                     checkboxClass: 'icheckbox_square-blue',
@@ -99,11 +101,14 @@
 
 
             // });
-        </script>
-        <script>
+
         $("#tb_tipeuser").DataTable();
+         $('#tb_staff').DataTable( {
+                     "scrollX": true
+                } );
+
         $("#tb_tahunakademik").DataTable();
-        $("#tb_staff").DataTable();
+        // $("#tb_staff").DataTable();
 
         $(".s_provinsi").change(function() {
         $.get("http://localhost/bms/staff/getkota/" + this.value, function(result) {
@@ -129,9 +134,42 @@
             })
         })
         })
-        // $('.debet-siswa').click(function(){
-        //     $('.kredit-sekolah').children('.iradio_square-blue').attr('class', 'iradio_square-blue checked') 
-        // })
+        $('#debet').change(function(){            
+            if($(this).val() === 'siswa'){
+                if($('#kredit').val() === 'Pilih' || $('#kredit').val() === null || $('#kredit').val() === ' '){
+                    $('#kredit').html('<option>Pilih</option><option value="sekolah">sekolah</option>')
+                }
+                else if($('#kredit').val() === 'siswa'){
+                    $('#kredit').html('<option>Pilih</option><option value="sekolah">sekolah</option>')
+                }
+            }else if($(this).val() === 'sekolah'){
+                if($('#kredit').val() === 'Pilih' || $('#kredit').val() === null || $('#kredit').val() === ' '){
+                     $('#kredit').html('<option>Pilih</option><option value="siswa">siswa</option>')
+                }else if($('#kredit').val() === 'sekolah'){
+                    $('#kredit').html('<option>Pilih</option><option value="siswa">siswa</option>')
+                }
+            }else{
+                 $('#kredit').html('<option>Pilih</option><option value="siswa">siswa</option><option value="sekolah">sekolah</option>')
+            }
+        })
+        $('#kredit').change(function(){            
+            if($(this).val() === 'siswa'){
+                if($('#debet').val() === 'Pilih' || $('#debet').val() === null || $('#debet').val() === ' '){
+                    $('#debet').html('<option>Pilih</option><option value="sekolah">sekolah</option>')
+                }
+                else if($('#debet').val() === 'siswa'){
+                    $('#debet').html('<option>Pilih</option><option value="sekolah">sekolah</option>')
+                }
+            }else if($(this).val() === 'sekolah'){
+                if($('#debet').val() === 'Pilih' || $('#debet').val() === null || $('#debet').val() === ' '){
+                     $('#debet').html('<option>Pilih</option><option value="siswa">siswa</option>')
+                }else if($('#debet').val() === 'sekolah'){
+                    $('#debet').html('<option>Pilih</option><option value="siswa">siswa</option>')
+                }
+            }else{
+                 $('#debet').html('<option>Pilih</option><option value="siswa">siswa</option><option value="sekolah">sekolah</option>')
+            }
+        })
         </script>
 
         <!-- ========== ADD custom.js FILE BELOW WITH YOUR CHANGES ========== -->

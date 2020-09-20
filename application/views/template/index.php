@@ -8,9 +8,9 @@
                                     <p class="sub-title">SMA NEGERI 1 WRINGIN ANOM !</p>
                                 </div>
                                 <!-- /.col-sm-6 -->
-                                <div class="col-sm-6 right-side">
+                                <!-- <div class="col-sm-6 right-side">
                                     <a class="btn bg-black toggle-code-handle tour-four" role="button">Toggle Code!</a>
-                                </div>
+                                </div> -->
                                 <!-- /.col-sm-6 text-right -->
                             </div>
                             <!-- /.row -->

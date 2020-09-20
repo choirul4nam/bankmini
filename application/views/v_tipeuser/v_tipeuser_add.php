@@ -30,13 +30,13 @@
         <div class="container-fluid">
             <div class="row ">
 
-                <div class="col-md-5">
+                <div class="col-md-12">
 
                     <div class="panel">
                         <?= $this->session->flashdata('message'); ?>
                         <div class="panel-heading">
                             <div class="panel-title">
-                                <h5>Detail Tipe User</h5>
+                                <h5>Tambah Tipe User</h5>
                             </div>
                         </div>
                         <div class="panel-body p-20">
@@ -56,7 +56,7 @@
                                     </tr>
                                 </table>
                                 <a href="<?= base_url('tipeuser') ?>" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Kembali</a>
-                                <button class="btn btn-success"><i class="fa fa-plus"> Tambah</i></button>
+                                <button class="btn btn-success"><i class="fa fa-plus"></i> Tambah</button>
                             </form>
                         </div>
                     </div>

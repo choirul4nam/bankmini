@@ -46,6 +46,7 @@
                             <table id="tb_staff" class="display table table-striped table-bordered" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
+                                        <th>No</th>
                                         <th>No. Pegawai</th>
                                         <th>Nama</th>
                                         <th>Alamat</th>
@@ -63,11 +64,13 @@
                                 </thead>
                                 <tbody>
                                     <?php
+                                    $no = 1;
                                     foreach ($staff as $data) :
                                         if ($data['status'] == 'aktif') {
                                     ?>
 
                                             <tr>
+                                                <td><?= $no++; ?></td>
                                                 <td><?= $data['nopegawai'] ?></td>
                                                 <td><?= $data['nama'] ?></td>
                                                 <td><?= $data['alamat'] ?></td>                                                   

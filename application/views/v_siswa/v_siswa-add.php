@@ -16,7 +16,7 @@
                             <form method="post" action="<?= base_url('siswa/add_process')  ?>">
                                 <div class="row panel">                            
                                     <div class="panel-body">
-                                        <div class="col-md-8">
+                                        <div class="col-md-12">
                                             <div class="form-group has-feedback">
                                                 <label for="name5">Nama Panjang</label>
                                                 <input type="text" class="form-control" id="name5" name="nama" required>

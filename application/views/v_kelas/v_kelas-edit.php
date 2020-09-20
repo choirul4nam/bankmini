@@ -17,7 +17,7 @@
                                 <input type="hidden" name="idKelas" value="<?= $kelas['id_kelas']; ?>">
                                 <div class="row panel">                            
                                     <div class="panel-body">
-                                        <div class="col-md-7">
+                                        <div class="col-md-12">
                                             <div class="form-group has-feedback">
                                                 <label for="name5">Kelas</label>
                                                 <input type="text" class="form-control" id="name5" name="kelas" value="<?= $kelas['kelas']; ?>">

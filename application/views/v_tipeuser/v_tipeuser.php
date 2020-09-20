@@ -30,7 +30,7 @@
         <div class="container-fluid">
             <div class="row ">
 
-                <div class="col-md-5">
+                <div class="col-md-12">
 
                     <div class="panel">
                         <?= $this->session->flashdata('message'); ?>
@@ -44,25 +44,30 @@
 
                         </div>
                         <div class="panel-body p-20">
-                            <table id="tb_tipeuser" class="display table table-striped table-bordered" cellspacing="0" width="100%">
+                            <table id="tb_tipeuser" class="display table table-striped table-bordered table-responsive" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
+                                        <th>No</th>
                                         <th>Tipe User</th>
-                                        <th>Aksi</th>
+                                        <th width="200px"><center>Aksi</center></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
+                                    $no = 1;
                                     foreach ($tipeuser as $data) : ?>
 
                                         <tr>
+                                            <td><?= $no++; ?></td>
                                             <td><?= $data['tipeuser'] ?></td>
                                             <td>
-                                                <div class="btn btn-group">
+                                               <center>
+                                                    <div class="btn btn-group">
                                                     <!-- <a href="<?= base_url('tipeuser-det/') . $data['id_tipeuser'] ?>" class="btn btn-success"><i class="fa fa-search"></i></a> -->
                                                     <a href="<?= base_url('tipeuser-ubah/') . $data['id_tipeuser'] ?>" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
                                                     <a href="<?= base_url('TipeUser/hapus/') . $data['id_tipeuser'] ?>" class="btn btn-danger" onclick="return confirm('Yakin Mau Dihapus ?')"><i class="fa fa-trash"></i></a>
                                                 </div>
+                                               </center>
                                             </td>
 
                                         </tr>

@@ -17,7 +17,8 @@
                                 <div class="col-sm-6">
                                     <ul class="breadcrumb">
             							<li><a href="<?php echo base_url('/') ?>"><i class="fa fa-home"></i>Home</a></li>
-            							<li class="active">Siswa</li>
+            							<li>Data Master</li>
+                                        <li class="active">Siswa</li>
             						</ul>
                                 </div>
                                 <!-- /.col-sm-6 -->
@@ -39,16 +40,16 @@
                                                 <div class="panel-title">
                                                     <h5>Data Siswa</h5>                                                    
                                                 </div>
-                                                <a href="<?= base_url('siswa-add/')  ?>" class="btn btn-primary ml-15">
+                                            </div>
+                                            <div class="panel-body p-20">                                            	
+                                                <a href="<?= base_url('siswa-add/')  ?>" class="btn btn-primary mb-20">
                                                 	<i class="fa fa-plus text-white"></i>
                                                 	Tambah Data Siswa
                                                 </a> 
-                                                <a href="<?= base_url('siswa-grad/')  ?>" class="btn btn-info">
+                                                <a href="<?= base_url('siswa-grad/')  ?>" class="btn btn-info mb-20">
                                                     <i class="fa fa-check text-white"></i>
                                                     Siswa Lulus
                                                 </a>
-                                            </div>
-                                            <div class="panel-body p-20">                                            	
                                                 <table id="dataTableSiswa" class="display table table-striped table-bordered" cellspacing="0" width="100%">
                                                     <thead>
                                                         <tr>

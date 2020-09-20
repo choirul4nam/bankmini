@@ -17,6 +17,7 @@
                                 <div class="col-sm-6">
                                     <ul class="breadcrumb">
                                         <li><a href="<?php echo base_url('/') ?>"><i class="fa fa-home"></i>Home</a></li>
+                                        <li>Data Master</li>
                                         <li class="active">Siswa</li>
                                     </ul>
                                 </div>

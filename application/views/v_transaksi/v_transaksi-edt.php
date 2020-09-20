@@ -17,7 +17,7 @@
                                 <input type="hidden" name="id_transaksi" value="<?= $transaksi->id_mastertransaksi;  ?>">
                                 <div class="row panel">                            
                                     <div class="panel-body">
-                                        <div class="col-md-8">
+                                        <div class="col-md-12">
                                             <div class="form-group has-feedback">
                                                 <label for="exampleInputEmail5">Kode Transaksi</label>
                                                 <input type="text" class="form-control" id="exampleInputEmail5" name="kategori" value="<?= $transaksi->kodetransaksi;?>" disabled>
@@ -26,25 +26,21 @@
                                             <div class="form-group has-feedback">
 		                                        <div class="row">
 		                                        	<div class="col-lg-6">
-		                                        		<label for="exampleInputPassword5">Debet</label>                                     
-		                                        		<label>
-		                                        			<input type="radio" name="debet" class="blue-style" value="siswa" <?php if($transaksi->debet == 'siswa'){echo'checked';} ?>> 
-		                                        			Siswa
-		                                        		</label>
-		                                                <label>
-		                                                	<input type="radio" name="debet" class="blue-style" value="sekolah" <?php if($transaksi->debet == 'sekolah'){echo'checked';} ?>> Sekolah                                           
-		                                                </label>  
-		                                        	</div>
-		                                        	<div class="col-lg-6">                                            		   
-	                                                	<label for="exampleInputPassword5">Kredit</label>
-		                                                <label>
-		                                                	<input type="radio" name="kredit" class="blue-style" value="siswa" <?php if($transaksi->kredit == 'siswa'){echo'checked';} ?>> 
-		                                                	Siswa
-		                                                </label>
-		                                                <label>
-		                                                	<input type="radio" name="kredit" class="blue-style" value="sekolah" <?php if($transaksi->kredit == 'sekolah'){echo'checked';} ?>> Sekolah                                           
-		                                                </label>     
-		                                            </div>
+                                                        <label for="exampleInputPassword5">Debet</label>                                     
+                                                        <select class="form-control" name="debet" id="debet">
+                                                            <option value=" ">Pilih</option>   
+                                                            <option value="siswa" <?php if ($transaksi->debet == 'siswa'){echo "selected";} ?>>Siswa</option>
+                                                            <option value="sekolah" <?php if ($transaksi->debet == 'sekolah'){echo "selected";} ?>>Sekolah</option>
+                                                        </select>                                           
+                                                    </div>
+                                                    <div class="col-lg-6">                                                     
+                                                        <label for="exampleInputPassword5">Kredit</label>
+                                                         <select class="form-control" name="kredit" id="kredit">
+                                                            <option value=" ">Pilih</option>      
+                                                            <option value="siswa" <?php if ($transaksi->kredit == 'siswa'){echo "selected";} ?>>Siswa</option>
+                                                            <option value="sekolah" <?php if ($transaksi->kredit == 'sekolah'){echo "selected";} ?>>Sekolah</option>
+                                                         </select>
+                                                    </div>
                                             	</div>
                                             </div>    
 

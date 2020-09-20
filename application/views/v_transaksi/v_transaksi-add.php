@@ -16,30 +16,24 @@
                             <form method="post" action="<?= base_url('transaksi/add_process')  ?>" id="frm">
                                 <div class="row panel">                            
                                     <div class="panel-body">
-                                        <div class="col-md-8">
+                                        <div class="col-md-12">
                                             <div class="form-group has-feedback">
 		                                        <div class="row">
 		                                        	<div class="col-lg-6">
 		                                        		<label for="exampleInputPassword5">Debet</label>                                     
-		                                        		<label class="debet-siswa">
-		                                        			<input type="radio" name="debet" value="siswa" class="blue-style"> 
-		                                        			Siswa
-		                                        		</label>
-		                                                <label class="debet-sekolah">
-		                                                	<input type="radio" name="debet" value="sekolah"  class="blue-style"> 
-                                                            Sekolah                                           
-		                                                </label>  
+                                                        <select class="form-control" name="debet" id="debet">
+                                                            <option value=" ">Pilih</option>   
+                                                            <option value="siswa">Siswa</option>
+                                                            <option value="sekolah">Sekolah</option>
+                                                        </select>	                                        
 		                                        	</div>
 		                                        	<div class="col-lg-6">                                            		   
 	                                                	<label for="exampleInputPassword5">Kredit</label>
-		                                                <label>
-		                                                	<input type="radio" name="kredit" value="siswa"  class="blue-style" id="kredit-siswa"> 
-		                                                	Siswa
-		                                                </label>
-		                                                <label class="kredit-sekolah" id="kredit-sekolah">
-		                                                	<input type="radio" name="kredit" value="sekolah"  class="blue-style"> 
-                                                            Sekolah                                           
-		                                                </label>     
+		                                                 <select class="form-control" name="kredit" id="kredit">
+                                                            <option value=" ">Pilih</option>      
+                                                            <option value="siswa">Siswa</option>
+                                                            <option value="sekolah">Sekolah</option>
+                                                         </select>
 		                                            </div>
                                             	</div>
                                             </div>    

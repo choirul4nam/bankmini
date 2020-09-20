@@ -30,7 +30,7 @@
         <div class="container-fluid">
             <div class="row ">
 
-                <div class="col-md-8">
+                <div class="col-md-12">
 
                     <div class="panel">
                         <?= $this->session->flashdata('message'); ?>
@@ -46,26 +46,31 @@
                             <table id="tb_tahunakademik" class="display table table-striped table-bordered" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
+                                        <th>No</th>
                                         <th>Tanggal Awal</th>
                                         <th>Tanggal Akhir</th>
                                         <!-- <th>Tanggal Update</th> -->
-                                        <th>Aksi</th>
+                                        <th width="200px"><center>Aksi</center></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
+                                    $no = 1;
                                     foreach ($tahunakademik as $data) : ?>
 
                                         <tr>
+                                            <td><?= $no++; ?></td>
                                             <td><?= $data['tglawal'] ?></td>
                                             <td><?= $data['tglakhir'] ?></td>
                                             <!-- <td><?= $data['tglupdate'] ?></td> -->
                                             <td>
-                                                <div class="btn btn-group">
+                                                <center>
+                                                    <div class="btn btn-group">
                                                     <!-- <a href="<?= base_url('tahunakademik-det/') . $data['id_tahunakademik'] ?>" class="btn btn-success"><i class="fa fa-search"></i></a> -->
                                                     <a href="<?= base_url('tahunakademik-ubah/') . $data['id_tahunakademik'] ?>" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
                                                     <a href="<?= base_url('tahunakademik/hapus/') . $data['id_tahunakademik'] ?> " class="btn btn-danger" onclick="return confirm('Yakin Mau Dihapus ?')"><i class="fa fa-trash"></i></a>
                                                 </div>
+                                                </center>
                                             </td>
 
                                         </tr>

@@ -30,7 +30,7 @@
         <div class="container-fluid">
             <div class="row ">
 
-                <div class="col-md-5">
+                <div class="col-md-12">
 
                     <div class="panel">
                         <div class="panel-heading">
@@ -60,7 +60,7 @@
                                     <tr>
                                         <td>telp</td>
                                         <td>:</td>
-                                        <td><input type="number" maxlength="12" class="form-control" id="telp" min="0" value="<?= $staf['tlp'] ?>" onkeypress="return event.charCode >= 48 && event.charCode <= 57" name="telp" required></td>
+                                        <td><input type="text" maxlength="12" minlength="11" class="form-control" id="telp" min="0" value="<?= $staf['tlp'] ?>" onkeypress="return event.charCode >= 48 && event.charCode <= 57" name="telp" required></td>
                                     </tr>
                                     <tr>
                                         <td>tipe user</td>
@@ -158,7 +158,7 @@
                                     </tr>
                                 </table>
                                 <a href="<?= base_url('staff') ?>" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Kembali</a>
-                                <button class="btn btn-warning"><i class="fa fa-pencil"> Ubah</i></button>
+                                <button class="btn btn-warning"><i class="fa fa-pencil"></i>Ubah</button>
                             </form>
                         </div>
                     </div>

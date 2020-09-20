@@ -30,7 +30,7 @@
         <div class="container-fluid">
             <div class="row ">
 
-                <div class="col-md-5">
+                <div class="col-md-12">
 
                     <div class="panel">
                         <?= $this->session->flashdata('message'); ?>
@@ -58,7 +58,7 @@
                                     </tr>
                                 </table>
                                 <a href="<?= base_url('tipeuser') ?>" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Kembali</a>
-                                <button class="btn btn-warning"><i class="fa fa-pencil"> Ubah</i></button>
+                                <button class="btn btn-warning"><i class="fa fa-pencil"></i> Ubah</button>
                             </form>
                         </div>
                     </div>

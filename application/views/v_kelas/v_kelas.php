@@ -13,6 +13,7 @@
                                 <div class="col-sm-6">
                                     <ul class="breadcrumb">
             							<li><a href="<?php echo base_url('/') ?>"><i class="fa fa-home"></i>Home</a></li>
+                                          <li>Data Master</li>
             							<li class="active">Kelas</li>
             						</ul>
                                 </div>
@@ -29,7 +30,7 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-7">
+                                    <div class="col-md-12">
                                         <div class="panel">
                                             <div class="panel-heading">
                                                 <div class="panel-title">
@@ -50,7 +51,7 @@
                                                         <tr>
                                                             <th>No</th>
                                                             <th>Kelas</th>                                                            
-                                                            <th width="115px">Aksi</th>
+                                                            <th width="200px"><center>Aksi</center></th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -59,10 +60,12 @@
                                                             <td><?= $no++; ?></td>
                                                             <td><?= $data['kelas']; ?></td>                                                                                         
                                                             <td>
-                                                            	<div class="btn-group">
-                                                            		<a href="<?= base_url('kelas-edt/'). $data['id_kelas'];  ?>" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
-                                                            		<a href="<?= base_url('kelas-hps/'). $data['id_kelas'];  ?>" class="btn btn-danger" onclick="return confirm('Yakin untuk menghapus?')"><i class="fa fa-trash"></i></a>
-                                                            	</div>
+                                                            	<center>
+                                                                 <div class="btn-group">
+                                                                    <a href="<?= base_url('kelas-edt/'). $data['id_kelas'];  ?>" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
+                                                                    <a href="<?= base_url('kelas-hps/'). $data['id_kelas'];  ?>" class="btn btn-danger" onclick="return confirm('Yakin untuk menghapus?')"><i class="fa fa-trash"></i></a>
+                                                                </div>   
+                                                                </center>
                                                             </td>
                                                         </tr>
                                                         <?php endforeach; ?>
