@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
     	<meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>SMAN 1 Wringin Anom</title>
+        <title>SIBMS (Sistem Informasi Bank Mini Sekolah)</title>
 
         <link rel="shortcut icon" href="<?php echo base_url() ?>assets/Favicon/favicon.ico">
         <!-- ========== COMMON STYLES ========== -->
@@ -26,7 +26,7 @@
             <div class="">
                 <div class="row">
                     <div class="col-lg-5 visible-lg-block">
-                        <img src="<?php echo base_url() ?>assets/LOGO SEKOLAH WRINGINANOM.png" alt="Options - Admin Template" class="img-responsive">
+                        <img src="<?php echo base_url() ?>assets/icon.png" alt="Options - Admin Template" class="img-responsive">
                     </div>
                     <div class="col-lg-6">
                         <section class="section">
@@ -38,7 +38,8 @@
                                             <div class="panel">
                                                 <div class="panel-heading">
                                                     <div class="panel-title text-center">
-                                                        <h4>SMA Negeri 1 Wringin Anom</h4>
+                                                        <h4>HALAMAN LOGIN</h4>
+                                                        <p><strong>SIMBMS (Sistem Informasi Bank Mini Sekolah)</strong></p>
                                                     </div>
                                                 </div>
                                                 <div class="panel-body p-20">
@@ -67,7 +68,7 @@
                                                     	<div class="form-group mt-20">
                                                     		<div class="col-sm-offset-2 col-sm-10">
                                                                 <a href="#" class="form-link"><small class="muted-text">Forgot Password?</small></a>
-                                                    			<button type="submit" class="btn btn-success btn-labeled pull-right">Sign in<span class="btn-label btn-label-right"><i class="fa fa-check"></i></span></button>
+                                                    			<button type="submit" class="btn btn-success btn-labeled pull-right">LOGIN<span class="btn-label btn-label-right"><i class="fa fa-check"></i></span></button>
                                                     		</div>
                                                     	</div>
                                                     </form>

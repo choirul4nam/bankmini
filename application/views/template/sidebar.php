@@ -16,14 +16,14 @@
                             <div class="sidebar-nav">
                                 <ul class="side-nav color-gray">
                                     <li class="nav-header">
-                                        <span class="">Main Category</span>
+                                        <span class="">Menu Utama</span>
                                     </li>
                                     <li >
                                         <a href="<?= base_url('') ?>"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
                                     </li>
 
                                     <li class="nav-header">
-                                        <span class="">Appearance</span>
+                                        <span class="">PILIHAN MENU</span>
                                     </li>
                                     <?php foreach ($menu as $menu) {
                                     $a = $menu->id_menu ?>

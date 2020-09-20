@@ -4,8 +4,8 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
     	<meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>SMAN 1 Wringin Anom</title>
-
+        <title>SIMBMS (Sistem Informasi Bank Mini Sekolah)</title>
+        <link rel="shortcut icon" href="<?php echo base_url() ?>assets/Favicon/favicon.ico">
         <!-- ========== COMMON STYLES ========== -->
         <link rel="stylesheet" href="<?php echo base_url() ?>assets/Theme/css/bootstrap.min.css" media="screen" >
         <link rel="stylesheet" href="<?php echo base_url() ?>assets/Theme/css/font-awesome.min.css" media="screen" >
@@ -36,7 +36,7 @@
             	<div class="container-fluid">
                     <div class="row">
                         <div class="navbar-header no-padding">
-                			<a class="navbar-brand" href="<?php echo base_url() ?>assets/Theme/index.html">BANK MINI SEKOLAH
+                			<a class="navbar-brand" href="<?php echo base_url() ?>assets/Theme/index.html">SIMBMS (Sistem Informasi Bank Mini Sekolah)
                 			</a>
                             <span class="small-nav-handle hidden-sm hidden-xs"><i class="fa fa-outdent"></i></span>
                 		</div>
