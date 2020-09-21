@@ -17,6 +17,7 @@ class TipeUser extends CI_Controller
     {
         $this->load->view('template/header');
         $id = $this->session->userdata('tipeuser');
+        echo $id;
         $data['menu'] = $this->M_Setting->getmenu1($id);
         $data['tipeuser'] = $this->M_TipeUser->getAll();
         $this->load->view('template/sidebar', $data);
