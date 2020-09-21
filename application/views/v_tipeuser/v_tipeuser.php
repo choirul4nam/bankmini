@@ -28,12 +28,16 @@
 
     <section class="section">
         <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-9">
+                    <?= $this->session->flashdata('message'); ?>
+                </div>
+            </div>
             <div class="row ">
 
                 <div class="col-md-12">
 
                     <div class="panel">
-                        <?= $this->session->flashdata('message'); ?>
 
                         <div class="panel-heading">
                             <div class="panel-title">
@@ -49,7 +53,9 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Tipe User</th>
-                                        <th width="200px"><center>Aksi</center></th>
+                                        <th width="200px">
+                                            <center>Aksi</center>
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -61,13 +67,13 @@
                                             <td><?= $no++; ?></td>
                                             <td><?= $data['tipeuser'] ?></td>
                                             <td>
-                                               <center>
+                                                <center>
                                                     <div class="btn btn-group">
-                                                    <!-- <a href="<?= base_url('tipeuser-det/') . $data['id_tipeuser'] ?>" class="btn btn-success"><i class="fa fa-search"></i></a> -->
-                                                    <a href="<?= base_url('tipeuser-ubah/') . $data['id_tipeuser'] ?>" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
-                                                    <a href="<?= base_url('TipeUser/hapus/') . $data['id_tipeuser'] ?>" class="btn btn-danger" onclick="return confirm('Yakin Mau Dihapus ?')"><i class="fa fa-trash"></i></a>
-                                                </div>
-                                               </center>
+                                                        <!-- <a href="<?= base_url('tipeuser-det/') . $data['id_tipeuser'] ?>" class="btn btn-success"><i class="fa fa-search"></i></a> -->
+                                                        <a href="<?= base_url('tipeuser-ubah/') . $data['id_tipeuser'] ?>" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
+                                                        <a href="<?= base_url('TipeUser/hapus/') . $data['id_tipeuser'] ?>" class="btn btn-danger" onclick="return confirm('Yakin Mau Dihapus ?')"><i class="fa fa-trash"></i></a>
+                                                    </div>
+                                                </center>
                                             </td>
 
                                         </tr>

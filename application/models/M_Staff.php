@@ -24,6 +24,11 @@ class M_Staff extends CI_Model
         return $this->db->get_where('tb_staf', ['id_staf' => $id_staf])->row_array();
     }
 
+    function getByNoPegawai($nopegawai)
+    {
+        return $this->db->get_where('tb_staf', ['nopegawai' => $nopegawai, 'status' => 'aktif'])->num_rows();
+    }
+
     function ubah($data, $id_staf)
     {
         $this->db->where('id_staf', $id_staf);

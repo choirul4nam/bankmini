@@ -2,8 +2,8 @@ $('#provinsi').change(function(){
 	if(this.value !== 'Pilih Provinsi'){
 		$.get('http://localhost/bms/siswa/getkota/'+this.value, function(result){		
 			let data = JSON.parse(result);
-			$('#selectKota').html('<option>Pilih Kota</option>');
-			$('#selectKeca').html('<option>Pilih Kecamatan</option>');
+			$('#selectKota').html('');
+			$('#selectKeca').html('');
 			$('#selectKota').removeAttr('disabled');
 			data.forEach(function(res){								
 				$('#selectKota').append('<option class="optkota" value="'+res.id_kota+'">'+res.name_kota+'</option>')
@@ -16,7 +16,7 @@ $('#selectKota').change(function(){
 	if(this.value !== 'Pilih Kota'){
 		$.get('http://localhost/bms/siswa/getKecamatan/'+this.value, function(result){		
 			let data = JSON.parse(result);
-			$('#selectKeca').html('<option>Pilih Kecamatan</option>');
+			$('#selectKeca').html('');
 			$('#selectKeca').removeAttr('disabled');
 			data.forEach(function(res){			
 				$('#selectKeca').append('<option value="'+res.id_kecamatan+'">'+res.kecamatan+'</option>')

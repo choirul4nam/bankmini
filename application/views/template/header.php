@@ -54,12 +54,12 @@
                 						        <img src="<?php echo base_url() ?>assets/Theme/images/avatar-1.svg" alt="John Doe" class="img-circle profile-img">
                                                 <div class="profile-name">
                                                     <h6><?= $this->session->userdata('nama'); ?></h6>
-                                                    <a href="<?php echo base_url() ?>assets/Theme/pages-profile.html">View Profile</a>
+                                                    <a href="<?php echo base_url('profile') ?>">View Profile</a>
                                                 </div>
                                                 <div class="clearfix"></div>
                 						    </div>
                 						</li>
-                						<li><a href=""><i class="fa fa-cog"></i> Settings</a></li>
+                						<!-- <li><a href=""><i class="fa fa-cog"></i> Settings</a></li> -->
                 						<li role="separator" class="divider"></li>
                 						<li><a href="<?php echo site_url('C_Login/logout'); ?>" class="color-danger text-center"><i class="fa fa-sign-out"></i> Logout</a></li>
                 					</ul>

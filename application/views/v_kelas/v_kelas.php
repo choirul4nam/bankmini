@@ -4,6 +4,7 @@
                         <div class="container-fluid">
                             <div class="row page-title-div">
                                 <div class="col-sm-6">
+                                    <h2 class="title">Kelas</h2>
                                     <p class="sub-title">SIMBMS (Sistem Informasi Bank Mini Sekolah)</p>
                                      <label>                                                          
                                 </div>                                

@@ -34,7 +34,8 @@ class Kelas extends CI_Controller {
 	}
 
 	public function add_process(){
-		$data = array(
+		if($this->M_Kelas->cekKelas($this->input->post('kelas', true))){
+			$data = array(
 				'id_kelas' => '' , 
 				'kelas' => $this->input->post('kelas', true),
 				'status' => 'aktif',
@@ -42,11 +43,17 @@ class Kelas extends CI_Controller {
 				'tglupdate' => date("Y-m-d h:i:sa")
 			);
 
-		$this->M_Kelas->addKelas($data);
-		$this->session->set_flashdata('alert', '<div class="alert alert-success left-icon-alert" role="alert">
-                                            		<strong>Sukses!</strong> Berhasil Menambahkan Kelas Baru.
-                                        		</div>');
-		redirect(base_url('kelas/'));
+			$this->M_Kelas->addKelas($data);
+			$this->session->set_flashdata('alert', '<div class="alert alert-success left-icon-alert" role="alert">
+	                                            		<strong>Sukses!</strong> Berhasil Menambahkan Kelas Baru.
+	                                        		</div>');
+			redirect(base_url('kelas/'));
+		}else{
+			$this->session->set_flashdata('alert', '<div class="alert alert-warning left-icon-alert" role="alert">
+	                                            		<strong>Perhatian!</strong> Data Sudah Ada.
+	                                        		</div>');
+			redirect(base_url('kelas/'));
+		}		
 	}
 
 	public function kelas_delete($id){
@@ -68,18 +75,25 @@ class Kelas extends CI_Controller {
 	}
 
 	public function edt_process(){
-		$id = $this->input->post('idKelas', true);
-		$data = array(
-				'kelas' => $this->input->post('kelas', true),
-				'id_user' => 1,
-				'tglupdate' => date("Y-m-d h:i:sa")
-			);
+		if($this->M_Kelas->cekKelas($this->input->post('kelas', true))){
+			$id = $this->input->post('idKelas', true);
+			$data = array(
+					'kelas' => $this->input->post('kelas', true),
+					'id_user' => 1,
+					'tglupdate' => date("Y-m-d h:i:sa")
+				);
 
-		$this->M_Kelas->editKelas($data, $id);
-		$this->session->set_flashdata('alert', '<div class="alert alert-success left-icon-alert" role="alert">
-                                            		<strong>Sukses!</strong> Berhasil Mengubah Kelas.
-                                        		</div>');
-		redirect(base_url('kelas/'));	
+			$this->M_Kelas->editKelas($data, $id);
+			$this->session->set_flashdata('alert', '<div class="alert alert-success left-icon-alert" role="alert">
+	                                            		<strong>Sukses!</strong> Berhasil Mengubah Kelas.
+	                                        		</div>');
+			redirect(base_url('kelas/'));	
+		}else{
+			$this->session->set_flashdata('alert', '<div class="alert alert-warning left-icon-alert" role="alert">
+	                                            		<strong>Perhatian!</strong> Data Sudah Ada.
+	                                        		</div>');
+			redirect(base_url('kelas/'));
+		}
 	}
 
 	public function delete_all(){

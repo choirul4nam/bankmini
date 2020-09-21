@@ -87,5 +87,9 @@ $route['staff-det/(:any)'] = 'staff/detail/$1';
 $route['staff-ubah/(:any)'] = 'staff/ubahdata/$1';
 
 
+//user
+$route['profile'] = 'staff/staff_profile';
+$route['ubah-profile'] = 'staff/profile_ubah';
+
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

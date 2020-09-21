@@ -35,4 +35,14 @@ class M_Kelas extends CI_Model {
     	$this->db->where('id_kelas', $id);
     	$this->db->update('tb_kelas', $data);
     }
+
+    public function cekKelas($kelas){
+        // $this->db->where('kelas', $kelas);
+        $cek = $this->db->get_where('tb_kelas', ['kelas' => $kelas])->row();
+        if(empty($cek)){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

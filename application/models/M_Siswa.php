@@ -8,8 +8,19 @@ class M_Siswa extends CI_Model {
 	    $this->db->join('tb_kelas', 'tb_siswa.id_kelas = tb_kelas.id_kelas');	    
 	    // $this->db->where('tb_siswa.status', 'aktif')->or_where('tb_siswa.status', 'alumni');
         $this->db->where('tb_siswa.status', 'aktif');
-	    $this->db->order_by('namasiswa', 'desc');
+	    $this->db->order_by('tgl_update', 'desc');
 	    $query = $this->db->get(); 
+        return $query->result();
+    }
+
+    function getLulus(){
+        $this->db->select('*');
+        $this->db->from('tb_siswa'); 
+        $this->db->join('tb_kelas', 'tb_siswa.id_kelas = tb_kelas.id_kelas');       
+        // $this->db->where('tb_siswa.status', 'aktif')->or_where('tb_siswa.status', 'alumni');
+        $this->db->where('tb_siswa.status', 'alumni');
+        $this->db->order_by('tgl_update', 'desc');
+        $query = $this->db->get(); 
         return $query->result();
     }
 
@@ -38,6 +49,24 @@ class M_Siswa extends CI_Model {
         $data = ['status' => 'alumni'];
         $this->db->where('id_kelas', $id);
         $this->db->update('tb_siswa', $data);   
+    }
+
+    function cekNis($nis){
+        $query = $this->db->get_where('tb_siswa',['nis' => $nis])->row(); 
+        if(empty($query)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    function cekRfid($rfid){
+        $query = $this->db->get_where('tb_siswa',['rfid' => $rfid])->row(); 
+        if(empty($query)){
+            return true;
+        }else{
+            return false;
+        }
     }
 
 }

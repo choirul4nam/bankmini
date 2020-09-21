@@ -27,7 +27,7 @@ class TipeUser extends CI_Controller
     public function hapus($id_tipeuser)
     {
         $this->M_TipeUser->hapus($id_tipeuser);
-        $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Data Berhasil Dihapus</div>');
+        $this->session->set_flashdata('message', '<div class="alert alert-success left-icon-alert" role="alert"><strong>Sukses!</strong> Data Berhasil Dihapus</div>');
         redirect('TipeUser');
     }
 
@@ -60,11 +60,11 @@ class TipeUser extends CI_Controller
             'tipeuser' => $tipeuser
         ];
         if ($this->M_TipeUser->cekData($tipeuser) >= 1) {
-            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Data Sudah Ada</div>');
+            $this->session->set_flashdata('message', '<div class="alert alert-danger left-icon-alert" role="alert"><strong>Gagal!</strong> Data Sudah Ada</div>');
             redirect('TipeUser/tambahdata');
         } else {
             $this->M_TipeUser->tambah($data);
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data Berhasil Ditambahkan</div>');
+            $this->session->set_flashdata('message', '<div class="alert alert-success left-icon-alert" role="alert"><strong>Sukses!</strong> Data Berhasil Ditambahkan</div>');
             redirect('TipeUser');
         }
     }
@@ -87,7 +87,7 @@ class TipeUser extends CI_Controller
             'tipeuser' => $this->input->post('tipeuser')
         ];
         $this->M_TipeUser->ubah($data);
-        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data Berhasil DiUbah</div>');
+        $this->session->set_flashdata('message', '<div class="alert alert-success left-icon-alert" role="alert"> <strong>Sukses!</strong> Data Berhasil DiUbah</div>');
         redirect('Tipeuser');
     }
 }

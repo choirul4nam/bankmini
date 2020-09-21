@@ -28,7 +28,7 @@ class Staff extends CI_Controller
     public function hapus($id_staf)
     {
         $this->M_Staff->hapus($id_staf);
-        $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Data Berhasil Dihapus</div>');
+        $this->session->set_flashdata('message', '<div class="alert alert-success left-icon-alert" role="alert"> <strong>Sukses!</strong> Data Berhasil Dihapus</div>');
         redirect('Staff');
     }
 
@@ -55,8 +55,9 @@ class Staff extends CI_Controller
 
     public function tambah()
     {
+        $nopegawai = $this->input->post('nopegawai');
         $data = [
-            'nopegawai' => $this->input->post('nopegawai'),
+            'nopegawai' => $nopegawai,
             'nama' => $this->input->post('nama'),
             'alamat' => $this->input->post('alamat'),
             'provinsi' => $this->input->post('s_provinsi'),
@@ -69,9 +70,19 @@ class Staff extends CI_Controller
             'id_user' => $this->session->userdata('id_user'),
             'password' => $this->input->post('pass')
         ];
-        $this->M_Staff->tambah($data);
-        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data Berhasil Ditambah</div>');
-        redirect('staff');
+
+        if ($this->M_Staff->getByNoPegawai($nopegawai) >= 1) {
+            $this->session->set_flashdata('message', '<div class="alert alert-danger left-icon-alert " role="alert">
+		                                            		<strong>Gagal!</strong> No Pegawai : "' . $nopegawai . ' ", sudah ada
+		                                        		</div>');
+            redirect('staff/tambahData');
+        } else {
+            $this->M_Staff->tambah($data);
+            $this->session->set_flashdata('message', '<div class="alert alert-success left-icon-alert" role="alert">
+		                                            		<strong>Sukses!</strong> Berhasil Menambahkan Data Staf.
+		                                        		</div>');
+            redirect('staff');
+        }
     }
 
     public function detail($id_staf)
@@ -108,13 +119,51 @@ class Staff extends CI_Controller
             'kecamatan' => $this->input->post('s_kecamatan'),
             'tlp' => $this->input->post('telp'),
             'id_tipeuser' => $this->input->post('tipeuser'),
-            'status' => 'aktif',
             'tgl_upddate' => date('Y-m-d h:i:s'),
-            'id_user' => '001',
+            'id_user' => $this->session->userdata('id_user'),
             'password' => $this->input->post('pass')
         ];
         $this->M_Staff->ubah($data, $id_staf);
-        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data Berhasil Diubah</div>');
-        redirect('staff');
+        if ($this->input->post('profile')) {
+            $session = array(
+                'authenticated' => true, // Buat session authenticated dengan value true
+                'nopegawai' => $data['nopegawai'],  // Buat session nip
+                'nama' => $data['nama'],
+                'id_user' => $id_staf, // Buat session authenticated
+                'tipeuser' => $data['id_tipeuser'],
+                'login' => true
+            );
+            $this->session->set_userdata($session);
+            $this->session->set_flashdata('message', '<div class="alert alert-success left-icon-alert" role="alert">
+		                                            		<strong>Sukses!</strong> Data Berhasil Diubah.
+		                                        		</div>');
+            redirect('profile');
+        } else {
+            $this->session->set_flashdata('message', '<div class="alert alert-success left-icon-alert" role="alert"> <strong>Sukses!</strong> Data Berhasil Diubah</div>');
+            redirect('staff');
+        }
+    }
+
+    public function staff_profile()
+    {
+        $data['menu'] = $this->M_Setting->getmenu1();
+        $data['staf'] = $this->M_Staff->getById($this->session->userdata('id_user'));
+
+
+        $this->load->view('template/header');
+        $this->load->view('template/sidebar', $data);
+        $this->load->view('v_user/v_user_profile.php', $data);
+        $this->load->view('template/footer');
+    }
+
+    public function profile_ubah()
+    {
+        $data['menu'] = $this->M_Setting->getmenu1();
+        $data['staf'] = $this->M_Staff->getById($this->session->userdata('id_user'));
+
+        $this->load->view('template/header');
+        $this->load->view('template/sidebar', $data);
+        $this->load->view('v_user/v_user_edit.php', $data);
+        $this->load->view('template/footer');
     }
 }

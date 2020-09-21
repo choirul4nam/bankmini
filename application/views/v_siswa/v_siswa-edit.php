@@ -4,7 +4,7 @@
                         <div class="container-fluid bg-white">
                             <div class="row page-title-div">
                                 <div class="col-sm-6">
-                                    <h2 class="title">Tambah Data Siswa</h2>
+                                    <h2 class="title">Ubah Data Siswa</h2>
                                     <p class="sub-title">SIMBMS (Sistem Informasi Bank Mini Sekolah)</p>                                    
                                 </div>
                                 <!-- /.col-sm-6 -->
@@ -14,26 +14,28 @@
                                 <!-- /.col-sm-6 text-right -->
                             </div>
                             <form method="post" action="<?= base_url('siswa/edt_process')  ?>">
+                                <input type="hidden" name="nisOld" value="<?= $datasiswa['nis']; ?>">
+                                <input type="hidden" name="rfidOld" value="<?= $datasiswa['rfid']; ?>">
                                 <div class="row panel">                            
                                     <div class="panel-body">
-                                        <div class="col-md-12">
+                                        <div class="col-md-12">                                            
+                                            <div class="form-group has-feedback">
+                                                <label for="username5">NIS</label>
+                                                <input type="text" class="form-control" maxlength="4" minlength="4" id="username5" name="nis" onkeypress='return event.charCode >= 48 && event.charCode <= 57' value="<?= $datasiswa['nis']; ?>">
+                                                <span class="fa fa-graduation-cap form-control-feedback"></span>
+                                                <span class="help-block">Masukkan NIS siswa</span>
+                                            </div>
+                                              <div class="form-group has-feedback">
+                                                <label for="name5">RFID</label>
+                                                <input type="text" class="form-control" id="name5" name="rfid" value="<?= $datasiswa['rfid']; ?>">
+                                                <span class="fa fa-pencil form-control-feedback"></span>
+                                                <span class="help-block">Masukkan RFID</span>
+                                            </div>  
                                             <div class="form-group has-feedback">
                                                 <label for="name5">Nama Panjang</label>
                                                 <input type="text" class="form-control" id="name5" name="nama" value="<?= $datasiswa['namasiswa']; ?>">
                                                 <span class="fa fa-pencil form-control-feedback"></span>
                                                 <span class="help-block">Masukkan nama siswa</span>
-                                            </div>
-                                            <div class="form-group has-feedback">
-                                                <label for="username5">NIS</label>
-                                                <input type="text" class="form-control" maxlength="5" minlength="5" id="username5" name="nis" onkeypress='return event.charCode >= 48 && event.charCode <= 57' value="<?= $datasiswa['nis']; ?>">
-                                                <span class="fa fa-graduation-cap form-control-feedback"></span>
-                                                <span class="help-block">Masukkan NIS siswa</span>
-                                            </div>
-                                            <div class="form-group has-feedback">
-                                                <label for="exampleInputEmail5">Alamat</label>
-                                                <input type="text" class="form-control" id="exampleInputEmail5" name="alamat" value="<?= $datasiswa['alamat']; ?>">
-                                                <span class="fa fa-map-marker form-control-feedback"></span>
-                                                <span class="help-block">Masukkan Alamat Siswa</span>
                                             </div>
                                             <div class="form-group has-feedback">
                                                 <label for="exampleInputPassword5">Jenis Kelamin</label>
@@ -47,7 +49,7 @@
                                                     <?php endif; ?>
                                                 </select>
                                                 <span class="glyphicon glyphicon-user form-control-feedback"></span>
-                                            </div>   
+                                            </div>  
                                             <div class="form-group has-feedback">
                                                 <label for="exampleInputPassword5">Kelas</label>
                                                 <select class="form-control" name="kelas">
@@ -57,7 +59,29 @@
                                                     <?php endforeach; ?>
                                                 </select>
                                                 <span class="fa fa-building-o form-control-feedback"></span>
-                                            </div>                              
+                                            </div> 
+                                            <div class="form-group has-feedback">
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <label for="exampleInputEmail5">Tempat Lahir</label>
+                                                        <input type="text" class="form-control" id="exampleInputEmail5" name="tempat_lahir" value="<?= $datasiswa['tempat_lahir']; ?>">
+                                                        <span class="fa fa-map-marker form-control-feedback mr-10"></span>
+                                                        <span class="help-block">Masukkan Tempat Lahir Siswa</span>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <label for="exampleInputEmail5">Tanggal Lahir</label>
+                                                        <input type="date" class="form-control" id="exampleInputEmail5" name="tanggal_lahir" value="<?= $datasiswa['tgl_lahir']; ?>">
+                                                        <span class="fa fa-map-marker form-control-feedback mr-10"></span>
+                                                        <span class="help-block">Masukkan Tanggal Lahir Siswa</span>
+                                                    </div>   
+                                                </div>
+                                            </div>
+                                            <div class="form-group has-feedback">
+                                                <label for="exampleInputEmail5">Alamat Lengkap</label>
+                                                <textarea class="form-control" name="alamat"><?= $datasiswa['alamat']; ?></textarea>
+                                                <span class="fa fa-map-marker form-control-feedback"></span>
+                                                <span class="help-block">Masukkan Alamat Siswa</span>
+                                            </div>                             
                                             <div class="form-group has-feedback">
                                                 <label for="js-states">Provinsi</label>
                                                 <select class="form-control" id="provinsi" name="prov">
@@ -87,13 +111,7 @@
                                                     <?php endforeach; ?>                                                     
                                                 </select>
                                                 <span class="fa fa-map form-control-feedback"></span>
-                                            </div>                                                                                
-                                            <div class="form-group has-feedback">
-                                                <label for="name5">RFID</label>
-                                                <input type="text" class="form-control" id="name5" name="rfid" value="<?= $datasiswa['rfid']; ?>">
-                                                <span class="fa fa-pencil form-control-feedback"></span>
-                                                <span class="help-block">Masukkan RFID</span>
-                                            </div>   
+                                            </div>                                                                                                                           
                                             <div class="form-group has-feedback">
                                                   <label>
                                                       <input type="checkbox" name="alumni" class="blue-style" value="1" <?php if($datasiswa['status'] === 'alumni'){echo "checked";} ?>>

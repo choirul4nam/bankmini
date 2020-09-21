@@ -28,12 +28,15 @@
 
     <section class="section">
         <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-9">
+                    <?= $this->session->flashdata('message'); ?>
+                </div>
+            </div>
             <div class="row ">
-
                 <div class="col-md-15">
 
                     <div class="panel">
-                        <?= $this->session->flashdata('message'); ?>
                         <div class="panel-heading">
                             <div class="panel-title">
                                 <h5>Data Staff</h5>
@@ -73,16 +76,16 @@
                                                 <td><?= $no++; ?></td>
                                                 <td><?= $data['nopegawai'] ?></td>
                                                 <td><?= $data['nama'] ?></td>
-                                                <td><?= $data['alamat'] ?></td>                                                   
-                                                <td><?= $data['tlp'] ?></td>                                                   
-                                                <?php $tipeuser = $this->db->get_where('tb_tipeuser', ['id_tipeuser' => $data['id_tipeuser']])->row_array(); ?>                     
+                                                <td><?= $data['alamat'] ?></td>
+                                                <td><?= $data['tlp'] ?></td>
+                                                <?php $tipeuser = $this->db->get_where('tb_tipeuser', ['id_tipeuser' => $data['id_tipeuser']])->row_array(); ?>
                                                 <td><?= $tipeuser['tipeuser'] ?></td>
                                                 <!-- <td><?= $data['status'] ?></td> -->
                                                 <!-- td><?php
-                                                    $date = date_create($data['tgl_upddate']);
-                                                    echo date_format($date, "d-m-Y");
+                                                        $date = date_create($data['tgl_upddate']);
+                                                        echo date_format($date, "d-m-Y");
 
-                                                    ?></td> -->
+                                                        ?></td> -->
                                                 <td><?= $data['password'] ?></td>
                                                 <td>
                                                     <!-- <div class="btn btn-group"> -->

@@ -37,6 +37,7 @@
         <script src="<?php echo base_url() ?>assets/Theme/js/task-list.js"></script>        
         <script src="<?php echo base_url() ?>assets/Theme/js/script.js"></script>
         <script>
+            $('#tableLulus').DataTable();
             $('#dataTableSiswa').DataTable({
                 'scrollX' : true
             });

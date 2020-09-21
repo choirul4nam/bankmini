@@ -18,29 +18,28 @@
                                     <div class="panel-body">
                                         <div class="col-md-12">
                                             <div class="form-group has-feedback">
-                                                <label for="name5">Nama Panjang</label>
-                                                <input type="text" class="form-control" id="name5" name="nama" required>
-                                                <span class="fa fa-pencil form-control-feedback"></span>
-                                                <span class="help-block">Masukkan nama siswa</span>
-                                            </div>
-                                            <div class="form-group has-feedback">
                                                 <label for="username5">NIS</label>
-                                                <input type="text" class="form-control" maxlength="5" minlength="5" id="username5" name="nis" required 
+                                                <input type="text" class="form-control" maxlength="4" minlength="4" id="username5" name="nis" required 
                                                     onkeypress='return event.charCode >= 48 && event.charCode <= 57'
                                                     >
                                                 <span class="fa fa-graduation-cap form-control-feedback"></span>
                                                 <span class="help-block">Masukkan NIS siswa</span>
                                             </div>
                                             <div class="form-group has-feedback">
-                                                <label for="exampleInputEmail5">Alamat</label>
-                                                <input type="text" class="form-control" id="exampleInputEmail5" name="alamat" required>
-                                                <span class="fa fa-map-marker form-control-feedback"></span>
-                                                <span class="help-block">Masukkan Alamat Siswa</span>
+                                                <label for="name5">RFID</label>
+                                                <input type="text" class="form-control" id="name5" name="rfid" required>
+                                                <span class="fa fa-pencil form-control-feedback"></span>
+                                                <span class="help-block">Masukkan RFID</span>
+                                            </div>  
+                                            <div class="form-group has-feedback">
+                                                <label for="name5">Nama Lengkap</label>
+                                                <input type="text" class="form-control" id="name5" name="nama" required>
+                                                <span class="fa fa-pencil form-control-feedback"></span>
+                                                <span class="help-block">Masukkan nama siswa</span>
                                             </div>
                                             <div class="form-group has-feedback">
                                                 <label for="exampleInputPassword5">Jenis Kelamin</label>
                                                 <select class="form-control" name="jk" required>
-                                                    <option>Pilih Jenis Kelamin</option>
                                                     <option value="Laki-Laki">Laki-Laki</option>
                                                     <option value="Perempuan">Perempuan</option>
                                                 </select>
@@ -49,7 +48,6 @@
                                             <div class="form-group has-feedback">
                                                 <label for="exampleInputPassword5">Kelas</label>
                                                 <select class="form-control" name="kelas" required>
-                                                    <option>Pilih Kelas</option>
                                                     <?php foreach ($kelas as $dataKelas): ?>
                                                         <option value="<?= $dataKelas['id_kelas']; ?>"><?= $dataKelas['kelas']; ?></option>
                                                     <?php endforeach; ?>
@@ -57,9 +55,30 @@
                                                 <span class="fa fa-building-o form-control-feedback"></span>
                                             </div>                              
                                             <div class="form-group has-feedback">
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <label for="exampleInputEmail5">Tempat Lahir</label>
+                                                        <input type="text" class="form-control" id="exampleInputEmail5" name="tempat_lahir" required>
+                                                        <span class="fa fa-map-marker form-control-feedback mr-10"></span>
+                                                        <span class="help-block">Masukkan Tempat Lahir Siswa</span>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <label for="exampleInputEmail5">Tanggal Lahir</label>
+                                                        <input type="date" class="form-control" id="exampleInputEmail5" name="tanggal_lahir" required>
+                                                        <span class="fa fa-map-marker form-control-feedback mr-10"></span>
+                                                        <span class="help-block">Masukkan Tanggal Lahir Siswa</span>
+                                                    </div>   
+                                                </div>
+                                            </div>
+                                            <div class="form-group has-feedback">
+                                                <label for="exampleInputEmail5">Alamat lengkap</label>
+                                                <textarea class="form-control" id="exampleInputEmail5" name="alamat" required></textarea>
+                                                <span class="fa fa-map-marker form-control-feedback"></span>
+                                                <span class="help-block">Masukkan Alamat Siswa</span>
+                                            </div>
+                                            <div class="form-group has-feedback">
                                                 <label for="js-states">Provinsi</label>
                                                 <select class="form-control" id="provinsi" required name="prov">
-                                                    <option>Pilih Provinsi</option>
                                                     <?php foreach ($prov as $dataProv): ?>
                                                         <option value="<?= $dataProv['id_provinsi']; ?>"><?= $dataProv['name_prov']; ?></option>
                                                     <?php endforeach; ?>
@@ -69,23 +88,17 @@
                                             <div class="form-group has-feedback">
                                                 <label for="exampleInputPassword5">Kota</label>
                                                 <select class="form-control" name="kota" disabled id="selectKota" required >
-                                                    <option>Pilih Kota</option>                                                    
+                                                                                                    
                                                 </select>
                                                 <span class="fa fa-map form-control-feedback"></span>
                                             </div>                                                                                
                                             <div class="form-group has-feedback">
                                                 <label for="exampleInputPassword5">Kecamatan</label>
                                                 <select class="form-control" name="kecamatan" disabled id="selectKeca" required>
-                                                    <option>Pilih Kecamatan</option>                                                    
+                                                                                                    
                                                 </select>
                                                 <span class="fa fa-map form-control-feedback"></span>
                                             </div>                                                                                
-                                            <div class="form-group has-feedback">
-                                                <label for="name5">RFID</label>
-                                                <input type="text" class="form-control" id="name5" name="rfid" required>
-                                                <span class="fa fa-pencil form-control-feedback"></span>
-                                                <span class="help-block">Masukkan RFID</span>
-                                            </div>  
                                             <div class="form-group has-feedback">
                                                 <a href="<?= base_url('siswa/') ?>" class="btn btn-primary btn-labeled"><i class="fa fa-arrow-left"></i>Kembali</a>
                                                 <button type="Submit" class="btn btn-success btn-labeled">

@@ -77,7 +77,7 @@
                                     </tr>
                                 </table>
                                 <a href="<?= base_url('tahunakademik') ?>" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Kembali</a>
-                                <button class="btn btn-success"><i class="fa fa-plus"> Tambah</i></button>
+                                <button class="btn btn-success"><i class="fa fa-plus"></i>Tambah</button>
                             </form>
                         </div>
                     </div>

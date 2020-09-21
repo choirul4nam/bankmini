@@ -28,12 +28,16 @@
 
     <section class="section">
         <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-9">
+                    <?= $this->session->flashdata('message'); ?>
+                </div>
+            </div>
             <div class="row ">
 
                 <div class="col-md-12">
 
                     <div class="panel">
-                        <?= $this->session->flashdata('message'); ?>
                         <div class="panel-heading">
                             <div class="panel-title">
                                 <h5>Tambah Tipe User</h5>

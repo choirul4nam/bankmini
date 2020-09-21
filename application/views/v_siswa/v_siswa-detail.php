@@ -25,14 +25,14 @@
                                             <div class="panel-body p-20">                                            	
                                                 <table class="table">
                                                     <tr>
-                                                        <td>RFID</td>
-                                                        <td>:</td>
-                                                        <td><?= $datasiswa['rfid']; ?></td>
-                                                    </tr>
-                                                    <tr>
                                                         <td>NIS</td>
                                                         <td>:</td>
                                                         <td><?= $datasiswa['nis']; ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>RFID</td>
+                                                        <td>:</td>
+                                                        <td><?= $datasiswa['rfid']; ?></td>
                                                     </tr>
                                                     <tr>
                                                         <td>Nama</td>
@@ -40,24 +40,19 @@
                                                         <td><?= $datasiswa['namasiswa']; ?></td>
                                                     </tr>
                                                     <tr>
+                                                        <td>Jenis Kelamin</td>
+                                                        <td>:</td>
+                                                        <td><?= $datasiswa['jk']; ?></td>
+                                                    </tr> 
+                                                    <tr>
                                                         <td>Kelas</td>
                                                         <td>:</td>
                                                         <td><?= $datasiswa['kelas']; ?></td>
                                                     </tr>
                                                     <tr>
-                                                        <td>Jenis Kelamin</td>
+                                                        <td>Tempat, Tanggal Lahir</td>
                                                         <td>:</td>
-                                                        <td><?= $datasiswa['jk']; ?></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Username</td>
-                                                        <td>:</td>
-                                                        <td><?= $datasiswa['nis']; ?></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Password</td>
-                                                        <td>:</td>
-                                                        <td><?= $datasiswa['password']; ?></td>
+                                                        <td><?= $datasiswa['tempat_lahir']; ?>, <?= $datasiswa['tgl_lahir']; ?></td>
                                                     </tr>
                                                     <tr>
                                                         <td>Alamat</td>
@@ -70,10 +65,20 @@
                                                         <td><?= $datasiswa['kecamatan'].'/'.$datasiswa['name_kota'].'/'.$datasiswa['name_prov']; ?></td>
                                                     </tr>
                                                     <tr>
+                                                        <td>Username</td>
+                                                        <td>:</td>
+                                                        <td><?= $datasiswa['nis']; ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Password</td>
+                                                        <td>:</td>
+                                                        <td><?= $datasiswa['password']; ?></td>
+                                                    </tr>
+                                                    <!-- <tr>
                                                         <td>status</td>
                                                         <td>:</td>
                                                         <td><?= $datasiswa['status']; ?></td>
-                                                    </tr>
+                                                    </tr> -->
                                                  <!--    <tr>
                                                         <td>Terakhir Di Update</td>
                                                         <td>:</td>

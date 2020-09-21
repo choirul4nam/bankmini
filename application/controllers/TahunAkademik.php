@@ -38,7 +38,7 @@ class TahunAkademik extends CI_Controller
     public function hapus($id_tahunakademik)
     {
         $this->M_TahunAkademik->hapus($id_tahunakademik);
-        $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Data Berhasil Dihapus</div>');
+        $this->session->set_flashdata('message', '<div class="alert alert-success left-icon-alert" role="alert"> <strong>Sukses!</strong> Data Berhasil Dihapus</div>');
         redirect('tahunakademik');
     }
 
@@ -62,7 +62,7 @@ class TahunAkademik extends CI_Controller
             'tglupdate' =>  date('Y-m-d  h:i:s')
         ];
         $this->M_TahunAkademik->tambah($data);
-        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data Berhasil Ditambahkan</div>');
+        $this->session->set_flashdata('message', '<div class="alert alert-success left-icon-alert" role="alert"> <strong>Sukses!</strong> Data Berhasil Ditambahkan</div>');
         redirect('tahunakademik');
     }
 
@@ -87,7 +87,7 @@ class TahunAkademik extends CI_Controller
             'tglupdate' =>  date('Y-m-d  h:i:s')
         ];
         $this->M_TahunAkademik->ubah($id, $data);
-        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data Berhasil Diubah</div>');
+        $this->session->set_flashdata('message', '<div class="alert alert-success left-icon-alert" role="alert"><strong>Sukses!</strong> Data Berhasil Diubah</div>');
         redirect('tahunakademik');
     }
 }

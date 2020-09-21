@@ -26,33 +26,32 @@ class C_Login extends CI_Controller {
 		$user = $this->M_login->get($username);
 
 		if(empty($user)){
-			$siswa = $this->M_login->getsiswa($username);
-			if(empty($siswa)){
-				echo "<script>
-					alert('Data yang anda masukkan salah');history.go(-1);</script>";
-			}else{
-				if($password == $siswa->password){
-		    		$session = array(
-			          'authenticated'=>true, 
-			          'nis'=> $username, 
-			          'nama'=> $siswa->namasiswa,			          
-			          'id_user'=> $username,
-			          'tipeuser'=>$siswa->id_tipeuser,
-			          'login' => true
-			        );
-			        $this->session->set_userdata($session);
-			        $this->M_login->userlog();
-			        redirect('Welcome'); 
-					// echo  'siswa login';
-			    }else{
-			        // $this->session->set_flashdata('message', 'Password salah'); // Buat session flashdata
-			        echo "<script>
-						alert('Password salah');history.go(-1);
-					</script>";
-			        // redirect('C_Login'); 
-			        // Redirect ke halaman login
-			    }	
-			}	
+			// $siswa = $this->M_login->getsiswa($username);
+			// if(empty($siswa)){
+			echo "<script>alert('Data yang anda masukkan salah');history.go(-1);</script>";
+			// }else{
+			// 	if($password == $siswa->password){
+		 //    		$session = array(
+			//           'authenticated'=>true, 
+			//           'nis'=> $username, 
+			//           'nama'=> $siswa->namasiswa,			          
+			//           'id_user'=> $username,
+			//           'tipeuser'=>$siswa->id_tipeuser,
+			//           'login' => true
+			//         );
+			//         $this->session->set_userdata($session);
+			//         $this->M_login->userlog();
+			//         redirect('Welcome'); 
+			// 		// echo  'siswa login';
+			//     }else{
+			//         // $this->session->set_flashdata('message', 'Password salah'); // Buat session flashdata
+			//         echo "<script>
+			// 			alert('Password salah');history.go(-1);
+			// 		</script>";
+			//         // redirect('C_Login'); 
+			//         // Redirect ke halaman login
+			//     }	
+			// }	
 			
 		} else {
 		    if($password == $user->password){ // Jika password yang diinput sama dengan password yang didatabase
