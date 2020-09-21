@@ -21,6 +21,7 @@ class Kelas extends CI_Controller {
 		// $id = $this->session->userdata('tipeuser');
 		$this->load->view('template/header');
 		$this->load->view('template/sidebar', $data);
+		
 		$this->load->view('v_kelas/v_kelas', $data);
 		$this->load->view('template/footer');
 	}	
@@ -67,7 +68,8 @@ class Kelas extends CI_Controller {
 	}
 
 	public function kelas_edit($id){
-		$data['menu'] = $this->M_Setting->getmenu1();
+        $ida = $this->session->userdata('tipeuser');
+        $data['menu'] = $this->M_Setting->getmenu1($ida);
 		$data['kelas'] = $this->M_Kelas->getkelasDetail($id);
 		// print_r(expression)
 		$this->load->view('template/header');

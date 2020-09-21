@@ -96,8 +96,8 @@ class Transaksi extends CI_Controller {
 	}
 
 	public function transaksi_edit($id){
-        $id = $this->session->userdata('tipeuser');
-        $data['menu'] = $this->M_Setting->getmenu1($id);
+        $ida = $this->session->userdata('tipeuser');
+        $data['menu'] = $this->M_Setting->getmenu1($ida);
 		$data['transaksi'] = $this->M_Transaksi->detailTransaksi($id);
 		// $id = $this->session->userdata('tipeuser');
 		$this->load->view('template/header');

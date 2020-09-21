@@ -19,4 +19,14 @@ class M_Setting extends CI_Model {
         $query = $this->db->get_where('tb_menu', $where);
         return $query->result();
     }
+
+    function cek($cek,$kode,$tabel){
+        $this->db->select('*');
+        $where = array(
+            $cek => $kode
+        );
+        $query = $this->db->get_where($tabel, $where);
+        return $query->result();
+    }
+
 }
