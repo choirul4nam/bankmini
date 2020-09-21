@@ -182,6 +182,65 @@ function toggle(source) {
     }
 }
 </script>
+
+<script type="text/javascript">
+  function embuh(){
+    var embuha = document.getElementById('kodeformat1').value;
+    if(embuha=='huruf'){
+    document.getElementById('texthuruf1').style.visibility='visible';
+    // document.getElementById('texthuruf1').value = embuha;
+    } else {
+    document.getElementById('texthuruf1').style.visibility='hidden';
+
+    }
+  }
+
+  function embuhb(){
+    var embuhtext = document.getElementById('format2').value;
+    if(embuhtext=='huruf'){
+    document.getElementById('texthuruf2').style.visibility='visible';
+    } else {
+    document.getElementById('texthuruf2').style.visibility='hidden';
+
+    }
+  }
+
+  function embuhc(){
+    var embuhtext3 = document.getElementById('format3').value;
+    if(embuhtext3=='huruf'){
+    document.getElementById('texthuruf3').style.visibility='visible';  
+    } else {
+    document.getElementById('texthuruf3').style.visibility='hidden';   
+    }
+    // document.getElementById('texthuruf3').value=embuhtext3;
+  }
+  function embuhhub(){
+      var a = document.getElementById('kodeformat1').value;
+      var b = document.getElementById('format2').value;
+      var c = document.getElementById('format3').value;
+      var d = document.getElementById('penghubung').value;
+      var e = document.getElementById('texthuruf1').value;
+      var f = document.getElementById('texthuruf2').value;
+      var g = document.getElementById('texthuruf2').value;
+      if (a == "huruf"){
+        var a = e;
+      } 
+      if (b == "huruf"){
+        var b = f;
+      } 
+      if(c == "huruf"){
+        var c = g;
+      }
+      document.getElementById('final').value = a+d+b+d+c;
+
+      document.getElementById('kodetransaksi').value = a+d+b+d+c;
+      $('#btnsimpankodekorwil').click(function(){
+        $('.close').click();
+      })
+    // var embuhhuba = document.getElementById('penghubung').value;
+  // document.getElementById('final').value= a+b;
+  }
+</script>
         <!-- ========== ADD custom.js FILE BELOW WITH YOUR CHANGES ========== -->
     </body>
 </html>

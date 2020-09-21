@@ -43,8 +43,9 @@ class Transaksi extends CI_Controller {
 		$kredit = $this->input->post('kredit', true);
 		$kategori = $this->input->post('kategori', true);
 		$deskripsi = $this->input->post('deskripsi', true);		
-		$kode = 'TR'.date("Ymd").''.getRandomString(5);
-		if($this->M_Transaksi->cekKodeTransaksi($kode)){
+		// $kode = 'TR'.date("Ymd").''.getRandomString(5);
+		$kode = $this->input->post('kodetransaksi');
+		// if($this->M_Transaksi->cekKodeTransaksi($kode)){
 			$data = array(
 				'id_mastertransaksi' => '',
 				'kodetransaksi' => $kode,
@@ -62,28 +63,28 @@ class Transaksi extends CI_Controller {
 	                                            		<strong>Sukses!</strong> Transaksi Berhasil.
 	                                        		</div>');
 			redirect(base_url('transaksi/'));
-		}else{
-			$kodeBaru = 'TR'.date("Ymd").''.getRandomString(5);
-			if($kodeBaru !== $kode){
-				$data = array(
-					'id_mastertransaksi' => '',
-					'kodetransaksi' => $kodeBaru,
-					'debet ' => $debet,
-					'kredit' => $kredit,
-					'kategori' => $kategori,
-					'deskripsi' => $deskripsi,
-					'nominal' => $result,					
-					'id_user' => 1,
-					'status' => 'aktif',
-					'tgl_update' => date("Y-m-d h:i:sa"),
-				);
-				$this->M_Transaksi->addTransaksi($data);
-				$this->session->set_flashdata('alert', '<div class="alert alert-success left-icon-alert" role="alert">
-		                                            		<strong>Sukses!</strong> Transaksi Berhasil.
-		                                        		</div>');
-				redirect(base_url('transaksi/'));
-			}
-		}
+		// }else{
+		// 	$kodeBaru = 'TR'.date("Ymd").''.getRandomString(5);
+		// 	if($kodeBaru !== $kode){
+		// 		$data = array(
+		// 			'id_mastertransaksi' => '',
+		// 			'kodetransaksi' => $kodeBaru,
+		// 			'debet ' => $debet,
+		// 			'kredit' => $kredit,
+		// 			'kategori' => $kategori,
+		// 			'deskripsi' => $deskripsi,
+		// 			'nominal' => $result,					
+		// 			'id_user' => 1,
+		// 			'status' => 'aktif',
+		// 			'tgl_update' => date("Y-m-d h:i:sa"),
+		// 		);
+		// 		$this->M_Transaksi->addTransaksi($data);
+		// 		$this->session->set_flashdata('alert', '<div class="alert alert-success left-icon-alert" role="alert">
+		//                                             		<strong>Sukses!</strong> Transaksi Berhasil.
+		//                                         		</div>');
+		// 		redirect(base_url('transaksi/'));
+		// 	}
+		// }
 	}
 
 	public function transaksi_delete($id){
