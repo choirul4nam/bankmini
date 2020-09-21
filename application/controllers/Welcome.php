@@ -29,9 +29,10 @@ class Welcome extends CI_Controller {
 
 	public function index()
 	{	
-        $data['menu'] = $this->M_Setting->getmenu1();
+        $id = $this->session->userdata('tipeuser');
+        $data['menu'] = $this->M_Setting->getmenu1($id);
         $data['dataSiswa'] = $this->db->get('tb_siswa')->num_rows(); 
-
+        
 		$this->load->view('template/header');
 		$this->load->view('template/sidebar', $data);
 		$this->load->view('template/index');

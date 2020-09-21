@@ -23,7 +23,8 @@ class Siswa extends CI_Controller
 
 	public function index()
 	{
-		$data['menu'] = $this->M_Setting->getmenu1();
+        $id = $this->session->userdata('tipeuser');
+        $data['menu'] = $this->M_Setting->getmenu1($id);
 		$data['datasiswa'] = $this->M_Siswa->getsiswa();
 		$data['datalulus'] = $this->M_Siswa->getLulus();
 
@@ -36,7 +37,8 @@ class Siswa extends CI_Controller
 	public function siswa_detail($nis)
 	{
 		$this->load->view('template/header');
-		$data['menu'] = $this->M_Setting->getmenu1();
+        $id = $this->session->userdata('tipeuser');
+        $data['menu'] = $this->M_Setting->getmenu1($id);
 		$this->load->view('template/sidebar', $data);
 		$data['datasiswa'] = $this->M_Siswa->getsiswadetail($nis);
 		$this->load->view('v_siswa/v_siswa-detail', $data);
@@ -46,8 +48,8 @@ class Siswa extends CI_Controller
 
 	public function siswa_add()
 	{
-		// $data['datasiswa'] = $this->M_Siswa->getsiswadetail($nis);
-		$data['menu'] = $this->M_Setting->getmenu1();
+        $id = $this->session->userdata('tipeuser');
+        $data['menu'] = $this->M_Setting->getmenu1($id);
 		$data['prov'] = $this->M_Provinsi->getprovinsi();
 		$data['kelas'] = $this->M_Kelas->getkelas();
 		$this->load->view('template/header');
@@ -145,7 +147,8 @@ class Siswa extends CI_Controller
 	public function siswa_edit($nis)
 	{
 		$data['datasiswa'] = $this->M_Siswa->getsiswadetail($nis);
-		$data['menu'] = $this->M_Setting->getmenu1();
+        $id = $this->session->userdata('tipeuser');
+        $data['menu'] = $this->M_Setting->getmenu1($id);
 		$data['prov'] = $this->M_Provinsi->getprovinsi();
 		$data['kelas'] = $this->M_Kelas->getkelas();
 		$data['kota'] = $this->M_Kota->getkotadetail($this->M_Siswa->getsiswadetail($nis)['id_provinsi']);
@@ -246,7 +249,8 @@ class Siswa extends CI_Controller
 	public function siswa_graduate()
 	{
 		$data['datasiswa'] = $this->M_Siswa->getsiswa();
-		$data['menu'] = $this->M_Setting->getmenu1();
+        $id = $this->session->userdata('tipeuser');
+        $data['menu'] = $this->M_Setting->getmenu1($id);
 		$data['kelas'] = $this->M_Kelas->getkelas();
 
 		$this->load->view('template/header');

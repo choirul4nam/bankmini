@@ -4,13 +4,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class M_login extends CI_Model{
 
   public function get($username){
+    $where = array('nopegawai' => $username, 'status !=' =>'tidak aktif' );
+    $result = $this->db->get_where('tb_staf', $where)->row();
+    return $result;
+}
 
-	  $this->db->join('tb_tipeuser', 'tb_tipeuser.id_tipeuser = tb_staf.id_tipeuser');
-  	$this->db->where('nopegawai',$username);
-  	$result = $this->db->get('tb_staf')->row();
+  // public function get($username){
 
-  	return $result;
-  }
+	 //  // $this->db->join('tb_tipeuser', 'tb_tipeuser.id_tipeuser = tb_staf.id_tipeuser');
+  // 	$this->db->where('nopegawai',$username);
+  // 	$result = $this->db->get('tb_staf')->row();
+
+  // 	return $result;
+  // }
 
   public function getsiswa($username){
 

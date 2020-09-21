@@ -14,7 +14,8 @@ class Kelas extends CI_Controller {
 
 	public function index()
 	{
-        $data['menu'] = $this->M_Setting->getmenu1();
+        $id = $this->session->userdata('tipeuser');
+        $data['menu'] = $this->M_Setting->getmenu1($id);
         $data['kelas'] = $this->M_Kelas->getkelas();
 
 		// $id = $this->session->userdata('tipeuser');
@@ -25,7 +26,8 @@ class Kelas extends CI_Controller {
 	}	
 
 	public function kelas_add(){
-		 $data['menu'] = $this->M_Setting->getmenu1();
+        $id = $this->session->userdata('tipeuser');
+        $data['menu'] = $this->M_Setting->getmenu1($id);
 		
 		$this->load->view('template/header');
 		$this->load->view('template/sidebar', $data);

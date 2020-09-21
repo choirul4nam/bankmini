@@ -77,6 +77,7 @@ $route['transaksi-edt/(:any)'] = 'transaksi/transaksi_edit/$1';
 $route['tipeuser-det/(:any)'] = 'tipeuser/detail/$1';
 $route['tipeuser-add'] = 'tipeuser/tambahData';
 $route['tipeuser-ubah/(:any)'] = 'tipeuser/ubahData/$1';
+$route['tipeuser-akses/(:any)'] = 'tipeuser/akses/$1';
 //tahun akademik
 $route['tahunakademik-det/(:any)'] = 'tahunakademik/detail/$1';
 $route['tahunakademik-add'] = 'tahunakademik/tambahdata';

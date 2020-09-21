@@ -17,7 +17,8 @@ class Transaksi extends CI_Controller {
 
 	public function index()
 	{
-        $data['menu'] = $this->M_Setting->getmenu1();
+        $id = $this->session->userdata('tipeuser');
+        $data['menu'] = $this->M_Setting->getmenu1($id);
         $data['transaksi'] = $this->M_Transaksi->getTransaksi();
 		// $id = $this->session->userdata('tipeuser');
 		$this->load->view('template/header');
@@ -27,8 +28,8 @@ class Transaksi extends CI_Controller {
 	}
 
 	public function transaksi_add(){
-		$data['menu'] = $this->M_Setting->getmenu1();
-		// $id = $this->session->userdata('tipeuser');
+        $id = $this->session->userdata('tipeuser');
+        $data['menu'] = $this->M_Setting->getmenu1($id);
 		$this->load->view('template/header');
 		$this->load->view('template/sidebar', $data);
 		$this->load->view('v_transaksi/v_transaksi-add', $data);

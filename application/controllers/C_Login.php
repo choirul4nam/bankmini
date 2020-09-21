@@ -22,12 +22,13 @@ class C_Login extends CI_Controller {
 	function cek_login(){
 		$username = $this->input->post('username');
 		$password = $this->input->post('password');
-		//echo $nip.$password;
+		// echo $username.$password;
 		$user = $this->M_login->get($username);
-
+		// echo $user;
 		if(empty($user)){
 			// $siswa = $this->M_login->getsiswa($username);
 			// if(empty($siswa)){
+			// echo $username;
 			echo "<script>alert('Data yang anda masukkan salah');history.go(-1);</script>";
 			// }else{
 			// 	if($password == $siswa->password){

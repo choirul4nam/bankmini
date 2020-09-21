@@ -17,8 +17,8 @@ class TahunAkademik extends CI_Controller
     public function index()
     {
         $this->load->view('template/header');
-        // $id = $this->session->userdata('tipeuser');
-        $data['menu'] = $this->M_Setting->getmenu1();
+        $id = $this->session->userdata('tipeuser');
+        $data['menu'] = $this->M_Setting->getmenu1($id);
         $data['tahunakademik'] = $this->M_TahunAkademik->getAll();
         $this->load->view('template/sidebar', $data);
         $this->load->view('v_tahunakademik/v_tahunakademik.php', $data);
@@ -28,8 +28,8 @@ class TahunAkademik extends CI_Controller
     public function detail($id_tahunakademik)
     {
         $this->load->view('template/header');
-        // $id = $this->session->userdata('tipeuser');
-        $data['menu'] = $this->M_Setting->getmenu1();
+        $id = $this->session->userdata('tipeuser');
+        $data['menu'] = $this->M_Setting->getmenu1($id);
         $data['tahunakademik'] = $this->M_TahunAkademik->getBYId($id_tahunakademik);
         $this->load->view('template/sidebar', $data);
         $this->load->view('v_tahunakademik/v_tahunakademik_detail.php', $data);
@@ -45,8 +45,8 @@ class TahunAkademik extends CI_Controller
     public function tambahData()
     {
         $this->load->view('template/header');
-        // $id = $this->session->userdata('tipeuser');
-        $data['menu'] = $this->M_Setting->getmenu1();
+        $id = $this->session->userdata('tipeuser');
+        $data['menu'] = $this->M_Setting->getmenu1($id);
         $this->load->view('template/sidebar', $data);
         $this->load->view('v_tahunakademik/v_tahunakademik_add.php', $data);
         $this->load->view('template/footer');
@@ -69,8 +69,8 @@ class TahunAkademik extends CI_Controller
     public function ubahdata($id_tahunakademik)
     {
         $this->load->view('template/header');
-        // $id = $this->session->userdata('tipeuser');
-        $data['menu'] = $this->M_Setting->getmenu1();
+        $id = $this->session->userdata('tipeuser');
+        $data['menu'] = $this->M_Setting->getmenu1($id);
         $data['tahunakademik'] = $this->M_TahunAkademik->getBYId($id_tahunakademik);
         $this->load->view('template/sidebar', $data);
         $this->load->view('v_tahunakademik/v_tahunakademik_ubah.php', $data);

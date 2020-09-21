@@ -18,8 +18,8 @@ class Staff extends CI_Controller
     public function index()
     {
         $this->load->view('template/header');
-        // $id = $this->session->userdata('tipeuser');
-        $data['menu'] = $this->M_Setting->getmenu1();
+        $id = $this->session->userdata('tipeuser');
+        $data['menu'] = $this->M_Setting->getmenu1($id);
         $data['staff'] = $this->M_Staff->getAll();
         $this->load->view('template/sidebar', $data);
         $this->load->view('v_staff/v_staff.php', $data);
@@ -35,8 +35,8 @@ class Staff extends CI_Controller
     public function tambahdata()
     {
         $this->load->view('template/header');
-        // $id = $this->session->userdata('tipeuser');
-        $data['menu'] = $this->M_Setting->getmenu1();
+        $id = $this->session->userdata('tipeuser');
+        $data['menu'] = $this->M_Setting->getmenu1($id);
         $this->load->view('template/sidebar', $data);
         $this->load->view('v_staff/v_staff_add.php', $data);
         $this->load->view('template/footer');
@@ -88,8 +88,8 @@ class Staff extends CI_Controller
     public function detail($id_staf)
     {
         $this->load->view('template/header');
-        // $id = $this->session->userdata('tipeuser');
-        $data['menu'] = $this->M_Setting->getmenu1();
+        $id = $this->session->userdata('tipeuser');
+        $data['menu'] = $this->M_Setting->getmenu1($id);
         $data['staf'] = $this->M_Staff->getById($id_staf);
         $this->load->view('template/sidebar', $data);
         $this->load->view('v_staff/v_staff_detail.php', $data);
@@ -99,8 +99,8 @@ class Staff extends CI_Controller
     public function ubahdata($id_staf)
     {
         $this->load->view('template/header');
-        // $id = $this->session->userdata('tipeuser');
-        $data['menu'] = $this->M_Setting->getmenu1();
+        $id = $this->session->userdata('tipeuser');
+        $data['menu'] = $this->M_Setting->getmenu1($id);
         $data['staf'] = $this->M_Staff->getById($id_staf);
         $this->load->view('template/sidebar', $data);
         $this->load->view('v_staff/v_staff_ubah.php', $data);
@@ -146,7 +146,8 @@ class Staff extends CI_Controller
 
     public function staff_profile()
     {
-        $data['menu'] = $this->M_Setting->getmenu1();
+        $id = $this->session->userdata('tipeuser');
+        $data['menu'] = $this->M_Setting->getmenu1($id);
         $data['staf'] = $this->M_Staff->getById($this->session->userdata('id_user'));
 
 
@@ -158,7 +159,8 @@ class Staff extends CI_Controller
 
     public function profile_ubah()
     {
-        $data['menu'] = $this->M_Setting->getmenu1();
+        $id = $this->session->userdata('tipeuser');
+        $data['menu'] = $this->M_Setting->getmenu1($id);
         $data['staf'] = $this->M_Staff->getById($this->session->userdata('id_user'));
 
         $this->load->view('template/header');

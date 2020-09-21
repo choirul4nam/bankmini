@@ -16,8 +16,8 @@ class TipeUser extends CI_Controller
     public function index()
     {
         $this->load->view('template/header');
-        // $id = $this->session->userdata('tipeuser');
-        $data['menu'] = $this->M_Setting->getmenu1();
+        $id = $this->session->userdata('tipeuser');
+        $data['menu'] = $this->M_Setting->getmenu1($id);
         $data['tipeuser'] = $this->M_TipeUser->getAll();
         $this->load->view('template/sidebar', $data);
         $this->load->view('v_tipeuser/v_tipeuser.php', $data);
@@ -27,6 +27,7 @@ class TipeUser extends CI_Controller
     public function hapus($id_tipeuser)
     {
         $this->M_TipeUser->hapus($id_tipeuser);
+        $this->M_TipeUser->hapusakses($id_tipeuser);
         $this->session->set_flashdata('message', '<div class="alert alert-success left-icon-alert" role="alert"><strong>Sukses!</strong> Data Berhasil Dihapus</div>');
         redirect('TipeUser');
     }
@@ -34,19 +35,31 @@ class TipeUser extends CI_Controller
     public function detail($id_tipeuser)
     {
         $this->load->view('template/header');
-        // $id = $this->session->userdata('tipeuser');
-        $data['menu'] = $this->M_Setting->getmenu1();
+        $id = $this->session->userdata('tipeuser');
+        $data['menu'] = $this->M_Setting->getmenu1($id);
         $data['tipeuser'] = $this->M_TipeUser->getById($id_tipeuser);
         $this->load->view('template/sidebar', $data);
         $this->load->view('v_tipeuser/v_tipeuser_detail.php', $data);
         $this->load->view('template/footer');
     }
 
+     public function akses($id_tipeuser)
+    {
+        $this->load->view('template/header');
+        $id = $this->session->userdata('tipeuser');
+        $data['menu'] = $this->M_Setting->getmenu1($id);
+        $data['tipeuser'] = $this->M_TipeUser->getById($id_tipeuser);
+        $data['akses'] = $this->M_TipeUser->getakses($id_tipeuser);
+        $this->load->view('template/sidebar', $data);
+        $this->load->view('v_tipeuser/v_akses.php', $data);
+        $this->load->view('template/footer');
+    }
+
     public function tambahData()
     {
         $this->load->view('template/header');
-        // $id = $this->session->userdata('tipeuser');
-        $data['menu'] = $this->M_Setting->getmenu1();
+        $id = $this->session->userdata('tipeuser');
+        $data['menu'] = $this->M_Setting->getmenu1($id);
 
         $this->load->view('template/sidebar', $data);
         $this->load->view('v_tipeuser/v_tipeuser_add.php', $data);
@@ -64,6 +77,11 @@ class TipeUser extends CI_Controller
             redirect('TipeUser/tambahdata');
         } else {
             $this->M_TipeUser->tambah($data);
+             $data = $this->M_TipeUser->cekkodetipeuser();
+                foreach ($data as $id) {
+                    $id = $id;
+                    $this->M_TipeUser->tambahakses($id);
+                }
             $this->session->set_flashdata('message', '<div class="alert alert-success left-icon-alert" role="alert"><strong>Sukses!</strong> Data Berhasil Ditambahkan</div>');
             redirect('TipeUser');
         }
@@ -72,8 +90,8 @@ class TipeUser extends CI_Controller
     public function ubahData($id_tipeuser)
     {
         $this->load->view('template/header');
-        // $id = $this->session->userdata('tipeuser');
-        $data['menu'] = $this->M_Setting->getmenu1();
+        $id = $this->session->userdata('tipeuser');
+        $data['menu'] = $this->M_Setting->getmenu1($id);
         $data['tipeuser'] = $this->M_TipeUser->getById($id_tipeuser);
         $this->load->view('template/sidebar', $data);
         $this->load->view('v_tipeuser/v_tipeuser_ubah.php', $data);
@@ -89,5 +107,50 @@ class TipeUser extends CI_Controller
         $this->M_TipeUser->ubah($data);
         $this->session->set_flashdata('message', '<div class="alert alert-success left-icon-alert" role="alert"> <strong>Sukses!</strong> Data Berhasil DiUbah</div>');
         redirect('Tipeuser');
+    }
+
+    public function editakses()
+    { 
+        if(isset($_POST['save']))
+        {
+
+            $iduser= $this->input->post('id');
+            $this->M_TipeUser->refresh($iduser);//Call the modal
+        
+            $submenu = $this->input->post('submenu');//Pass the userid here
+            $checkbox = $this->input->post('view'); 
+            for($i=0;$i<count($checkbox);$i++){
+                $sub = $submenu[$i];
+                $view = $checkbox[$i];
+                $this->M_TipeUser->editv($iduser,$sub,$view);//Call the modal
+                
+            }
+
+            $addbox = $this->input->post('add'); 
+            for($i=0;$i<count($addbox);$i++){
+                $sub = $submenu[$i];
+                $add = $addbox[$i];
+                $this->M_TipeUser->edita($iduser,$sub,$add);//Call the modal
+                
+            }
+
+            $editbox = $this->input->post('edit'); 
+            for($i=0;$i<count($editbox);$i++){
+                $sub = $submenu[$i];
+                $edit = $editbox[$i];
+                $this->M_TipeUser->edite($iduser,$sub,$edit);//Call the modal
+                
+            }
+
+            $deletebox = $this->input->post('delete'); 
+            for($i=0;$i<count($deletebox);$i++){
+                $sub = $submenu[$i];
+                $delete = $deletebox[$i];
+                $this->M_TipeUser->editd($iduser,$sub,$delete);//Call the modal
+                
+            }
+        $this->session->set_flashdata('message', '<div class="alert alert-success left-icon-alert" role="alert"> <strong>Sukses!</strong> Data Berhasil DiUbah</div>');
+            redirect('Tipeuser');
+        }
     }
 }

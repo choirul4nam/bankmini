@@ -69,7 +69,7 @@
                                             <td>
                                                 <center>
                                                     <div class="btn btn-group">
-                                                        <!-- <a href="<?= base_url('tipeuser-det/') . $data['id_tipeuser'] ?>" class="btn btn-success"><i class="fa fa-search"></i></a> -->
+                                                        <a href="<?= base_url('tipeuser-akses/') . $data['id_tipeuser'] ?>" class="btn btn-success"><i class="fa fa-search"></i></a>
                                                         <a href="<?= base_url('tipeuser-ubah/') . $data['id_tipeuser'] ?>" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
                                                         <a href="<?= base_url('TipeUser/hapus/') . $data['id_tipeuser'] ?>" class="btn btn-danger" onclick="return confirm('Yakin Mau Dihapus ?')"><i class="fa fa-trash"></i></a>
                                                     </div>
