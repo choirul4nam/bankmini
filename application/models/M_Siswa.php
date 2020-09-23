@@ -68,5 +68,16 @@ class M_Siswa extends CI_Model {
             return false;
         }
     }
-
+    
+    function getJK($jk){
+        if($jk === 'L' || $jk === 'l'){
+            return 'Laki-laki';
+        }else if($jk === 'P' || $jk === 'p'){
+            return 'Perempuan';
+        }else if($jk == 'Laki-laki'){
+            return 'Laki-laki';
+        }else if($jk == 'Perempuan'){
+            return 'Perempuan';
+        }
+    }
 }

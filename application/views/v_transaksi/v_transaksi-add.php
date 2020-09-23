@@ -38,16 +38,16 @@
 		                                        		<label for="exampleInputPassword5">Debet</label>                                     
                                                         <select class="form-control" name="debet" id="debet">
                                                             <option value=" ">Pilih</option>   
-                                                            <option value="siswa">Siswa</option>
-                                                            <option value="sekolah">Sekolah</option>
+                                                            <option value="siswa">siswa</option>
+                                                            <option value="koperasi">Koperasi</option>
                                                         </select>	                                        
 		                                        	</div>
 		                                        	<div class="col-lg-6">                                            		   
 	                                                	<label for="exampleInputPassword5">Kredit</label>
 		                                                 <select class="form-control" name="kredit" id="kredit">
                                                             <option value=" ">Pilih</option>      
-                                                            <option value="siswa">Siswa</option>
-                                                            <option value="sekolah">Sekolah</option>
+                                                            <option value="siswa">siswa</option>
+                                                            <option value="koperasi">Koperasi</option>
                                                          </select>
 		                                            </div>
                                             	</div>

@@ -1,12 +1,12 @@
 
   <!-- /.content-wrapper -->
-  <footer>
-    <strong>Development By &copy; 2020 <a href="https://hosterweb.co.id">HOSTERWEB INDONESIA</a>
-  </footer>
-            <!-- /.content-wrapper -->
+  <!-- /.content-wrapper -->
+            <footer>
+                <strong>Development By &copy; 2020 <a href="https://hosterweb.co.id">HOSTERWEB INDONESIA</a>
+            </footer>
         </div>
-        <!-- /.main-wrapper -->
-
+        <!-- /.main-wrapper -->    
+    </div>
         <!-- ========== COMMON JS FILES ========== -->
         <script src="<?php echo base_url() ?>assets/Theme/js/jquery/jquery-2.2.4.js"></script>
         <script src="<?php echo base_url() ?>assets/Theme/js/jquery-ui/jquery-ui.js"></script>
@@ -138,109 +138,115 @@
         $('#debet').change(function(){            
             if($(this).val() === 'siswa'){
                 if($('#kredit').val() === 'Pilih' || $('#kredit').val() === null || $('#kredit').val() === ' '){
-                    $('#kredit').html('<option>Pilih</option><option value="sekolah">sekolah</option>')
+                    $('#kredit').html('<option>Pilih</option><option value="koperasi">Koperasi</option>')
                 }
                 else if($('#kredit').val() === 'siswa'){
-                    $('#kredit').html('<option>Pilih</option><option value="sekolah">sekolah</option>')
+                    $('#kredit').html('<option>Pilih</option><option value="koperasi">Koperasi</option>')
                 }
-            }else if($(this).val() === 'sekolah'){
+            }else if($(this).val() === 'koperasi'){
                 if($('#kredit').val() === 'Pilih' || $('#kredit').val() === null || $('#kredit').val() === ' '){
                      $('#kredit').html('<option>Pilih</option><option value="siswa">siswa</option>')
-                }else if($('#kredit').val() === 'sekolah'){
+                }else if($('#kredit').val() === 'koperasi'){
                     $('#kredit').html('<option>Pilih</option><option value="siswa">siswa</option>')
                 }
             }else{
-                 $('#kredit').html('<option>Pilih</option><option value="siswa">siswa</option><option value="sekolah">sekolah</option>')
+                 $('#kredit').html('<option>Pilih</option><option value="siswa">siswa</option><option value="koperasi">Koperasi</option>')
             }
         })
         $('#kredit').change(function(){            
             if($(this).val() === 'siswa'){
                 if($('#debet').val() === 'Pilih' || $('#debet').val() === null || $('#debet').val() === ' '){
-                    $('#debet').html('<option>Pilih</option><option value="sekolah">sekolah</option>')
+                    $('#debet').html('<option>Pilih</option><option value="koperasi">tpo</option>')
                 }
                 else if($('#debet').val() === 'siswa'){
-                    $('#debet').html('<option>Pilih</option><option value="sekolah">sekolah</option>')
+                    $('#debet').html('<option>Pilih</option><option value="koperasi">Koperasi</option>')
                 }
-            }else if($(this).val() === 'sekolah'){
+            }else if($(this).val() === 'koperasi'){
                 if($('#debet').val() === 'Pilih' || $('#debet').val() === null || $('#debet').val() === ' '){
                      $('#debet').html('<option>Pilih</option><option value="siswa">siswa</option>')
-                }else if($('#debet').val() === 'sekolah'){
+                }else if($('#debet').val() === 'koperasi'){
                     $('#debet').html('<option>Pilih</option><option value="siswa">siswa</option>')
                 }
             }else{
-                 $('#debet').html('<option>Pilih</option><option value="siswa">siswa</option><option value="sekolah">sekolah</option>')
+                 $('#debet').html('<option>Pilih</option><option value="siswa">siswa</option><option value="koperasi">Koperasi</option>')
             }
         })
+          
+        function toggle(source) {
+            var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            for (var i = 0; i < checkboxes.length; i++) {
+                if (checkboxes[i] != source)
+                    checkboxes[i].checked = source.checked;
+            }
+        }
+
+        function embuh(){
+            var embuha = document.getElementById('kodeformat1').value;
+            if(embuha=='huruf'){
+            document.getElementById('texthuruf1').style.visibility='visible';
+            // document.getElementById('texthuruf1').value = embuha;
+            } else {
+            document.getElementById('texthuruf1').style.visibility='hidden';
+
+            }
+        }
+
+        function embuhb(){
+            var embuhtext = document.getElementById('format2').value;
+            if(embuhtext=='huruf'){
+            document.getElementById('texthuruf2').style.visibility='visible';
+            } else {
+            document.getElementById('texthuruf2').style.visibility='hidden';
+
+            }
+        }
+
+        function embuhc(){
+            var embuhtext3 = document.getElementById('format3').value;
+            if(embuhtext3=='huruf'){
+            document.getElementById('texthuruf3').style.visibility='visible';  
+            } else {
+            document.getElementById('texthuruf3').style.visibility='hidden';   
+            }
+            // document.getElementById('texthuruf3').value=embuhtext3;
+        }
+        function embuhhub(){
+            var a = document.getElementById('kodeformat1').value;
+            var b = document.getElementById('format2').value;
+            var c = document.getElementById('format3').value;
+            var d = document.getElementById('penghubung').value;
+            var e = document.getElementById('texthuruf1').value;
+            var f = document.getElementById('texthuruf2').value;
+            var g = document.getElementById('texthuruf2').value;
+            if (a == "huruf"){
+                var a = e;
+            } 
+            if (b == "huruf"){
+                var b = f;
+            } 
+            if(c == "huruf"){
+                var c = g;
+            }
+            document.getElementById('final').value = a+d+b+d+c;
+
+            document.getElementById('kodetransaksi').value = a+d+b+d+c;
+            $('#btnsimpankodekorwil').click(function(){
+                $('.close').click();
+            })
+            // var embuhhuba = document.getElementById('penghubung').value;
+        // document.getElementById('final').value= a+b;
+        }
+
+        $('#tb_import').DataTable({
+            scrollY: '300px',
+            paging: false
+        });
+        $('#file').hide();
+        $('#file').change(function(){
+            $('#filename').html($(this)[0].files[0]['name'])
+            // console.log()
+        })
         </script>
-
-<script type="text/javascript">
-function toggle(source) {
-    var checkboxes = document.querySelectorAll('input[type="checkbox"]');
-    for (var i = 0; i < checkboxes.length; i++) {
-        if (checkboxes[i] != source)
-            checkboxes[i].checked = source.checked;
-    }
-}
-</script>
-
-<script type="text/javascript">
-  function embuh(){
-    var embuha = document.getElementById('kodeformat1').value;
-    if(embuha=='huruf'){
-    document.getElementById('texthuruf1').style.visibility='visible';
-    // document.getElementById('texthuruf1').value = embuha;
-    } else {
-    document.getElementById('texthuruf1').style.visibility='hidden';
-
-    }
-  }
-
-  function embuhb(){
-    var embuhtext = document.getElementById('format2').value;
-    if(embuhtext=='huruf'){
-    document.getElementById('texthuruf2').style.visibility='visible';
-    } else {
-    document.getElementById('texthuruf2').style.visibility='hidden';
-
-    }
-  }
-
-  function embuhc(){
-    var embuhtext3 = document.getElementById('format3').value;
-    if(embuhtext3=='huruf'){
-    document.getElementById('texthuruf3').style.visibility='visible';  
-    } else {
-    document.getElementById('texthuruf3').style.visibility='hidden';   
-    }
-    // document.getElementById('texthuruf3').value=embuhtext3;
-  }
-  function embuhhub(){
-      var a = document.getElementById('kodeformat1').value;
-      var b = document.getElementById('format2').value;
-      var c = document.getElementById('format3').value;
-      var d = document.getElementById('penghubung').value;
-      var e = document.getElementById('texthuruf1').value;
-      var f = document.getElementById('texthuruf2').value;
-      var g = document.getElementById('texthuruf2').value;
-      if (a == "huruf"){
-        var a = e;
-      } 
-      if (b == "huruf"){
-        var b = f;
-      } 
-      if(c == "huruf"){
-        var c = g;
-      }
-      document.getElementById('final').value = a+d+b+d+c;
-
-      document.getElementById('kodetransaksi').value = a+d+b+d+c;
-      $('#btnsimpankodekorwil').click(function(){
-        $('.close').click();
-      })
-    // var embuhhuba = document.getElementById('penghubung').value;
-  // document.getElementById('final').value= a+b;
-  }
-</script>
         <!-- ========== ADD custom.js FILE BELOW WITH YOUR CHANGES ========== -->
     </body>
 </html>

@@ -30,7 +30,7 @@
                                                         <select class="form-control" name="debet" id="debet">
                                                             <option value=" ">Pilih</option>   
                                                             <option value="siswa" <?php if ($transaksi->debet == 'siswa'){echo "selected";} ?>>Siswa</option>
-                                                            <option value="sekolah" <?php if ($transaksi->debet == 'sekolah'){echo "selected";} ?>>Sekolah</option>
+                                                            <option value="koperasi" <?php if ($transaksi->debet == 'koperasi'){echo "selected";} ?>>Koperasi</option>
                                                         </select>                                           
                                                     </div>
                                                     <div class="col-lg-6">                                                     
@@ -38,7 +38,7 @@
                                                          <select class="form-control" name="kredit" id="kredit">
                                                             <option value=" ">Pilih</option>      
                                                             <option value="siswa" <?php if ($transaksi->kredit == 'siswa'){echo "selected";} ?>>Siswa</option>
-                                                            <option value="sekolah" <?php if ($transaksi->kredit == 'sekolah'){echo "selected";} ?>>Sekolah</option>
+                                                            <option value="koperasi" <?php if ($transaksi->kredit == 'koperasi'){echo "selected";} ?>>Koperasi</option>
                                                          </select>
                                                     </div>
                                             	</div>

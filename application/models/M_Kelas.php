@@ -14,9 +14,11 @@ class M_Kelas extends CI_Model {
     }    
 
     public function getSiswaByKelas($idKelas){
-        $query = $this->db->get_where('v_siswa', ['id_kelas' => $idKelas, 'status' => 'aktif'])->result_array(); 
+        $this->db->where(['id_kelas' => $idKelas]);
+        $this->db->order_by('namasiswa', 'asc');
+        $query = $this->db->get('v_siswa')->result_array(); 
         return $query;
-    } 
+    }  
 
     public function addKelas($data){
     	$this->db->insert('tb_kelas', $data);
