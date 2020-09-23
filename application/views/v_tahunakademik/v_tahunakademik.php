@@ -43,8 +43,9 @@
                                 <h5>Data Tahun Akademik</h5>
                             </div>
 
-                            <a href="<?= base_url('tahunakademik-add') ?>" class="btn btn-primary ml-15"><i class="fa fa-plus"></i> Tambah Tahun Akademik</a>
-
+                            <?php if ($akses['add'] == 1) { ?>
+                                <a href="<?= base_url('tahunakademik-add') ?>" class="btn btn-primary ml-15"><i class="fa fa-plus"></i> Tambah Tahun Akademik</a>
+                            <?php } ?>
                         </div>
                         <div class="panel-body p-20">
                             <table id="tb_tahunakademik" class="display table table-striped table-bordered" cellspacing="0" width="100%">
@@ -72,9 +73,15 @@
                                             <td>
                                                 <center>
                                                     <div class="btn btn-group">
-                                                        <!-- <a href="<?= base_url('tahunakademik-det/') . $data['id_tahunakademik'] ?>" class="btn btn-success"><i class="fa fa-search"></i></a> -->
-                                                        <a href="<?= base_url('tahunakademik-ubah/') . $data['id_tahunakademik'] ?>" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
-                                                        <a href="<?= base_url('tahunakademik/hapus/') . $data['id_tahunakademik'] ?> " class="btn btn-danger" onclick="return confirm('Yakin Mau Dihapus ?')"><i class="fa fa-trash"></i></a>
+                                                        <?php if ($akses['view'] == 1) { ?>
+                                                            <!-- <a href="<?= base_url('tahunakademik-det/') . $data['id_tahunakademik'] ?>" class="btn btn-success"><i class="fa fa-search"></i></a> -->
+                                                        <?php } ?>
+                                                        <?php if ($akses['edit'] == 1) { ?>
+                                                            <a href="<?= base_url('tahunakademik-ubah/') . $data['id_tahunakademik'] ?>" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
+                                                        <?php } ?>
+                                                        <?php if ($akses['delete'] == 1) { ?>
+                                                            <a href="<?= base_url('tahunakademik/hapus/') . $data['id_tahunakademik'] ?> " class="btn btn-danger" onclick="return confirm('Yakin Mau Dihapus ?')"><i class="fa fa-trash"></i></a>
+                                                        <?php } ?>
                                                     </div>
                                                 </center>
                                             </td>

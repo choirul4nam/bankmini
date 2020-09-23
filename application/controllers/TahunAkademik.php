@@ -11,6 +11,7 @@ class TahunAkademik extends CI_Controller
         $this->load->library('session');
         $this->load->model('M_Setting');
         $this->load->model('M_TahunAkademik');
+        $this->load->model('M_Akses');
         cek_login_user();
     }
 
@@ -20,6 +21,8 @@ class TahunAkademik extends CI_Controller
         $id = $this->session->userdata('tipeuser');
         $data['menu'] = $this->M_Setting->getmenu1($id);
         $data['tahunakademik'] = $this->M_TahunAkademik->getAll();
+        $data['akses'] = $this->M_Akses->getByLinkSubMenu(urlPath());
+
         $this->load->view('template/sidebar', $data);
         $this->load->view('v_tahunakademik/v_tahunakademik.php', $data);
         $this->load->view('template/footer');

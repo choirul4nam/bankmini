@@ -11,15 +11,19 @@ class TipeUser extends CI_Controller
         $this->load->library('session');
         $this->load->model('M_Setting');
         $this->load->model('M_TipeUser');
+        $this->load->model('M_Akses');
+
         cek_login_user();
     }
     public function index()
     {
         $this->load->view('template/header');
         $id = $this->session->userdata('tipeuser');
-        echo $id;
+        // echo $id;
         $data['menu'] = $this->M_Setting->getmenu1($id);
         $data['tipeuser'] = $this->M_TipeUser->getAll();
+        $data['akses'] = $this->M_Akses->getByLinkSubMenu(urlPath());
+
         $this->load->view('template/sidebar', $data);
         $this->load->view('v_tipeuser/v_tipeuser.php', $data);
         $this->load->view('template/footer');
@@ -44,7 +48,7 @@ class TipeUser extends CI_Controller
         $this->load->view('template/footer');
     }
 
-     public function akses($id_tipeuser)
+    public function akses($id_tipeuser)
     {
         $this->load->view('template/header');
         $id = $this->session->userdata('tipeuser');
@@ -78,11 +82,11 @@ class TipeUser extends CI_Controller
             redirect('TipeUser/tambahdata');
         } else {
             $this->M_TipeUser->tambah($data);
-             $data = $this->M_TipeUser->cekkodetipeuser();
-                foreach ($data as $id) {
-                    $id = $id;
-                    $this->M_TipeUser->tambahakses($id);
-                }
+            $data = $this->M_TipeUser->cekkodetipeuser();
+            foreach ($data as $id) {
+                $id = $id;
+                $this->M_TipeUser->tambahakses($id);
+            }
             $this->session->set_flashdata('message', '<div class="alert alert-success left-icon-alert" role="alert"><strong>Sukses!</strong> Data Berhasil Ditambahkan</div>');
             redirect('TipeUser');
         }
@@ -111,46 +115,45 @@ class TipeUser extends CI_Controller
     }
 
     public function editakses()
-    { 
-        if(isset($_POST['save']))
-        {
+    {
+        if (isset($_POST['save'])) {
 
-            $iduser= $this->input->post('id');
-            $this->M_TipeUser->refresh($iduser);//Call the modal
-        
-            $submenu = $this->input->post('submenu');//Pass the userid here
-            $checkbox = $this->input->post('view'); 
-            for($i=0;$i<count($checkbox);$i++){
+            $iduser = $this->input->post('id');
+            $this->M_TipeUser->refresh($iduser); //Call the modal
+
+            $submenu = $this->input->post('submenu'); //Pass the userid here
+            $checkbox = $this->input->post('view');
+            for ($i = 0; $i < count($checkbox); $i++) {
                 $sub = $submenu[$i];
                 $view = $checkbox[$i];
-                $this->M_TipeUser->editv($iduser,$sub,$view);//Call the modal
-                
+                $this->M_TipeUser->editv($iduser, $sub, $view); //Call the modal
+
             }
 
-            $addbox = $this->input->post('add'); 
-            for($i=0;$i<count($addbox);$i++){
+            $addbox = $this->input->post('add');
+            for ($i = 0; $i < count($addbox); $i++) {
                 $sub = $submenu[$i];
                 $add = $addbox[$i];
-                $this->M_TipeUser->edita($iduser,$sub,$add);//Call the modal
-                
+                $this->M_TipeUser->edita($iduser, $sub, $add); //Call the modal
+
             }
 
-            $editbox = $this->input->post('edit'); 
-            for($i=0;$i<count($editbox);$i++){
+            $editbox = $this->input->post('edit');
+            for ($i = 0; $i < count($editbox); $i++) {
                 $sub = $submenu[$i];
                 $edit = $editbox[$i];
-                $this->M_TipeUser->edite($iduser,$sub,$edit);//Call the modal
-                
+                $this->M_TipeUser->edite($iduser, $sub, $edit); //Call the modal
+
             }
 
-            $deletebox = $this->input->post('delete'); 
-            for($i=0;$i<count($deletebox);$i++){
+            $deletebox = $this->input->post('delete');
+            for ($i = 0; $i < count($deletebox); $i++) {
                 $sub = $submenu[$i];
                 $delete = $deletebox[$i];
-                $this->M_TipeUser->editd($iduser,$sub,$delete);//Call the modal
-                
+                $this->M_TipeUser->editd($iduser, $sub, $delete); //Call the modal
+
             }
-        $this->session->set_flashdata('message', '<div class="alert alert-success left-icon-alert" role="alert"> <strong>Sukses!</strong> Data Berhasil DiUbah</div>');
+            $this->session->set_flashdata('message', '<div class="alert alert-success left-icon-alert" role="alert"> <strong>Sukses!</strong> Data Berhasil DiUbah</div>');
             redirect('Tipeuser');
         }
     }

@@ -43,9 +43,9 @@
                             <div class="panel-title">
                                 <h5>Data Tipe User</h5>
                             </div>
-
-                            <a href="<?= base_url('tipeuser-add') ?>" class="btn btn-primary ml-15 mt-15"><i class="fa fa-plus"></i> Tambah Tipe User</a>
-
+                            <?php if ($akses['add'] == 1) { ?>
+                                <a href="<?= base_url('tipeuser-add') ?>" class="btn btn-primary ml-15 mt-15"><i class="fa fa-plus"></i> Tambah Tipe User</a>
+                            <?php } ?>
                         </div>
                         <div class="panel-body p-20">
                             <table id="tb_tipeuser" class="display table table-striped table-bordered table-responsive" cellspacing="0" width="100%">
@@ -69,9 +69,15 @@
                                             <td>
                                                 <center>
                                                     <div class="btn btn-group">
-                                                        <a href="<?= base_url('tipeuser-akses/') . $data['id_tipeuser'] ?>" class="btn btn-success"><i class="fa fa-cog"></i></a>
-                                                        <a href="<?= base_url('tipeuser-ubah/') . $data['id_tipeuser'] ?>" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
-                                                        <a href="<?= base_url('TipeUser/hapus/') . $data['id_tipeuser'] ?>" class="btn btn-danger" onclick="return confirm('Yakin Mau Dihapus ?')"><i class="fa fa-trash"></i></a>
+                                                        <?php if ($akses['view'] == 1) { ?>
+                                                            <a href="<?= base_url('tipeuser-akses/') . $data['id_tipeuser'] ?>" class="btn btn-success"><i class="fa fa-cog"></i></a>
+                                                        <?php } ?>
+                                                        <?php if ($akses['edit'] == 1) { ?>
+                                                            <a href="<?= base_url('tipeuser-ubah/') . $data['id_tipeuser'] ?>" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
+                                                        <?php } ?>
+                                                        <?php if ($akses['delete'] == 1) { ?>
+                                                            <a href="<?= base_url('TipeUser/hapus/') . $data['id_tipeuser'] ?>" class="btn btn-danger" onclick="return confirm('Yakin Mau Dihapus ?')"><i class="fa fa-trash"></i></a>
+                                                        <?php } ?>
                                                     </div>
                                                 </center>
                                             </td>

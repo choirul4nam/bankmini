@@ -18,17 +18,21 @@ class Siswa extends CI_Controller
 		$this->load->model('M_Kota');
 		$this->load->model('M_Kecamatan');
 		$this->load->model('M_Kelas');
-		$this->load->library(array('PHPExcel','PHPExcel/IOFactory'));
-        // $this->load->library('ImportExcel'); //load librari excel
+		$this->load->model('M_Akses');
+
+		$this->load->library(array('PHPExcel', 'PHPExcel/IOFactory'));
+		// $this->load->library('ImportExcel'); //load librari excel
 		cek_login_user();
 	}
 
 	public function index()
 	{
-        $id = $this->session->userdata('tipeuser');
-        $data['menu'] = $this->M_Setting->getmenu1($id);
+		$id = $this->session->userdata('tipeuser');
+		$data['menu'] = $this->M_Setting->getmenu1($id);
 		$data['datasiswa'] = $this->M_Siswa->getsiswa();
 		$data['datalulus'] = $this->M_Siswa->getLulus();
+		$data['akses'] = $this->M_Akses->getByLinkSubMenu(urlPath());
+
 
 		$this->load->view('template/header');
 		$this->load->view('template/sidebar', $data);
@@ -39,8 +43,8 @@ class Siswa extends CI_Controller
 	public function siswa_detail($nis)
 	{
 		$this->load->view('template/header');
-        $id = $this->session->userdata('tipeuser');
-        $data['menu'] = $this->M_Setting->getmenu1($id);
+		$id = $this->session->userdata('tipeuser');
+		$data['menu'] = $this->M_Setting->getmenu1($id);
 		$this->load->view('template/sidebar', $data);
 		$data['datasiswa'] = $this->M_Siswa->getsiswadetail($nis);
 		$this->load->view('v_siswa/v_siswa-detail', $data);
@@ -50,8 +54,8 @@ class Siswa extends CI_Controller
 
 	public function siswa_add()
 	{
-        $id = $this->session->userdata('tipeuser');
-        $data['menu'] = $this->M_Setting->getmenu1($id);
+		$id = $this->session->userdata('tipeuser');
+		$data['menu'] = $this->M_Setting->getmenu1($id);
 		$data['prov'] = $this->M_Provinsi->getprovinsi();
 		$data['kelas'] = $this->M_Kelas->getkelas();
 		$this->load->view('template/header');
@@ -149,8 +153,8 @@ class Siswa extends CI_Controller
 	public function siswa_edit($nis)
 	{
 		$data['datasiswa'] = $this->M_Siswa->getsiswadetail($nis);
-        $id = $this->session->userdata('tipeuser');
-        $data['menu'] = $this->M_Setting->getmenu1($id);
+		$id = $this->session->userdata('tipeuser');
+		$data['menu'] = $this->M_Setting->getmenu1($id);
 		$data['prov'] = $this->M_Provinsi->getprovinsi();
 		$data['kelas'] = $this->M_Kelas->getkelas();
 		$data['kota'] = $this->M_Kota->getkotadetail($this->M_Siswa->getsiswadetail($nis)['id_provinsi']);
@@ -251,8 +255,8 @@ class Siswa extends CI_Controller
 	public function siswa_graduate()
 	{
 		$data['datasiswa'] = $this->M_Siswa->getsiswa();
-        $id = $this->session->userdata('tipeuser');
-        $data['menu'] = $this->M_Setting->getmenu1($id);
+		$id = $this->session->userdata('tipeuser');
+		$data['menu'] = $this->M_Setting->getmenu1($id);
 		$data['kelas'] = $this->M_Kelas->getkelas();
 
 		$this->load->view('template/header');
@@ -260,7 +264,7 @@ class Siswa extends CI_Controller
 		$this->load->view('v_siswa/v_siswa-graduate', $data);
 		$this->load->view('template/footer');
 	}
-	
+
 	public function grad_process($id)
 	{
 		$this->M_Siswa->siswaGraduate($id);
@@ -269,7 +273,7 @@ class Siswa extends CI_Controller
 		</div>');
 		redirect(base_url('siswa/'));
 	}
-	
+
 	public function siswa_export()
 	{
 		$id = $this->session->userdata('tipeuser');
@@ -277,19 +281,20 @@ class Siswa extends CI_Controller
 		$data['datasiswa'] = $this->M_Siswa->getsiswa();
 		$data['menu'] = $this->M_Setting->getmenu1($id);
 		$data['kelas'] = $this->M_Kelas->getkelas();
-		
+
 		$this->load->view('template/header');
 		$this->load->view('template/sidebar', $data);
 		$this->load->view('v_siswa/v_siswa-export', $data);
 		$this->load->view('template/footer');
 	}
 
-	public function export_process($idKelas){
+	public function export_process($idKelas)
+	{
 		$data['data'] = $this->M_Kelas->getSiswaByKelas($idKelas);
 		$data['kelas'] = $this->db->get_where('tb_kelas', ['id_kelas' => $idKelas])->row();
 		$this->load->view('v_siswa/v_siswa-export_page', $data);
 	}
-	
+
 	public function siswa_import()
 	{
 		$id = $this->session->userdata('tipeuser');
@@ -302,30 +307,31 @@ class Siswa extends CI_Controller
 		$this->load->view('template/sidebar', $data);
 		$this->load->view('v_siswa/v_siswa-import', $data);
 		$this->load->view('template/footer');
-	}	
+	}
 
-	public function upload(){
-        $fileName = time().$_FILES['file']['name'];
-		 
-        $config['upload_path'] = './assets/excel/'; //buat folder dengan nama assets di root folder
-        $config['file_name'] = str_replace(" ", "", $fileName);
-        $config['allowed_types'] = 'xls|xlsx|csv';
-        $config['max_size'] = 10000;
-         
-        $this->load->library('upload');
-        $this->upload->initialize($config);
-         
-        if(! $this->upload->do_upload('file') )
-        $this->upload->display_errors();
-             
-        $media = $this->upload->data('file');
-        $inputFileName = './assets/excel/'.$config['file_name'];
-         
-        try {
+	public function upload()
+	{
+		$fileName = time() . $_FILES['file']['name'];
+
+		$config['upload_path'] = './assets/excel/'; //buat folder dengan nama assets di root folder
+		$config['file_name'] = str_replace(" ", "", $fileName);
+		$config['allowed_types'] = 'xls|xlsx|csv';
+		$config['max_size'] = 10000;
+
+		$this->load->library('upload');
+		$this->upload->initialize($config);
+
+		if (!$this->upload->do_upload('file'))
+			$this->upload->display_errors();
+
+		$media = $this->upload->data('file');
+		$inputFileName = './assets/excel/' . $config['file_name'];
+
+		try {
 			$inputFileType = IOFactory::identify($inputFileName);
 			$objReader = IOFactory::createReader($inputFileType);
 			$objPHPExcel = $objReader->load($inputFileName);
-		} catch(Exception $e) {
+		} catch (Exception $e) {
 			redirect('siswa-import');
 		}
 
@@ -335,23 +341,25 @@ class Siswa extends CI_Controller
 		$data = [];
 		$no = 0;
 		$id_tipeuser = $this->db->get_where('tb_tipeuser', ['tipeuser' => 'siswa'])->row_array();
-		for ($row = 2; $row <= $highestRow; $row++){                  //  Read a row of data into an array                 
-			$rowData = $sheet->rangeToArray('A' . $row . ':' . $highestColumn . $row,
-											NULL,
-											TRUE,
-											FALSE);
-											
+		for ($row = 2; $row <= $highestRow; $row++) {                  //  Read a row of data into an array                 
+			$rowData = $sheet->rangeToArray(
+				'A' . $row . ':' . $highestColumn . $row,
+				NULL,
+				TRUE,
+				FALSE
+			);
+
 			//Sesuaikan sama nama kolom tabel di database     
-			$date = strtotime(  PHPExcel_Style_NumberFormat::toFormattedString($rowData[0][5],'YYYY-MM-DD'));                      
+			$date = strtotime(PHPExcel_Style_NumberFormat::toFormattedString($rowData[0][5], 'YYYY-MM-DD'));
 			$data[$no++] = array(
-				"nis"=> $rowData[0][1],
-				"namasiswa"=> $rowData[0][2],
+				"nis" => $rowData[0][1],
+				"namasiswa" => $rowData[0][2],
 				'alamat' => $rowData[0][3],
 				'tempat_lahir' => strtoupper($rowData[0][4]),
-				'tgl_lahir' => date('Y-m-d',$date),
+				'tgl_lahir' => date('Y-m-d', $date),
 				'kecamatan' => $this->db->get_where('tb_kecamatan', ['kecamatan' => $rowData[0][6]])->row()->id_kecamatan,
-				'kota' => $this->db->get_where('tb_kota', ['name_kota LIKE' => '%'.$rowData[0][7].'%'])->row()->id_kota,
-				'provinsi' => $this->db->get_where('tb_provinsi', ['name_prov LIKE' => '%'.$rowData[0][8].'%'])->row()->id_provinsi,
+				'kota' => $this->db->get_where('tb_kota', ['name_kota LIKE' => '%' . $rowData[0][7] . '%'])->row()->id_kota,
+				'provinsi' => $this->db->get_where('tb_provinsi', ['name_prov LIKE' => '%' . $rowData[0][8] . '%'])->row()->id_provinsi,
 				'jk' => $this->M_Siswa->getJK($rowData[0][9]),
 				// 'id_kelas' => $rowData[0][10],
 				'id_kelas' => $this->db->get_where('tb_kelas', ['kelas' => $rowData[0][10]])->row()->id_kelas,
@@ -362,7 +370,7 @@ class Siswa extends CI_Controller
 				'password' => 'siswa123',
 				'rfid' => $rowData[0][11]
 			);
-			
+
 			// sesuaikan nama dengan nama tabel
 			// $insert = $this->db->insert("eimport",$data);
 			// delete_files($media['file_path']);
@@ -382,10 +390,11 @@ class Siswa extends CI_Controller
 		$this->load->view('v_siswa/v_siswa-import_page', $data);
 		$this->load->view('template/footer');
 	}
-	
-	public function import(){
+
+	public function import()
+	{
 		$data = $this->session->dataImport;
-		for($i = 0; $i < count($data); $i++){
+		for ($i = 0; $i < count($data); $i++) {
 			$this->db->insert('tb_siswa', $data[$i]);
 		}
 		// $this->session->unset_tempdata('dataImport');

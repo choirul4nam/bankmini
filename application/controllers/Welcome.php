@@ -1,7 +1,8 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Welcome extends CI_Controller {
+class Welcome extends CI_Controller
+{
 
 	/**
 	 * Index Page for this controller.
@@ -19,20 +20,25 @@ class Welcome extends CI_Controller {
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
 
-	public function __construct(){
-        parent::__construct();
-        $this->load->helper(array('form','url'));
-        $this->load->library('session');
-        $this->load->model('M_Setting');
-        cek_login_user();
-    }
+	public function __construct()
+	{
+		parent::__construct();
+		$this->load->helper(array('form', 'url'));
+		$this->load->library('session');
+		$this->load->model('M_Setting');
+
+		$this->load->model('M_Siswa');
+		$this->load->model('M_Kelas');
+		cek_login_user();
+	}
 
 	public function index()
-	{	
-        $id = $this->session->userdata('tipeuser');
-        $data['menu'] = $this->M_Setting->getmenu1($id);
-        $data['dataSiswa'] = $this->db->get('tb_siswa')->num_rows(); 
-        
+	{
+		$id = $this->session->userdata('tipeuser');
+		$data['menu'] = $this->M_Setting->getmenu1($id);
+		$data['dataSiswa'] = $this->db->get('tb_siswa')->num_rows();
+		$data['kelas'] = $this->M_Kelas->getkelas();
+
 		$this->load->view('template/header');
 		$this->load->view('template/sidebar', $data);
 		$this->load->view('template/index');

@@ -12,6 +12,8 @@ class Staff extends CI_Controller
         $this->load->library('session');
         $this->load->model('M_Setting');
         $this->load->model('M_Staff');
+        $this->load->model('M_Akses');
+
         cek_login_user();
     }
 
@@ -21,6 +23,8 @@ class Staff extends CI_Controller
         $id = $this->session->userdata('tipeuser');
         $data['menu'] = $this->M_Setting->getmenu1($id);
         $data['staff'] = $this->M_Staff->getAll();
+        $data['akses'] = $this->M_Akses->getByLinkSubMenu(urlPath());
+
         $this->load->view('template/sidebar', $data);
         $this->load->view('v_staff/v_staff.php', $data);
         $this->load->view('template/footer');
