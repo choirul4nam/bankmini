@@ -59,6 +59,9 @@ $route['siswa-add'] = 'siswa/siswa_add';
 $route['siswa-hps/(:any)'] = 'siswa/siswa_delete/$1';
 $route['siswa-edt/(:any)'] = 'siswa/siswa_edit/$1';
 $route['siswa-grad'] = 'siswa/siswa_graduate/';
+$route['siswa-export'] = 'siswa/siswa_export/';
+$route['siswa-import'] = 'siswa/siswa_import/';
+$route['siswa-checkImport'] = 'siswa/upload/';
 //akhir route siswa
 
 //route kelas
