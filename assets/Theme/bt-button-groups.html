@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    	<meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Options Admin - Responsive Web Application Kit</title>
+
+        <!-- ========== COMMON STYLES ========== -->
+        <link rel="stylesheet" href="css/bootstrap.css" media="screen" >
+        <link rel="stylesheet" href="css/font-awesome.min.css" media="screen" >
+        <link rel="stylesheet" href="css/animate-css/animate.min.css" media="screen" >
+        <link rel="stylesheet" href="css/lobipanel/lobipanel.min.css" media="screen" >
+
+        <!-- ========== PAGE STYLES ========== -->
+        <link rel="stylesheet" href="css/prism/prism.css" media="screen" > <!-- USED FOR DEMO HELP - YOU CAN REMOVE IT -->
+
+        <!-- ========== THEME CSS ========== -->
+        <link rel="stylesheet" href="css/main.css" media="screen" >
+
+        <!-- ========== MODERNIZR ========== -->
+        <script src="js/modernizr/modernizr.min.js"></script>
+    </head>
+    <body class="top-navbar-fixed">
+        <div class="main-wrapper">
+
+            <!-- ========== TOP NAVBAR ========== -->
+            <nav class="navbar top-navbar bg-white box-shadow">
+            	<div class="container-fluid">
+                    <div class="row">
+                        <div class="navbar-header no-padding">
+                			<a class="navbar-brand" href="index.html">
+                			    <img src="images/logo-dark.svg" alt="Options - Admin Template" class="logo">
+                			</a>
+                            <span class="small-nav-handle hidden-sm hidden-xs"><i class="fa fa-outdent"></i></span>
+                			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1" aria-expanded="false">
+                				<span class="sr-only">Toggle navigation</span>
+                				<i class="fa fa-ellipsis-v"></i>
+                			</button>
+                            <button type="button" class="navbar-toggle mobile-nav-toggle" >
+                				<i class="fa fa-bars"></i>
+                			</button>
+                		</div>
+                        <!-- /.navbar-header -->
+
+                		<div class="collapse navbar-collapse" id="navbar-collapse-1">
+                			<ul class="nav navbar-nav" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
+                                <li class="hidden-sm hidden-xs"><a href="#" class="user-info-handle"><i class="fa fa-user"></i></a></li>
+                                <li class="hidden-sm hidden-xs"><a href="#" class="full-screen-handle"><i class="fa fa-arrows-alt"></i></a></li>
+                                <li class="hidden-sm hidden-xs"><a href="#"><i class="fa fa-search"></i></a></li>
+                				<li class="hidden-xs hidden-xs"><!-- <a href="#">My Tasks</a> --></li>
+                                <li class=""><a href="#" class="color-primary"><i class="fa fa-diamond"></i> Upgrade</a></li>
+                			</ul>
+                            <!-- /.nav navbar-nav -->
+
+                			<ul class="nav navbar-nav navbar-right" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
+                                <li class="dropdown">
+                					<a href="#" class="dropdown-toggle bg-primary" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-plus-circle"></i> Add New <span class="caret"></span></a>
+                					<ul class="dropdown-menu" >
+                						<li><a href="#"><i class="fa fa-plus-square-o"></i> Customer</a></li>
+                                        <li><a href="#"><i class="fa fa-plus-square-o"></i> Employee</a></li>
+                						<li><a href="#"><i class="fa fa-plus-square-o"></i> Estimate</a></li>
+                                        <li><a href="#"><i class="fa fa-plus-square-o"></i> Task</a></li>
+                						<li><a href="#"><i class="fa fa-plus-square-o"></i> Team Member</a></li>
+                						<li role="separator" class="divider"></li>
+                						<li><a href="#">Create Order</a></li>
+                						<li role="separator" class="divider"></li>
+                						<li><a href="#">Generate Report</a></li>
+                					</ul>
+                				</li>
+                                <!-- /.dropdown -->
+                                <li><a href="#" class=""><i class="fa fa-bell"></i></a></li>
+                				<li><a href="#" class=""><i class="fa fa-comments"></i></a></li>
+                				<li class="dropdown">
+                					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">John Doe <span class="caret"></span></a>
+                					<ul class="dropdown-menu profile-dropdown">
+                						<li class="profile-menu bg-gray">
+                						    <div class="">
+                						        <img src="http://placehold.it/60/c2c2c2?text=User" alt="John Doe" class="img-circle profile-img">
+                                                <div class="profile-name">
+                                                    <h6>John Doe</h6>
+                                                    <a href="#">View Profile</a>
+                                                </div>
+                                                <div class="clearfix"></div>
+                						    </div>
+                						</li>
+                						<li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
+                						<li><a href="#"><i class="fa fa-sliders"></i> Account Details</a></li>
+                						<li role="separator" class="divider"></li>
+                						<li><a href="#" class="color-danger text-center"><i class="fa fa-sign-out"></i> Logout</a></li>
+                					</ul>
+                				</li>
+                                <!-- /.dropdown -->
+                                <li><a href="#" class="hidden-xs hidden-sm open-right-sidebar"><i class="fa fa-ellipsis-v"></i></a></li>
+                			</ul>
+                            <!-- /.nav navbar-nav navbar-right -->
+                		</div>
+                		<!-- /.navbar-collapse -->
+                    </div>
+                    <!-- /.row -->
+            	</div>
+            	<!-- /.container-fluid -->
+            </nav>
+
+            <!-- ========== WRAPPER FOR BOTH SIDEBARS & MAIN CONTENT ========== -->
+            <div class="content-wrapper">
+                <div class="content-container">
+
+                    <!-- ========== LEFT SIDEBAR ========== -->
+                    <div class="left-sidebar bg-black-300 box-shadow ">
+                        <div class="sidebar-content">
+                            <div class="user-info closed">
+                                <img src="http://placehold.it/90/c2c2c2?text=User" alt="John Doe" class="img-circle profile-img">
+                                <h6 class="title">John Doe</h6>
+                                <small class="info">PHP Developer</small>
+                            </div>
+                            <!-- /.user-info -->
+
+                            <div class="sidebar-nav">
+                                <ul class="side-nav color-gray">
+                                    <li class="nav-header">
+                                        <span class="">Main Category</span>
+                                    </li>
+                                    <li class="has-children">
+                                        <a href="#"><i class="fa fa-dashboard"></i> <span>Dashboard</span> <i class="fa fa-angle-right arrow"></i></a>
+                                        <ul class="child-nav">
+                                            <li><a href="index.html"><i class="fa fa-bolt"></i> <span>Layout 1</span></a></li>
+                                            <li><a href="dashboard-2.html"><i class="fa fa-bookmark"></i> <span>Layout 2</span></a></li><li><a href="dashboard-full-width.html"><i class="fa fa-dashboard"></i> <span>Layout 3</span></a></li>
+                                        </ul>
+                                    </li>
+
+                                    <li class="nav-header">
+                                        <span class="">Appearance</span>
+                                    </li>
+                                    <li class="has-children">
+                                        <a href="#"><i class="fa fa-file-text"></i> <span>Page Layouts</span> <i class="fa fa-angle-right arrow"></i></a>
+                                        <ul class="child-nav">
+                                            <li><a href="layout-fixed-top.html"><i class="fa fa-lock"></i> <span>Fixed Navbar</span></a></li>
+                                            <li><a href="layout-fixed-top-side.html"><i class="fa fa-thumb-tack"></i> <span>Fixed Top & Sidebar</span></a></li>
+                                            <li><a href="layout-static-top-side.html"><i class="fa fa-unlock"></i> <span>Static Top & Sidebar</span></a></li>
+                                            <li><a href="layout-small-sidebar.html"><i class="fa fa-sign-in"></i> <span>Small Sidebar</span></a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="has-children">
+                                        <a href="#"><i class="fa fa-paint-brush"></i> <span>Color Schemes</span> <i class="fa fa-angle-right arrow"></i></a>
+                                        <ul class="child-nav">
+                                            <li><a href="color-primary.html"><i class="fa fa-bank"></i> <span>Primary Color</span></a></li>
+                                            <li><a href="color-danger.html"><i class="fa fa-bell"></i> <span>Danger Color</span></a></li>
+                                            <li><a href="color-success.html"><i class="fa fa-check"></i> <span>Success Color</span></a></li>
+                                            <li><a href="color-warning.html"><i class="fa fa-info"></i> <span>Warning Color</span></a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="has-children">
+                                        <a href="#"><i class="fa fa-map-signs"></i> <span>Sidebar Layouts</span> <i class="fa fa-angle-right arrow"></i></a>
+                                        <ul class="child-nav">
+                                            <li><a href="sidebar-light.html"><i class="fa fa-newspaper-o "></i> <span>Light Sidebar</span></a></li>
+                                            <li><a href="sidebar-default.html"><i class="fa fa-leaf "></i> <span>Default Sidebar</span></a></li>
+                                            <li><a href="sidebar-primary.html"><i class="fa fa-check"></i> <span>Primary Sidebar</span></a></li>
+                                            <li><a href="sidebar-indigo.html"><i class="fa fa-info"></i> <span>Indigo Sidebar</span></a></li>
+                                            <li><a href="sidebar-sea-green.html"><i class="fa fa-male"></i> <span>Sea Green Sidebar</span></a></li>
+                                            <li><a href="sidebar-navy.html"><i class="fa fa-sign-in"></i> <span>Navy Sidebar</span></a></li>
+                                        </ul>
+                                    </li>
+
+                                    <li class="nav-header">
+                                        <span class="">Components</span>
+                                    </li>
+                                    <li class="has-children">
+                                        <a href="#"><i class="fa fa-magic"></i> <span>UI Components</span> <span class="label label-success ml-5">Hot</span> <i class="fa fa-angle-right arrow"></i></a>
+                                        <ul class="child-nav">
+                                            <li><a href="ui-buttons.html"><i class="fa fa-plane"></i> <span>Buttons</span></a></li>
+                                            <li><a href="ui-panels.html"><i class="fa fa-puzzle-piece"></i> <span>Panels</span></a></li>
+                                            <li><a href="ui-modals.html"><i class="fa fa-random"></i> <span>Modals</span></a></li>
+                                            <li><a href="ui-page-headers.html"><i class="fa fa-road"></i> <span>Page Headers</span></a></li>
+                                            <li><a href="ui-loaders.html"><i class="fa fa-spinner"></i> <span>Loaders</span></a></li>
+                                            <li><a href="ui-confirmation.html"><i class="fa fa-info"></i> <span>Confirmation</span></a></li>
+                                            <li><a href="ui-dropdown-menu.html"><i class="fa fa-sitemap"></i> <span>Dropdown Menu</span></a></li>
+                                            <li><a href="ui-media-objects.html"><i class="fa fa-photo"></i> <span>Media Objects</span></a></li>
+                                            <li><a href="ui-timeout-idle.html"><i class="fa fa-ticket"></i> <span>Timeout Idle</span></a></li>
+                                            <li><a href="ui-timeout-session.html"><i class="fa fa-suitcase"></i> <span>Timeout Session</span></a></li>
+                                            <li><a href="ui-bootstrap-tour.html"><i class="fa fa-fighter-jet"></i> <span>Bootstrap Tour</span></a></li>
+                                            <li><a href="ui-timeline.html"><i class="fa fa-clock-o"></i> <span>Timeline</span></a></li>
+                                            <li><a href="ui-date-picker.html"><i class="fa fa-calendar"></i> <span>Date Picker</span></a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="has-children">
+                                        <a href="#"><i class="fa fa-bars"></i> <span>Bootstrap Components</span> <i class="fa fa-angle-right arrow"></i></a>
+                                        <ul class="child-nav">
+                                            <li><a href="bt-accordions.html"><i class="fa fa-bar-chart"></i> <span>Accordions</span></a></li>
+                                            <li><a href="bt-affix.html"><i class="fa fa-bell-o"></i> <span>Affix</span></a></li>
+                                            <li><a href="bt-alerts.html"><i class="fa fa-info-circle"></i> <span>Alerts</span></a></li>
+                                            <li><a href="bt-button-dropdown.html"><i class="fa fa-bookmark"></i> <span>Button Dropdown</span></a></li>
+                                            <li><a href="bt-button-groups.html"><i class="fa fa-bomb"></i> <span>Button Groups</span></a></li>
+                                            <li><a href="bt-buttons.html"><i class="fa fa-bug"></i> <span>Buttons</span></a></li>
+                                            <li><a href="bt-carousel.html"><i class="fa fa-bullseye"></i> <span>Carousel</span></a></li>
+                                            <li><a href="bt-code.html"><i class="fa fa-code"></i> <span>Code</span></a></li>
+                                            <li><a href="bt-collapse.html"><i class="fa fa-plane"></i> <span>Collapse</span></a></li>
+                                            <li><a href="bt-dropdowns.html"><i class="fa fa-calendar"></i> <span>Dropdowns</span></a></li>
+                                            <li><a href="bt-grid.html"><i class="fa fa-th"></i> <span>Grid</span></a></li>
+                                            <li><a href="bt-helpers.html"><i class="fa fa-hand-o-right"></i> <span>Helpers</span></a></li>
+                                            <li><a href="bt-labels-badges.html"><i class="fa fa-signal"></i> <span>Labels & Badges</span></a></li>
+                                            <li><a href="bt-modals.html"><i class="fa fa-shopping-cart"></i> <span>Modals</span></a></li>
+                                            <li><a href="bt-pagination.html"><i class="fa fa-video-camera"></i> <span>Pagination</span></a></li>
+                                            <li><a href="bt-popover.html"><i class="fa fa-camera"></i> <span>Popover</span></a></li>
+                                            <li><a href="bt-scrollspy.html"><i class="fa fa-arrows-alt"></i> <span>Scrollspy</span></a></li>
+                                            <li><a href="bt-tabs.html"><i class="fa fa-cloud"></i> <span>Tabs</span></a></li>
+                                            <li><a href="bt-tooltips.html"><i class="fa fa-crop"></i> <span>Tooltips</span></a></li>
+                                            <li><a href="bt-typography.html"><i class="fa fa-text-width"></i> <span>Typography</span></a></li>
+                                            <li><a href="bt-progress-bar.html"><i class="fa fa-tasks"></i> <span>Progress Bar</span></a></li>
+                                        </ul>
+                                    </li>
+                                     <li class="has-children">
+                                        <a href="#"><i class="fa fa-comments-o"></i> <span>Tables</span> <i class="fa fa-angle-right arrow"></i></a>
+                                        <ul class="child-nav">
+                                            <li><a href="table-basic.html"><i class="fa fa-lock"></i> <span>Basic Tables</span></a></li>
+                                            <li><a href="table-datatable.html"><i class="fa fa-list"></i> <span>Datatables</span></a></li>
+                                            <li><a href="table-user-details.html"><i class="fa fa-table"></i> <span>Tabular User Details</span></a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="font-awesome.html"><i class="fa fa-font-awesome"></i> <span>Font Awesome</span></a></li>
+                                    <li><a href="animations.html"><i class="fa fa-spinner animate"></i> <span>CSS Animations</span></a></li>
+                                    <li class="nav-header">
+                                        <span class="">Charts</span>
+                                    </li>
+                                    <li class="has-children">
+                                        <a href="#"><i class="fa fa-bar-chart-o"></i> <span>Amcharts</span> <i class="fa fa-angle-right arrow"></i></a>
+                                        <ul class="child-nav">
+                                            <li><a href="chart-column-bar.html"><i class="fa fa-barcode"></i> <span>Column & Bar Charts</span></a></li>
+                                            <li><a href="chart-line-area.html"><i class="fa fa-line-chart"></i> <span>Line & Area Charts</span></a></li>
+                                            <li><a href="chart-pie-chart.html"><i class="fa fa-pie-chart"></i> <span>Pie Charts</span></a></li>
+                                            <li><a href="chart-funnel.html"><i class="fa fa-area-chart"></i> <span>Funnel Chart</span></a></li>
+                                            <li><a href="chart-others.html"><i class="fa fa-comments"></i> <span>Other Charts</span></a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="charts-high-chart.html"><i class="fa fa-area-chart"></i> <span>High Chart</span></a></li>
+                                    <li><a href="charts-chartjs.html"><i class="fa fa-area-chart"></i> <span>Chart.js</span></a></li>
+
+                                    <li class="nav-header">
+                                        <span class="">Forms</span>
+                                    </li>
+                                    <li class=""><a href="form-basic.html"><i class="fa fa-cloud"></i> <span>Basic Forms</span></a></li>
+                                    <li class=""><a href="form-layouts.html"><i class="fa fa-bars"></i> <span>Form Layouts</span></a></li>
+                                    <li class=""><a href="form-validations.html"><i class="fa fa-info"></i> <span>Validations</span></a></li>
+                                    <li class="has-children">
+                                        <a href="#"><i class="fa fa-bar-chart-o"></i> <span>Form Components</span> <i class="fa fa-angle-right arrow"></i></a>
+                                        <ul class="child-nav">
+                                            <li class=""><a href="form-checkbox.html"><i class="fa fa-check"></i> <span>Checkboxes</span></a></li>
+                                            <li class=""><a href="form-bt-switches.html"><i class="fa fa-bullhorn"></i> <span>Bootstrap Switch</span></a></li>
+                                            <li class=""><a href="form-input-groups.html"><i class="fa fa-bullseye"></i> <span>Input Groups</span></a></li>
+                                            <li class=""><a href="form-select2.html"><i class="fa fa-arrows-alt"></i> <span>Select 2</span></a></li>
+                                            <li class=""><a href="form-switches.html"><i class="fa fa-check-square-o"></i> <span>Switches</span></a></li>
+                                            <li class=""><a href="form-tags.html"><i class="fa fa-history"></i> <span>Tags</span></a></li>
+                                        </ul>
+                                    </li>
+                                    <li class=""><a href="form-editable.html"><i class="fa fa-pencil"></i> <span>Editable Form</span></a></li>
+                                    <li class=""><a href="form-steps.html"><i class="fa fa-server"></i> <span>Steps</span></a></li>
+                                    <li class=""><a href="form-dropzone.html"><i class="fa fa-bullseye"></i> <span>Dropzone</span></a></li>
+                                    <li class="has-children">
+                                        <a href="#"><i class="fa fa-paperclip"></i> <span>Editors</span> <i class="fa fa-angle-right arrow"></i></a>
+                                        <ul class="child-nav">
+                                            <li class=""><a href="form-editor-ckeditor.html"><i class="fa fa-check"></i> <span>CKEditor</span></a></li>
+                                            <li class=""><a href="form-editor-summernote.html"><i class="fa fa-bullhorn"></i> <span>Summernote</span></a></li>
+                                        </ul>
+                                    </li>
+
+                                    <li class="nav-header">
+                                        <span class="">Pages</span>
+                                    </li>
+                                    <li class="has-children">
+                                        <a href="#"><i class="fa fa-lock"></i> <span>Login</span> <i class="fa fa-angle-right arrow"></i></a>
+                                        <ul class="child-nav">
+                                            <li><a href="pages-login.html"><i class="fa fa-lock"></i> <span>Option 1</span></a></li>
+                                            <li><a href="pages-login-2.html"><i class="fa fa-sign-in"></i> <span>Option 2</span></a></li>
+                                            <li><a href="pages-login-3.html"><i class="fa fa-sign-out"></i> <span>Option 3</span></a></li>
+                                            <li><a href="pages-login-4.html"><i class="fa fa-lock"></i> <span>Option 4</span></a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="has-children">
+                                        <a href="#"><i class="fa fa-sign-out"></i> <span>Register</span> <i class="fa fa-angle-right arrow"></i></a>
+                                        <ul class="child-nav">
+                                            <li><a href="pages-register.html"><i class="fa fa-lock"></i> <span>Option 1</span></a></li>
+                                            <li><a href="pages-register-2.html"><i class="fa fa-sign-in"></i> <span>Option 2</span></a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="has-children">
+                                        <a href="#"><i class="fa fa-lock"></i> <span>Ecommerce</span> <i class="fa fa-angle-right arrow"></i></a>
+                                        <ul class="child-nav">
+                                            <li><a href="ecommerce-dashboard.html"><i class="fa fa-home"></i> <span>Dashboard</span></a></li>
+                                            <li><a href="ecommerce-orders.html"><i class="fa fa-shopping-cart"></i> <span>Orders</span></a></li>
+                                            <li><a href="ecommerce-order-view.html"><i class="fa fa-sign-out"></i> <span>Order View</span></a></li>
+                                            <li><a href="ecommerce-products.html"><i class="fa fa-lock"></i> <span>Products</span></a></li>
+                                        </ul>
+                                    </li>
+                                    <li class=""><a href="pages-error-404.html"><i class="fa fa-info"></i> <span>Error 404</span></a></li>
+                                    <li class=""><a href="pages-error-500.html"><i class="fa fa-info-circle"></i> <span>Error 500</span></a></li>
+                                    <li class=""><a href="pages-profile.html"><i class="fa fa-user"></i> <span>Profile</span></a></li>
+                                    <li class=""><a href="pages-pricing.html"><i class="fa fa-user-secret"></i> <span>Pricing</span></a></li>
+                                </ul>
+                                <!-- /.side-nav -->
+                                <div class="purchase-btn hidden-sm hidden-xs">
+                                    <a href="https://themeforest.net/item/options-admin-responsive-web-application-ui-kit/19796742?license=regular&open_purchase_for_item_id=19796742&purchasable=source&ref=salttechno" target="_blank" class="btn btn-success btn-labeled">Purchase Now<span class="btn-label btn-label-right"><i class="fa fa-check"></i></span></a>
+                                </div>
+                            </div>
+                            <!-- /.sidebar-nav -->
+                        </div>
+                        <!-- /.sidebar-content -->
+                    </div>
+                    <!-- /.left-sidebar -->
+
+                    <div class="main-page">
+                        <div class="container-fluid">
+                            <div class="row page-title-div">
+                                <div class="col-md-6">
+                                    <h2 class="title">Bootstrap - Button Groups</h2>
+                                    <p class="sub-title">We have styled all Bootstrap elements just as you want!</p>
+                                </div>
+                                <!-- /.col-md-6 -->
+                                <div class="col-md-6 right-side">
+                                    <a class="btn bg-black toggle-code-handle" role="button">Toggle Code!</a>
+                                </div>
+                                <!-- /.col-md-6 text-right -->
+                            </div>
+                            <!-- /.row -->
+                            <div class="row breadcrumb-div">
+                                <div class="col-md-6">
+                                    <ul class="breadcrumb">
+            							<li><a href="index.html"><i class="fa fa-home"></i> Home</a></li>
+            							<li><a href="#">Bootstrap</a></li>
+            							<li class="active">Button Groups</li>
+            						</ul>
+                                </div>
+                                <!-- /.col-md-6 -->
+                                <div class="col-md-6 text-right">
+                                    <a href="#"><i class="fa fa-comments"></i> Talk to us</a>
+                                    <a href="#" class="pl-20"><i class="fa fa-cog"></i> Settings</a>
+                                </div>
+                                <!-- /.col-md-6 -->
+                            </div>
+                            <!-- /.row -->
+                        </div>
+                        <!-- /.container-fluid -->
+
+                        <section class="section">
+                            <div class="container">
+
+                                <div class="row mt-40">
+                                    <div class="col-md-12">
+                                        <div class="section-title">
+                                            <h4 class="title underline">Basic Example</h4>
+                                            <p class="sub-title">Group a series of buttons together on a single line with the button group.</p>
+                                        </div>
+                                        <!-- /.section-title -->
+                                    </div>
+                                    <!-- /.col-md-12 -->
+
+                                    <div class="col-md-12 mb-15">
+                                        <div class="btn-group" role="group">
+                                            <button type="button" class="btn btn-default">Left</button>
+                                            <button type="button" class="btn btn-default">Middle</button>
+                                            <button type="button" class="btn btn-default">Right</button>
+                                        </div>
+                                        <!-- /.btn-group -->
+                                    </div>
+                                    <!-- /.col-md-12 -->
+
+                                    <a class="btn btn-primary btn-xs src-btn" role="button" data-toggle="collapse" href="#basic" aria-expanded="false" aria-controls="basic"><i class="fa fa-code"></i></a>
+                                </div>
+                                <!-- /.row -->
+
+                                <div class="src-code">
+                                    <pre class="language-html"><code class="language-html">
+&lt;div class="btn-group" role="group"&gt;
+    &lt;button type="button" class="btn btn-default"&gt;Left&lt;/button&gt;
+    &lt;button type="button" class="btn btn-default"&gt;Middle&lt;/button&gt;
+    &lt;button type="button" class="btn btn-default"&gt;Right&lt;/button&gt;
+&lt;/div&gt;
+&lt;!-- /.btn-group --&gt;
+                                    </code></pre>
+                                </div>
+                                <!-- /.src-code -->
+
+                                <div class="row mt-40">
+                                    <div class="col-md-12">
+                                        <div class="section-title">
+                                            <h4 class="title underline">Button Toolbar</h4>
+                                            <p class="sub-title">Combine sets of <code class="language-html">&lt;div class="btn-group"&gt;</code> into a <code class="language-html">&lt;div class="btn-toolbar"&gt;</code> for more complex components.</p>
+                                        </div>
+                                        <!-- /.section-title -->
+                                    </div>
+                                    <!-- /.col-md-12 -->
+
+                                    <div class="col-md-12 mb-15">
+                                        <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                                        	<div class="btn-group" role="group" aria-label="First group">
+                                        		<button type="button" class="btn btn-default">1</button>
+                                        		<button type="button" class="btn btn-default">2</button>
+                                        		<button type="button" class="btn btn-default">3</button>
+                                        		<button type="button" class="btn btn-default">4</button>
+                                        	</div>
+                                        	<div class="btn-group" role="group" aria-label="Second group">
+                                        		<button type="button" class="btn btn-default">5</button>
+                                        		<button type="button" class="btn btn-default">6</button>
+                                        		<button type="button" class="btn btn-default">7</button>
+                                        	</div>
+                                        	<div class="btn-group" role="group" aria-label="Third group">
+                                        		<button type="button" class="btn btn-default">8</button>
+                                        	</div>
+                                        </div>
+                                        <!-- /.btn-toolbar -->
+                                    </div>
+                                    <!-- /.col-md-12 -->
+
+                                    <a class="btn btn-primary btn-xs src-btn" role="button" data-toggle="collapse" href="#toolbar" aria-expanded="false" aria-controls="toolbar"><i class="fa fa-code"></i></a>
+                                </div>
+                                <!-- /.row -->
+
+                                <div class="src-code">
+                                    <pre class="language-html"><code class="language-html">
+&lt;div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups"&gt;
+    &lt;div class="btn-group" role="group" aria-label="First group"&gt;
+        &lt;button type="button" class="btn btn-default"&gt;1&lt;/button&gt;
+        &lt;button type="button" class="btn btn-default"&gt;2&lt;/button&gt;
+        &lt;button type="button" class="btn btn-default"&gt;3&lt;/button&gt;
+        &lt;button type="button" class="btn btn-default"&gt;4&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div class="btn-group" role="group" aria-label="Second group"&gt;
+        &lt;button type="button" class="btn btn-default"&gt;5&lt;/button&gt;
+        &lt;button type="button" class="btn btn-default"&gt;6&lt;/button&gt;
+        &lt;button type="button" class="btn btn-default"&gt;7&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div class="btn-group" role="group" aria-label="Third group"&gt;
+        &lt;button type="button" class="btn btn-default"&gt;8&lt;/button&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;!-- /.btn-toolbar --&gt;
+                                    </code></pre>
+                                </div>
+                                <!-- /.src-code -->
+
+                                <div class="row mt-40">
+                                    <div class="col-md-12">
+                                        <div class="section-title">
+                                            <h4 class="title underline">Sizing</h4>
+                                            <p class="sub-title">Instead of applying button sizing classes to every button in a group, just add <code class="language-html">.btn-group-*</code> to each <code class="language-html">.btn-group</code>, including when nesting multiple groups.</p>
+                                        </div>
+                                        <!-- /.section-title -->
+                                    </div>
+                                    <!-- /.col-md-12 -->
+
+                                    <div class="col-md-12 mb-15">
+                                        <div class="btn-group btn-group-lg mb-15" role="group" aria-label="Large button group">
+                                        	<button type="button" class="btn btn-default">Left</button>
+                                        	<button type="button" class="btn btn-default">Middle</button>
+                                        	<button type="button" class="btn btn-default">Right</button>
+                                        </div>
+                                        <br>
+                                        <div class="btn-group mb-15" role="group" aria-label="Default button group">
+                                        	<button type="button" class="btn btn-default">Left</button>
+                                        	<button type="button" class="btn btn-default">Middle</button>
+                                        	<button type="button" class="btn btn-default">Right</button>
+                                        </div>
+                                        <br>
+                                        <div class="btn-group btn-group-sm mb-15" role="group" aria-label="Small button group">
+                                        	<button type="button" class="btn btn-default">Left</button>
+                                        	<button type="button" class="btn btn-default">Middle</button>
+                                        	<button type="button" class="btn btn-default">Right</button>
+                                        </div>
+                                        <br>
+                                        <div class="btn-group btn-group-xs mb-15" role="group" aria-label="Extra-small button group">
+                                        	<button type="button" class="btn btn-default">Left</button>
+                                        	<button type="button" class="btn btn-default">Middle</button>
+                                        	<button type="button" class="btn btn-default">Right</button>
+                                        </div>
+                                    </div>
+                                    <!-- /.col-md-12 -->
+
+                                    <a class="btn btn-primary btn-xs src-btn" role="button" data-toggle="collapse" href="#sizing" aria-expanded="false" aria-controls="sizing"><i class="fa fa-code"></i></a>
+                                </div>
+                                <!-- /.row -->
+
+                                <div class="src-code">
+                                    <pre class="language-html"><code class="language-html">
+&lt;div class="btn-group btn-group-lg mb-15" role="group" aria-label="Large button group"&gt;
+    &lt;button type="button" class="btn btn-default"&gt;Left&lt;/button&gt;
+    &lt;button type="button" class="btn btn-default"&gt;Middle&lt;/button&gt;
+    &lt;button type="button" class="btn btn-default"&gt;Right&lt;/button&gt;
+&lt;/div&gt;
+&lt;br&gt;
+&lt;div class="btn-group mb-15" role="group" aria-label="Default button group"&gt;
+    &lt;button type="button" class="btn btn-default"&gt;Left&lt;/button&gt;
+    &lt;button type="button" class="btn btn-default"&gt;Middle&lt;/button&gt;
+    &lt;button type="button" class="btn btn-default"&gt;Right&lt;/button&gt;
+&lt;/div&gt;
+&lt;br&gt;
+&lt;div class="btn-group btn-group-sm mb-15" role="group" aria-label="Small button group"&gt;
+    &lt;button type="button" class="btn btn-default"&gt;Left&lt;/button&gt;
+    &lt;button type="button" class="btn btn-default"&gt;Middle&lt;/button&gt;
+    &lt;button type="button" class="btn btn-default"&gt;Right&lt;/button&gt;
+&lt;/div&gt;
+&lt;br&gt;
+&lt;div class="btn-group btn-group-xs mb-15" role="group" aria-label="Extra-small button group"&gt;
+    &lt;button type="button" class="btn btn-default"&gt;Left&lt;/button&gt;
+    &lt;button type="button" class="btn btn-default"&gt;Middle&lt;/button&gt;
+    &lt;button type="button" class="btn btn-default"&gt;Right&lt;/button&gt;
+&lt;/div&gt;
+                                    </code></pre>
+                                </div>
+                                <!-- /.src-code -->
+
+                                <div class="row mt-40">
+                                    <div class="col-md-12">
+                                        <div class="section-title">
+                                            <h4 class="title underline">Nesting</h4>
+                                            <p class="sub-title">Place a <code class="language-html">.btn-group</code> within another <code class="language-html">.btn-group</code> when you want dropdown menus mixed with a series of buttons.</p>
+                                        </div>
+                                        <!-- /.section-title -->
+                                    </div>
+                                    <!-- /.col-md-12 -->
+
+                                    <div class="col-md-12 mb-15">
+                                        <div class="btn-group" role="group" >
+                                        	<button type="button" class="btn btn-default">1</button>
+                                        	<button type="button" class="btn btn-default">2</button>
+
+                                        	<div class="btn-group" role="group">
+                                        		<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        			Dropdown
+                                        			<span class="caret"></span>
+                                        		</button>
+                                        		<ul class="dropdown-menu">
+                                        			<li><a href="#">Dropdown link</a></li>
+                                        			<li><a href="#">Dropdown link</a></li>
+                                        		</ul>
+                                        	</div>
+                                        </div>
+                                    </div>
+                                    <!-- /.col-md-12 -->
+
+                                    <a class="btn btn-primary btn-xs src-btn" role="button" data-toggle="collapse" href="#nesting" aria-expanded="false" aria-controls="nesting"><i class="fa fa-code"></i></a>
+                                </div>
+                                <!-- /.row -->
+
+                                <div class="src-code">
+                                    <pre class="language-html"><code class="language-html">
+&lt;div class="btn-group" role="group" &gt;
+    &lt;button type="button" class="btn btn-default"&gt;1&lt;/button&gt;
+    &lt;button type="button" class="btn btn-default"&gt;2&lt;/button&gt;
+
+    &lt;div class="btn-group" role="group"&gt;
+        &lt;button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"&gt;
+            Dropdown
+            &lt;span class="caret"&gt;&lt;/span&gt;
+        &lt;/button&gt;
+        &lt;ul class="dropdown-menu"&gt;
+            &lt;li&gt;&lt;a href="#"&gt;Dropdown link&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;Dropdown link&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/div&gt;
+    &lt;!-- /.btn-group --&gt;
+&lt;/div&gt;
+&lt;!-- /.btn-group --&gt;
+                                    </code></pre>
+                                </div>
+                                <!-- /.src-code -->
+
+                                <div class="row mt-40">
+                                    <div class="col-md-12">
+                                        <div class="section-title">
+                                            <h4 class="title underline">Vertical Button Group</h4>
+                                            <p class="sub-title">Make a set of buttons appear vertically stacked rather than horizontally. Split button dropdowns are not supported here.</p>
+                                        </div>
+                                        <!-- /.section-title -->
+                                    </div>
+                                    <!-- /.col-md-12 -->
+
+                                    <div class="col-md-12 mb-15">
+                                        <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
+                                        	<button type="button" class="btn btn-default">Button</button>
+                                        	<button type="button" class="btn btn-default">Button</button>
+                                        	<div class="btn-group" role="group">
+                                        		<button id="btnGroupVerticalDrop1" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Dropdown <span class="caret"></span> </button>
+                                        		<ul class="dropdown-menu" aria-labelledby="btnGroupVerticalDrop1">
+                                        			<li><a href="#">Dropdown link</a></li>
+                                        			<li><a href="#">Dropdown link</a></li>
+                                        		</ul>
+                                        	</div>
+                                        	<button type="button" class="btn btn-default">Button</button>
+                                        	<button type="button" class="btn btn-default">Button</button>
+                                        	<div class="btn-group" role="group">
+                                        		<button id="btnGroupVerticalDrop2" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Dropdown <span class="caret"></span> </button>
+                                        		<ul class="dropdown-menu" aria-labelledby="btnGroupVerticalDrop2">
+                                        			<li><a href="#">Dropdown link</a></li>
+                                        			<li><a href="#">Dropdown link</a></li>
+                                        		</ul>
+                                        	</div>
+                                        	<div class="btn-group" role="group">
+                                        		<button id="btnGroupVerticalDrop3" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Dropdown <span class="caret"></span> </button>
+                                        		<ul class="dropdown-menu" aria-labelledby="btnGroupVerticalDrop3">
+                                        			<li><a href="#">Dropdown link</a></li>
+                                        			<li><a href="#">Dropdown link</a></li>
+                                        		</ul>
+                                        	</div>
+                                        	<div class="btn-group" role="group">
+                                        		<button id="btnGroupVerticalDrop4" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Dropdown <span class="caret"></span> </button>
+                                        		<ul class="dropdown-menu" aria-labelledby="btnGroupVerticalDrop4">
+                                        			<li><a href="#">Dropdown link</a></li>
+                                        			<li><a href="#">Dropdown link</a></li>
+                                        		</ul>
+                                        	</div>
+                                        </div>
+                                        <!-- /.btn-group-vertical -->
+                                    </div>
+                                    <!-- /.col-md-12 -->
+
+                                    <a class="btn btn-primary btn-xs src-btn" role="button" data-toggle="collapse" href="#vertical" aria-expanded="false" aria-controls="vertical"><i class="fa fa-code"></i></a>
+                                </div>
+                                <!-- /.row -->
+
+                                <div class="src-code">
+                                    <pre class="language-html"><code class="language-html">
+&lt;div class="btn-group-vertical" role="group" aria-label="Vertical button group"&gt;
+    &lt;button type="button" class="btn btn-default"&gt;Button&lt;/button&gt;
+    &lt;button type="button" class="btn btn-default"&gt;Button&lt;/button&gt;
+    &lt;div class="btn-group" role="group"&gt;
+        &lt;button id="btnGroupVerticalDrop1" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"&gt; Dropdown &lt;span class="caret"&gt;&lt;/span&gt; &lt;/button&gt;
+        &lt;ul class="dropdown-menu" aria-labelledby="btnGroupVerticalDrop1"&gt;
+            &lt;li&gt;&lt;a href="#"&gt;Dropdown link&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;Dropdown link&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/div&gt;
+    &lt;button type="button" class="btn btn-default"&gt;Button&lt;/button&gt;
+    &lt;button type="button" class="btn btn-default"&gt;Button&lt;/button&gt;
+    &lt;div class="btn-group" role="group"&gt;
+        &lt;button id="btnGroupVerticalDrop2" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"&gt; Dropdown &lt;span class="caret"&gt;&lt;/span&gt; &lt;/button&gt;
+        &lt;ul class="dropdown-menu" aria-labelledby="btnGroupVerticalDrop2"&gt;
+            &lt;li&gt;&lt;a href="#"&gt;Dropdown link&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;Dropdown link&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/div&gt;
+    &lt;div class="btn-group" role="group"&gt;
+        &lt;button id="btnGroupVerticalDrop3" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"&gt; Dropdown &lt;span class="caret"&gt;&lt;/span&gt; &lt;/button&gt;
+        &lt;ul class="dropdown-menu" aria-labelledby="btnGroupVerticalDrop3"&gt;
+            &lt;li&gt;&lt;a href="#"&gt;Dropdown link&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;Dropdown link&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/div&gt;
+    &lt;div class="btn-group" role="group"&gt;
+        &lt;button id="btnGroupVerticalDrop4" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"&gt; Dropdown &lt;span class="caret"&gt;&lt;/span&gt; &lt;/button&gt;
+        &lt;ul class="dropdown-menu" aria-labelledby="btnGroupVerticalDrop4"&gt;
+            &lt;li&gt;&lt;a href="#"&gt;Dropdown link&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;Dropdown link&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;!-- /.btn-group-vertical --&gt;
+                                    </code></pre>
+                                </div>
+                                <!-- /.src-code -->
+
+                                <div class="row mt-40">
+                                    <div class="col-md-12">
+                                        <div class="section-title">
+                                            <h4 class="title underline">Justified Button Group</h4>
+                                            <p class="sub-title">To use justified button groups with <code class="language-html">&lt;button&gt;</code> elements, you must wrap each button in a button group. Wrap all these button groups in a wrapper with class <code class="language-html">.btn-group.btn-group-justified</code>. Most browsers don't properly apply our CSS for justification to <code class="language-html">&lt;button&gt;</code> elements, but since we support button dropdowns, we can work around that.</p>
+                                        </div>
+                                        <!-- /.section-title -->
+                                    </div>
+                                    <!-- /.col-md-12 -->
+
+                                    <div class="col-md-12 mb-15">
+                                        <div class="btn-group btn-group-justified" role="group" >
+                                        	<div class="btn-group" role="group">
+                                        		<button type="button" class="btn btn-default">Left</button>
+                                        	</div>
+                                        	<div class="btn-group" role="group">
+                                        		<button type="button" class="btn btn-default">Middle</button>
+                                        	</div>
+                                        	<div class="btn-group" role="group">
+                                        		<button type="button" class="btn btn-default">Right</button>
+                                        	</div>
+                                        </div>
+                                    </div>
+                                    <!-- /.col-md-12 -->
+
+                                    <a class="btn btn-primary btn-xs src-btn" role="button" data-toggle="collapse" href="#justified" aria-expanded="false" aria-controls="justified"><i class="fa fa-code"></i></a>
+                                </div>
+                                <!-- /.row -->
+
+                                <div class="src-code">
+                                    <pre class="language-html"><code class="language-html">
+&lt;div class="btn-group btn-group-justified" role="group" &gt;
+    &lt;div class="btn-group" role="group"&gt;
+        &lt;button type="button" class="btn btn-default"&gt;Left&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div class="btn-group" role="group"&gt;
+        &lt;button type="button" class="btn btn-default"&gt;Middle&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div class="btn-group" role="group"&gt;
+        &lt;button type="button" class="btn btn-default"&gt;Right&lt;/button&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+                                    </code></pre>
+                                </div>
+                                <!-- /.src-code -->
+
+                                <div class="row mt-40">
+                                    <div class="col-md-12">
+                                        <div class="section-title">
+                                            <h4 class="title underline">Checkbox Button Group</h4>
+                                            <p class="sub-title">Add <code class="language-html">data-toggle="buttons"</code> to a <code class="language-html">.btn-group</code> containing checkbox or radio inputs to enable toggling in their respective styles.</p>
+                                        </div>
+                                        <!-- /.section-title -->
+                                    </div>
+                                    <!-- /.col-md-12 -->
+
+                                    <div class="col-md-12 mb-15">
+                                        <div class="btn-group" data-toggle="buttons">
+                                            <label class="btn btn-primary active">
+                                            	<input type="checkbox" checked> Checkbox 1 (pre-checked)
+                                            </label>
+                                            <label class="btn btn-primary">
+                                            	<input type="checkbox"> Checkbox 2
+                                            </label>
+                                            <label class="btn btn-primary">
+                                            	<input type="checkbox"> Checkbox 3
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <!-- /.col-md-12 -->
+
+                                    <a class="btn btn-primary btn-xs src-btn" role="button" data-toggle="collapse" href="#checkbox" aria-expanded="false" aria-controls="checkbox"><i class="fa fa-code"></i></a>
+                                </div>
+                                <!-- /.row -->
+
+                                <div class="src-code">
+                                    <pre class="language-html"><code class="language-html">
+&lt;div class="btn-group" data-toggle="buttons"&gt;
+    &lt;label class="btn btn-primary active"&gt;
+        &lt;input type="checkbox" checked&gt; Checkbox 1 (pre-checked)
+    &lt;/label&gt;
+    &lt;label class="btn btn-primary"&gt;
+        &lt;input type="checkbox"&gt; Checkbox 2
+    &lt;/label&gt;
+    &lt;label class="btn btn-primary"&gt;
+        &lt;input type="checkbox"&gt; Checkbox 3
+    &lt;/label&gt;
+&lt;/div&gt;
+                                    </code></pre>
+                                </div>
+                                <!-- /.src-code -->
+
+                                <div class="row mt-40">
+                                    <div class="col-md-12">
+                                        <div class="section-title">
+                                            <h4 class="title underline">Radio Button Group</h4>
+                                            <p class="sub-title">Add <code class="language-html">data-toggle="buttons"</code> to a <code class="language-html">.btn-group</code> containing checkbox or radio inputs to enable toggling in their respective styles.</p>
+                                        </div>
+                                        <!-- /.section-title -->
+                                    </div>
+                                    <!-- /.col-md-12 -->
+
+                                    <div class="col-md-12 mb-15">
+                                        <div class="btn-group" data-toggle="buttons">
+                                            <label class="btn btn-primary active">
+                                            	<input type="radio" name="options" id="option1" checked> Radio 1 (preselected)
+                                            </label>
+                                            <label class="btn btn-primary">
+                                            	<input type="radio" name="options" id="option2"> Radio 2
+                                            </label>
+                                            <label class="btn btn-primary">
+                                            	<input type="radio" name="options" id="option3"> Radio 3
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <!-- /.col-md-12 -->
+
+                                    <a class="btn btn-primary btn-xs src-btn" role="button" data-toggle="collapse" href="#radio" aria-expanded="false" aria-controls="radio"><i class="fa fa-code"></i></a>
+                                </div>
+                                <!-- /.row -->
+
+                                <div class="src-code">12">
+                                    <pre class="language-html"><code class="language-html">
+&lt;div class="btn-group" data-toggle="buttons"&gt;
+    &lt;label class="btn btn-primary active"&gt;
+        &lt;input type="radio" name="options" id="option1" checked&gt; Radio 1 (preselected)
+    &lt;/label&gt;
+    &lt;label class="btn btn-primary"&gt;
+        &lt;input type="radio" name="options" id="option2"&gt; Radio 2
+    &lt;/label&gt;
+    &lt;label class="btn btn-primary"&gt;
+        &lt;input type="radio" name="options" id="option3"&gt; Radio 3
+    &lt;/label&gt;
+&lt;/div&gt;
+                                    </code></pre>
+                                </div>
+                                <!-- /.src-code -->
+
+
+                            </div>
+                            <!-- /.container -->
+                        </section>
+                        <!-- /.section -->
+
+                    </div>
+                    <!-- /.main-page -->
+
+                    <div class="right-sidebar bg-white fixed-sidebar">
+                        <div class="sidebar-content">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h4>Useful Sidebar <i class="fa fa-times close-icon"></i></h4>
+                                        <p>Code for help is added within the main page. Check for code below the example.</p>
+                                        <p>You can use this sidebar to help your end-users. You can enter any HTML in this sidebar.</p>
+                                        <p>This sidebar can be a 'fixed to top' or you can unpin it to scroll with main page.</p>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                    </div>
+                                    <!-- /.col-md-12 -->
+
+                                    <div class="text-center mt-20">
+                                        <button type="button" class="btn btn-success btn-labeled">Purchase Now<span class="btn-label btn-label-right"><i class="fa fa-check"></i></span></button>
+                                    </div>
+                                    <!-- /.text-center -->
+                                </div>
+                                <!-- /.row -->
+                            </div>
+                            <!-- /.container-fluid -->
+                        </div>
+                        <!-- /.sidebar-content -->
+                    </div>
+                    <!-- /.right-sidebar -->
+
+                </div>
+                <!-- /.content-container -->
+            </div>
+            <!-- /.content-wrapper -->
+
+        </div>
+        <!-- /.main-wrapper -->
+
+        <!-- ========== COMMON JS FILES ========== -->
+        <script src="js/jquery/jquery-2.2.4.min.js"></script>
+        <script src="js/jquery-ui/jquery-ui.min.js"></script>
+        <script src="js/bootstrap/bootstrap.min.js"></script>
+        <script src="js/pace/pace.min.js"></script>
+        <script src="js/lobipanel/lobipanel.min.js"></script>
+        <script src="js/iscroll/iscroll.js"></script>
+
+        <!-- ========== PAGE JS FILES ========== -->
+        <script src="js/prism/prism.js"></script>
+        <script src="js/prism/prism-line-numbers.js"></script>
+
+        <!-- ========== THEME JS ========== -->
+        <script src="js/main.js"></script>
+
+        <!-- ========== ADD custom.js FILE BELOW WITH YOUR CHANGES ========== -->
+    </body>
+</html>

@@ -1,0 +1,85 @@
+.vertical-timeline-bg {
+    background: linear-gradient(to bottom, #bea2e7 0%, #86b7e7 100%);
+    color: #fff;
+}
+.vertical-timeline ul {
+  margin: 40px 0 50px 0;
+  list-style: none;
+  position: relative;
+  padding: 1px 100px;
+  font-size: 13px;
+}
+.vertical-timeline ul:before {
+  content: "";
+  width: 1px;
+  height: 100%;
+  position: absolute;
+  border-left: 2px dashed #fff;
+}
+.vertical-timeline ul li {
+  position: relative;
+  margin-left: 30px;
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 14px;
+  border-radius: 6px;
+  width: 250px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.12), 0 2px 2px rgba(0, 0, 0, 0.08);
+}
+.vertical-timeline ul li:not(:first-child) {
+  margin-top: 60px;
+}
+.vertical-timeline ul li > span {
+  width: 2px;
+  height: 100%;
+  background: #fff;
+  left: -30px;
+  top: 0;
+  position: absolute;
+}
+.vertical-timeline ul li > span:before, .vertical-timeline ul li > span:after {
+  content: "";
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  position: absolute;
+  background: #86b7e7;
+  left: -5px;
+  top: 0;
+}
+.vertical-timeline ul li span:after {
+  top: 100%;
+}
+.vertical-timeline ul li > div {
+  margin-left: 10px;
+}
+.vertical-timeline div .title, .vertical-timeline div .type {
+  font-weight: 600;
+  font-size: 12px;
+}
+.vertical-timeline div .info {
+  font-weight: 300;
+}
+.vertical-timeline div > div {
+  margin-top: 5px;
+}
+.vertical-timeline span.number {
+  height: 100%;
+}
+.vertical-timeline span.number span {
+  position: absolute;
+  font-size: 10px;
+  left: -35px;
+  font-weight: bold;
+}
+.vertical-timeline span.number span:first-child {
+  top: 0;
+}
+.vertical-timeline span.number span:last-child {
+  top: 100%;
+}
+@media (max-width: 576px) {
+    .vertical-timeline ul {
+    padding: 10px !important;
+    }
+}
