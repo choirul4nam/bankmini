@@ -73,7 +73,7 @@
                                         <th>Kelas</th>
                                         <th>Tahun Akademik</th>
                                         <!-- <th>Status</th> -->
-                                        <th>Aksi</th>
+                                        <th><center>Aksi</center></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -100,6 +100,7 @@
                                             <?php endif; ?>
                                             <!-- <td><?= $data->status; ?></td> -->
                                             <td style="min-width: 175px;">
+                                            <center>
                                                 <div class="btn-group">
                                                     <?php if ($akses['view'] == 1) { ?>
                                                         <a href="<?= base_url('siswa-det/') . $data->nis;  ?>" class="btn btn-success"><i class="fa fa-search"></i></a>
@@ -111,6 +112,7 @@
                                                         <a href="<?= base_url('siswa-hps/') . $data->nis;  ?>" class="btn btn-danger" onclick="return confirm('Yakin untuk menghapus?')"><i class="fa fa-trash"></i></a>
                                                     <?php  } ?>                                                        
                                                 </div>
+                                            </center>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>

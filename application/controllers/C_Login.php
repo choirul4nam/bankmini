@@ -32,53 +32,6 @@ class C_Login extends CI_Controller {
 		$this->load->view('v_siswa/v_siswa-login.php');		
 	}
 
-	// public function siswa_login(){
-	// 	// var_dump();
-	// 	if(!empty($this->input->post('nis'))){
-	// 		$nis = $this->input->post('nis');
-	// 		$dataSiswa = $this->M_Siswa->getsiswadetail($nis);
-	// 		if(!empty($dataSiswa)){
-	// 			$session = array(
-	// 				'authenticated' => 	true, // Buat session authenticated dengan value true					
-	// 				'nama'			=> 	$dataSiswa['namasiswa'],
-	// 				'id_user'		=>	$dataSiswa['nis'],
-	// 				'rfid'			=>	$dataSiswa['rfid'],
-	// 				'jk'			=>	$dataSiswa['jk'],	
-	// 				'alamat'		=>	$dataSiswa['alamat'],
-	// 				'status'		=>	$dataSiswa['status'],
-	// 				'tipeuser'		=> $dataSiswa['id_tipeuser'],
-	// 				'login-siswa' 	=> 	true
-	// 			  );
-	// 			  $this->session->set_userdata($session); // Buat session sesuai $session
-	// 			  $this->M_login->userlog();
-	// 			  redirect('dashboard/');
-	// 		}else{
-	// 			echo "<script>alert('Data yang anda masukkan salah');history.go(-1);</script>";				
-	// 		}
-	// 	}else if(!empty($this->input->post('rfid'))){
-	// 		$rfid = $this->input->post('rfid');
-	// 		$dataSiswa = $this->db->get_where('tb_siswa', ['rfid' => $rfid])->row();
-	// 		if(!empty($dataSiswa)){
-	// 			$session = array(
-	// 				'authenticated' => 	true, // Buat session authenticated dengan value true					
-	// 				'nama'			=> 	$dataSiswa->namasiswa,
-	// 				'id_user'		=>	$dataSiswa->nis, // Buat session authenticated
-	// 				'rfid'			=>	$dataSiswa->rfid,
-	// 				'jk'			=>	$dataSiswa->jk,					
-	// 				'alamat'		=>	$dataSiswa->alamat,
-	// 				'status'		=>	$dataSiswa->status,
-	// 				'tipeuser'		=> $dataSiswa->id_tipeuser,
-	// 				'login-siswa' 	=> 	true
-	// 			  );
-	// 			  $this->session->set_userdata($session); // Buat session sesuai $session
-	// 			  $this->M_login->userlog();
-	// 			  echo 'berhasil';
-	// 		}else{
-	// 			echo "<script>alert('Kartu pelajar anda tidak terdaftar di database');history.go(-1);</script>";				
-	// 		}
-	// 	}
-	// }
-
 	function cek_login(){
 
 		$username = $this->input->post('username');
@@ -88,13 +41,13 @@ class C_Login extends CI_Controller {
 		if(empty($user)){
 			echo "<script>alert('Data yang anda masukkan salah');history.go(-1);</script>";			
 		} else {
-		    if($password == $user->password){ // Jika password yang diinput sama dengan password yang didatabase
+		    if(md5($password) == $user->password){ // Jika password yang diinput sama dengan password yang didatabase
         		$session = array(
 		          'authenticated'=>true, // Buat session authenticated dengan value true
-		          'nopegawai'=> $username,  // Buat session nip
+		          'username'=> $username,  // Buat session nip
 		          'nama'=> $user->nama,
-		          'id_user'=>$user->id_staf, // Buat session authenticated
-		          'tipeuser'=>$user->id_tipeuser,
+		          'id_user'=>$user->id, // Buat session authenticated
+		          'tipeuser'=>$user->user_level,
 		          'login' => true
 		        );
 		        $this->session->set_userdata($session); // Buat session sesuai $session

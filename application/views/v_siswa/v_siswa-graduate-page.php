@@ -47,7 +47,7 @@
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         Cari Siswa Per Kelas
-                                        <select id="kelasGrad" class="form-control">
+                                        <select id="kelasGrad" class="form-control js-states">
                                             <option value="salah">Pilih Kelas</option>
                                             <?php foreach($kelas as $row): ?>
                                                 <option value="<?=$row['id_kelas']?>">  <?= $row['kelas']; ?> </option>

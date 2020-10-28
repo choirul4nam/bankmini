@@ -58,7 +58,7 @@
                                         <th>Kategori</th>
                                         <th>Deskripsi</th>
                                         <th>Nominal</th>
-                                        <th width="100px">Aksi</th>
+                                        <th width="100px"><center>Aksi</center></th>
                                     </tr>
                                 </thead>
                                 <tbody>

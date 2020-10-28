@@ -8,7 +8,7 @@ class M_Siswa extends CI_Model {
 	    // $this->db->join('tb_kelas', 'tb_siswa.id_kelas = tb_kelas.id_kelas');	    
 	    // $this->db->where('tb_siswa.status', 'aktif')->or_where('tb_siswa.status', 'alumni');
         $this->db->where('tb_siswa.status', 'aktif');
-	    $this->db->order_by('nis', 'asc');
+	    $this->db->order_by('namasiswa', 'asc');
 	    $query = $this->db->get(); 
         return $query->result();
     }

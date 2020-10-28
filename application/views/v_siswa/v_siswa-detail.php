@@ -78,7 +78,7 @@
                                             <?php endif; ?>
                                         </tr>
                                         <tr>
-                                            <td>Tempat, Tanggal Lahir</td>
+                                            <td style="width: 200px;">Tempat, Tanggal Lahir</td>
                                             <td>:</td>
                                             <td><?= $datasiswa['tempat_lahir']; ?>, <?= $datasiswa['tgl_lahir']; ?></td>
                                         </tr>
@@ -88,30 +88,20 @@
                                             <td><?= $datasiswa['alamat']; ?></td>
                                         </tr>
                                         <tr>
-                                            <td>Kecamatan/Kota/Provinsi</td>
+                                            <td>Kecamatan</td>
                                             <td>:</td>
-                                            <td><?= (!empty($datasiswa['kecamatan']) ? $this->db->get_where('tb_kecamatan', ['id_kecamatan' => $datasiswa['kecamatan']])->row()->kecamatan : '').'/'.(!empty($datasiswa['kota']) ? $this->db->get_where('tb_kota', ['id_kota' => $datasiswa['kota']])->row()->name_kota : ' ').'/'.(!empty($datasiswa['provinsi']) ? $this->db->get_where('tb_provinsi', ['id_provinsi' => $datasiswa['provinsi']])->row()->name_prov : '' ) ?></td>
-                                        </tr>                                       
-                                        <!-- <tr>
-                                            <td>Username</td>
+                                            <td><?= (!empty($datasiswa['kecamatan']) ? $this->db->get_where('tb_kecamatan', ['id_kecamatan' => $datasiswa['kecamatan']])->row()->kecamatan : '') ?> </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Kota</td>
                                             <td>:</td>
-                                            <td><?= $datasiswa['nis']; ?></td>
-                                        </tr> -->
-                                        <!-- <tr>
-                                            <td>Password</td>
+                                            <td><?= (!empty($datasiswa['kota']) ? $this->db->get_where('tb_kota', ['id_kota' => $datasiswa['kota']])->row()->name_kota : ' ') ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Provinsi</td>
                                             <td>:</td>
-                                            <td><?= $datasiswa['password']; ?></td>
-                                        </tr> -->
-                                        <!-- <tr>
-                                            <td>status</td>
-                                            <td>:</td>
-                                            <td><?= $datasiswa['status']; ?></td>
-                                        </tr> -->
-                                        <!--    <tr>
-                                            <td>Terakhir Di Update</td>
-                                            <td>:</td>
-                                            <td><?= $datasiswa['tglupdate']; ?></td>
-                                        </tr> -->
+                                            <td><?= (!empty($datasiswa['provinsi']) ? $this->db->get_where('tb_provinsi', ['id_provinsi' => $datasiswa['provinsi']])->row()->name_prov : '' ) ?></td>
+                                        </tr>                                                                             
                                     </table>
                                     <button onclick="history.go(-1);" class="btn btn-primary"><i class="fa fa-arrow-left"></i>Kembali</button>                                    
                             </div>

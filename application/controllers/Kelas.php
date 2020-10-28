@@ -84,7 +84,7 @@ class Kelas extends CI_Controller
 			$this->session->set_flashdata('alert', '<div class="alert alert-warning left-icon-alert" role="alert">
 	                                            		<strong>Perhatian!</strong> Data Sudah Ada.
 	                                        		</div>');
-			redirect(base_url('kelas/'));
+			redirect(base_url('kelas-add/'));
 		}
 	}
 
@@ -112,24 +112,26 @@ class Kelas extends CI_Controller
 
 	public function edt_process()
 	{
-		if ($this->M_Kelas->cekKelas($this->input->post('kelas', true))) {
-			$id = $this->input->post('idKelas', true);
-			$data = array(
-				'kelas' => $this->input->post('kelas', true),
-				'id_user' => 1,
-				'tglupdate' => date("Y-m-d h:i:sa")
-			);
+		$id = $this->input->post('idKelas', true);
+		$data = array(
+			'kelas' => $this->input->post('kelas', true),
+			'id_user' => 1,
+			'tglupdate' => date("Y-m-d h:i:sa")
+		);
 
+		$kelas = $this->db->get_where("tb_kelas", ['id_kelas !=' => $id, 'kelas' => $data['kelas']])->result();
+
+		if (count($kelas) > 0){			
+			$this->session->set_flashdata('alert', '<div class="alert alert-warning left-icon-alert" role="alert">
+	                                            		<strong>Perhatian!</strong> Data Sudah Ada.
+	                                        		</div>');
+			redirect(base_url('kelas-edt/'.$id));
+		} else {
 			$this->M_Kelas->editKelas($data, $id);
 			$this->session->set_flashdata('alert', '<div class="alert alert-success left-icon-alert" role="alert">
 	                                            		<strong>Sukses!</strong> Berhasil Mengubah Kelas.
 	                                        		</div>');
-			redirect(base_url('kelas/'));
-		} else {
-			$this->session->set_flashdata('alert', '<div class="alert alert-warning left-icon-alert" role="alert">
-	                                            		<strong>Perhatian!</strong> Data Sudah Ada.
-	                                        		</div>');
-			redirect(base_url('kelas/'));
+			redirect(base_url('kelas/'));			
 		}
 	}
 
@@ -152,10 +154,11 @@ class Kelas extends CI_Controller
 		$query = $this->db->query("SELECT * FROM tb_kelas WHERE kelas LIKE '%$jurusan%' AND `status` = 'aktif'")->result();
 
 		$data = [];
-
 		foreach($query as $row){
 			if($row->kelas != $kelassiswa){
-				if(strlen($kelas) < strlen(explode(' ', $row->kelas)[0]) && $nourut == explode(' ', $row->kelas)[2]){
+				//strlen(explode(' ', $row->kelas)[0])				
+				$asd = strlen($kelas) + 1;
+				if($asd == strlen(explode(' ', $row->kelas)[0]) && $nourut == explode(' ', $row->kelas)[2]){
 					// echo $row->kelas.'<br>';
 					array_push($data, $row);
 				}

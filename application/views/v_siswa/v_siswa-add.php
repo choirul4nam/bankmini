@@ -40,7 +40,7 @@
                                             </div>
                                             <div class="form-group has-feedback">
                                                 <label for="exampleInputPassword5">Jenis Kelamin*</label>
-                                                <select class="form-control" name="jk" required>
+                                                <select class="form-control js-states" name="jk" required>
                                                     <option value="">Pilih Jenis Kelamin</option>
                                                     <option value="Laki-Laki">Laki-Laki</option>
                                                     <option value="Perempuan">Perempuan</option>
@@ -49,7 +49,7 @@
                                             </div>   
                                             <div class="form-group has-feedback">
                                                 <label for="exampleInputPassword5">Kelas*</label>
-                                                <select class="form-control" name="kelas" required>
+                                                <select class="form-control js-states" name="kelas" required>
                                                     <option value="">Pilih Kelas</option>
                                                     <?php foreach ($kelas as $dataKelas): ?>
                                                         <option value="<?= $dataKelas['id_kelas']; ?>"><?= $dataKelas['kelas']; ?></option>
@@ -59,7 +59,7 @@
                                             </div>                              
                                             <div class="form-group has-feedback">
                                                 <label for="exampleInputPassword5">Tahun Akademik*</label>
-                                                <select class="form-control" name="tahun_akademik" required>
+                                                <select class="form-control js-states" name="tahun_akademik" required>
                                                     <option value="">Pilih Tahun Akademik</option>
                                                     <?php foreach ($tahunaka as $row): ?>
                                                         <option value="<?= $row['id_tahunakademik']; ?>"><?= $row['tglawal']; ?> - <?= $row['tglakhir']; ?></option>
@@ -90,7 +90,7 @@
                                             </div>
                                             <div class="form-group has-feedback">
                                                 <label for="js-states">Provinsi*</label>
-                                                <select class="form-control s_provinsi" id="provinsi" required name="prov">
+                                                <select class="form-control s_provinsi js-states" id="provinsi" required name="prov">
                                                     <option value="">Pilih Provinsi</option>
                                                     <?php foreach ($prov as $dataProv): ?>
                                                         <option value="<?= $dataProv['id_provinsi']; ?>"><?= $dataProv['name_prov']; ?></option>
@@ -100,14 +100,14 @@
                                             </div>                                                                                
                                             <div class="form-group has-feedback">
                                                 <label for="exampleInputPassword5">Kota*</label>
-                                                <select class="form-control s_kota" name="kota" disabled id="selectKota" required >
+                                                <select class="form-control s_kota js-states" name="kota" disabled id="selectKota" required >
                                                                                                     
                                                 </select>
                                                 <!-- <span class="fa fa-map form-control-feedback"></span> -->
                                             </div>                                                                                
                                             <div class="form-group has-feedback">
                                                 <label for="exampleInputPassword5">Kecamatan*</label>
-                                                <select class="form-control s_kecamatan" name="kecamatan" disabled id="selectKeca" required>
+                                                <select class="form-control s_kecamatan js-states" name="kecamatan" disabled id="selectKeca" required>
                                                                                                     
                                                 </select>
                                                 <!-- <span class="fa fa-map form-control-feedback"></span> -->

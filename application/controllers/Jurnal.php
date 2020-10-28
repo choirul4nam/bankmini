@@ -47,7 +47,7 @@ class Jurnal extends CI_Controller
 	}
 
 	public function add_process(){
-		// print_r($this->input->post());
+			print_r($this->input->post());
 		$data = [
 			'id_jurnal' => '',
 			'tipe_transaksi' => $this->input->post('jurnal_tipe_transaksi'),

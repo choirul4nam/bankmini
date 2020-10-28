@@ -67,9 +67,15 @@ class TahunAkademik extends CI_Controller
             'id_user' => $this->session->userdata('id_user'),
             'tglupdate' =>  date('Y-m-d  h:i:s')
         ];
-        $this->M_TahunAkademik->tambah($data);
-        $this->session->set_flashdata('message', '<div class="alert alert-success left-icon-alert" role="alert"> <strong>Sukses!</strong> Data Berhasil Ditambahkan</div>');
-        redirect('tahunakademik');
+        $cekData = $this->db->get_where('tb_tahunakademik', ['tglawal' =>  $data['tglawal'], 'tglakhir' => $data['tglakhir']])->result();
+        if(count($cekData) > 0){
+            $this->session->set_flashdata('message', '<div class="alert alert-warning left-icon-alert" role="alert"> <strong>Perhatian!</strong> Data Sudah ada</div>');
+            redirect('tahunakademik-add');
+        }else{
+            $this->M_TahunAkademik->tambah($data);
+            $this->session->set_flashdata('message', '<div class="alert alert-success left-icon-alert" role="alert"> <strong>Sukses!</strong> Data Berhasil Ditambahkan</div>');
+            redirect('tahunakademik');
+        }        
     }
 
     public function ubahdata($id_tahunakademik)
@@ -93,14 +99,19 @@ class TahunAkademik extends CI_Controller
             'id_user' => '01',
             'tglupdate' =>  date('Y-m-d  h:i:s')
         ];
-        $this->M_TahunAkademik->ubah($id, $data);
-        $this->session->set_flashdata('message', '<div class="alert alert-success left-icon-alert" role="alert"><strong>Sukses!</strong> Data Berhasil Diubah</div>');
-        redirect('tahunakademik');
+        $cekData = $this->db->get_where('tb_tahunakademik', ['id_tahunakademik !=' => $id ,'tglawal' =>  $data['tglawal'], 'tglakhir' => $data['tglakhir']])->result();
+        if(count($cekData) > 0){
+            $this->session->set_flashdata('message', '<div class="alert alert-warning left-icon-alert" role="alert"> <strong>Perhatian!</strong> Data Sudah ada</div>');
+            redirect('tahunakademik-ubah/'.$id);
+        }else{
+            $this->M_TahunAkademik->ubah($id, $data);
+            $this->session->set_flashdata('message', '<div class="alert alert-success left-icon-alert" role="alert"><strong>Sukses!</strong> Data Berhasil Diubah</div>');
+            redirect('tahunakademik');
+        } 
     }
 
     public function getTAList($id){
         $ta = $this->db->get_where("tb_tahunakademik", ['id_tahunakademik' => $id])->row();        
-        // var_dump($ta);
         $tawal = $ta->tglawal;
         $query = $this->db->query("SELECT * FROM tb_tahunakademik WHERE tglawal >= '$tawal' AND id_tahunakademik != $id")->result();
         echo json_encode($query);

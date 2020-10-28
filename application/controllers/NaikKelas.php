@@ -22,6 +22,7 @@ class NaikKelas extends CI_Controller
 		$data['menu'] = $this->M_Setting->getmenu1($id);
 		$data['akses'] = $this->M_Akses->getByLinkSubMenu(urlPath(), $id);
 		$data['activeMenu'] = $this->db->get_where('tb_submenu', ['submenu' => 'naik kelas'])->row()->id_menus;
+				$this->db->order_by('kelas', "asc");
 		$query = $this->db->get('tb_kelas')->result_array();		
 		$index = 0;
 		foreach($query as $row){

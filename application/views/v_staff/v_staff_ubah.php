@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="row page-title-div">
             <div class="col-sm-6">
-                <h2 class="title">Staff</h2>
+                <h2 class="title">Guru & Anggota</h2>
                 <p class="sub-title">SIMBMS (Sistem Informasi Bank Mini Sekolah)</p>
             </div>
             <!-- /.col-sm-6 -->
@@ -17,7 +17,7 @@
                 <ul class="breadcrumb">
                     <li><a href="<?php echo base_url() ?>"><i class="fa fa-home"></i> Home</a></li>
                     <li class="active">Data Master</li>
-                    <li class="active">Staff</li>
+                    <li class="active">Guru dan Anggota</li>
                 </ul>
             </div>
             <!-- /.col-sm-6 -->
@@ -35,7 +35,7 @@
                     <div class="panel">
                         <div class="panel-heading">
                             <div class="panel-title">
-                                <h5>Ubah Data Staff</h5>
+                                <h5>Ubah Data Guru dan Anggota</h5>
                             </div>
                         </div>
                         <div class="panel-body p-20">
@@ -43,7 +43,7 @@
                                 <input type="hidden" value="<?= $staf['id_staf'] ?>" id="id_staf" name="id_staf" />
                                 <table class="table">
                                     <tr>
-                                        <td>no pegawai</td>
+                                        <td>No Anggota</td>
                                         <td>:</td>
                                         <td><input type="text" maxlength="12" class="form-control" id="nopegawai" name="nopegawai" value="<?= $staf['nopegawai']  ?> "></td>
                                     </tr>
@@ -62,36 +62,15 @@
                                         <td>:</td>
                                         <td><input type="text" maxlength="12" minlength="11" class="form-control" id="telp" min="0" value="<?= $staf['tlp'] ?>" onkeypress="return event.charCode >= 48 && event.charCode <= 57" name="telp" required></td>
                                     </tr>
-                                    <tr>
-                                        <td>tipe user</td>
-                                        <td>:</td>
-                                        <td>
-                                            <select class="js-states form-control" id="js-states tipeuser" name="tipeuser">
-                                                <?php
-                                                $dataTipeUser = $this->db->query('SELECT * FROM tb_tipeuser')->result_array();
-                                                foreach ($dataTipeUser as $data) :
-                                                    if ($data['id_tipeuser'] == $staf['id_tipeuser']) {
-                                                ?>
-                                                        <option value="<?= $data['id_tipeuser'] ?>" selected><?= $data['tipeuser'] ?></option>
-                                                    <?php
-                                                    } else {
-                                                    ?>
-                                                        <option value="<?= $data['id_tipeuser'] ?>"><?= $data['tipeuser'] ?></option>
-                                                <?php
-                                                    }
-                                                endforeach;
-                                                ?>
-                                            </select>
-                                        </td>
-                                    </tr>
-                                    <tr>
+                                    
+                                    <!-- <tr>
                                         <td>password</td>
                                         <td>:</td>
 
-                                        <td>
+                                        <td> -->
                                             <!-- <input type="hidden" id="pass" name="pass" value="pegawai123"> -->
-                                            <input type="text" class="form-control" id="pass" name="pass" value="<?= $staf['password'] ?>" required></td>
-                                    </tr>
+                                            <!-- <input type="text" class="form-control" id="pass" name="pass" value="<?= $staf['password'] ?>" required></td>
+                                    </tr> -->
                                     <tr>
                                         <td>provinsi</td>
                                         <td>:</td>

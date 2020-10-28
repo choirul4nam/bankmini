@@ -54,13 +54,13 @@
                                                 <th>No</th>
                                                 <th>NIS</th>
                                                 <th>Nama Siswa</th>
-                                                <th>Alamat</th>
+                                                <!-- <th>Alamat</th> -->
                                                 <th>Jenis Kelamin</th>
                                                 <th>Kelas</th>
                                                 <th>Tahun Akademik</th>
-                                                <th>RFID</th>
+                                                <!-- <th>RFID</th> -->
                                                 <!-- <th>Status</th> -->
-                                                <th width="115px">Aksi</th>
+                                                <th width="115px"><center>Aksi</center></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -71,7 +71,7 @@
                                                     <td><?= $no++; ?></td>
                                                     <td><?= $data->nis; ?></td>
                                                     <td><?= $data->namasiswa; ?></td>
-                                                    <td><?= $data->alamat; ?></td>
+                                                    <!-- <td><?= $data->alamat; ?></td> -->
                                                     <td><?= $data->jk; ?></td>
                                                     <?php if($data->id_kelas != 0): ?>
                                                     <?php $kelas = $this->db->get_where('tb_kelas', ['id_kelas' => $data->id_kelas])->row()->kelas; ?>
@@ -85,14 +85,16 @@
                                                     <?php else: ?>
                                                     <td></td>
                                                     <?php endif; ?>
-                                                    <td><?= $data->rfid; ?></td>
+                                                    <!-- <td><?= $data->rfid; ?></td> -->
                                                     <!-- <td><?= $data->status; ?></td> -->
                                                     <td style="min-width: 175px;">
+                                                    <center>
                                                         <div class="btn-group">
                                                             <?php if ($akses['view'] == 1) { ?>
                                                                 <a href="<?= base_url('siswa-det/') . $data->nis;  ?>" class="btn btn-success"><i class="fa fa-search"></i></a>
                                                             <?php  } ?>                                                           
                                                         </div>
+                                                        </center>
                                                     </td>
                                                 </tr>
                                             <?php

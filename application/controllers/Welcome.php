@@ -18,6 +18,7 @@ class Welcome extends CI_Controller
 
 	public function index()
 	{
+		// var_dump($this->session);
 		$thisM = date('m');
 		$id = $this->session->userdata('tipeuser');
 		$nominalKredit = 0;

@@ -130,8 +130,10 @@ class MTransaksi extends CI_Controller
 		$kredit = $this->input->post('kredit', true);
 		$kategori = $this->input->post('kategori', true);
 		$deskripsi = $this->input->post('deskripsi', true);
+		$kodetransaksi = $this->input->post('kodetransaksi', true);
 		$data = array(
-			'debet ' => $debet,
+			'debet' => $debet,
+			'kodetransaksi' => $kodetransaksi,
 			'kredit' => $kredit,
 			'kategori' => $kategori,
 			'deskripsi' => $deskripsi,

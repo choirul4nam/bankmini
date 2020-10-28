@@ -60,26 +60,26 @@
                             <div class="row">
                                 <div class="col-lg-4 mb-10">
                                 <label for="">Pilih Kelas Untuk Template</label>
-                                    <select id="kelasDownload" class="form-control mb-20"style="height: 45px; font-size: 17px;">
+                                    <select id="kelasDownload" class="form-control js-states mb-20"style="height: 45px; font-size: 17px;">
                                         <option value="salah">Unduh Tamplate Untuk Kelas</option>
                                         <?php foreach($kelas as $row): ?>
                                             <option value="<?= $row['id_kelas'] ?>"><?= $row['kelas']; ?></option>
                                         <?php endforeach; ?>    
                                     </select>
-                                    <button class="btn btn-success btn-tamplate" id="downTMP" disabled>
+                                    <button class="btn btn-success btn-tamplate mt-10" id="downTMP" disabled>
                                         <i class="fa fa-download"></i>
                                         Unduh Tamplate Excel
                                     </button> 
                                 </div>
                                 <div class="col-md-4">
                                 <label for="">Tahun Akademik <i>(Wajib di isi)</i></label>
-                                    <select id="ta" class="form-control mb-20" style="height: 45px; font-size: 17px;">
+                                    <select id="ta" class="form-control js-states mb-20" style="height: 45px; font-size: 17px;">
                                         <option value="salah">Pilih Tahun Akademik</option>
                                         <?php foreach($tahun as $row): ?>                                    
                                             <option value="<?= $row['id'];?>"><?= $row['tahunawal'].' - '.$row['tahunakhir'] ; ?></option>
                                         <?php endforeach; ?>
                                     </select>
-                                    <button disabled id="btnImportS" class="btn btn-primary" >Import Data</button>                                    
+                                    <button disabled id="btnImportS" class="btn btn-primary mt-10" >Import Data</button>                                    
                                 </div>                                
                             </div>                             
                             <label class="mb-30"><i class="pull-right">Ada <?= $countSiswa; ?> Siswa</i></label>               

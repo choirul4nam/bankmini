@@ -45,7 +45,7 @@
                                             <div class="row">
                                                 <div class="col-lg-5 col-md-5 col-sm-12 mb-30" style="margin-left: -23px; margin-right: 23px;">
                                                     <label for="">Pilih Tipe Transaksi*</label>	
-                                                    <select class="form-control" id="jurnalTs">
+                                                    <select class="form-control js-states" id="jurnalTs">
                                                         <option value="pilih">Pilih Tipe Transaksi</option>
                                                         <option value="transaksi">Transaksi</option>
                                                         <option value="kaskeluar">Kas keluar</option>

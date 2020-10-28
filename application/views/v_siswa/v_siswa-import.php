@@ -59,13 +59,13 @@
                             </div>
                             <div class="row">
                                 <div class="col-lg-4">
-                                    <select id="kelasDownload" class="form-control mb-20">
+                                    <select id="kelasDownload" class="form-control mb-20 js-states ">
                                         <option value="salah">Unduh Tamplate Untuk Kelas</option>
                                         <?php foreach($kelas as $row): ?>
                                             <option value="<?= $row['id_kelas'] ?>"><?= $row['kelas']; ?></option>
                                         <?php endforeach; ?>    
                                     </select>
-                                    <button class="btn btn-success btn-tamplate" id="downTMP" disabled>
+                                    <button class="btn btn-success btn-tamplate mt-10" id="downTMP" disabled>
                                         <i class="fa fa-download"></i>
                                         Unduh Tamplate Excel
                                     </button> 

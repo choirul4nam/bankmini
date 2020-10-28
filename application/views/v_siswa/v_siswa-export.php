@@ -45,7 +45,7 @@
                             <p>Tampilkan Siswa berdasarkan kelas</p>
                             <div class="row">
                                 <div class="col-lg-4 mb-20">
-                                    <select class="form-control" id="siswaKelas">
+                                    <select class="form-control js-states" id="siswaKelas">
                                     <option>Pilih Kelas</option>
                                     <?php foreach ($kelas as $dataKelas): ?>
                                         <option value="<?= $dataKelas['id_kelas']; ?>"><?= $dataKelas['kelas']; ?></option>

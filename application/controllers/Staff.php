@@ -24,7 +24,7 @@ class Staff extends CI_Controller
         $data['menu'] = $this->M_Setting->getmenu1($id);
         $data['staff'] = $this->M_Staff->getAll();
         $data['akses'] = $this->M_Akses->getByLinkSubMenu(urlPath(), $id);
-        $data['activeMenu'] = $this->db->get_where('tb_submenu', ['submenu' => 'staf'])->row()->id_menus;
+        $data['activeMenu'] = $this->db->get_where('tb_submenu', ['submenu' => 'guru dan anggota'])->row()->id_menus;
 
         $this->load->view('template/sidebar', $data);
         $this->load->view('v_staff/v_staff.php', $data);
@@ -42,7 +42,7 @@ class Staff extends CI_Controller
         $this->load->view('template/header');
         $id = $this->session->userdata('tipeuser');
         $data['menu'] = $this->M_Setting->getmenu1($id);
-        $data['activeMenu'] = $this->db->get_where('tb_submenu', ['submenu' => 'kelas'])->row()->id_menus;
+        $data['activeMenu'] = $this->db->get_where('tb_submenu', ['submenu' => 'guru dan anggota'])->row()->id_menus;
         $this->load->view('template/sidebar', $data);
         $this->load->view('v_staff/v_staff_add.php', $data);
         $this->load->view('template/footer');
@@ -70,11 +70,9 @@ class Staff extends CI_Controller
             'kota' => $this->input->post('s_kota'),
             'kecamatan' => $this->input->post('s_kecamatan'),
             'tlp' => $this->input->post('telp'),
-            'id_tipeuser' => $this->input->post('tipeuser'),
             'status' => 'aktif',
             'tgl_upddate' => date('Y-m-d h:i:s'),
             'id_user' => $this->session->userdata('id_user'),
-            'password' => $this->input->post('pass')
         ];
 
         if ($this->M_Staff->getByNoPegawai($nopegawai) >= 1) {
@@ -97,7 +95,7 @@ class Staff extends CI_Controller
         $id = $this->session->userdata('tipeuser');
         $data['menu'] = $this->M_Setting->getmenu1($id);
         $data['staf'] = $this->M_Staff->getById($id_staf);
-        $data['activeMenu'] = $this->db->get_where('tb_submenu', ['submenu' => 'kelas'])->row()->id_menus;
+        $data['activeMenu'] = $this->db->get_where('tb_submenu', ['submenu' => 'guru dan anggota'])->row()->id_menus;
         $data['akses'] = $this->M_Akses->getByLinkSubMenu(urlPathDet(), $id);
 
         $this->load->view('template/sidebar', $data);
@@ -111,7 +109,7 @@ class Staff extends CI_Controller
         $id = $this->session->userdata('tipeuser');
         $data['menu'] = $this->M_Setting->getmenu1($id);
         $data['staf'] = $this->M_Staff->getById($id_staf);
-        $data['activeMenu'] = $this->db->get_where('tb_submenu', ['submenu' => 'kelas'])->row()->id_menus;
+        $data['activeMenu'] = $this->db->get_where('tb_submenu', ['submenu' => 'guru dan anggota'])->row()->id_menus;
         $this->load->view('template/sidebar', $data);
         $this->load->view('v_staff/v_staff_ubah.php', $data);
         $this->load->view('template/footer');
@@ -128,10 +126,8 @@ class Staff extends CI_Controller
             'kota' => $this->input->post('s_kota'),
             'kecamatan' => $this->input->post('s_kecamatan'),
             'tlp' => $this->input->post('telp'),
-            'id_tipeuser' => $this->input->post('tipeuser'),
             'tgl_upddate' => date('Y-m-d h:i:s'),
             'id_user' => $this->session->userdata('id_user'),
-            'password' => $this->input->post('pass')
         ];
         $this->M_Staff->ubah($data, $id_staf);
         if ($this->input->post('profile')) {
@@ -153,33 +149,7 @@ class Staff extends CI_Controller
             redirect('staff');
         }
     }
-
-    public function staff_profile()
-    {
-        $id = $this->session->userdata('tipeuser');
-        $data['menu'] = $this->M_Setting->getmenu1($id);
-        $data['staf'] = $this->M_Staff->getById($this->session->userdata('id_user'));
-        $data['activeMenu'] = $this->db->get_where('tb_submenu', ['submenu' => 'kelas'])->row()->id_menus;
-
-        $this->load->view('template/header');
-        $this->load->view('template/sidebar', $data);
-        $this->load->view('v_user/v_user_profile.php', $data);
-        $this->load->view('template/footer');
-    }
-
-    public function profile_ubah()
-    {
-        $id = $this->session->userdata('tipeuser');
-        $data['menu'] = $this->M_Setting->getmenu1($id);
-        $data['staf'] = $this->M_Staff->getById($this->session->userdata('id_user'));
-        $data['activeMenu'] = $this->db->get_where('tb_submenu', ['submenu' => 'kelas'])->row()->id_menus;
-
-        $this->load->view('template/header');
-        $this->load->view('template/sidebar', $data);
-        $this->load->view('v_user/v_user_edit.php', $data);
-        $this->load->view('template/footer');
-    }
-
+    
     public function getStaff()
     {
         echo json_encode($this->db->get_where('tb_staf', ['id_tipeuser' => 1, 'status' => 'aktif'])->result_array());

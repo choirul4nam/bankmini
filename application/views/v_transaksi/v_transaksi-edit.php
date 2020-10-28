@@ -23,10 +23,10 @@
 	                    </div>
 	                </div>
 	                <div class="row">
-	                    <div class="col-md-5 col-md-5 col-sm-12">
+	                    <div class="col-md-6 col-md-6 col-sm-12">
 	                        <i>( * ) Wajib di Isi</i>
 	                        <div class="form-group">
-	                            <label for="exampleInputPassword5" style="font-size: 16px;">Pilih Tipe User*</label>
+	                            <label for="exampleInputPassword5" style="font-size: 15px;">Pilih Tipe User*</label>
 	                            <select class="form-control js-states tipeuserAdd inpCus" id="js-states" name="tipeuser"
 	                                required>
 	                                <option value="salah">Pilih Tipe User</option>
@@ -39,7 +39,7 @@
 	                        </div>
 
 	                        <div class="form-group">
-	                            <label for="exampleInputPassword5" style="font-size: 16px;">Cari Nama*</label>
+	                            <label for="exampleInputPassword5" style="font-size: 15px;">Cari Nama*</label>
 	                            <select class="form-control inpt selectJS js-states cusName inpCus" id="js-states" disabled
 	                                required>
 
@@ -47,7 +47,7 @@
 	                        </div>
 
 	                        <div class="form-group has-feedback">
-	                            <label for="exampleInputEmail5" style="font-size: 16px;">Transaksi*</label>
+	                            <label for="exampleInputEmail5" style="font-size: 15px;">Transaksi*</label>
 	                            <select class="form-control inpt js-states kategori inpCus" id="js-states" disabled
 	                                required>
 
@@ -68,7 +68,7 @@
 									<input type="hidden" name="id_transaksi" value="<?= $data->id_transaksi; ?>">
 	                        </div>
 	                        <div class="form-group has-feedback">
-	                            <label for="name5" style="font-size: 16px;">Kode Transaksi*</label>
+	                            <label for="name5" style="font-size: 15px;">Kode Transaksi*</label>
 	                            <input type="hidden" name="kode_transaksi" id="kode_transaksi" value="<?= $data->kodetransaksi; ?>">
 	                            <input type="text" class="form-control inpCus" disabled id="kode"
 	                                style="font-size: 18px; font-weight: 500;" value="<?= $data->kodetransaksi; ?>">
@@ -77,7 +77,7 @@
 	                        </div>
 
 	                        <div class="form-group has-feedback">
-	                            <label for="name5" style="font-size: 16px;">Keterangan*</label>
+	                            <label for="name5" style="font-size: 15px;">Keterangan*</label>
 	                            <textarea class="form-control inpt inpCus" id="keterangan" name="keterangan"
 	                                required style="font-size: 18px; font-weight: 500;" cols="30" rows="3"><?= $data->keterangan; ?></textarea>
 	                            <span class="fa fa-pencil form-control-feedback"></span>
@@ -98,12 +98,12 @@
 	                        </div>
 	                    </div>
 
-	                    <div class="col-lg-7 col-md-7 col-sm-12">
+	                    <div class="col-lg-6 col-md-6 col-sm-12">
 	                        <div class="cotainer-fluid" style="margin: 0px; padding: 0px;">
 	                            <div class="row">
 	                                <div class="col-lg-12 col-md-12 col-sm-12 mt-25">
 	                                    <div class="form-group has-feedback">
-	                                        <label for="name5" style="font-size: 16px;">Nominal*</label>
+	                                        <label for="name5" style="font-size: 15px;">Nominal*</label>
 	                                        <input type="text" class="form-control nominalInp inpt inpCus"
 	                                            style="font-size: 60px; text-align: right; font-weight: 600; height: 80px; background: #f7f774; color: #000;"
 	                                            disabled id="inputNominal"

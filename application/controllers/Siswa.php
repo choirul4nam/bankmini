@@ -28,12 +28,8 @@ class Siswa extends CI_Controller
 	public function index()
 	{
 		$id = $this->session->userdata('tipeuser');
-		$data['menu'] = $this->M_Setting->getmenu1($id);		
-		if($this->session->userdata('tipeuser') == 2){
-			$data['datasiswa'] = $this->M_Siswa->getsiswadetail($this->session->userdata('id_user'));
-		}else if($this->session->userdata('tipeuser') == 1){
-			$data['datasiswa'] = $this->M_Siswa->getsiswa();
-		}
+		$data['menu'] = $this->M_Setting->getmenu1($id);				
+		$data['datasiswa'] = $this->M_Siswa->getsiswa();		
 		$data['datalulus'] = $this->M_Siswa->getLulus();		
 		$data['akses'] = $this->M_Akses->getByLinkSubMenu(urlPath(), $id);
 		$data['activeMenu'] = $this->db->get_where('tb_submenu', ['submenu' => 'siswa'])->row()->id_menus;
@@ -331,9 +327,7 @@ class Siswa extends CI_Controller
 	
 	public function siswa_export()
 	{
-		$id = $this->session->userdata('tipeuser');
-		
-		$data['akses'] = $this->M_Akses->getByLinkSubMenu(urlPath(), $id);
+		$id = $this->session->userdata('tipeuser');		
 		$data['datasiswa'] = $this->M_Siswa->getsiswa();
 		$data['menu'] = $this->M_Setting->getmenu1($id);
 		$data['kelas'] = $this->M_Kelas->getkelas();
@@ -350,8 +344,8 @@ class Siswa extends CI_Controller
 		$siswa = $this->db->get_where('tb_siswa', ['id_kelas' => $id])->result();
 		$name = $this->db->get_where('tb_kelas', ['id_kelas' => $id])->row()->kelas;
 
-		require(APPPATH.'PHPExcel-1.8/Classes/PHPExcel.php');
-		require(APPPATH.'PHPExcel-1.8/Classes/PHPExcel/Writer/Excel2007.php');
+		require(APPPATH.'third_party/PHPExcel-1.8/Classes/PHPExcel.php');
+		require(APPPATH.'third_party/PHPExcel-1.8/Classes/PHPExcel/Writer/Excel2007.php');
 
 		$objPHPExcel = new PHPExcel();
 		$objPHPExcel->getProperties()->setCreator("HOSTERWEB");
@@ -712,7 +706,7 @@ class Siswa extends CI_Controller
 		$id = $this->session->userdata('tipeuser');
 		// $data['akses'] = $this->M_Akses->getByLinkSubMenu(urlPath(), $id);
 		$data['menu'] = $this->M_Setting->getmenu1($id);
-		$data['kelas'] = $this->M_Kelas->getkelas();
+		$data['kelas'] = $this->db->get_where('tb_kelas', ['kelas LIKE' => '%XII%'])->result_array();
 		$data['activeMenu'] = $this->db->get_where('tb_submenu', ['submenu' => 'siswa lulus'])->row()->id_menus;
 
 		$this->load->view('template/header');
@@ -722,7 +716,7 @@ class Siswa extends CI_Controller
 	}
 
 	public function getSiswaSrch($key){
-		echo json_encode($this->db->query("SELECT tb_siswa.*, tb_kelas.kelas, tb_tahunakademik.tglawal, tb_tahunakademik.tglakhir FROM tb_siswa JOIN tb_kelas ON tb_siswa.id_kelas = tb_kelas.id_kelas JOIN tb_tahunakademik ON tb_siswa.id_tahunakademik = tb_tahunakademik.id_tahunakademik WHERE nis LIKE '%$key%' OR namasiswa LIKE '%$key%' AND tb_siswa.status = 'aktif'")->result());
+		echo json_encode($this->db->query("SELECT tb_siswa.*, tb_kelas.kelas, tb_tahunakademik.tglawal, tb_tahunakademik.tglakhir FROM tb_siswa JOIN tb_kelas ON tb_siswa.id_kelas = tb_kelas.id_kelas JOIN tb_tahunakademik ON tb_siswa.id_tahunakademik = tb_tahunakademik.id_tahunakademik WHERE nis LIKE '%$key%' OR namasiswa LIKE '%$key%' AND tb_siswa.status = 'aktif' AND tb_kelas.kelas LIKE '%XII%'")->result());
 	}
 
 	public function gradByOne($id)
@@ -757,23 +751,4 @@ class Siswa extends CI_Controller
 		redirect(base_url('naikkelas/'));
 			
 	}
-
-	// public function historiTransaksi(){
-	// 	$id = $this->session->userdata('tipeuser');				
-	// 	$nis = $this->session->userdata('id_user');			
-		
-	// 	// $data = [];
-
-	// 	$querySiswa = $this->db->query("SELECT tb_transaksi.* FROM tb_transaksi JOIN tb_mastertransaksi ON tb_transaksi.id_jenistransaksi = tb_mastertransaksi.id_mastertransaksi JOIN tb_siswa ON tb_transaksi.id_siswa = tb_siswa.nis WHERE tb_siswa.nis = $nis ORDER BY tb_transaksi.tgl_update DESC")->result_array(); 		
-		
-	// 	$data['menu'] = $this->M_Setting->getmenu1($id);		
-	// 	$data['dataTransaksi'] = $querySiswa;		
-	// 	$data['akses'] = $this->M_Akses->getByLinkSubMenu(urlPath(), $id);
-	// 	$data['activeMenu'] = $this->db->get_where('tb_submenu', ['submenu' => 'histori transaksi'])->row()->id_menus;
-
-	// 	$this->load->view('template/header');
-	// 	$this->load->view('template/sidebar', $data);
-	// 	$this->load->view('v_siswa/v_siswa-histori', $data);
-	// 	$this->load->view('template/footer');
-	// }
 }

@@ -37,7 +37,7 @@
 		                                        <div class="row">
 		                                        	<div class="col-lg-6">
 		                                        		<label for="exampleInputPassword5" style="font-size: 16px;">Debet*</label>                                     
-                                                        <select class="form-control" name="debet" id="debet" style="font-size: 20px;font-weight: 600; height: 45px;">
+                                                        <select class="form-control js-states" name="debet" id="debet" style="font-size: 20px;font-weight: 600; height: 45px;">
                                                             <option value=" ">Pilih</option>   
                                                             <option value="siswa">Siswa</option>
                                                             <option value="koperasi">Koperasi</option>
@@ -45,7 +45,7 @@
 		                                        	</div>
 		                                        	<div class="col-lg-6">                                            		   
 	                                                	<label for="exampleInputPassword5" style="font-size: 16px;">Kredit*</label>
-		                                                 <select class="form-control" name="kredit" id="kredit" style="font-size: 20px;font-weight: 600; height: 45px;">
+		                                                 <select class="form-control js-states" name="kredit" id="kredit" style="font-size: 20px;font-weight: 600; height: 45px;">
                                                             <option value=" ">Pilih</option>      
                                                             <option value="siswa">Siswa</option>
                                                             <option value="koperasi">Koperasi</option>

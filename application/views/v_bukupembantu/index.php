@@ -44,7 +44,7 @@
                                         <div class="row">
                                             <div class="col-lg-4 col-md-4 col-sm-12" style="margin-left: -23px;">
                                                 <label for="">Tipe User</label>	
-                                                    <select class="form-control" id="bpTipeuser">
+                                                    <select class="form-control js-states" id="bpTipeuser">
                                                         <option value="">Pilih Tipe User</option>
                                                         <?php  foreach($tipeuser as $row): ?>
                                                             <option value="<?= $row['tipeuser'] ; ?>"><?= ucwords($row['tipeuser']) ; ?></option>

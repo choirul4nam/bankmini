@@ -39,7 +39,7 @@
                                             </div>
                                             <div class="form-group has-feedback">
                                                 <label for="exampleInputPassword5">Jenis Kelamin</label>
-                                                <select class="form-control" name="jk">
+                                                <select class="form-control js-states" name="jk">
                                                     <?php if($datasiswa['jk'] === 'Laki-laki'): ?>
                                                         <option value="Laki-laki">Laki-Laki</option>
                                                         <option value="Perempuan">Perempuan</option>
@@ -52,7 +52,7 @@
                                             </div>  
                                             <div class="form-group has-feedback">
                                                 <label for="exampleInputPassword5">Kelas</label>
-                                                <select class="form-control" name="kelas">
+                                                <select class="form-control js-states" name="kelas">
                                                     <option>Pilih Kelas</option>
                                                     <?php foreach ($kelas as $dataKelas): ?>
                                                         <option value="<?= $dataKelas['id_kelas']; ?>" <?php if($dataKelas['id_kelas'] === $datasiswa['id_kelas']){echo "selected";} ?>><?= $dataKelas['kelas']; ?></option>
@@ -62,7 +62,7 @@
                                             </div> 
                                             <div class="form-group has-feedback">
                                                 <label for="exampleInputPassword5">Tahun Akademik</label>
-                                                <select class="form-control" name="tahun_akademik" required>
+                                                <select class="form-control js-states" name="tahun_akademik" required>
                                                     <?php foreach ($tahunaka as $row): ?>
                                                         <option value="<?= $row['id_tahunakademik']; ?>" <?php if($row['id_tahunakademik'] === $datasiswa['id_tahunakademik']){echo "selected";} ?>><?= $row['tglawal']; ?> - <?= $row['tglakhir']; ?></option>
                                                     <?php endforeach; ?>
@@ -94,7 +94,7 @@
                                             </div>                             
                                             <div class="form-group has-feedback">
                                                 <label for="js-states">Provinsi</label>
-                                                <select class="form-control s_provinsi" id="provinsi" name="prov">
+                                                <select class="form-control s_provinsi js-states" id="provinsi" name="prov">
                                                     <option value="">Pilih Provinsi</option>
                                                     <?php foreach ($prov as $dataProv): ?>
                                                         <option value="<?= $dataProv['id_provinsi']; ?>" <?php if($dataProv['id_provinsi'] === $datasiswa['provinsi']){echo "selected";} ?>><?= $dataProv['name_prov']; ?></option>
@@ -104,7 +104,7 @@
                                             </div>                                                                                
                                             <div class="form-group has-feedback">
                                                 <label for="exampleInputPassword5">Kota</label>
-                                                <select class="form-control s_kota" name="kota" id="selectKota">
+                                                <select class="form-control s_kota js-states" name="kota" id="selectKota">
                                                     <option value="">Pilih Kota</option>
                                                     <?php foreach ($kota as $dataKota): ?>
                                                         <option value="<?= $dataKota['id_kota']; ?>" <?php if($dataKota['id_kota'] === $datasiswa['kota']){echo "selected";} ?>><?= $dataKota['name_kota']; ?></option>
@@ -114,22 +114,13 @@
                                             </div>                                                                                
                                             <div class="form-group has-feedback">
                                                 <label for="exampleInputPassword5">Kecamatan</label>
-                                                <select class="form-control s_kecamatan" name="kecamatan" id="selectKeca">
+                                                <select class="form-control s_kecamatan js-states" name="kecamatan" id="selectKeca">
                                                     <option value="">Pilih Kecamatan</option> 
                                                     <?php foreach ($keca as $dataKeca): ?>
                                                         <option value="<?= $dataKeca['id_kecamatan']; ?>" <?php if($dataKeca['id_kecamatan'] === $datasiswa['kecamatan']){echo "selected";} ?>><?= $dataKeca['kecamatan']; ?></option>
                                                     <?php endforeach; ?>                                                     
                                                 </select>
-                                                <!-- <span class="fa fa-map form-control-feedback"></span> -->
                                             </div>                                                                                                                           
-                                            <!-- <div class="form-group has-feedback">
-                                                  <label>
-                                                      <input type="checkbox" name="alumni" class="blue-style" value="1" <?php if($datasiswa['status'] === 'alumni'){echo "checked";} ?>>
-                                                      Alumni
-                                                    </label>
-                                                <span class="fa fa-pencil form-control-feedback"></span>
-                                                <span class="help-block">Centang jika siswa ini menjadi Alumni</span>
-                                            </div>   -->
                                             <input type="hidden" name="status" value="<?= $datasiswa['status']; ?>">
                                             <div class="form-group has-feedback">
                                                   <a href="<?= base_url('siswa/') ?>" class="btn btn-primary btn-labeled"><i class="fa fa-arrow-left"></i>Kembali</a>

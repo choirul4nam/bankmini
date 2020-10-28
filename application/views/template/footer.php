@@ -50,6 +50,8 @@
 
 	$('#tableLulus').DataTable();
 
+	$('#table-user').DataTable();
+
 	$('#upClass-table').DataTable()
 
 	$('#dataTableTransaksi').DataTable({
@@ -94,37 +96,6 @@
 			insert: '<div class="icheck_line-icon"></div>' + label_text
 		});
 	});
-
-	// $(function(){
-
-	// Counter for dashboard stats
-	// $('.counter').counterUp({
-	//     delay: 10,
-	//     time: 1000
-	// });
-
-	// Welcome notification
-	// toastr.options = {
-	//     "closeButton": true,
-	//     "debug": false,
-	//     "newestOnTop": false,
-	//     "progressBar": false,
-	//     "positionClass": "toast-top-right",
-	//     "preventDuplicates": false,
-	//     "onclick": null,
-	//     "showDuration": "300",
-	//     "hideDuration": "1000",
-	//     "timeOut": "3500",
-	//     "extendedTimeOut": "1000",
-	//     "showEasing": "swing",
-	//     "hideEasing": "linear",
-	//     "showMethod": "fadeIn",
-	//     "hideMethod": "fadeOut"
-	// }
-	// toastr["success"]("One stop solution to your website admin panel!", "Welcome to Options!");
-
-
-	// });
 
 	$("#tb_tipeuser").DataTable()
 
@@ -727,6 +698,7 @@
                                         </tr>`)
 				} else {
 					$('#tableBP').html('')
+					$('#tableBP').append('<tr><td colspan="6" align="center">Tidak ada Transaksi</td></tr>')
 				}
 			});
 		} else {
@@ -787,7 +759,7 @@
 			$('#box-transaksi').html('')
 			$('#id_customer').val($(this).val())
 			let tipe = $('.tipeuserAdd').val()
-			console.log(tipe)
+			// console.log(tipe)
 			if (tipe == 2) {
 				$.get(baseUrl + 'transaksi/getSaldoSiswa/' + $(this).val(), function (res) {
 					$('#saldoBox').html(formatRupiah(res, "Rp. "))
@@ -841,8 +813,7 @@
 				})
 			}
 			$.get(baseUrl + 'transaksi/getHistoriTransaksi?id=' + parseInt($(this).val()) + '&tipe=' + $('.tipeuserAdd').val(), function (result) {
-				let data = JSON.parse(result)
-				// console.log(result)
+				let data = JSON.parse(result)				
 				// console.log(tipe.strtolower)
 				if (data.length != 0) {
 					let no = 1;
@@ -859,9 +830,9 @@
 						} else if (res.kredit == 'koeperasi') {
 							koperKredit = 'staf'
 						}
-						if (res.debet == tipe.toLowerCase() || koperDebet == tipe.toLowerCase()) {
+						if (res.debet == 'siswa' || koperDebet == 'staf') {
 							tipeTransaksi = 'Debet'
-						} else if (res.kredit == tipe.toLowerCase() || koperKredit == tipe.toLowerCase()) {
+						} else if (res.kredit == 'siswa' || koperKredit == 'staf') {
 							tipeTransaksi = 'Kredit'
 						}
 						$('#box-transaksi').append(`<tr>
@@ -969,7 +940,7 @@
 						data.forEach(function (res) {
 							var d = res.tgltransaksi;
 							d = d.split(' ')[0]
-							$('.transaksiField').append('<option tipe="kk" keterangan="' + res.keterangan + '" nominal="' + res.nominal + '" value="' + res.id_kk + '">' + d + ' ' + res.keterangan + '(' + res.kode_kas_keluar + ') <b>' + formatRupiah(res.nominal, "Rp. ") + '</b></option>')
+							$('.transaksiField').append('<option tipe="kk" keterangan="' + res.keterangan + '" nominal="' + res.nominal + '" value="' + res.id_kk + '">' + d + ' ' + res.keterangan + ' (' + res.kode_kas_keluar + ') <b>' + formatRupiah(res.nominal, "Rp. ") + '</b></option>')
 						})
 					} else {
 						$('.transaksiField').html('')
@@ -989,7 +960,7 @@
 						data.forEach(function (res) {
 							var d = res.tgltransaksi;
 							d = d.split(' ')[0]
-							$('.transaksiField').append('<option tipe="km" keterangan="' + res.keterangan + '" nominal="' + res.nominal + '" value="' + res.id_km + '">' + d + ' ' + res.keterangan + '(' + res.kode_kas_masuk + ') <b>' + formatRupiah(res.nominal, "Rp. ") + '</b></option>')
+							$('.transaksiField').append('<option tipe="km" keterangan="' + res.keterangan + '" nominal="' + res.nominal + '" value="' + res.id_km + '">' + d + ' ' + res.keterangan + ' (' + res.kode_kas_masuk + ') <b>' + formatRupiah(res.nominal, "Rp. ") + '</b></option>')
 						})
 					} else {
 						$('.transaksiField').html('')
@@ -1010,11 +981,11 @@
 		let nominal = $('.transaksiField option:selected').attr('nominal')
 		let tipe = $('.transaksiField option:selected').attr('tipe')
 		if (tipe == 'kk') {
-			$('.radioOne .iradio_square-blue').attr('class', 'iradio_square-blue')
+			$('.radioTwo .iradio_square-blue').attr('class', 'iradio_square-blue checked')
 			$('#two').attr('checked', false)
 		} else if (tipe == 'km') {
 			$('#two').attr('checked', false)
-			$('.radioTwo .iradio_square-blue').attr('class', 'iradio_square-blue')
+			$('.radioOne .iradio_square-blue').attr('class', 'iradio_square-blue checked')
 		} else if (tipe == 'transaksi') {
 			let type = $('.transaksiField option:selected').attr('type');
 			let debet = $('.transaksiField option:selected').attr('debet');
@@ -1681,10 +1652,12 @@
 		$('#btnCheckAll').show()
 	})
 
-	// let edtNominal = $('.inputEdtNominal').val();
-	// $('.inputEdtNominal').val(formatRupiah(edtNominal, "Rp. "))
+	if(mtransaksiEdit){
+		let nominal = $("#inputNominal").val()
+		$("#inputNominal").val(formatRupiah(nominal ,"Rp. "))
+		$('#nominal').val(nominal);
+	}
 
-	/* Fungsi formatRupiah */
 	function formatRupiah(angka, prefix) {
 		var number_string = angka.replace(/[^,\d]/g, "").toString(),
 				split = number_string.split(","),
@@ -1698,10 +1671,27 @@
 			rupiah += separator + ribuan.join(".");
 		}
 
-		rupiah = split[1] != undefined ? rupiah + "," + split[1] : rupiah;
-		$('#nominal').val(rupiah);
+		rupiah = split[1] != undefined ? rupiah + "," + split[1] : rupiah;		
 		return prefix == undefined ? rupiah : rupiah ? "Rp. " + rupiah : "";
 	}
+
+	$("#inputNominal").keyup(function(){
+		var number_string = this.value.replace(/[^,\d]/g, "").toString(),
+				split = number_string.split(","),
+				sisa = split[0].length % 3,
+				rupiah = split[0].substr(0, sisa),
+				ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+		// tambahkan titik jika yang di input sudah menjadi angka ribuan
+		if (ribuan) {
+			separator = sisa ? "." : "";
+			rupiah += separator + ribuan.join(".");
+		}
+
+		rupiah = split[1] != undefined ? rupiah + "," + split[1] : rupiah;		
+		this.value =  "Rp. " + rupiah;
+		$('#nominal').val(rupiah);
+	})
 
 	$("#ta").change(function () {
 		if (this.value != 'salah') {
@@ -1740,9 +1730,9 @@
 				} else {
 					let no = 1
 					let idTA = 0
-					$.get(baseUrl + 'kelas/getKelasList?kelas=' + kelas[0] + '&jurusan=' + kelas[1] + '&nourut=' + kelas[2], function (res) {
-						// console.log(res)
-						let data = JSON.parse(res)
+					$.get(baseUrl + 'kelas/getKelasList?kelas=' + kelas[0] + '&jurusan=' + kelas[1] + '&nourut=' + kelas[2], function (asd) {
+						// console.log(asd)
+						let data = JSON.parse(asd)
 						if (data.length != 0) {
 							$("#toClass").html('')
 							$("#toClass").attr('disabled', false)
@@ -1770,8 +1760,8 @@
                             </tr>
                         `)
 					})
-					$.get(baseUrl + 'tahunakademik/getTAList/' + idTA, function (res) {
-						let data = JSON.parse(res)
+					$.get(baseUrl + 'tahunakademik/getTAList/' + idTA, function (hasil) {
+						let data = JSON.parse(hasil)
 						console.log(data)
 						if (data.length != 0) {
 							$("#upClassTA").html('')
