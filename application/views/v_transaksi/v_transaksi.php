@@ -77,7 +77,7 @@
                                                     <?php if ($akses['delete'] == 1) { ?>
                                                         <a href="<?= base_url('transaksi-hps/') . $row['id_transaksi'];  ?>" class="btn btn-danger" onclick="return confirm('Yakin untuk menghapus?')"><i class="fa fa-trash"></i></a>
                                                     <?php } ?>
-                                                    <a href="<?= base_url('transaksi/printOutTransaksi?id_transaksi='.$row['id_transaksi'].'&tipe=').$row['tipeuser'];  ?>" class="btn btn-info" onclick="return confirm('Yakin untuk Print Transaksi?')"><i class="fa fa-print"></i></a>
+                                                    <a target="_blank" href="<?= base_url('transaksi/printOutTransaksi?id_transaksi='.$row['id_transaksi'].'&tipe=').$row['tipeuser'];  ?>" class="btn btn-info" onclick="return confirm('Yakin untuk Print Transaksi?')"><i class="fa fa-print"></i></a>
                                                 </div>
                                                 </center>
                                             </td>

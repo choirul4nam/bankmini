@@ -187,101 +187,105 @@ class Transaksi extends CI_Controller
 		$staf = $this->db->get_where('tb_staf', ['id_staf' => $query->id_user])->row()->nama;	
 		$kelas = $this->db->get_where('tb_kelas',['id_kelas' => $query->id_kelas])->row()->kelas;
 		$print_status = "none";		
-		  try{
-			$this->load->library('escpos');
+		$data['query'] = $query;
+		$data['staf'] = $staf;
+		$data['sisasaldo'] = $saldo;
+		$this->load->view('v_transaksi/v_transaksi-print', $data);
+		//   try{
+		// 	$this->load->library('escpos');
  
-			$connector = new Escpos\PrintConnectors\WindowsPrintConnector("hoster_web");   
-			// var_dump($connector);
-			$printer = new Escpos\Printer($connector);
-			// var_dump($printer);
-			// $printer->E;
-			// die();
+		// 	$connector = new Escpos\PrintConnectors\WindowsPrintConnector("hoster_web");   
+		// 	// var_dump($connector);
+		// 	$printer = new Escpos\Printer($connector);
+		// 	// var_dump($printer);
+		// 	// $printer->E;
+		// 	// die();
 	 
-			function buatBaris4Kolom($kolom1, $kolom2) {
+		// 	function buatBaris4Kolom($kolom1, $kolom2) {
 	  
-				$lebar_kolom_1 = 12;
-				$lebar_kolom_2 = 8;
+		// 		$lebar_kolom_1 = 12;
+		// 		$lebar_kolom_2 = 8;
 	 
-				$kolom1 = wordwrap($kolom1, $lebar_kolom_1, "\n", true);
-				$kolom2 = wordwrap($kolom2, $lebar_kolom_2, "\n", true);
+		// 		$kolom1 = wordwrap($kolom1, $lebar_kolom_1, "\n", true);
+		// 		$kolom2 = wordwrap($kolom2, $lebar_kolom_2, "\n", true);
 	 
-				$kolom1Array = explode("\n", $kolom1);
-				$kolom2Array = explode("\n", $kolom2);
+		// 		$kolom1Array = explode("\n", $kolom1);
+		// 		$kolom2Array = explode("\n", $kolom2);
 	 
-				$jmlBarisTerbanyak = max(count($kolom1Array), count($kolom2Array));
+		// 		$jmlBarisTerbanyak = max(count($kolom1Array), count($kolom2Array));
 	 
-				$hasilBaris = array();
+		// 		$hasilBaris = array();
 	 
-				for ($i = 0; $i < $jmlBarisTerbanyak; $i++) {
+		// 		for ($i = 0; $i < $jmlBarisTerbanyak; $i++) {
 	 
-					// memberikan spasi di setiap cell berdasarkan lebar kolom yang ditentukan, 
-					$hasilKolom1 = str_pad((isset($kolom1Array[$i]) ? $kolom1Array[$i] : ""), $lebar_kolom_1, " ");
-					$hasilKolom2 = str_pad((isset($kolom2Array[$i]) ? $kolom2Array[$i] : ""), $lebar_kolom_2, " ");
+		// 			// memberikan spasi di setiap cell berdasarkan lebar kolom yang ditentukan, 
+		// 			$hasilKolom1 = str_pad((isset($kolom1Array[$i]) ? $kolom1Array[$i] : ""), $lebar_kolom_1, " ");
+		// 			$hasilKolom2 = str_pad((isset($kolom2Array[$i]) ? $kolom2Array[$i] : ""), $lebar_kolom_2, " ");
 	 
-				  //   // memberikan rata kanan pada kolom 3 dan 4 karena akan kita gunakan untuk harga dan total harga
-				  //   $hasilKolom3 = str_pad((isset($kolom3Array[$i]) ? $kolom3Array[$i] : ""), $lebar_kolom_3, " ", STR_PAD_LEFT);
-				  //   $hasilKolom4 = str_pad((isset($kolom4Array[$i]) ? $kolom4Array[$i] : ""), $lebar_kolom_4, " ", STR_PAD_LEFT);
+		// 		  //   // memberikan rata kanan pada kolom 3 dan 4 karena akan kita gunakan untuk harga dan total harga
+		// 		  //   $hasilKolom3 = str_pad((isset($kolom3Array[$i]) ? $kolom3Array[$i] : ""), $lebar_kolom_3, " ", STR_PAD_LEFT);
+		// 		  //   $hasilKolom4 = str_pad((isset($kolom4Array[$i]) ? $kolom4Array[$i] : ""), $lebar_kolom_4, " ", STR_PAD_LEFT);
 	 
-					// Menggabungkan kolom tersebut menjadi 1 baris dan ditampung ke variabel hasil (ada 1 spasi disetiap kolom)
-					$hasilBaris[] = $hasilKolom1 . " " . $hasilKolom2;
-				}
+		// 			// Menggabungkan kolom tersebut menjadi 1 baris dan ditampung ke variabel hasil (ada 1 spasi disetiap kolom)
+		// 			$hasilBaris[] = $hasilKolom1 . " " . $hasilKolom2;
+		// 		}
 	 
-				// Hasil yang berupa array, disatukan kembali menjadi string dan tambahkan \n disetiap barisnya.
-				return implode($hasilBaris, "\n") . "\n";
-			}   
+		// 		// Hasil yang berupa array, disatukan kembali menjadi string dan tambahkan \n disetiap barisnya.
+		// 		return implode($hasilBaris, "\n") . "\n";
+		// 	}   
 	 
-			// Membuat judul
-			$printer->initialize();
-			$printer->selectPrintMode(Escpos\Printer::MODE_DOUBLE_HEIGHT); // Setting teks menjadi lebih besar
-			$printer->setJustification(Escpos\Printer::JUSTIFY_CENTER); // Setting teks menjadi rata tengah
-			$printer->text("SMA NEGERI 1 WRINGIN ANOM\n");
-			$printer->text("\n");
+		// 	// Membuat judul
+		// 	$printer->initialize();
+		// 	$printer->selectPrintMode(Escpos\Printer::MODE_DOUBLE_HEIGHT); // Setting teks menjadi lebih besar
+		// 	$printer->setJustification(Escpos\Printer::JUSTIFY_CENTER); // Setting teks menjadi rata tengah
+		// 	$printer->text("SMA NEGERI 1 WRINGIN ANOM\n");
+		// 	$printer->text("\n");
 	 
-			$date = date_create($query->tgl_update);			
+		// 	$date = date_create($query->tgl_update);			
 
-			// Data transaksi
-			$printer->initialize();
-			if($tipe == 'staf'){
-				$printer->text("Staf\n");
-				$printer->text("\n");
-			}
-			$printer->text("Tanggal,Waktu : ".date_format($date,"d-m-Y H:i:s")."\n");
-			$printer->text("\n");
-			$printer->text("Kode Transaksi : ".$query->kodetransaksi."\n");
-			$printer->text("\n");
-			$printer->text("Nama : ".$query->namaTransaksi."\n");
-			$printer->text("\n");
-			if($tipe == 'siswa'){
-				$printer->text("NIS : ".$query->nis."\n");
-				$printer->text("\n");
-				$printer->text("Kelas : ".$kelas."\n");
-				$printer->text("\n");
-			}
-			$printer->text("Keterangan : ".$query->keterangan."\n");
-			$printer->text("\n");
-			$printer->text("Nominal : Rp. ".number_format($query->nominal)."\n");
-			$printer->text("\n");
-			$printer->text("Sisa Saldo : Rp. ".number_format($saldo)."\n");
-			$printer->text("\n");		  
-			$printer->text("\n");
-			$printer->text("\n");
-			 // Pesan penutup
-			$printer->initialize();
-			$printer->setJustification(Escpos\Printer::JUSTIFY_RIGHT);
-			$printer->text("Petugas\n");
-			$printer->text($staf."\n");
-			$printer->feed(8); // mencetak 5 baris kosong agar terangkat (pemotong kertas saya memiliki jarak 5 baris dari toner)
+		// 	// Data transaksi
+		// 	$printer->initialize();
+		// 	if($tipe == 'staf'){
+		// 		$printer->text("Staf\n");
+		// 		$printer->text("\n");
+		// 	}
+		// 	$printer->text("Tanggal,Waktu : ".date_format($date,"d-m-Y H:i:s")."\n");
+		// 	$printer->text("\n");
+		// 	$printer->text("Kode Transaksi : ".$query->kodetransaksi."\n");
+		// 	$printer->text("\n");
+		// 	$printer->text("Nama : ".$query->namaTransaksi."\n");
+		// 	$printer->text("\n");
+		// 	if($tipe == 'siswa'){
+		// 		$printer->text("NIS : ".$query->nis."\n");
+		// 		$printer->text("\n");
+		// 		$printer->text("Kelas : ".$kelas."\n");
+		// 		$printer->text("\n");
+		// 	}
+		// 	$printer->text("Keterangan : ".$query->keterangan."\n");
+		// 	$printer->text("\n");
+		// 	$printer->text("Nominal : Rp. ".number_format($query->nominal)."\n");
+		// 	$printer->text("\n");
+		// 	$printer->text("Sisa Saldo : Rp. ".number_format($saldo)."\n");
+		// 	$printer->text("\n");		  
+		// 	$printer->text("\n");
+		// 	$printer->text("\n");
+		// 	 // Pesan penutup
+		// 	$printer->initialize();
+		// 	$printer->setJustification(Escpos\Printer::JUSTIFY_RIGHT);
+		// 	$printer->text("Petugas\n");
+		// 	$printer->text($staf."\n");
+		// 	$printer->feed(8); // mencetak 5 baris kosong agar terangkat (pemotong kertas saya memiliki jarak 5 baris dari toner)
 			
-			$this->session->set_flashdata('alert', '<div class="alert alert-success left-icon-alert" role="alert">
-	                                            		<strong>Sukses!</strong> Berhasil.
-													</div>');
+		// 	$this->session->set_flashdata('alert', '<div class="alert alert-success left-icon-alert" role="alert">
+	    //                                         		<strong>Sukses!</strong> Berhasil.
+		// 											</div>');
 
-		    $printer->cut(); 
-			//   $printer->pulse();
-			$printer->close(); 
-		  }catch(Exception $e){
-			echo "Ada Masalah: " . $e -> getMessage() . "\n";
-		  }
+		//     $printer->cut(); 
+		// 	//   $printer->pulse();
+		// 	$printer->close(); 
+		//   }catch(Exception $e){
+		// 	echo "Ada Masalah: " . $e -> getMessage() . "\n";
+		//   }
 	}
 
 	public function transaksi_delete($id)

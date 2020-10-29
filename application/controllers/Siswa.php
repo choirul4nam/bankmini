@@ -4,6 +4,9 @@ date_default_timezone_set('Asia/Jakarta');
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+
 class Siswa extends CI_Controller
 {
 
@@ -330,9 +333,10 @@ class Siswa extends CI_Controller
 		$id = $this->session->userdata('tipeuser');		
 		$data['datasiswa'] = $this->M_Siswa->getsiswa();
 		$data['menu'] = $this->M_Setting->getmenu1($id);
-		$data['kelas'] = $this->M_Kelas->getkelas();
+		$data['kelas'] = $this->db->query('SELECT DISTINCT(tb_kelas.id_kelas), tb_kelas.kelas, COUNT(tb_siswa.id_kelas) AS jmlsiswa FROM tb_siswa JOIN tb_kelas ON tb_siswa.id_kelas = tb_kelas.id_kelas WHERE tb_siswa.status = "aktif" GROUP BY tb_siswa.id_kelas')->result_array();
 		$data['activeMenu'] = $this->db->get_where('tb_submenu', ['submenu' => 'siswa'])->row()->id_menus;
 		
+		// var_dump($data);
 		$this->load->view('template/header');
 		$this->load->view('template/sidebar', $data);
 		$this->load->view('v_siswa/v_siswa-export', $data);
@@ -341,90 +345,102 @@ class Siswa extends CI_Controller
 	
 	public function export_process($id)
 	{
-		$siswa = $this->db->get_where('tb_siswa', ['id_kelas' => $id])->result();
+
+					$this->db->select('tb_siswa.*, tb_kelas.kelas, tb_tahunakademik.tglawal, tb_tahunakademik.tglakhir');
+					$this->db->join('tb_kelas', 'tb_siswa.id_kelas = tb_kelas.id_kelas');
+					$this->db->join('tb_tahunakademik', 'tb_siswa.id_tahunakademik = tb_tahunakademik.id_tahunakademik');
+					$this->db->where('tb_siswa.id_kelas', $id);
+		$siswa =	$this->db->get('tb_siswa')->result();
+		// var_dump($siswa);
+		// die();
+		// $this->db->query('tb_siswa', ['id_kelas' => $id])->result();
 		$name = $this->db->get_where('tb_kelas', ['id_kelas' => $id])->row()->kelas;
-
-		require(APPPATH.'third_party/PHPExcel-1.8/Classes/PHPExcel.php');
-		require(APPPATH.'third_party/PHPExcel-1.8/Classes/PHPExcel/Writer/Excel2007.php');
-
-		$objPHPExcel = new PHPExcel();
-		$objPHPExcel->getProperties()->setCreator("HOSTERWEB");
-		$objPHPExcel->getProperties()->setLastModifiedBy("HOSTERWEB");
-		$objPHPExcel->getProperties()->setTitle("Download Tamplate excel");
-		$objPHPExcel->getProperties()->setSubject("");
-		$objPHPExcel->getProperties()->setDescription("");
-
-		$objPHPExcel->setActiveSheetIndex(0);
-		$objPHPExcel->getActiveSheet()->setCellValue('A1', 'DATA KELAS '.$name);
-		$objPHPExcel->getActiveSheet()->mergeCells('A1:G1');
-
-		$objPHPExcel->getActiveSheet()->setCellValue('A2', 'SMA NEGERI 1 WRINGIN ANOM ');
-		$objPHPExcel->getActiveSheet()->mergeCells('A2:G2');
-				
-		$objPHPExcel->getActiveSheet()->setCellValue('A3', ' ');
-		$objPHPExcel->getActiveSheet()->mergeCells('A3:G3');
 		
-		$objPHPExcel->getActiveSheet()->setCellValue('A4', ' ');
-		$objPHPExcel->getActiveSheet()->mergeCells('A4:G4');
-		
-		$objPHPExcel->getActiveSheet()->setCellValue('A5', 'No');
-		$objPHPExcel->getActiveSheet()->setCellValue('B5', 'NIS');
-		$objPHPExcel->getActiveSheet()->setCellValue('C5', 'Nama Lengkap');
-		$objPHPExcel->getActiveSheet()->setCellValue('D5', 'Jenis Kelamin');
-		$objPHPExcel->getActiveSheet()->setCellValue('E5', 'Kelas');
-		$objPHPExcel->getActiveSheet()->setCellValue('F5', 'Tempat, Tanggal Lahir');
-		$objPHPExcel->getActiveSheet()->setCellValue('G5', 'Alamat');
-		
-		$style = array(
-			'alignment' => array(
-				'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
-			),			
-		);
-	
-		$objPHPExcel->getDefaultStyle()->applyFromArray($style);		
-		$styleArray = array(
-			'borders' => array(
-			  'allborders' => array(
-				'style' => PHPExcel_Style_Border::BORDER_THIN
-			  )
-			)
-		);
-		  
-		$objPHPExcel->getActiveSheet()->getStyle('A1:G1')->applyFromArray($styleArray);		
-		$objPHPExcel->getActiveSheet()->getStyle('A2:G2')->applyFromArray($styleArray);		
-		$objPHPExcel->getActiveSheet()->getStyle('A3:G3')->applyFromArray($styleArray);		
-		$objPHPExcel->getActiveSheet()->getStyle('A4:G4')->applyFromArray($styleArray);		
-		$objPHPExcel->getActiveSheet()->getStyle('A5:G5')->applyFromArray($styleArray);	
+		try {					
+			$spreadsheet = new Spreadsheet();
+			$sheet = $spreadsheet->getActiveSheet();
+			$spreadsheet->getProperties()
+						->setCreator("HOSTERWEB")
+						->setLastModifiedBy("HOSTERWEB")
+						->setTitle("SIMBMS")
+						->setSubject("EXCEL SISWA")
+						->setDescription(
+							"Data Siswa ".$name." SMAN 1 WRINGIN ANOM"
+						)
+						->setKeywords("HOSTERWEB")
+						->setCategory("excel");
+			$spreadsheet->setActiveSheetIndex(0);
+			$sheet->setCellValue('A1', 'DATA KELAS '.$name);
+			$sheet->mergeCells('A1:H1');
 
-		$nr = 6;
-		$no = 1;
-		foreach($siswa as $row){
-			$kelas = $this->db->get_where('tb_kelas', ['id_kelas' => $row->id_kelas])->row()->kelas;
-			$objPHPExcel->getActiveSheet()->setCellValue('A'.$nr, $no);
-			$objPHPExcel->getActiveSheet()->setCellValue('B'.$nr, $row->nis);
-			$objPHPExcel->getActiveSheet()->setCellValue('C'.$nr, $row->namasiswa);
-			$objPHPExcel->getActiveSheet()->setCellValue('D'.$nr, $row->jk);
-			$objPHPExcel->getActiveSheet()->setCellValue('E'.$nr, $kelas);
-			$objPHPExcel->getActiveSheet()->setCellValue('F'.$nr, $row->tempat_lahir.','.$row->tempat_lahir);
-			$objPHPExcel->getActiveSheet()->setCellValue('G'.$nr, $row->alamat);	
+			$sheet->setCellValue('A2', 'SMA NEGERI 1 WRINGIN ANOM ');
+			$sheet->mergeCells('A2:H2');
+					
+			$sheet->setCellValue('A3', '');
+			$sheet->mergeCells('A3:H3');
+			
+			$sheet->setCellValue('A4', ' ~Untuk Format Tempat tanggal lahir jangan lupa dipisah dengan koma ( , )');
+			$sheet->mergeCells('A4:H4');
 
-			$nr++;
-			$no++;
-		}		  		  
+			$sheet->setCellValue('A5', 'No');
+			$sheet->setCellValue('B5', 'NIS');
+			$sheet->setCellValue('C5', 'Nama Lengkap');
+			$sheet->setCellValue('D5', 'Jenis Kelamin');
+			$sheet->setCellValue('E5', 'Kelas');
+			$sheet->setCellValue('F5', 'Tempat, Tanggal Lahir');		
+			$sheet->setCellValue('G5', 'Alamat');
+			$sheet->setCellValue('H5', 'Tahun Akademik');
+			
+			$sheet->getColumnDimension('A')->setAutoSize(true);
+			$sheet->getColumnDimension('B')->setAutoSize(true);
+			$sheet->getColumnDimension('C')->setAutoSize(true);
+			$sheet->getColumnDimension('D')->setAutoSize(true);
+			$sheet->getColumnDimension('E')->setAutoSize(true);
+			$sheet->getColumnDimension('F')->setAutoSize(true);
+			$sheet->getColumnDimension('G')->setAutoSize(true);
+			$sheet->getColumnDimension('H')->setAutoSize(true);
 
-		$fileName = $name.date('dmY').'.xlsx';
+			$x = 6;
+			$no = 1;
+			foreach($siswa as $row)
+			{			
+				$sheet->setCellValue('A'.$x, $no++);
+				$sheet->setCellValue('B'.$x, $row->nis);
+				$sheet->setCellValue('C'.$x, $row->namasiswa);
+				$sheet->setCellValue('D'.$x, $row->jk);
+				$sheet->setCellValue('E'.$x, $row->kelas);
+				$sheet->setCellValue('F'.$x, $row->tempat_lahir.','.$row->tgl_lahir);
+				$sheet->setCellValue('G'.$x, $row->alamat);	
+				$sheet->setCellValue('H'.$x, $row->tglawal.' - '.$row->tglakhir);	
 
-		$objPHPExcel->getActiveSheet()->setTitle('Data Siswa');
+				$x++;			
+			}			
+			$styleArray = [			
+				'alignment' => [
+					'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+				],
+				'borders' => [
+					'allBorders' => [
+						'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+						'color' => ['argb' => '00000000'],
+					],
+				],
+			
+			];
+			$row = $x - 1;		
+			$sheet->getStyle('A1:H'.$row)->applyFromArray($styleArray);								
 
-		header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-		header('Content-Disposition: attachment; filename="'. $fileName .'"');
-		header('Cache-Control: max-age=0');
+			$writer = new Xlsx($spreadsheet);
+			$filename = $name.time();
+			
+			header('Content-Type: application/vnd.ms-excel');
+			header('Content-Disposition: attachment;filename="'. $filename .'.xlsx"'); 
+			header('Cache-Control: max-age=0');
 
-		$write = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
-		$write->save('php://output');
-		
-		exit;
-
+			$writer->save('php://output');				  		  
+		}catch(Exception $e) {
+			echo 'Message: ' .$e->getMessage();
+		}
 	}
 	
 	public function siswa_import()
@@ -445,154 +461,7 @@ class Siswa extends CI_Controller
 
 	public function upload()
 	{
-		// var_dump($_FILES['file']);				
-		$this->load->library(array('PHPExcel', 'PHPExcel/IOFactory'));
-		$fileName = time() . $_FILES['file']['name'];
-		$config['upload_path'] = './assets/excel/'; //buat folder dengan nama assets di root folder
-		$config['file_name'] = str_replace(" ", "", $fileName);
-		$config['allowed_types'] = 'xls|xlsx|csv';
-		$config['max_size'] = 10000;
-
-		$this->load->library('upload');
-		$this->upload->initialize($config);
-
-		if($this->upload->do_upload('file')){ 			
-		}else{ 
-			$this->session->set_flashdata('alert', '<div class="alert alert-warning left-icon-alert" role="alert">
-														<strong>Perhatian!</strong> <br>
-														<ul>															
-															<li>'.$this->upload->display_errors().'</li>															
-														</ul>						
-													</div>');
-			redirect(base_url('siswa-import/'));
-		} 
-		
-		$media = $this->upload->data('file');
-		$inputFileName = './assets/excel/' . $config['file_name'];
-
-		try {			
-			$inputFileType = IOFactory::identify($inputFileName);
-			$objReader = IOFactory::createReader($inputFileType);
-			$objPHPExcel = $objReader->load($inputFileName);
-		} catch (Exception $e) {
-			// redirect('siswa-import');
-			// $this->session->set_flashdata('alert', '<div class="alert alert-danger left-icon-alert" role="alert">
-			// 											<strong>Perhatian!</strong> '.$e.'.
-			// 										</div>');
-			// redirect(base_url('siswa-import/'));
-			var_dump($e);
-		}
-
-		$sheet = $objPHPExcel->getSheet(0);
-		$highestRow = $sheet->getHighestRow();
-		$highestColumn = $sheet->getHighestColumn();		
-		$data = [];
-		$dataKosong = [];
-		$no = 0;
-		$kosong = 0;
-		$id_tipeuser = $this->db->get_where('tb_tipeuser', ['tipeuser' => 'siswa'])->row_array();
-		// var_dump($id_tipeuser);
-		if($highestRow >= 6){
-			if(!empty($id_tipeuser)){
-				for ($row = 6; $row <= $highestRow; $row++) {                  //  Read a row of data into an array                 
-					$rowData = $sheet->rangeToArray(
-						'A' . $row . ':' . $highestColumn . $row,
-						NULL,
-						TRUE,
-						FALSE
-					);
-	
-					//Sesuaikan sama nama kolom tabel di database     
-					if( empty($rowData[0][1]) || empty($rowData[0][2]) || empty($rowData[0][3]) || empty($rowData[0][4])){
-						if(empty($rowData[0][1]) && empty($rowData[0][2]) && empty($rowData[0][3]) && empty($rowData[0][4])){
-							// 			
-						}else{
-							$dataKosong[$no++] = array(
-								"nis" => $rowData[0][1],
-								"namasiswa" => $rowData[0][2],
-								'jk' => $rowData[0][3],
-								'id_kelas' => $rowData[0][4],
-								'tempat_tgl_lahir' => $rowData[0][5],								
-								'alamat' => $rowData[0][6],
-								// 'id_kelas' => $rowData[0][10],
-								// 'tgl_update' => date("Y-m-d h:i:sa"),
-								// 'id_user' => $this->session->userdata('id_user'),
-								// 'status' => 'aktif',
-								// 'id_tipeuser' => $id_tipeuser['id_tipeuser'],
-								// 'password' => 'siswa123',
-							);
-						}
-															
-					}else{						
-						// (!empty(explode(',',$rowData[0][5])[1]) ? $date = strtotime(PHPExcel_Style_NumberFormat::toFormattedString(explode(',',$rowData[0][5])[1] , 'YYYY-MM-DD')) : '');						
-						// $tgl = explode(',',$rowData[0][5])[1];
-						// $date = strtotime(PHPExcel_Style_NumberFormat::toFormattedString($tgl , 'YYYY-MM-DD'));
-						// $newDate = date('Y-m-d',$date);
-						// echo $newDate;
-						// die();
-						if($this->db->get_where('tb_kelas', ['kelas LIKE' => '%'. $rowData[0][4].'%' ])->num_rows() != 0){
-							$data[$no++] = array(
-								"nis" => $rowData[0][1],
-								"namasiswa" => $rowData[0][2],
-								'jk' => $this->M_Siswa->getJK($rowData[0][3]),
-								'id_kelas' => $this->db->get_where('tb_kelas', ['kelas LIKE' => '%'. $rowData[0][4].'%' ])->row()->id_kelas,
-								'tempat_tgl_lahir' => $rowData[0][5],
-								'alamat' => $rowData[0][6],
-								'tgl_lahir' => (!empty(explode(',',$rowData[0][5])[1]) ? explode(',', $rowData[0][5])[1] : '' ),
-								'tempat_lahir' => (!empty(explode(',',$rowData[0][5])[0]) ? explode(',', $rowData[0][5])[0] : '' ),
-								// 'kecamatan' => $this->db->get_where('tb_kecamatan', ['kecamatan LIKE' => '%'.$rowData[0][6].'%' ])->row()->id_kecamatan,
-								// 'kota' => $this->db->get_where('tb_kota', ['name_kota LIKE' => '%' . $rowData[0][7] . '%'])->row()->id_kota,
-								// 'provinsi' => $this->db->get_where('tb_provinsi', ['name_prov LIKE' => '%' . $rowData[0][8] . '%'])->row()->id_provinsi,
-								// 'id_kelas' => $rowData[0][10],
-								'tgl_update' => date("Y-m-d h:i:sa"),
-								'id_user' => $this->session->userdata('id_user'),
-								'status' => 'aktif',
-								'id_tipeuser' => $id_tipeuser['id_tipeuser'],
-								'password' => 'siswa123',
-							);
-						}else{
-							$this->session->set_flashdata('alert', '<div class="alert alert-danger left-icon-alert" role="alert">
-														<strong>Gagal!</strong> Kelas '.$rowData[0][4].' Tambah kan Terlebih dulu
-													</div>');
-							redirect(base_url('siswa/'));
-						}
-					}
-				
-				}
-			}else{
-				$this->session->set_flashdata('alert', '<div class="alert alert-danger left-icon-alert" role="alert">
-														<strong>Gagal!</strong> Mohon tambahkan Tipe User siswa terlebih dulu.
-													</div>');
-				redirect(base_url('siswa/'));
-			}
-		}else{
-			$this->session->set_flashdata('alert', '<div class="alert alert-warning left-icon-alert" role="alert">
-														<strong>Perhatian!</strong> File excel anda kosong.
-													</div>');
-			redirect(base_url('siswa-import/'));
-		}
-		$id = $this->session->userdata('tipeuser');
-		$this->session->dataImport = $data;
-		$this->session->dataKosongImport = $data;
-
-		if(count($dataKosong) !== 0){
-			$this->session->set_flashdata('alert', '<div class="alert alert-warning left-icon-alert" role="alert">
-													<strong>Perhatian!</strong> Ada data anda yang kosong, Tolong cek kembali dan Upload Kembali.
-												</div>');
-					redirect(base_url('siswa-import/'));
-		}else{
-			$datas['datasiswa'] = $this->session->dataImport;
-			$datas['countSiswa'] = count($this->session->dataImport);
-			$datas['menu'] = $this->M_Setting->getmenu1($id);
-			$datas['kelas'] = $this->M_Kelas->getkelas();
-			$datas['tahun'] = $this->db->query('SELECT id_tahunakademik AS id, YEAR(tglawal) AS tahunawal, YEAR(tglakhir) AS tahunakhir FROM `tb_tahunakademik`')->result_array();
-			$datas['activeMenu'] = $this->db->get_where('tb_submenu', ['submenu' => 'siswa'])->row()->id_menus;
-
-			$this->load->view('template/header');
-			$this->load->view('template/sidebar', $datas);
-			$this->load->view('v_siswa/v_siswa-import_page', $datas);
-			$this->load->view('template/footer');
-		}		
+			
 	}
 
 	public function import()
@@ -627,79 +496,78 @@ class Siswa extends CI_Controller
 	public function downloadTMP($idkelas){
 		// $data['kelas'] = $this->db->get_where('tb_kelas', ['id_kelas' => $kelas])->row()->kelas;
 		// $this->load->view('v_siswa/v_siswa-download-tmp', $data);
-		$kelas = $this->db->get_where('tb_kelas', ['id_kelas' => $idkelas])->row()->kelas;
+		$kelas = $this->db->get_where('tb_kelas', ['id_kelas' => $idkelas])->row()->kelas;		
+		$spreadsheet = new Spreadsheet();
+		$sheet = $spreadsheet->getActiveSheet();
+		$sheet->setCellValue('A1', 'DATA KELAS '.$kelas);
+		$sheet->mergeCells('A1:G1');
 
-		require(APPPATH.'third_party/PHPExcel-1.8/Classes/PHPExcel.php');
-		require(APPPATH.'third_party/PHPExcel-1.8/Classes/PHPExcel/Writer/Excel2007.php');
-
-		$objPHPExcel = new PHPExcel();
-		$objPHPExcel->getProperties()->setCreator("HOSTERWEB");
-		$objPHPExcel->getProperties()->setLastModifiedBy("HOSTERWEB");
-		$objPHPExcel->getProperties()->setTitle("Download Tamplate excel");
-		$objPHPExcel->getProperties()->setSubject("");
-		$objPHPExcel->getProperties()->setDescription("");
-
-		$objPHPExcel->setActiveSheetIndex(0);
-		$objPHPExcel->getActiveSheet()->setCellValue('A1', 'DATA KELAS '.$kelas);
-		$objPHPExcel->getActiveSheet()->mergeCells('A1:G1');
-
-		$objPHPExcel->getActiveSheet()->setCellValue('A2', 'SMA NEGERI 1 WRINGIN ANOM ');
-		$objPHPExcel->getActiveSheet()->mergeCells('A2:G2');
+		$sheet->setCellValue('A2', 'SMA NEGERI 1 WRINGIN ANOM ');
+		$sheet->mergeCells('A2:G2');
 				
-		$objPHPExcel->getActiveSheet()->setCellValue('A3', ' ');
-		$objPHPExcel->getActiveSheet()->mergeCells('A3:G3');
+		$sheet->setCellValue('A3', '');
+		$sheet->mergeCells('A3:G3');
 		
-		$objPHPExcel->getActiveSheet()->setCellValue('A4', ' ');
-		$objPHPExcel->getActiveSheet()->mergeCells('A4:G4');
+		$sheet->setCellValue('A4', ' ~Untuk Format Tempat tanggal lahir jangan lupa dipisah dengan koma ( , )');
+		$sheet->mergeCells('A4:G4');
+
+		$sheet->setCellValue('A5', 'No');
+		$sheet->setCellValue('B5', 'NIS');
+		$sheet->setCellValue('C5', 'Nama Lengkap');
+		$sheet->setCellValue('D5', 'Jenis Kelamin');
+		$sheet->setCellValue('E5', 'Kelas');
+		$sheet->setCellValue('F5', 'Tempat, Tanggal Lahir');
+		$sheet->setCellValue('G5', 'Alamat');
 		
-		$objPHPExcel->getActiveSheet()->setCellValue('A5', 'No');
-		$objPHPExcel->getActiveSheet()->setCellValue('B5', 'NIS');
-		$objPHPExcel->getActiveSheet()->setCellValue('C5', 'Nama Lengkap');
-		$objPHPExcel->getActiveSheet()->setCellValue('D5', 'Jenis Kelamin');
-		$objPHPExcel->getActiveSheet()->setCellValue('E5', 'Kelas');
-		$objPHPExcel->getActiveSheet()->setCellValue('F5', 'Tempat, Tanggal Lahir');
-		$objPHPExcel->getActiveSheet()->setCellValue('G5', 'Alamat');
+		$sheet->setCellValue('A6', ' ');
+		$sheet->setCellValue('B6', ' ');
+		$sheet->setCellValue('C6', ' ');
+		$sheet->setCellValue('D6', ' ');
+		$sheet->setCellValue('E6', $kelas);
+		$sheet->setCellValue('F6', ' ');
+		$sheet->setCellValue('G6', ' ');
+
+		$styleArray = [			
+			'alignment' => [
+				'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+			],
+			'borders' => [
+				'allBorders' => [
+					'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+					'color' => ['argb' => '00000000'],
+				],
+			],
 		
-		$objPHPExcel->getActiveSheet()->setCellValue('A6', ' ');
-		$objPHPExcel->getActiveSheet()->setCellValue('B6', ' ');
-		$objPHPExcel->getActiveSheet()->setCellValue('C6', ' ');
-		$objPHPExcel->getActiveSheet()->setCellValue('D6', ' ');
-		$objPHPExcel->getActiveSheet()->setCellValue('E6', $kelas);
-		$objPHPExcel->getActiveSheet()->setCellValue('F6', ' ');
-		$objPHPExcel->getActiveSheet()->setCellValue('G6', ' ');
-		$style = array(
-			'alignment' => array(
-				'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
-			),			
-		);
-	
-		$objPHPExcel->getDefaultStyle()->applyFromArray($style);		
-		$styleArray = array(
-			'borders' => array(
-			  'allborders' => array(
-				'style' => PHPExcel_Style_Border::BORDER_THIN
-			  )
-			)
-		);	
-		  
-		$objPHPExcel->getActiveSheet()->getStyle('A1:G1')->applyFromArray($styleArray);		
-		$objPHPExcel->getActiveSheet()->getStyle('A2:G2')->applyFromArray($styleArray);		
-		$objPHPExcel->getActiveSheet()->getStyle('A3:G3')->applyFromArray($styleArray);		
-		$objPHPExcel->getActiveSheet()->getStyle('A4:G4')->applyFromArray($styleArray);		
-		$objPHPExcel->getActiveSheet()->getStyle('A5:G5')->applyFromArray($styleArray);	
+		];
+		$sheet->getColumnDimension('A')->setAutoSize(true);
+		$sheet->getColumnDimension('B')->setAutoSize(true);
+		$sheet->getColumnDimension('C')->setAutoSize(true);
+		$sheet->getColumnDimension('D')->setAutoSize(true);
+		$sheet->getColumnDimension('E')->setAutoSize(true);
+		$sheet->getColumnDimension('F')->setAutoSize(true);
+		$sheet->getColumnDimension('G')->setAutoSize(true);
+		$sheet->getStyle('A1:G6')->applyFromArray($styleArray);				
 
-		$fileName = $kelas.date('dmY').'.xlsx';
-
-		$objPHPExcel->getActiveSheet()->setTitle('Data Siswa');
-
-		header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-		header('Content-Disposition: attachment; filename="'. $fileName .'"');
+		$writer = new Xlsx($spreadsheet);
+		$filename = $kelas.time();
+		
+		header('Content-Type: application/vnd.ms-excel');
+		header('Content-Disposition: attachment;filename="'. $filename .'.xlsx"'); 
 		header('Cache-Control: max-age=0');
 
-		$write = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
-		$write->save('php://output');
-		
-		exit;
+		$writer->save('php://output');
+		// $siswa = $this->siswa_model->getAll();
+		// $no = 1;
+		// $x = 2;
+		// foreach($siswa as $row)
+		// {
+		// 	$sheet->setCellValue('A'.$x, $no++);
+		// 	$sheet->setCellValue('B'.$x, $row->nama);
+		// 	$sheet->setCellValue('C'.$x, $row->kelas);
+		// 	$sheet->setCellValue('D'.$x, $row->jenis_kelamin);
+		// 	$sheet->setCellValue('E'.$x, $row->alamat);
+		// 	$x++;
+		// }	
 	}
 	
 	public function graduate_page(){

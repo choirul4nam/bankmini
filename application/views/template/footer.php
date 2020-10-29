@@ -1630,7 +1630,7 @@
 					})
 					let kelas = $('#siswaKelas option:selected').html()
 					data.forEach(function (res) {
-						$('#dataSiswaKelas').append('<tr><td>' + i + '</td><td>' + res.nis + '</td><td>' + res.namasiswa + '</td><td>' + res.alamat + '</td><td>' + res.jk + '</td><td>' + kelas + '</td><td>' + res.rfid + '</td></tr>');
+						$('#dataSiswaKelas').append('<tr><td>' + i + '</td><td>' + res.nis + '</td><td>' + res.namasiswa + '</td><td>' + res.alamat + '</td><td>' + res.jk + '</td><td>' + res.rfid + '</td></tr>');
 						i++;
 					})
 				}

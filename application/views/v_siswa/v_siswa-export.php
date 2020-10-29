@@ -48,7 +48,7 @@
                                     <select class="form-control js-states" id="siswaKelas">
                                     <option>Pilih Kelas</option>
                                     <?php foreach ($kelas as $dataKelas): ?>
-                                        <option value="<?= $dataKelas['id_kelas']; ?>"><?= $dataKelas['kelas']; ?></option>
+                                        <option value="<?= $dataKelas['id_kelas']; ?>"> <?= $dataKelas['kelas']; ?>  <span class="bg-primary">( <?= $dataKelas['jmlsiswa']; ?> Siswa )</span> </option>
                                     <?php endforeach; ?>
                                 </select>                                                    
                                 </div>
@@ -64,7 +64,6 @@
                                         <th>Nama Siswa</th>
                                         <th>Alamat</th>
                                         <th>Jenis Kelamin</th>
-                                        <th>Kelas</th>
                                         <th>RFID</th>
                                     </tr>
                                 </thead>
