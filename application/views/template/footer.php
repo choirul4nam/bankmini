@@ -673,9 +673,13 @@
 					$('.btnAdd').removeAttr('disabled')
 					$('#warning').css("display", "none")
 					$('#tipeTransaksi').val('kredit')
+					$('.nominalInp').attr('disabled', false)					
+					$('.nominalInp').css('background', '#f7f774')
 				} else if (data.debet == 'siswa') {
 					$('#tipeTransaksi').val('debet')
 					$('.nominalInp').attr('tipe-debet', data.debet)
+					$('.nominalInp').attr('disabled', true)					
+					$('.nominalInp').css('background', '#d4d4ba')					
 					if (data.nominal > parseInt(saldo)) {
 						$('#warning').css("display", "block")
 						$('.btnAdd').attr('disabled', 'disabled')
@@ -692,6 +696,8 @@
 				if (data.debet == 'koperasi') {
 					$('#tipeTransaksi').val('debet')
 					$('.nominalInp').attr('tipe-debet', data.debet)					
+					$('.nominalInp').attr('disabled', true)					
+					$('.nominalInp').css('background', '#d4d4ba')									
 					if (data.nominal > parseInt(saldo)) {
 						$('#warning').css("display", "block")
 						$('.btnAdd').attr('disabled', 'disabled')
@@ -702,7 +708,9 @@
 				}else if(data.debet == '' && data.kredit == 'koperasi'){
 					$('#tipeTransaksi').val('kredit')
 					$('.nominalInp').attr('tipe-debet', data.debet)					
-					$('.nominalInp').attr('tipe-kredit', data.kredit)					
+					$('.nominalInp').attr('tipe-kredit', data.kredit)	
+					$('.nominalInp').attr('disabled', false)					
+					$('.nominalInp').css('background', '#f7f774')									
 					if (data.nominal > parseInt(saldo)) {
 						$('#warning').css("display", "block")
 						$('.btnAdd').attr('disabled', 'disabled')
