@@ -10,7 +10,9 @@
 <script src="<?php echo base_url() ?>assets/Theme/js/bootstrap/bootstrap.js"></script>
 <script src="<?php echo base_url() ?>assets/Theme/js/pace/pace.min.js"></script>
 <script src="<?php echo base_url() ?>assets/Theme/js/lobipanel/lobipanel.min.js"></script>
-<script src="<?php echo base_url() ?>assets/Theme/js/iscroll/iscroll.js">j</script>
+<script src="<?php echo base_url() ?>assets/Theme/js/iscroll/iscroll.js">
+	j
+</script>
 <script src="<?php echo base_url() ?>assets/Theme/js/DataTables/DataTables-1.10.13/js/jquery.dataTables.js"></script>
 <script src="<?php echo base_url() ?>assets/Theme/js/DataTables/DataTables-1.10.13/js/dataTables.bootstrap.js"></script>
 
@@ -21,8 +23,7 @@
 <script src="<?php echo base_url() ?>assets/Theme/js/amcharts/amcharts.js"></script>
 <script src="<?php echo base_url() ?>assets/Theme/js/amcharts/serial.js"></script>
 <script src="<?php echo base_url() ?>assets/Theme/js/amcharts/plugins/export/export.min.js"></script>
-<link rel="stylesheet" href="<?php echo base_url() ?>assets/Theme/js/amcharts/plugins/export/export.css" type="text/css"
-	  media="all"/>
+<link rel="stylesheet" href="<?php echo base_url() ?>assets/Theme/js/amcharts/plugins/export/export.css" type="text/css" media="all" />
 <script src="<?php echo base_url() ?>assets/Theme/js/amcharts/themes/light.js"></script>
 <script src="<?php echo base_url() ?>assets/Theme/js/toastr/toastr.min.js"></script>
 <script src="<?php echo base_url() ?>assets/Theme/js/icheck/icheck.min.js"></script>
@@ -63,33 +64,40 @@
 	// });
 
 	$(document).ready(function() {
-		var t = $('#dataTableTransaksi').DataTable( {
-			"columnDefs": [ {
+		var t = $('#dataTableTransaksi').DataTable({
+			"columnDefs": [{
 				"searchable": false,
 				"orderable": false,
 				"targets": 0
-			} ],
-			"order": [[ 1, 'DESC' ]],
+			}],
+			"order": [
+				[1, 'DESC']
+			],
 			"sScrollX": "100%",
 			"sScrollXInner": "110%",
 			"bScrollCollapse": true,
 			"responsive": true,
-		} );
-	
-		t.on( 'order.dt search.dt', function () {
-			t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
-				cell.innerHTML = i+1;
-			} );
-		} ).draw();
-	} );
+		});
+
+		t.on('order.dt search.dt', function() {
+			t.column(0, {
+				search: 'applied',
+				order: 'applied'
+			}).nodes().each(function(cell, i) {
+				cell.innerHTML = i + 1;
+			});
+		}).draw();
+	});
 
 	$('#dataTableSiswa').DataTable({
 		'scrollX': true,
 		'sort': false
 	});
-	
+
 	$('#dataSiswaIndex').DataTable({
-		"order": [[3, "desc"]],
+		"order": [
+			[3, "desc"]
+		],
 		'scrollX': true,
 		'sort': false
 	});
@@ -114,10 +122,10 @@
 		radioClass: 'iradio_flat'
 	});
 
-	$('input.line-style').each(function () {
+	$('input.line-style').each(function() {
 		var self = $(this),
-				label = self.next(),
-				label_text = label.text();
+			label = self.next(),
+			label_text = label.text();
 
 		label.remove();
 		self.iCheck({
@@ -134,11 +142,11 @@
 	});
 
 	$('#tb_histori').DataTable({
-				// 'scrollX' : true,
+		// 'scrollX' : true,
 		"sScrollX": "100%",
 		"sScrollXInner": "110%",
 		"bScrollCollapse": true,
-		"responsive": true,		
+		"responsive": true,
 		"searching": false,
 		"paging": false,
 		"bInfo": false,
@@ -168,13 +176,13 @@
 		$('#box-transaksi').html('')
 		// $('#id_customer').val(rfid)
 		let tipe = $('.tipeuserAdd option:selected').html()
-		$.get(baseUrl + 'transaksi/getHistoriTransaksiByRfid?id=' + rfid + '&tipe=' + $('.tipeuserAdd').val(), function (result) {
+		$.get(baseUrl + 'transaksi/getHistoriTransaksiByRfid?id=' + rfid + '&tipe=' + $('.tipeuserAdd').val(), function(result) {
 			let data = JSON.parse(result)
 			// console.log(result)
 			// console.log(data)
 			if (data.length != 0) {
 				let no = 1;
-				data.forEach(function (res) {
+				data.forEach(function(res) {
 					$('#box-transaksi').append(`<tr>
                                                     <td><b>` + no++ + `. </b></td> 
                                                     <td>` + res.tgl_update + `</td>
@@ -183,13 +191,13 @@
                                                     <td>` + (res.debet == tipe ? 'Debet' : '')(res.kredit == tipe ? 'Kredit' : '') + `</td>
                                                 </tr>`)
 				})
-				$.get(baseUrl + 'siswa/getSiswa', function (result) {
+				$.get(baseUrl + 'siswa/getSiswa', function(result) {
 					let siswa = JSON.parse(result);
 					// console.log(data)
 					$('.cusName').html('');
 					$('.cusName').removeAttr('disabled');
 					$('.cusName').append('<option value="">Pilih Nama</option>')
-					siswa.forEach(function (res) {
+					siswa.forEach(function(res) {
 						if (res.rfid == rfid) {
 							$('#id_customer').val(res.nis)
 							$('.cusName').append('<option value="' + res.nis + '" selected>' + res.namasiswa + ' ( ' + res.nis + ' )</option>')
@@ -219,32 +227,32 @@
 	$("#tb_tahunakademik").DataTable()
 	// $("#tb_staff").DataTable();
 
-	$(".s_provinsi").change(function () {
-		$.get(baseUrl + "staff/getkota/" + this.value, function (result) {
+	$(".s_provinsi").change(function() {
+		$.get(baseUrl + "staff/getkota/" + this.value, function(result) {
 			let data = JSON.parse(result);
 			$(".s_kota").html('<option>Pilih kota</option>')
 			$(".s_kota").removeAttr('disabled')
 			$(".s_kecamatan").html('<option>Pilih Kecamatan</option>')
-			data.forEach(function (dataKota) {
+			data.forEach(function(dataKota) {
 				$(".s_kota").append('<option value="' + dataKota.id_kota + '">' + dataKota.name_kota + '</option>')
 			})
 		})
 	});
 
-	$(".s_kota").change(function () {
-		$.get(baseUrl + "staff/getkecamatan/" + this.value, function (result) {
+	$(".s_kota").change(function() {
+		$.get(baseUrl + "staff/getkecamatan/" + this.value, function(result) {
 			console.log(result)
 			let data = JSON.parse(result);
 			$(".s_kecamatan").removeAttr('disabled')
 			$(".s_kecamatan").html('<option>Pilih Kecamatan</option>')
 
-			data.forEach(function (dataKecamatan) {
+			data.forEach(function(dataKecamatan) {
 				$(".s_kecamatan").append('<option value="' + dataKecamatan.id_kecamatan + '">' + dataKecamatan.kecamatan + '</option>')
 			})
 		})
 	})
 
-	$('#debet').change(function () {
+	$('#debet').change(function() {
 		// let kdval = $("#kredit").val();			
 		// if(kdval === 'salah'){
 		// 	console.log(this.value)
@@ -354,7 +362,7 @@
 		// }					
 	})
 
-	$('#kredit').change(function () {
+	$('#kredit').change(function() {
 		// let dbval = $('#debet').val();
 		// if(dbval ===  'salah'){
 		// 	if(this.value !== 'salah'){
@@ -402,17 +410,17 @@
 		// }
 	})
 
-	$('#blnkas').change(function () {
+	$('#blnkas').change(function() {
 		let dbet = 0
 		let krdii = 0
 		let sldo = 0
-		$.get(baseUrl + "kasumum/dkkkk/" + this.value, function (result) {
+		$.get(baseUrl + "kasumum/dkkkk/" + this.value, function(result) {
 			let data = JSON.parse(result);
 			dbet = data['dbet']
 			krdii = data['krdi']
 			sldo = data['sldo']
 		})
-		$.get(baseUrl + "kasumum/recapKas/" + this.value, function (result) {
+		$.get(baseUrl + "kasumum/recapKas/" + this.value, function(result) {
 			$("#dataKas").html('')
 			let data = JSON.parse(result);
 			if (data.length == 0) {
@@ -421,7 +429,7 @@
                 </tr>`)
 			} else {
 				console.log(data)
-				data.forEach(function (dataKasKeluar) {
+				data.forEach(function(dataKasKeluar) {
 					let dateee = new Date(dataKasKeluar[0])
 					let tgltransaksii = dateee.getDate() + ' - ' + (dateee.getMonth() + 1) + ' - ' + dateee.getFullYear()
 					let kode = dataKasKeluar[3]
@@ -455,21 +463,21 @@
 		})
 	})
 
-	$('#neraca').change(function () {
+	$('#neraca').change(function() {
 		$('#pm').removeAttr('checked')
 		$('#lr').removeAttr('checked')
 		$('#pm').removeAttr('required')
 		$('#lr').removeAttr('required')
 	})
 
-	$('#pm').change(function () {
+	$('#pm').change(function() {
 		$('#neraca').removeAttr('checked')
 		$('#lr').removeAttr('checked')
 		$('#neraca').removeAttr('required')
 		$('#lr').removeAttr('required')
 	})
 
-	$('#lr').change(function () {
+	$('#lr').change(function() {
 		$('#neraca').removeAttr('checked')
 		$('#pm').removeAttr('checked')
 		$('#neraca').removeAttr('required')
@@ -547,7 +555,7 @@
 		document.getElementById('final').value = a + d + b + d + c;
 
 		document.getElementById('kodetransaksi').value = a + d + b + d + c;
-		$('#btnsimpankodekorwil').click(function () {
+		$('#btnsimpankodekorwil').click(function() {
 			$('.close').click();
 		})
 		// var embuhhuba = document.getElementById('penghubung').value;
@@ -561,14 +569,14 @@
 
 	$('#file').hide();
 
-	$('#file').change(function () {
+	$('#file').change(function() {
 		$('#filename').html($(this)[0].files[0]['name'])
 		// console.log()
 	})
 
 	// $('#warning').css("display", "none")
 
-	$('.tipeuserAdd').change(function () {
+	$('.tipeuserAdd').change(function() {
 		$('#box-transaksi').html('')
 		if ($(this).val() != 'salah') {
 			$('#saldoBox').removeAttr('data-saldo')
@@ -590,45 +598,45 @@
 			$('#keterangan').val('')
 			$('.nominalInp').val('')
 			if (parseInt($(this).val()) == 1) {
-				$.get(baseUrl + 'staff/getStaff', function (result) {
+				$.get(baseUrl + 'staff/getStaff', function(result) {
 					let data = JSON.parse(result);
 					// console.log(data)
 					$('.cusName').html('');
 					$('.cusName').removeAttr('disabled');
 					$('.cusName').append('<option value="">Pilih Nama</option>')
-					data.forEach(function (res) {
-						$('.cusName').append('<option value="' + res.id_staf + '">' + res.nama + ' ('+ res.nopegawai +')</option>')
+					data.forEach(function(res) {
+						$('.cusName').append('<option value="' + res.id_staf + '">' + res.nama + ' (' + res.nopegawai + ')</option>')
 					})
 				});
-				$.get(baseUrl + 'mtransaksi/getMTransaksiStaf/koperasi', function (result) {
+				$.get(baseUrl + 'mtransaksi/getMTransaksiStaf/koperasi', function(result) {
 					let data = JSON.parse(result);
 					// console.log(data)
 					$('.kategori').html('');
 					$('.kategori').removeAttr('disabled');
 					$('.kategori').append('<option value="salah">Pilih Transaksi</option>')
-					data.forEach(function (res) {
+					data.forEach(function(res) {
 						$('.kategori').append('<option value="' + res.id_mastertransaksi + '">' + res.kategori + '</option>')
 					})
 				});
 
 			} else {
-				$.get(baseUrl + 'siswa/getSiswa', function (result) {
+				$.get(baseUrl + 'siswa/getSiswa', function(result) {
 					let data = JSON.parse(result);
 					// console.log(data)
 					$('.cusName').html('');
 					$('.cusName').removeAttr('disabled');
 					$('.cusName').append('<option value="">Pilih Nama</option>')
-					data.forEach(function (res) {
+					data.forEach(function(res) {
 						$('.cusName').append('<option value="' + res.nis + '">' + res.namasiswa + ' ( ' + res.nis + ' )</option>')
 					})
 				});
-				$.get(baseUrl + 'mtransaksi/getMTransaksiSiswa/siswa', function (result) {
+				$.get(baseUrl + 'mtransaksi/getMTransaksiSiswa/siswa', function(result) {
 					let data = JSON.parse(result);
 					// console.log(data)
 					$('.kategori').html('');
 					$('.kategori').removeAttr('disabled');
 					$('.kategori').append('<option value="salah">Pilih Transaksi</option>')
-					data.forEach(function (res) {
+					data.forEach(function(res) {
 						$('.kategori').append('<option value="' + res.id_mastertransaksi + '">' + res.kategori + '</option>')
 					})
 				});
@@ -653,12 +661,12 @@
 	})
 
 
-	$('.kategori').change(function () {
+	$('.kategori').change(function() {
 		if (this.value != 'salah') {
 			$('.inpt').removeAttr('disabled')
-			$.get(baseUrl + 'mtransaksi/detailTransaksi/' + this.value, function (result) {
+			$.get(baseUrl + 'mtransaksi/detailTransaksi/' + this.value, function(result) {
 				let data = JSON.parse(result);
-				$.get(baseUrl + 'transaksi/getNewKode/' + data.kodetransaksi, function (res) {
+				$.get(baseUrl + 'transaksi/getNewKode/' + data.kodetransaksi, function(res) {
 					$('#kode').val(res)
 					$('#kode_transaksi').val(res)
 				})
@@ -673,13 +681,13 @@
 					$('.btnAdd').removeAttr('disabled')
 					$('#warning').css("display", "none")
 					$('#tipeTransaksi').val('kredit')
-					$('.nominalInp').attr('disabled', false)					
+					$('.nominalInp').attr('disabled', false)
 					$('.nominalInp').css('background', '#f7f774')
 				} else if (data.debet == 'siswa') {
 					$('#tipeTransaksi').val('debet')
 					$('.nominalInp').attr('tipe-debet', data.debet)
-					$('.nominalInp').attr('disabled', true)					
-					$('.nominalInp').css('background', '#d4d4ba')					
+					$('.nominalInp').attr('disabled', true)
+					$('.nominalInp').css('background', '#d4d4ba')
 					if (data.nominal > parseInt(saldo)) {
 						$('#warning').css("display", "block")
 						$('.btnAdd').attr('disabled', 'disabled')
@@ -695,9 +703,9 @@
 				//     $('#tipeTransaksi').val('kredit')
 				if (data.debet == 'koperasi') {
 					$('#tipeTransaksi').val('debet')
-					$('.nominalInp').attr('tipe-debet', data.debet)					
-					$('.nominalInp').attr('disabled', true)					
-					$('.nominalInp').css('background', '#d4d4ba')									
+					$('.nominalInp').attr('tipe-debet', data.debet)
+					$('.nominalInp').attr('disabled', true)
+					$('.nominalInp').css('background', '#d4d4ba')
 					if (data.nominal > parseInt(saldo)) {
 						$('#warning').css("display", "block")
 						$('.btnAdd').attr('disabled', 'disabled')
@@ -705,12 +713,12 @@
 						$('#warning').css("display", "none")
 						$('.btnAdd').removeAttr('disabled')
 					}
-				}else if(data.debet == '' && data.kredit == 'koperasi'){
+				} else if (data.debet == '' && data.kredit == 'koperasi') {
 					$('#tipeTransaksi').val('kredit')
-					$('.nominalInp').attr('tipe-debet', data.debet)					
-					$('.nominalInp').attr('tipe-kredit', data.kredit)	
-					$('.nominalInp').attr('disabled', false)					
-					$('.nominalInp').css('background', '#f7f774')									
+					$('.nominalInp').attr('tipe-debet', data.debet)
+					$('.nominalInp').attr('tipe-kredit', data.kredit)
+					$('.nominalInp').attr('disabled', false)
+					$('.nominalInp').css('background', '#f7f774')
 					if (data.nominal > parseInt(saldo)) {
 						$('#warning').css("display", "block")
 						$('.btnAdd').attr('disabled', 'disabled')
@@ -733,7 +741,7 @@
 		}
 	})
 
-	$('.nominalInp').keyup(function () {
+	$('.nominalInp').keyup(function() {
 		this.value = formatRupiah(this.value, "Rp. ");
 		let saldo = $('#saldoBox').attr('data-saldo')
 		let kredit = $('.nominalInp').attr('tipe-kredit')
@@ -773,7 +781,7 @@
 				$('#warning').css("display", "block")
 				$('.btnAdd').attr('disabled', true)
 			}
-		}else if(debet == '' && kredit == 'koperasi'){
+		} else if (debet == '' && kredit == 'koperasi') {
 			$('#warning').css("display", "none")
 			$('.btnAdd').removeAttr('disabled')
 		}
@@ -791,45 +799,45 @@
 	function getCustomer() {
 		let customer = $('#id_customer').val()
 		if ($('#usertipe').val() == 'siswa') {
-			$.get(baseUrl + 'siswa/getSiswa', function (result) {
+			$.get(baseUrl + 'siswa/getSiswa', function(result) {
 				let data = JSON.parse(result);
 				// console.log(data)
 				$('.cusName').html('');
 				$('.cusName').removeAttr('disabled');
 				$('.cusName').append('<option value="">Pilih Nama</option>')
-				data.forEach(function (res) {
+				data.forEach(function(res) {
 					$('.cusName').append('<option value="' + res.id_staf + '">' + res.nama + '</option>')
 				})
 			});
-			$.get(baseUrl + 'mtransaksi/getMTransaksiStaf/koperasi', function (result) {
+			$.get(baseUrl + 'mtransaksi/getMTransaksiStaf/koperasi', function(result) {
 				let data = JSON.parse(result);
 				// console.log(data)
 				$('.kategori').html('');
 				$('.kategori').removeAttr('disabled');
 				$('.kategori').append('<option value=" ">Pilih Transaksi</option>')
-				data.forEach(function (res) {
+				data.forEach(function(res) {
 					$('.kategori').append('<option value="' + res.id_mastertransaksi + '">' + res.kategori + '</option>')
 				})
 			});
 
 		} else {
-			$.get(baseUrl + 'siswa/getSiswa', function (result) {
+			$.get(baseUrl + 'siswa/getSiswa', function(result) {
 				let data = JSON.parse(result);
 				// console.log(data)
 				$('.cusName').html('');
 				$('.cusName').removeAttr('disabled');
 				$('.cusName').append('<option value="">Pilih Nama</option>')
-				data.forEach(function (res) {
+				data.forEach(function(res) {
 					$('.cusName').append('<option value="' + res.nis + '">' + res.namasiswa + ' ( ' + res.nis + ' )</option>')
 				})
 			});
-			$.get(baseUrl + 'mtransaksi/getMTransaksiSiswa/siswa', function (result) {
+			$.get(baseUrl + 'mtransaksi/getMTransaksiSiswa/siswa', function(result) {
 				let data = JSON.parse(result);
 				// console.log(data)
 				$('.kategori').html('');
 				$('.kategori').removeAttr('disabled');
 				$('.kategori').append('<option value="">Pilih Transaksi</option>')
-				data.forEach(function (res) {
+				data.forEach(function(res) {
 					$('.kategori').append('<option value="' + res.id_mastertransaksi + '">' + res.kategori + '</option>')
 				})
 			});
@@ -843,7 +851,7 @@
 		let tipe = $('#bpTipeuser').val()
 		$('#tableBP').html('')
 		if (id != '') {
-			$.get(baseUrl + 'transaksi/detailTransaksi?id=' + parseInt(id) + '&tipe=' + tipe, function (result) {
+			$.get(baseUrl + 'transaksi/detailTransaksi?id=' + parseInt(id) + '&tipe=' + tipe, function(result) {
 				let data = JSON.parse(result)
 				// console.log(data)
 				if (data.length != 0) {
@@ -852,9 +860,9 @@
 					let koperasiK = '';
 					let koperasiD = '';
 					let saldoView = 0;
-					data.forEach(function (res) {
+					data.forEach(function(res) {
 						let tgl = new Date(res.tgl_update);
-						let tglbaru = tgl.getDate()+ '-' + tgl.getMonth() + '-' + tgl.getFullYear();
+						let tglbaru = tgl.getDate() + '-' + tgl.getMonth() + '-' + tgl.getFullYear();
 						console.log(tglbaru);
 						if (res.kredit == 'koperasi') {
 							koperasiK = 'staf'
@@ -889,28 +897,28 @@
 		}
 	})
 
-	$('#bpTipeuser').change(function () {
+	$('#bpTipeuser').change(function() {
 		if ($(this).val() == 'siswa') {
-			$.get(baseUrl + 'siswa/getSiswa', function (result) {
+			$.get(baseUrl + 'siswa/getSiswa', function(result) {
 				let data = JSON.parse(result);
 				// console.log(data)
 				$('.nameMember').html('');
 				$('.nameMember').removeAttr('disabled');
 				$('.btn-mem').removeAttr('disabled');
 				$('.nameMember').html('<option value="">Pilih Nama</option>')
-				data.forEach(function (res) {
+				data.forEach(function(res) {
 					$('.nameMember').append('<option value="' + res.nis + '">' + res.namasiswa + ' ( ' + res.nis + ' )</option>')
 				})
 			});
 		} else if ($(this).val() == 'staf') {
-			$.get(baseUrl + 'staff/getStaff', function (result) {
+			$.get(baseUrl + 'staff/getStaff', function(result) {
 				let data = JSON.parse(result);
 				// console.log(data)
 				$('.nameMember').html('');
 				$('.nameMember').removeAttr('disabled');
 				$('.btn-mem').removeAttr('disabled');
 				$('.nameMember').html('<option value="">Pilih Nama</option>')
-				data.forEach(function (res) {
+				data.forEach(function(res) {
 					$('.nameMember').append('<option value="' + res.id_staf + '">' + res.nama + '</option>')
 				})
 			});
@@ -923,7 +931,7 @@
 
 	let sssaldo = 0;
 
-	$('.cusName').change(function () {
+	$('.cusName').change(function() {
 		$('.sisasaldo').val('')
 		$('#saldoBox').html('')
 		$('.inpt').attr('disabled', 'disabled')
@@ -944,9 +952,9 @@
 			let tipe = $('.tipeuserAdd').val()
 			// console.log(tipe)
 			if (tipe == 2) {
-				$.get(baseUrl + 'transaksi/getSaldoSiswa/' + $(this).val(), function (res) {
+				$.get(baseUrl + 'transaksi/getSaldoSiswa/' + $(this).val(), function(res) {
 					$('#saldoBox').html(formatRupiah(res, "Rp. "))
-					$('#saldoBox').attr('data-saldo', parseInt(res))					
+					$('#saldoBox').attr('data-saldo', parseInt(res))
 					$('#sisasaldo').val(parseInt(res))
 					let saldo = parseInt(res)
 					let kredit = $('.nominalInp').attr('tipe-kredit')
@@ -969,7 +977,7 @@
 				})
 			} else if (tipe == 1) {
 				let id_staf = $(this).val()
-				$.get(baseUrl + 'Transaksi/getTransaksiStafByid/' + id_staf, function (result) {
+				$.get(baseUrl + 'Transaksi/getTransaksiStafByid/' + id_staf, function(result) {
 					// let data = JSON.parse(result);
 					sssaldo = result
 					$('#saldoBox').html(formatRupiah(result.toString(), "Rp. "))
@@ -995,8 +1003,8 @@
 					}
 				})
 			}
-			$.get(baseUrl + 'transaksi/getHistoriTransaksi?id=' + parseInt($(this).val()) + '&tipe=' + $('.tipeuserAdd').val(), function (result) {
-				let data = JSON.parse(result)				
+			$.get(baseUrl + 'transaksi/getHistoriTransaksi?id=' + parseInt($(this).val()) + '&tipe=' + $('.tipeuserAdd').val(), function(result) {
+				let data = JSON.parse(result)
 				// console.log(tipe.strtolower)
 				if (data.length != 0) {
 					let no = 1;
@@ -1005,7 +1013,7 @@
 					let tanggalBaru = '';
 					let koperDebet = '';
 					let koperKredit = '';
-					data.forEach(function (res) {
+					data.forEach(function(res) {
 						tanggal = res.tgl_update;
 						tanggalBaru = tanggal.slice(0, 10);
 						if (res.debet == 'koperasi') {
@@ -1034,13 +1042,13 @@
 			});
 			if ($('.tipeuserAdd').val() != 'salah') {
 				if (parseInt($('.tipeuserAdd').val()) == 1) {
-					$.get(baseUrl + 'mtransaksi/getMTransaksiStaf/koperasi', function (result) {
+					$.get(baseUrl + 'mtransaksi/getMTransaksiStaf/koperasi', function(result) {
 						let data = JSON.parse(result);
 						if (data.length != 0) {
 							$('.kategori').html('');
 							$('.kategori').removeAttr('disabled');
 							$('.kategori').append('<option value="salah">Pilih Transaksi</option>')
-							data.forEach(function (res) {
+							data.forEach(function(res) {
 								$('.kategori').append('<option value="' + res.id_mastertransaksi + '">' + res.kategori + '</option>')
 							})
 						} else {
@@ -1050,13 +1058,13 @@
 					});
 
 				} else {
-					$.get(baseUrl + 'mtransaksi/getMTransaksiSiswa/siswa', function (result) {
+					$.get(baseUrl + 'mtransaksi/getMTransaksiSiswa/siswa', function(result) {
 						let data = JSON.parse(result);
 						if (data.length != 0) {
 							$('.kategori').html('');
 							$('.kategori').removeAttr('disabled');
 							$('.kategori').append('<option value="salah">Pilih Transaksi</option>')
-							data.forEach(function (res) {
+							data.forEach(function(res) {
 								$('.kategori').append('<option value="' + res.id_mastertransaksi + '">' + res.kategori + '</option>')
 							})
 						} else {
@@ -1071,7 +1079,7 @@
 		}
 	})
 
-	$('.btnAdd').click(function () {
+	$('.btnAdd').click(function() {
 		setInterval(() => {
 			$('#box-transaksi').html('')
 			$('.nameMember').html('')
@@ -1088,20 +1096,20 @@
 		}, 500);
 	})
 
-	$('#jurnalTs').change(function () {
+	$('#jurnalTs').change(function() {
 		if ($(this).val() != 'pilih') {
 			reRadio()
 			if ($(this).val() == 'transaksi') {
 				$('.transaksiField').html('')
 				$('.transaksiField').append('<option value="salah">Pilih Transaksi</option>')
 				// console.log($(this).val())
-				$.get(baseUrl + 'transaksi/getTransaksi', function (result) {
+				$.get(baseUrl + 'transaksi/getTransaksi', function(result) {
 					let data = JSON.parse(result)
 					// console.log(data)
 					if (data.length != 0) {
 						let no = 1;
 						$('.transaksiField').removeAttr('disabled');
-						data.forEach(function (res) {
+						data.forEach(function(res) {
 							var d = res.tgl_update;
 							d = d.split(' ')[0]
 							$('.transaksiField').append('<option tipe="transaksi" keterangan="' + res.keterangan + '" type="' + res.type + '" kredit="' + res.kredit + '" debet="' + res.debet + '" nominal="' + res.nominal + '" value="' + res.id_transaksi + '">' + d + ' ' + res.namaTransaksi + '(' + res.noIden + ') <b>' + res.keterangan + '</b></option>')
@@ -1115,12 +1123,12 @@
 			} else if ($(this).val() == 'kaskeluar') {
 				$('.transaksiField').html('')
 				$('.transaksiField').append('<option value="salah">Pilih Kas Keluar</option>')
-				$.get(baseUrl + 'kaskeluar/getKasKeluar', function (result) {
+				$.get(baseUrl + 'kaskeluar/getKasKeluar', function(result) {
 					let data = JSON.parse(result)
 					// console.log(data)
 					if (data.length != 0) {
 						$('.transaksiField').removeAttr('disabled');
-						data.forEach(function (res) {
+						data.forEach(function(res) {
 							var d = res.tgltransaksi;
 							d = d.split(' ')[0]
 							$('.transaksiField').append('<option tipe="kk" keterangan="' + res.keterangan + '" nominal="' + res.nominal + '" value="' + res.id_kk + '">' + d + ' ' + res.keterangan + ' (' + res.kode_kas_keluar + ') <b>' + formatRupiah(res.nominal, "Rp. ") + '</b></option>')
@@ -1134,13 +1142,13 @@
 			} else if ($(this).val() == 'kasmasuk') {
 				$('.transaksiField').html('')
 				$('.transaksiField').append('<option value="salah">Pilih Kas Masuk</option>')
-				$.get(baseUrl + 'kasmasuk/getKasMasuk', function (result) {
+				$.get(baseUrl + 'kasmasuk/getKasMasuk', function(result) {
 					let data = JSON.parse(result)
 					// console.log(data)
 					if (data.length != 0) {
 						let no = 1;
 						$('.transaksiField').removeAttr('disabled');
-						data.forEach(function (res) {
+						data.forEach(function(res) {
 							var d = res.tgltransaksi;
 							d = d.split(' ')[0]
 							$('.transaksiField').append('<option tipe="km" keterangan="' + res.keterangan + '" nominal="' + res.nominal + '" value="' + res.id_km + '">' + d + ' ' + res.keterangan + ' (' + res.kode_kas_masuk + ') <b>' + formatRupiah(res.nominal, "Rp. ") + '</b></option>')
@@ -1159,7 +1167,7 @@
 		}
 	})
 
-	$('.transaksiField').change(function () {
+	$('.transaksiField').change(function() {
 		reRadio()
 		let nominal = $('.transaksiField option:selected').attr('nominal')
 		let tipe = $('.transaksiField option:selected').attr('tipe')
@@ -1192,7 +1200,7 @@
 		$('.btnGenerate').removeAttr('disabled')
 	})
 
-	$('.btnGenerate').click(function () {
+	$('.btnGenerate').click(function() {
 		$('#confirmTable').show()
 		$('.jurnalKeterangan').html('')
 		$('.jurnalDebet').html('')
@@ -1247,7 +1255,7 @@
 		$('#one').attr('checked', false)
 	}
 
-	$('.btnGenerate').click(function () {
+	$('.btnGenerate').click(function() {
 		$('#confirmTable').show()
 		$('.jurnalKeterangan').html('')
 		$('.jurnalDebet').html('')
@@ -1292,17 +1300,17 @@
 		}
 	})
 
-	$('#kodeCOA1').change(function () {
+	$('#kodeCOA1').change(function() {
 		if ($(this).val() != 'salah') {
 			$('input[name="kode_coa_debet"]').val($(this).val())
-			$.get(baseUrl + 'mastercoa/getKode/' + $(this).val(), function (result) {
+			$.get(baseUrl + 'mastercoa/getKode/' + $(this).val(), function(result) {
 				let data = JSON.parse(result)
 				if (data.length != 0) {
 					let no = 1;
 					$('#kodeCOA2').html('')
 					$('#kodeCOA2').removeAttr('disabled')
 					$('#kodeCOA2').append('<option value="salah">Pilih Kode COA Kredit</option>')
-					data.forEach(function (res) {
+					data.forEach(function(res) {
 						$('#kodeCOA2').append('<option value="' + res.kode_coa + '">' + res.kode_coa + ' - ' + res.akun + '</option>')
 					})
 				}
@@ -1310,19 +1318,19 @@
 		}
 	})
 
-	$('#kodeCOA2').change(function () {
+	$('#kodeCOA2').change(function() {
 		if ($(this).val() != 'salah') {
 			$('input[name="kode_coa_kredit"]').val($(this).val())
 			$('.btn-saveJurnal').removeAttr('disabled')
 		}
 	})
 
-	$('#downTMP').click(function () {
+	$('#downTMP').click(function() {
 		window.location.href = baseUrl + "siswa/downloadTMP/" + $('#kelasDownload').val();
 		// console.log($('#kelasDownload').val())
 	})
 
-	$('#kelasDownload').change(function () {
+	$('#kelasDownload').change(function() {
 		if ($(this).val() != 'salah') {
 			$('#downTMP').removeAttr('disabled')
 		} else {
@@ -1332,13 +1340,13 @@
 
 	$('#viewGrad').hide()
 
-	$('#kelasGrad').change(function () {
+	$('#kelasGrad').change(function() {
 		if ($(this).val() != 'salah') {
 			$('#rowGrad').html('')
 			$('#siswaGrad').attr('disabled', true);
 			$('#viewGrad').show()
 			// console.log($(this).val())
-			$.get(baseUrl + 'siswa/getSiswaByKelas/' + $(this).val(), function (res) {
+			$.get(baseUrl + 'siswa/getSiswaByKelas/' + $(this).val(), function(res) {
 				console.log(res)
 				let data = JSON.parse(res)
 				if (data.length == 0) {
@@ -1354,7 +1362,7 @@
                                                         <i class="fa fa-check"></i>
                                                         Luluskan Semua
                                                     </button>`)
-					data.forEach(function (resu) {
+					data.forEach(function(resu) {
 						$('#rowGrad').append(`
                                         <tr>
                                             <td>` + no++ + `</td>
@@ -1381,14 +1389,14 @@
 		}
 	})
 
-	$('#siswaGrad').keyup(function () {
+	$('#siswaGrad').keyup(function() {
 		// console.log($(this).val())
 		$('#rowGrad').html('')
 		if ($(this).val() != '') {
 			$('#rowGrad').html('')
 			$('#kelasGrad').attr('disabled', true);
 			$('#viewGrad').show()
-			$.get(baseUrl + 'siswa/getSiswaSrch/' + $(this).val(), function (res) {
+			$.get(baseUrl + 'siswa/getSiswaSrch/' + $(this).val(), function(res) {
 				let data = JSON.parse(res)
 				if (data.length === 0) {
 					$('#rowGrad').html('')
@@ -1400,7 +1408,7 @@
 				} else {
 					$('#rowGrad').html('')
 					let no = 1
-					data.forEach(function (resu) {
+					data.forEach(function(resu) {
 						$('#rowGrad').append(`
                                         <tr>
                                             <td>` + no++ + `</td>
@@ -1444,14 +1452,14 @@
 		// console.log($("#"+nis).html())
 		if (confirm('Yakin Untuk meluluskan ' + $("#" + nis).html() + ' !!!')) {
 			// console.log('ya')
-			$.get(baseUrl + 'siswa/gradByOne/' + nis, function (res) {
+			$.get(baseUrl + 'siswa/gradByOne/' + nis, function(res) {
 				if (res == 'berhasil') {
 					if ($('#kelasGrad').val() != 'salah' && $('#siswaGrad').val() == '') {
 						$('#rowGrad').html('')
 						$('#siswaGrad').attr('disabled', true);
 						$('#viewGrad').show()
 						toastr["success"]("Berhasil Meluluskan Siswa!");
-						$.get(baseUrl + 'siswa/getSiswaByKelas/' + $('#kelasGrad').val(), function (res) {
+						$.get(baseUrl + 'siswa/getSiswaByKelas/' + $('#kelasGrad').val(), function(res) {
 							// console.log(res)
 							let data = JSON.parse(res)
 							if (data.length == 0) {
@@ -1462,7 +1470,7 @@
                                             `)
 							} else {
 								let no = 1
-								data.forEach(function (resu) {
+								data.forEach(function(resu) {
 									$('#rowGrad').append(`
                                                     <tr>
                                                         <td>` + no++ + `</td>
@@ -1503,14 +1511,14 @@
 		let kelas = $('#kelasGrad option:selected').html();
 		if (confirm('Yakin Untuk meluluskan siswa' + kelas + '!!!')) {
 			// console.log('ya')
-			$.get(baseUrl + 'siswa/grad_process/' + idKelas, function (res) {
+			$.get(baseUrl + 'siswa/grad_process/' + idKelas, function(res) {
 				if (res == 'berhasil') {
 					if ($('#kelasGrad').val() != 'salah' && $('#siswaGrad').val() == '') {
 						$('#rowGrad').html('')
 						$('#siswaGrad').attr('disabled', true);
 						$('#viewGrad').show()
 						toastr["success"]("Berhasil Meluluskan Siswa Kelas " + kelas);
-						$.get(baseUrl + 'siswa/getSiswaByKelas/' + $('#kelasGrad').val(), function (res) {
+						$.get(baseUrl + 'siswa/getSiswaByKelas/' + $('#kelasGrad').val(), function(res) {
 							// console.log(res)
 							let data = JSON.parse(res)
 							if (data.length == 0) {
@@ -1521,7 +1529,7 @@
                                             `)
 							} else {
 								let no = 1
-								data.forEach(function (resu) {
+								data.forEach(function(resu) {
 									$('#rowGrad').append(`
                                                     <tr>
                                                         <td>` + no++ + `</td>
@@ -1554,13 +1562,13 @@
 	if (transaksiEdit) {
 		let idcus = $("#id_customer").val()
 		if (parseInt($('.tipeuserAdd').val()) == 1) {
-			$.get(baseUrl + 'staff/getStaff', function (result) {
+			$.get(baseUrl + 'staff/getStaff', function(result) {
 				let data = JSON.parse(result);
 				// console.log(data)
 				$('.cusName').html('');
 				$('.cusName').removeAttr('disabled');
 				$('.cusName').append('<option value="">Pilih Nama</option>')
-				data.forEach(function (res) {
+				data.forEach(function(res) {
 					if (res.id_staf == idcus) {
 						$('.cusName').append('<option value="' + res.id_staf + '" selected>' + res.nama + '</option>')
 					} else {
@@ -1569,13 +1577,13 @@
 				})
 			});
 		} else {
-			$.get(baseUrl + 'siswa/getSiswa', function (result) {
+			$.get(baseUrl + 'siswa/getSiswa', function(result) {
 				let data = JSON.parse(result);
 				// console.log(data)
 				$('.cusName').html('');
 				$('.cusName').removeAttr('disabled');
 				$('.cusName').append('<option value="">Pilih Nama</option>')
-				data.forEach(function (res) {
+				data.forEach(function(res) {
 					if (res.nis == idcus) {
 						$('.cusName').append('<option value="' + res.nis + '" selected>' + res.namasiswa + ' ( ' + res.nis + ' )</option>')
 					} else {
@@ -1587,9 +1595,9 @@
 
 		let idjt = $("#id_jenistransaksi").val()
 		if ($(".cusName").val() != '') {
-			$.get(baseUrl + 'mtransaksi/detailTransaksi/' + idjt, function (result) {
+			$.get(baseUrl + 'mtransaksi/detailTransaksi/' + idjt, function(result) {
 				let data = JSON.parse(result);
-				$.get(baseUrl + 'transaksi/getNewKode/' + data.kodetransaksi, function (res) {
+				$.get(baseUrl + 'transaksi/getNewKode/' + data.kodetransaksi, function(res) {
 					$('#kode').val(res)
 					$('#kode_transaksi').val(res)
 				})
@@ -1632,13 +1640,13 @@
 				}
 			});
 			if (parseInt($('.tipeuserAdd').val()) == 1) {
-				$.get(baseUrl + 'mtransaksi/getMTransaksiStaf/koperasi', function (result) {
+				$.get(baseUrl + 'mtransaksi/getMTransaksiStaf/koperasi', function(result) {
 					let data = JSON.parse(result);
 					// console.log(data)
 					$('.kategori').html('');
 					$('.kategori').removeAttr('disabled');
 					$('.kategori').append('<option value="salah">Pilih Transaksi</option>')
-					data.forEach(function (res) {
+					data.forEach(function(res) {
 						if (res.id_mastertransaksi == idjt) {
 							$('.kategori').append('<option value="' + res.id_mastertransaksi + '" selected>' + res.kategori + '</option>')
 						} else {
@@ -1647,13 +1655,13 @@
 					})
 				});
 			} else {
-				$.get(baseUrl + 'mtransaksi/getMTransaksiSiswa/siswa', function (result) {
+				$.get(baseUrl + 'mtransaksi/getMTransaksiSiswa/siswa', function(result) {
 					let data = JSON.parse(result);
 					// console.log(data)
 					$('.kategori').html('');
 					$('.kategori').removeAttr('disabled');
 					$('.kategori').append('<option value="salah">Pilih Transaksi</option>')
-					data.forEach(function (res) {
+					data.forEach(function(res) {
 						if (res.id_mastertransaksi == idjt) {
 							$('.kategori').append('<option value="' + res.id_mastertransaksi + '" selected>' + res.kategori + '</option>')
 						} else {
@@ -1668,7 +1676,7 @@
 		$("#inputNominal").val(formatRupiah(nom, "Rp. "));
 
 		if ($('.tipeuserAdd').val() == '2') {
-			$.get(baseUrl + 'transaksi/getSaldoSiswa/' + idcus, function (res) {
+			$.get(baseUrl + 'transaksi/getSaldoSiswa/' + idcus, function(res) {
 				$('#saldoBox').html(formatRupiah(res, "Rp. "))
 				$('#saldoBox').attr('data-saldo', parseInt(res))
 				console.log($(".cusName").val())
@@ -1694,7 +1702,7 @@
 			})
 		} else if ($('.tipeuserAdd').val() == '1') {
 			let id_staf = idcus
-			$.get(baseUrl + 'Transaksi/getTransaksiStafByid/' + id_staf, function (result) {
+			$.get(baseUrl + 'Transaksi/getTransaksiStafByid/' + id_staf, function(result) {
 				let data = JSON.parse(result);
 				sssaldo = data.saldo
 				$('#saldoBox').html(formatRupiah(data.saldo.toString(), "Rp. "))
@@ -1722,7 +1730,7 @@
 		}
 		let tipe = $('.tipeuserAdd option:selected').html()
 		$('#box-transaksi').html('')
-		$.get(baseUrl + 'transaksi/getHistoriTransaksi?id=' + idcus + '&tipe=' + $('.tipeuserAdd').val(), function (result) {
+		$.get(baseUrl + 'transaksi/getHistoriTransaksi?id=' + idcus + '&tipe=' + $('.tipeuserAdd').val(), function(result) {
 			let data = JSON.parse(result)
 			// console.log(result)
 			// console.log(tipe.strtolower)
@@ -1733,7 +1741,7 @@
 				let tanggalBaru = '';
 				let koperDebet = '';
 				let koperKredit = '';
-				data.forEach(function (res) {
+				data.forEach(function(res) {
 					tanggal = res.tgl_update;
 					tanggalBaru = tanggal.slice(0, 9);
 					if (res.debet == 'koperasi') {
@@ -1762,41 +1770,41 @@
 		});
 
 	}
-	$('#provinsi').change(function () {
+	$('#provinsi').change(function() {
 		if (this.value !== 'Pilih Provinsi') {
-			$.get(baseUrl + 'siswa/getkota/' + this.value, function (result) {
+			$.get(baseUrl + 'siswa/getkota/' + this.value, function(result) {
 				let data = JSON.parse(result);
 				$('#selectKota').html('');
 				$('#selectKeca').html('');
 				$('#selectKota').removeAttr('disabled');
 				$('#selectKota').append('<option value="">Pilih Kota</option>')
 				$('#selectKeca').append('<option value="">Pilih Kecamatan</option>')
-				data.forEach(function (res) {
+				data.forEach(function(res) {
 					$('#selectKota').append('<option class="optkota" value="' + res.id_kota + '">' + res.name_kota + '</option>')
 				})
 			});
 		}
 	})
 
-	$('#selectKota').change(function () {
+	$('#selectKota').change(function() {
 		if (this.value !== 'Pilih Kota') {
-			$.get(baseUrl + 'siswa/getKecamatan/' + this.value, function (result) {
+			$.get(baseUrl + 'siswa/getKecamatan/' + this.value, function(result) {
 				let data = JSON.parse(result);
 				$('#selectKeca').html('');
 				$('#selectKeca').removeAttr('disabled');
 				$('#selectKeca').append('<option value="">Pilih Kecamatan</option>')
-				data.forEach(function (res) {
+				data.forEach(function(res) {
 					$('#selectKeca').append('<option value="' + res.id_kecamatan + '">' + res.kecamatan + '</option>')
 				})
 			});
 		}
 	})
 
-	$('#siswaKelas').change(function () {
+	$('#siswaKelas').change(function() {
 		let idKelas = this.value;
 		console.log(idKelas)
 		if (this.value !== 'Pilih Kelas') {
-			$.get(baseUrl + 'siswa/getSiswaByKelas/' + this.value, function (result) {
+			$.get(baseUrl + 'siswa/getSiswaByKelas/' + this.value, function(result) {
 				let data = JSON.parse(result);
 				$('#dataSiswaKelas').html(' ');
 				// $('#selectKeca').removeAttr('disabled');
@@ -1806,13 +1814,13 @@
 				} else {
 					let i = 1;
 					$('.btn-grad').removeAttr('disabled');
-					$('.btn-grad').click(function () {
+					$('.btn-grad').click(function() {
 						if (confirm('Yakin')) {
 							window.location.href = baseUrl + 'siswa/export_process/' + idKelas;
 						}
 					})
 					let kelas = $('#siswaKelas option:selected').html()
-					data.forEach(function (res) {
+					data.forEach(function(res) {
 						$('#dataSiswaKelas').append('<tr><td>' + i + '</td><td>' + res.nis + '</td><td>' + res.namasiswa + '</td><td>' + res.alamat + '</td><td>' + res.jk + '</td><td>' + res.rfid + '</td></tr>');
 						i++;
 					})
@@ -1823,30 +1831,30 @@
 
 	$('#btnUnCheck').hide()
 
-	$('#btnCheckAll').click(function () {
+	$('#btnCheckAll').click(function() {
 		$('.nisCheck').attr('checked', 'checked')
 		$('#btnCheckAll').hide()
 		$('#btnUnCheck').show()
 	})
 
-	$('#btnUnCheck').click(function () {
+	$('#btnUnCheck').click(function() {
 		$('.nisCheck').removeAttr('checked')
 		$('#btnUnCheck').hide()
 		$('#btnCheckAll').show()
 	})
 
-	if(mtransaksiEdit){
+	if (mtransaksiEdit) {
 		let nominal = $("#inputNominal").val()
-		$("#inputNominal").val(formatRupiah(nominal ,"Rp. "))
+		$("#inputNominal").val(formatRupiah(nominal, "Rp. "))
 		$('#nominal').val(nominal);
 	}
 
 	function formatRupiah(angka, prefix) {
 		var number_string = angka.replace(/[^,\d]/g, "").toString(),
-				split = number_string.split(","),
-				sisa = split[0].length % 3,
-				rupiah = split[0].substr(0, sisa),
-				ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+			split = number_string.split(","),
+			sisa = split[0].length % 3,
+			rupiah = split[0].substr(0, sisa),
+			ribuan = split[0].substr(sisa).match(/\d{3}/gi);
 
 		// tambahkan titik jika yang di input sudah menjadi angka ribuan
 		if (ribuan) {
@@ -1854,16 +1862,16 @@
 			rupiah += separator + ribuan.join(".");
 		}
 
-		rupiah = split[1] != undefined ? rupiah + "," + split[1] : rupiah;		
+		rupiah = split[1] != undefined ? rupiah + "," + split[1] : rupiah;
 		return prefix == undefined ? rupiah : rupiah ? "Rp. " + rupiah : "";
 	}
 
-	$("#inputNominal").keyup(function(){
+	$("#inputNominal").keyup(function() {
 		var number_string = this.value.replace(/[^,\d]/g, "").toString(),
-				split = number_string.split(","),
-				sisa = split[0].length % 3,
-				rupiah = split[0].substr(0, sisa),
-				ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+			split = number_string.split(","),
+			sisa = split[0].length % 3,
+			rupiah = split[0].substr(0, sisa),
+			ribuan = split[0].substr(sisa).match(/\d{3}/gi);
 
 		// tambahkan titik jika yang di input sudah menjadi angka ribuan
 		if (ribuan) {
@@ -1871,12 +1879,12 @@
 			rupiah += separator + ribuan.join(".");
 		}
 
-		rupiah = split[1] != undefined ? rupiah + "," + split[1] : rupiah;		
-		this.value =  "Rp. " + rupiah;
+		rupiah = split[1] != undefined ? rupiah + "," + split[1] : rupiah;
+		this.value = "Rp. " + rupiah;
 		$('#nominal').val(rupiah);
 	})
 
-	$("#ta").change(function () {
+	$("#ta").change(function() {
 		if (this.value != 'salah') {
 			$("#btnImportS").attr('disabled', false);
 		} else {
@@ -1884,13 +1892,13 @@
 		}
 	})
 
-	$("#btnImportS").click(function () {
+	$("#btnImportS").click(function() {
 		if (confirm('Yakin Import Data')) {
 			window.location.href = baseUrl + 'siswa/import?id_tahunakademik=' + $("#ta").val();
 		}
 	})
 
-	$("#fromClass").change(function () {
+	$("#fromClass").change(function() {
 		$("#toClass").attr('disabled', true)
 		$("#upClassTA").attr('disabled', true)
 		$("#naikkelas").attr("disabled", true)
@@ -1899,7 +1907,7 @@
 		if (this.value != 'salah') {
 			let kelas = $("#fromClass option:selected").html().split(' ')
 			// console.log(kelas)
-			$.get(baseUrl + 'siswa/getSiswaByKelas/' + $(this).val(), function (res) {
+			$.get(baseUrl + 'siswa/getSiswaByKelas/' + $(this).val(), function(res) {
 				// console.log(res)
 				let data = JSON.parse(res)
 				if (data.length == 0) {
@@ -1913,14 +1921,14 @@
 				} else {
 					let no = 1
 					let idTA = 0
-					$.get(baseUrl + 'kelas/getKelasList?kelas=' + kelas[0] + '&jurusan=' + kelas[1] + '&nourut=' + kelas[2], function (asd) {
+					$.get(baseUrl + 'kelas/getKelasList?kelas=' + kelas[0] + '&jurusan=' + kelas[1] + '&nourut=' + kelas[2], function(asd) {
 						// console.log(asd)
 						let data = JSON.parse(asd)
 						if (data.length != 0) {
 							$("#toClass").html('')
 							$("#toClass").attr('disabled', false)
 							$("#toClass").html('<option value="salah">Pilih Kelas</option>')
-							data.forEach(function (row) {
+							data.forEach(function(row) {
 								$("#toClass").append(`
                                     <option value="` + row.id_kelas + `">` + row.kelas + `</option>
                                 `)
@@ -1930,7 +1938,7 @@
 						}
 					})
 					$('#upClass').html('')
-					data.forEach(function (resu) {
+					data.forEach(function(resu) {
 						idTA = resu.id_tahunakademik
 						$('#upClass').append(`
                             <tr>
@@ -1944,14 +1952,14 @@
                         `)
 					})
 					// console.log(idTA)
-					$.get(baseUrl + 'tahunakademik/getTAList/' + idTA, function (hasil) {
+					$.get(baseUrl + 'tahunakademik/getTAList/' + idTA, function(hasil) {
 						// console.log(hasil)
 						let tahuna = JSON.parse(hasil)
 						// console.log(tahuna)
 						if (tahuna.length != 0) {
 							$("#upClassTA").html('')
 							$("#upClassTA").html('<option value="salah">Pilih Tahun Akademik</option>')
-							tahuna.forEach(function (row) {							
+							tahuna.forEach(function(row) {
 								$("#upClassTA").append(`
                                     <option value="` + row.id_tahunakademik + `">` + new Date(row.tglawal).getFullYear() + ` - ` + new Date(row.tglakhir).getFullYear() + `</option>
                                 `)
@@ -1965,7 +1973,7 @@
 		}
 	})
 
-	$("#toClass").change(function () {
+	$("#toClass").change(function() {
 		$("#upClassTA").attr('disabled', true)
 		$("#naikkelas").attr("disabled", true)
 		if (this.value != 'salah') {
@@ -1973,24 +1981,1114 @@
 		}
 	})
 
-	$("#upClassTA").change(function(){
+	$("#upClassTA").change(function() {
 		$("#naikkelas").attr("disabled", true)
-		if(this.value != 'salah'){
+		if (this.value != 'salah') {
 			$("#naikkelas").attr("disabled", false)
 		}
 	})
 
-	$("#naikkelas").click(function(){
-		if(confirm("Yakin Menaikan Kelas "+$("#fromClass option:selected").html()+" ke Kelas "+ $("#toClass option:selected").html()) ){
+	$("#naikkelas").click(function() {
+		if (confirm("Yakin Menaikan Kelas " + $("#fromClass option:selected").html() + " ke Kelas " + $("#toClass option:selected").html())) {
 			let oldkelas = $("#fromClass").val();
 			let newkelas = $("#toClass").val();
 			let ta = $("#upClassTA").val();
-			window.location.href = baseUrl+'siswa/naikKelas?oldKelas='+oldkelas+'&tahun_akademik='+ta+'&newKelas='+newkelas
+			window.location.href = baseUrl + 'siswa/naikKelas?oldKelas=' + oldkelas + '&tahun_akademik=' + ta + '&newKelas=' + newkelas
 		}
 		// $("#modalperingatan").show();
 	})
+
+	//kas umum
+
+	//hri ini
+	$('#lporanhri').click(function() {
+		$.ajax({
+			url: baseUrl + 'kasumum/hariini ',
+			type: 'GET',
+			beforeSend: function() {
+				$("#dataKas").html('')
+				$("#dataKas").append(`<tr>
+                        <td colspan="6"><center>Loading</center></td>
+                    </tr>`)
+			},
+			success: function(result) {
+				$("#dataKas").html('')
+				let data = JSON.parse(result);
+				// console.log(data['data2'])
+				if (data['data1'].length == 0) {
+					$("#dataKas").append(`<tr>
+                        <td colspan="6"><center>Data Kosong</center></td>
+                    </tr>`)
+					$("#tt").html('<p id="tt" style="font-weight: bold; font-size: 30px; margin-top: 30px">TOTAL : ' + formatRupiah("0", 'Rp. ') + '</p>')
+				} else {
+					// console.log(data)
+					// $("#dataKas").append(`<tr>
+					//     <td></td>
+					//     <td>Saldo Awal</td>
+					//     <td>` + data['data2'][0] + `</td>
+					//     <td>` + 0 + `</td>
+					//     <td>` + data['data2'][0] + `</td>
+					// </tr>`)
+					let no = 0;
+					data['data1'].forEach(function(datahariini) {
+						no++
+						let dateee = new Date(datahariini[0])
+						let mmm = (dateee.getMonth() + 1)
+						let ddd = dateee.getDate()
+						if (mmm == 1) {
+							mmm = "0" + (dateee.getMonth() + 1)
+						} else if (ddd == 1) {
+							ddd = "0" + dateee.getDate()
+						}
+						let tgltransaksii = ddd + ' - ' + mmm + ' - ' + dateee.getFullYear()
+						let kode = datahariini[3]
+						let ketkode = kode.substring(0, 2)
+						let debet = 0
+						let kredit = 0
+						let ket = ""
+						if (ketkode == 'KK') {
+							debet = 'Rp. 0'
+							kredit = formatRupiah(datahariini[2].toString(), 'Rp. ')
+							ket = "kas keluar"
+						} else if (ketkode == 'KM') {
+							kredit = 'Rp. 0'
+							debet = formatRupiah(datahariini[2].toString(), 'Rp. ')
+							ket = "kas masuk"
+						}
+						console.log(data)
+						$("#dataKas").append(`<tr>
+                                                <td>` + no + `</td>
+                                                <td>` + tgltransaksii + `</td>
+                                                <td>` + kode + `</td>
+                                                <td>` + debet + `</td>
+                                                <td>` + kredit + `</td>
+                                                <td>
+                                                    ` + ket + ` : <br>
+                                                    ` + datahariini[1] + `
+                                                </td>
+                                            </tr>`)
+
+					})
+
+					$("#dataKas").append(`<tr>
+                                    <td></td>
+                                    <td style="font-size: 15px;font-weight: bold">Total</td>
+                                    <td></td>
+                                    <td style="font-size: 15px;font-weight: bold">` + formatRupiah(data['data2'][0].toString(), 'Rp. ') + `</td>
+                                    <td style="font-size: 15px;font-weight: bold">` + formatRupiah(data['data2'][1].toString(), 'Rp. ') + `</td>
+                                    <td style="font-size: 15px;font-weight: bold">Saldo : ` + formatRupiah(data['data2'][2].toString(), 'Rp. ') + `</td>
+                                </tr>`)
+					$("#tt").html('<p id="tt" style="font-weight: bold; font-size: 30px; margin-top: 30px">TOTAL : ' + formatRupiah(data['data2'][2].toString(), 'Rp. ') + '</p>')
+				}
+			}
+		})
+	})
+	//bln ini
+	$('#lporanbln').click(function() {
+
+		$.ajax({
+			url: baseUrl + 'kasumum/blnini',
+			type: 'GET',
+			beforeSend: function() {
+				$("#dataKas").html('')
+				$("#dataKas").append(`<tr>
+                        <td colspan="6"><center>Loading</center></td>
+                    </tr>`)
+			},
+			success: function(result) {
+				let data = JSON.parse(result);
+				console.log(data)
+				$("#dataKas").html('')
+				if (data['data1'].length == 0) {
+					$("#dataKas").append(`<tr>
+                        <td colspan="6"><center>Data Kosong</center></td>
+                    </tr>`)
+					$("#tt").html('<p id="tt" style="font-weight: bold; font-size: 30px; margin-top: 30px">TOTAL : ' + formatRupiah("0", 'Rp. ') + '</p>')
+				} else {
+					let d = new Date()
+					// console.log(data);
+					let m = (d.getMonth() + 1)
+					if (m == 1) {
+						m = "0" + (d.getMonth() + 1)
+					}
+					// console.log(m)
+					$("#dataKas").append(`<tr>
+                        <td>1</td>
+                        <td>01 - ` + m + ` - ` + d.getFullYear() + `</td>
+                        <td></td>
+                        <td>` + formatRupiah(data['data2'][0].toString(), 'Rp. ') + `</td>
+                        <td>` + formatRupiah("0", 'Rp. ') + `</td>
+                        <td>Saldo Awal </td>
+                    </tr>`)
+					let no = 1
+					data['data1'].forEach(function(datablnini) {
+						no++
+						let dateee = new Date(datablnini[0])
+						let mmm = (dateee.getMonth() + 1)
+						let ddd = dateee.getDate()
+						if (mmm == 1) {
+							mmm = "0" + (dateee.getMonth() + 1)
+						} else if (ddd == 1) {
+							ddd = "0" + dateee.getDate()
+						}
+						let tgltransaksii = ddd + ' - ' + mmm + ' - ' + dateee.getFullYear()
+						let kode = datablnini[3]
+						let ketkode = kode.substring(0, 2)
+						let debet = 0
+						let kredit = 0
+						let ket = ""
+						if (ketkode === 'KK') {
+							debet = 'Rp. 0'
+							kredit = formatRupiah(datablnini[2].toString(), 'Rp. ')
+							ket = "kas keluar"
+						} else if (ketkode == 'KM') {
+							kredit = 'Rp. 0'
+							debet = formatRupiah(datablnini[2].toString(), 'Rp. ')
+							ket = "kas masuk"
+						}
+
+						$("#dataKas").append(`<tr>
+                                            <td>` + no + `</td>
+                                            <td>` + tgltransaksii + `</td>
+                                            <td>` + kode + `</td>
+                                            <td>` + debet + `</td>
+                                            <td>` + kredit + `</td>
+                                            <td>
+                                                ` + ket + ` : <br> 
+                                                ` + datablnini[1] + `
+                                            </td>
+                                        </tr>`)
+					})
+					$("#dataKas").append(`<tr>
+                                    <td></td>
+                                    <td style="font-size: 15px;font-weight: bold">Total</td>
+                                    <td></td>
+                                    <td style="font-size: 15px;font-weight: bold">` + formatRupiah(data['data2'][1].toString(), 'Rp. ') + `</td>
+                                    <td style="font-size: 15px;font-weight: bold">` + formatRupiah(data['data2'][2].toString(), 'Rp. ') + `</td>
+                                    <td style="font-size: 15px;font-weight: bold">Saldo : ` + formatRupiah(data['data2'][3].toString(), 'Rp. ') + `</td>
+                                </tr>`)
+					$("#tt").html('<p id="tt" style="font-weight: bold; font-size: 30px; margin-top: 30px">TOTAL : ' + formatRupiah(data['data2'][3].toString(), 'Rp. ') + '</p>')
+				}
+			}
+
+		})
+
+	})
+
+
+	//thn ini
+	$('#lporanthn').click(function() {
+		$.ajax({
+			url: baseUrl + 'kasumum/thnini',
+			type: 'GET',
+			beforeSend: function() {
+				$("#dataKas").html('')
+				$("#dataKas").append(`<tr>
+                        <td colspan="6"><center>Loading</center></td>
+                    </tr>`)
+
+			},
+			success: function(result) {
+				let data = JSON.parse(result);
+				$("#dataKas").html('')
+				if (data['data1'].length == 0) {
+					$("#dataKas").append(`<tr>
+                        <td colspan="6"><center>Data Kosong</center></td>
+                    </tr>`)
+					$("#tt").html('<p id="tt" style="font-weight: bold; font-size: 30px; margin-top: 30px">TOTAL : ' + formatRupiah("0", 'Rp. ') + '</p>')
+				} else {
+					let d = new Date()
+					// console.log(data)
+					$("#dataKas").append(`<tr>
+                        <td>1</td>
+                        <td>01 - 01 - ` + d.getFullYear() + `</td>
+                        <td></td>
+                        <td>` + formatRupiah(data['data2'][0].toString(), 'Rp. ') + `</td>
+                        <td>` + formatRupiah("0", 'Rp. ') + `</td>
+                        <td>Saldo Awal </td>
+                    </tr>`)
+					let no = 1
+					data['data1'].forEach(function(datathnini) {
+						no++
+						let dateee = new Date(datathnini[0])
+						let mmm = (dateee.getMonth() + 1)
+						let ddd = dateee.getDate()
+						if (mmm == 1) {
+							mmm = "0" + (dateee.getMonth() + 1)
+						} else if (ddd == 1) {
+							ddd = "0" + dateee.getDate()
+						}
+						let tgltransaksii = ddd + ' - ' + mmm + ' - ' + dateee.getFullYear()
+						let kode = datathnini[3]
+						let ketkode = kode.substring(0, 2)
+						let debet = 0
+						let kredit = 0
+						let ket = ""
+						if (ketkode === 'KK') {
+							debet = 'Rp. 0'
+							kredit = formatRupiah(datathnini[2].toString(), 'Rp. ')
+							ket = 'kas keluar'
+						} else if (ketkode == 'KM') {
+							kredit = 'Rp. 0'
+							debet = formatRupiah(datathnini[2].toString(), 'Rp. ')
+							ket = 'kas masuk'
+						}
+						$("#dataKas").append(`<tr>
+                                            <td>` + no + `</td>
+                                            <td>` + tgltransaksii + `</td>
+                                            <td>` + kode + `</td>
+                                            <td>` + debet + `</td>
+                                            <td>` + kredit + `</td>
+                                            <td>
+                                                ` + ket + ` : <br>
+                                                ` + datathnini[1] + `
+                                            </td>
+                                        </tr>`)
+					})
+					$("#dataKas").append(`<tr>
+                                    <td></td>
+                                    <td style="font-size: 15px;font-weight: bold">Total</td>
+                                    <td></td>
+                                    <td style="font-size: 15px;font-weight: bold">` + formatRupiah(data['data2'][1].toString(), 'Rp. ') + `</td>
+                                    <td style="font-size: 15px;font-weight: bold">` + formatRupiah(data['data2'][2].toString(), 'Rp. ') + `</td>
+                                    <td style="font-size: 15px;font-weight: bold">Saldo : ` + formatRupiah(data['data2'][3].toString(), 'Rp. ') + `</td>
+                                </tr>`)
+					$("#tt").html('<p id="tt" style="font-weight: bold; font-size: 30px; margin-top: 30px">TOTAL : ' + formatRupiah(data['data2'][3].toString(), 'Rp. ') + '</p>')
+				}
+			}
+		})
+	})
+
+	//custom
+	$('#btnCaridata').click(function() {
+		let awal = $('#tglawall').val()
+		let akhir = $('#tglakhiree').val()
+		let date1 = new Date(awal)
+		let datee1 = date1.getDate()
+		let month = (date1.getMonth() + 1)
+		let year = date1.getFullYear()
+		let date2 = new Date(akhir)
+		let datee2 = date2.getDate()
+		let monthh = (date2.getMonth() + 1)
+		let yearr = date2.getFullYear()
+
+
+		let jmlhbln = 12
+		let thn = 28
+		if (year % 4 == 0) {
+			thn = 29
+		}
+		let jmlhari = [
+			[1, 31],
+			[2, thn],
+			[3, 31],
+			[4, 30],
+			[5, 31],
+			[6, 30],
+			[7, 31],
+			[8, 31],
+			[9, 30],
+			[10, 31],
+			[11, 30],
+			[12, 31]
+		]
+		// console.log(awal, akhir)
+		if (awal == akhir) {
+			$.ajax({
+				url: baseUrl + 'kasumum/hariini',
+				type: 'GET',
+				beforeSend: function() {
+					$("#dataKas").html('')
+					$("#dataKas").append(`<tr>
+                        <td colspan="6"><center>Loading</center></td>
+                    </tr>`)
+				},
+				success: function(result) {
+					$("#dataKas").html('')
+					let data = JSON.parse(result);
+					// console.log(data['data2'])
+					if (data['data1'].length == 0) {
+						$("#dataKas").append(`<tr>
+                        <td colspan="6"><center>Data Kosong</center></td>
+                    </tr>`)
+						$("#tt").html('<p id="tt" style="font-weight: bold; font-size: 30px; margin-top: 30px">TOTAL : ' + formatRupiah("0", 'Rp. ') + '</p>')
+					} else {
+						// console.log(data)
+						// $("#dataKas").append(`<tr>
+						//     <td></td>
+						//     <td>Saldo Awal</td>
+						//     <td></td>
+						//     <td>` + formatRupiah(data['data2'][0].toString(), 'Rp. ') + `</td>
+						//     <td>` + 0 + `</td>
+						//     <td>` + formatRupiah(data['data2'][0].toString(), 'Rp. ') + `</td>
+						// </tr>`)
+						let no = 0;
+						data['data1'].forEach(function(datahariini) {
+							no++
+							let dateee = new Date(datahariini[0])
+							let mmm = (dateee.getMonth() + 1)
+							let ddd = dateee.getDate()
+							if (mmm == 1) {
+								mmm = "0" + (dateee.getMonth() + 1)
+							} else if (ddd == 1) {
+								ddd = "0" + dateee.getDate()
+							}
+							let tgltransaksii = ddd + ' - ' + mmm + ' - ' + dateee.getFullYear()
+							let kode = datahariini[3]
+							let ketkode = kode.substring(0, 2)
+							let debet = 0
+							let kredit = 0
+							let ket = ""
+							if (ketkode == 'KK') {
+								debet = 'Rp. 0'
+								kredit = formatRupiah(datahariini[2].toString(), 'Rp. ')
+								ket = "kas keluar"
+							} else if (ketkode == 'KM') {
+								kredit = 'Rp. 0'
+								debet = formatRupiah(datahariini[2].toString(), 'Rp. ')
+								ket = "kas masuk"
+							}
+							console.log(data)
+							$("#dataKas").append(`<tr>
+                                                <td>` + no + `</td>
+                                                <td>` + tgltransaksii + `</td>
+                                                <td>` + kode + `</td>
+                                                <td>` + debet + `</td>
+                                                <td>` + kredit + `</td>
+                                                <td>
+                                                    ` + ket + ` : <br>
+                                                    ` + datahariini[1] + `
+                                                </td>
+                                            </tr>`)
+						})
+
+						$("#dataKas").append(`<tr>
+                                    <td></td>
+                                    <td style="font-size: 15px;font-weight: bold">Total</td>
+                                    <td></td>
+                                    <td style="font-size: 15px;font-weight: bold">` + formatRupiah(data['data2'][0].toString(), 'Rp. ') + `</td>
+                                    <td style="font-size: 15px;font-weight: bold">` + formatRupiah(data['data2'][1].toString(), 'Rp. ') + `</td>
+                                    <td style="font-size: 15px;font-weight: bold">Saldo : ` + formatRupiah(data['data2'][2].toString(), 'Rp. ') + `</td>
+                                </tr>`)
+						$("#tt").html('<p id="tt" style="font-weight: bold; font-size: 30px; margin-top: 30px">TOTAL : ' + formatRupiah(data['data2'][2].toString(), 'Rp. ') + '</p>')
+					}
+				}
+			})
+		}
+
+		if (year == yearr && month == monthh && datee1 != datee2) {
+			let Y_awal = year
+			let M_awal = month
+			let awal = datee1
+			let no = 0
+			let a = 0
+
+			let nmr = 1
+
+			let awall = $('#tglawall').val()
+			let akhirr = $('#tglakhiree').val()
+
+			$.ajax({
+				url: baseUrl + 'kasumum/thnn/' + awall + '/' + akhirr,
+				type: 'GET',
+				beforeSend: function() {
+					$("#dataKas").html('')
+					$("#dataKas").append(`<tr>
+                        <td colspan="6"><center>Loading</center></td>
+                    </tr>`)
+					$("#tt").html('<p id="tt" style="font-weight: bold; font-size: 30px; margin-top: 30px">TOTAL : ' + formatRupiah("0", 'Rp. ') + '</p>')
+				},
+				success: function(result) {
+					let data = JSON.parse(result);
+					$("#dataKas").html('')
+					if (data['data1'].length == 0) {
+						$("#dataKas").append(`<tr>
+                        <td colspan="6"><center>Data Kosong</center></td>
+                    </tr>`)
+					} else {
+						// console.log(data)
+						let date1 = new Date(awall)
+						let mm = (date1.getMonth() + 1)
+						let dd = date1.getDate()
+						if (mm == 1) {
+							mm = "0" + (date1.getMonth() + 1)
+						} else if (dd == 1) {
+							dd = "0" + date1.getDate()
+						}
+						$("#dataKas").append(`<tr>
+                        <td>1</td>
+                        <td>` + dd + ' - ' + mm + ' - ' + date1.getFullYear() + `</td>
+                        <td></td>
+                        <td>` + formatRupiah(data['data2'][0].toString(), 'Rp. ') + `</td>
+                        <td>` + formatRupiah("0", 'Rp. ') + `</td>
+                        <td>Saldo Awal </td>
+                    </tr>`)
+						let no = 1
+						data['data1'].forEach(function(datathnini) {
+							no++
+							let dateee = new Date(datathnini[0])
+							let mmm = (dateee.getMonth() + 1)
+							let ddd = dateee.getDate()
+							if (mmm == 1) {
+								mmm = "0" + (dateee.getMonth() + 1)
+							} else if (ddd == 1) {
+								ddd = "0" + dateee.getDate()
+							}
+							let tgltransaksii = ddd + ' - ' + mmm + ' - ' + dateee.getFullYear()
+							let kode = datathnini[3]
+							let ketkode = kode.substring(0, 2)
+							let debet = 0
+							let kredit = 0
+							let ket = ""
+							if (ketkode === 'KK') {
+								debet = 'Rp. 0'
+								kredit = formatRupiah(datathnini[2].toString(), 'Rp. ')
+								ket = 'kas keluar'
+							} else if (ketkode == 'KM') {
+								kredit = 'Rp. 0'
+								debet = formatRupiah(datathnini[2].toString(), 'Rp. ')
+								ket = 'kas masuk'
+							}
+							$("#dataKas").append(`<tr>
+                                            <td>` + no + `</td>
+                                            <td>` + tgltransaksii + `</td>
+                                            <td>` + kode + `</td>
+                                            <td>` + debet + `</td>
+                                            <td>` + kredit + `</td>
+                                            <td>
+                                                ` + ket + ` : <br>
+                                                ` + datathnini[1] + `
+                                            </td>
+                                        </tr>`)
+						})
+						$("#dataKas").append(`<tr>
+                                    <td></td>
+                                    <td style="font-size: 15px;font-weight: bold">Total</td>
+                                    <td></td>
+                                    <td style="font-size: 15px;font-weight: bold">` + formatRupiah(data['data2'][1].toString(), 'Rp. ') + `</td>
+                                    <td style="font-size: 15px;font-weight: bold">` + formatRupiah(data['data2'][2].toString(), 'Rp. ') + `</td>
+                                    <td style="font-size: 15px;font-weight: bold">Saldo : ` + formatRupiah(data['data2'][3].toString(), 'Rp. ') + `</td>
+                                </tr>`)
+						$("#tt").html('<p id="tt" style="font-weight: bold; font-size: 30px; margin-top: 30px">TOTAL : ' + formatRupiah(data['data2'][3].toString(), 'Rp. ') + '</p>')
+					}
+				}
+			})
+
+
+			// for (i = awal; i < datee2 + 1; i++) {
+			//     if (i == awal) {
+			//         $.ajax({
+			//             url: baseUrl+'kasumum/blnini',
+			//             type: 'GET',
+			//             beforeSend: function() {
+			//                 $("#dataKas").html('')
+			//                 $("#dataKas").append(`<tr id='l'>
+			//                         <td colspan="6"><center>Loading</center></td>
+			//                     </tr>`)
+			//             },
+			//             success: function(result) {
+			//                 // $("#l").html('')
+			//                 let data = JSON.parse(result)
+			//                 $("#dataKas").append(`<tr>
+			//                             <td></td>
+			//                             <td>Saldo Awal</td>
+			//                             <td></td>
+			//                             <td>` + formatRupiah(data['data2'][0].toString(), 'Rp. ') + `</td>
+			//                             <td>` + 0 + `</td>
+			//                             <td>` + formatRupiah(data['data2'][0].toString(), 'Rp. ') + `</td>
+			//                         </tr>`)
+			//             }
+			//         })
+			//     } else if (i >= awal || i != datee2) {
+			//         $.ajax({
+			//             url: baseUrl+'kasumum/bulaniniBy/' + i + '/' + datee2 + '/' + datee1,
+			//             type: 'GET',
+
+			//             success: function(result) {
+			//                 data = JSON.parse(result);
+			//                 let datahariini = []
+
+			//                 if (data['data1'].length != 0) {
+			//                     datahariini.push(data['data1'])
+			//                     console.log(datahariini)
+
+			//                     if (datahariini[0].length > 1) {
+			//                         console.log('hallo')
+			//                         datahariini[0].forEach(function(data) {
+			//                             let dateee = new Date(data[0])
+			//                             let tgltransaksii = dateee.getDate() + ' - ' + (dateee.getMonth() + 1) + ' - ' + dateee.getFullYear()
+			//                             let kode = data[3]
+			//                             let ketkode = kode.substring(0, 2)
+			//                             let debet = 0
+			//                             let kredit = 0
+			//                             let ket = ""
+
+			//                             if (ketkode === 'KK') {
+			//                                 debet = 'Rp. 0'
+			//                                 kredit = formatRupiah(data[2].toString(), 'Rp. ')
+			//                                 ket = 'kas keluar'
+			//                             } else if (ketkode == 'KM') {
+			//                                 kredit = 'Rp. 0'
+			//                                 debet = formatRupiah(data[2].toString(), 'Rp. ')
+			//                                 ket = 'kas masuk'
+			//                             }
+
+			//                             $("#dataKas").append(`<tr>
+			//                                 <td>` + nmr++ + `</td>
+			//                                 <td>` + tgltransaksii + `</td>
+			//                                 <td>` + kode + `</td>
+			//                                 <td>` + debet + `</td>
+			//                                 <td>` + kredit + `</td>
+			//                                 <td>
+			//                                     ` + ket + ` : <br>
+			//                                     ` + data[1] + `
+			//                                 </td>
+			//                             </tr>`)
+			//                         })
+			//                     } else if (datahariini[0].length == 1) {
+
+			//                         let dateee = new Date(datahariini[0][0][0])
+			//                         let tgltransaksii = dateee.getDate() + ' - ' + (dateee.getMonth() + 1) + ' - ' + dateee.getFullYear()
+			//                         let kode = datahariini[0][0][3]
+			//                         let ketkode = kode.substring(0, 2)
+			//                         let debet = 0
+			//                         let kredit = 0
+			//                         let ket = ""
+			//                         console.log(kode)
+			//                         if (ketkode === 'KK') {
+			//                             debet = 'Rp. 0'
+			//                             kredit = formatRupiah(datahariini[0][0][2].toString(), 'Rp. ')
+			//                             ket = 'kas keluar'
+			//                         } else if (ketkode == 'KM') {
+			//                             kredit = 'Rp. 0'
+			//                             debet = formatRupiah(datahariini[0][0][2].toString(), 'Rp. ')
+			//                             ket = 'kas masuk'
+			//                         }
+
+			//                         $("#dataKas").append(`<tr>
+			//                                 <td>` + nmr++ + `</td>
+			//                                 <td>` + tgltransaksii + `</td>
+			//                                 <td>` + kode + `</td>
+			//                                 <td>` + debet + `</td>
+			//                                 <td>` + kredit + `</td>
+			//                                 <td>
+			//                                     ` + ket + `: <br>
+			//                                     ` + datahariini[0][0][1] + `
+			//                                 </td>
+			//                             </tr>`)
+
+			//                     }
+			//                 }
+			//             }
+			//         })
+			//         // console.log(i + " : "+datee2)
+			//     }
+			// }
+			// $.ajax({
+			//     url: baseUrl+'kasumum/blnini',
+			//     type: 'GET',
+			//     success: function(result) {
+			//         $("#l").html('')
+			//         let data = JSON.parse(result)
+			//         $("#dataKas").append(`<tr>
+			//                             <td></td>
+			//                             <td>Total</td>
+			//                             <td></td>
+			//                             <td>` + formatRupiah(data['data2'][1].toString(), 'Rp. ') + `</td>
+			//                             <td>` + formatRupiah(data['data2'][2].toString(), 'Rp. ') + `</td>
+			//                             <td>Saldo : ` + formatRupiah(data['data2'][3].toString(), 'Rp. ') + `</td>
+			//                         </tr>`)
+			//     }
+			// })
+		}
+		if (year == yearr && month != monthh) {
+			// console.log('haha')
+			let awall = $('#tglawall').val()
+			let akhirr = $('#tglakhiree').val()
+			let awal = month
+			let awal2 = datee1
+			// $("#dataKas").html('')
+			let nmr = 0
+			// let awall = $('#tglawall').val()
+			// let akhirr = $('#tglakhiree').val()
+
+			$.ajax({
+				url: baseUrl + 'kasumum/thnn/' + awall + '/' + akhirr,
+				type: 'GET',
+				beforeSend: function() {
+					$("#dataKas").html('')
+					$("#dataKas").append(`<tr>
+                        <td colspan="6"><center>Loading</center></td>
+                    </tr>`)
+					$("#tt").html('<p id="tt" style="font-weight: bold; font-size: 30px; margin-top: 30px">TOTAL : ' + formatRupiah("0", 'Rp. ') + '</p>')
+				},
+				success: function(result) {
+					let data = JSON.parse(result);
+					$("#dataKas").html('')
+					if (data['data1'].length == 0) {
+						$("#dataKas").append(`<tr>
+                        <td colspan="6"><center>Data Kosong</center></td>
+                    </tr>`)
+					} else {
+						let date1 = new Date(awall)
+						let mm = (date1.getMonth() + 1)
+						let dd = date1.getDate()
+						if (mm == 1) {
+							mm = "0" + (date1.getMonth() + 1)
+						} else if (dd == 1) {
+							dd = "0" + date1.getDate()
+						}
+						$("#dataKas").append(`<tr>
+                        <td>1</td>
+                        <td>` + dd + ' - ' + mm + ' - ' + date1.getFullYear() + `</td>
+                        <td></td>
+                        <td>` + formatRupiah(data['data2'][0].toString(), 'Rp. ') + `</td>
+                        <td>` + formatRupiah("0", 'Rp. ') + `</td>
+                        <td>Saldo Awal </td>
+                    </tr>`)
+						let no = 1
+						data['data1'].forEach(function(datathnini) {
+							no++
+							let dateee = new Date(datathnini[0])
+							let mmm = (dateee.getMonth() + 1)
+							let ddd = dateee.getDate()
+							if (mmm == 1) {
+								mmm = "0" + (dateee.getMonth() + 1)
+							} else if (ddd == 1) {
+								ddd = "0" + dateee.getDate()
+							}
+							let tgltransaksii = ddd + ' - ' + mmm + ' - ' + dateee.getFullYear()
+							let kode = datathnini[3]
+							let ketkode = kode.substring(0, 2)
+							let debet = 0
+							let kredit = 0
+							let ket = ""
+							if (ketkode === 'KK') {
+								debet = 'Rp. 0'
+								kredit = formatRupiah(datathnini[2].toString(), 'Rp. ')
+								ket = 'kas keluar'
+							} else if (ketkode == 'KM') {
+								kredit = 'Rp. 0'
+								debet = formatRupiah(datathnini[2].toString(), 'Rp. ')
+								ket = 'kas masuk'
+							}
+							$("#dataKas").append(`<tr>
+                                            <td>` + no + `</td>
+                                            <td>` + tgltransaksii + `</td>
+                                            <td>` + kode + `</td>
+                                            <td>` + debet + `</td>
+                                            <td>` + kredit + `</td>
+                                            <td>
+                                                ` + ket + ` : <br>
+                                                ` + datathnini[1] + `
+                                            </td>
+                                        </tr>`)
+						})
+						$("#dataKas").append(`<tr>
+                                    <td></td>
+                                    <td style="font-size: 15px;font-weight: bold">Total</td>
+                                    <td></td>
+                                    <td style="font-size: 15px;font-weight: bold">` + formatRupiah(data['data2'][1].toString(), 'Rp. ') + `</td>
+                                    <td style="font-size: 15px;font-weight: bold">` + formatRupiah(data['data2'][2].toString(), 'Rp. ') + `</td>
+                                    <td style="font-size: 15px;font-weight: bold">Saldo : ` + formatRupiah(data['data2'][3].toString(), 'Rp. ') + `</td>
+                                </tr>`)
+						$("#tt").html('<p id="tt" style="font-weight: bold; font-size: 30px; margin-top: 30px">TOTAL : ' + formatRupiah(data['data2'][3].toString(), 'Rp. ') + '</p>')
+					}
+				}
+			})
+
+			// for (i = awal; i < monthh + 1; i++) {
+
+			//     if (i == awal) {
+			//         $.ajax({
+			//             url: baseUrl+'kasumum/bnnn/' + awall + '/' + akhirr,
+			//             type: 'GET',
+			//             beforeSend: function() {
+			//                 $("#dataKas").html('')
+			//                 $("#dataKas").append(`<tr id='l'>
+			//                         <td colspan="6"><center>Loading</center></td>
+			//                     </tr>`)
+			//             },
+			//             success: function(result) {
+			//                 let data = JSON.parse(result)
+			//                 // console.log(data)
+			//                 $("#dataKas").append(`<tr>
+			//                     <td></td>
+			//                     <td>Saldo Awal</td>
+			//                     <td></td>
+			//                     <td>` + formatRupiah(data[0].toString(), 'Rp. ') + `</td>
+			//                     <td>` + 0 + `</td>
+			//                     <td>` + formatRupiah(data[0].toString(), 'Rp. ') + `</td>
+			//                 </tr>`)
+			//             }
+			//         })
+			//     }
+			//     jmlhari.forEach(function(harii) {
+			//         let harrri = 0
+			//         if (awal == harii[0] && i == harii[0]) {
+			//             for (a = awal2; a < harii[1] + 1; a++) {
+
+			//                 harrri = a
+			//                 $.ajax({
+			//                     url: baseUrl+'kasumum/bnn/' + i + '/' + a,
+			//                     type: 'GET',
+			//                     success: function(result) {
+			//                         data = JSON.parse(result);
+			//                         console.log(data)
+			//                         let datahariini = []
+			//                         if (data.length != 0) {
+			//                             datahariini.push(data)
+			//                             console.log(datahariini[0])
+			//                             if (datahariini[0].length > 1) {
+			//                                 datahariini[0].forEach(function(data) {
+			//                                     let dateee = new Date(data[0])
+			//                                     let tgltransaksii = dateee.getDate() + ' - ' + (dateee.getMonth() + 1) + ' - ' + dateee.getFullYear()
+			//                                     let kode = data[3]
+			//                                     let ketkode = kode.substring(0, 2)
+			//                                     let debet = 0
+			//                                     let kredit = 0
+			//                                     if (ketkode === 'KK') {
+			//                                         debet = 'Rp. 0'
+			//                                         kredit = data[2]
+			//                                     } else if (ketkode == 'KM') {
+			//                                         kredit = 'Rp. 0'
+			//                                         debet = data[2]
+			//                                     }
+
+			//                                     $("#dataKas").append(`<tr>
+			//                                     <td>` + nmr + `</td>
+			//                                 <td>` + tgltransaksii + `</td>
+			//                                 <td>` + kode + `</td>
+			//                                 <td>` + debet + `</td>
+			//                                 <td>` + kredit + `</td>
+			//                                 <td>` + data[1] + `</td>
+			//                             </tr>`)
+			//                                 })
+
+			//                             } else if (datahariini[0].length == 1) {
+			//                                 let dateee = new Date(datahariini[0][0][0])
+			//                                 let tgltransaksii = dateee.getDate() + ' - ' + (dateee.getMonth() + 1) + ' - ' + dateee.getFullYear()
+			//                                 let kode = datahariini[0][0][3]
+			//                                 let ketkode = kode.substring(0, 2)
+			//                                 let debet = 0
+			//                                 let kredit = 0
+			//                                 if (ketkode === 'KK') {
+			//                                     debet = 'Rp. 0'
+			//                                     kredit = formatRupiah(datahariini[0][0][2].toString(), 'Rp. ')
+			//                                 } else if (ketkode == 'KM') {
+			//                                     kredit = 'Rp. 0'
+			//                                     debet = formatRupiah(datahariini[0][0][2].toString(), 'Rp. ')
+			//                                 }
+			//                                 nmr += 1
+			//                                 $("#dataKas").append(`<tr>
+			//                                 <td>` + nmr + `</td>
+			//                                 <td>` + tgltransaksii + `</td>
+			//                                 <td>` + kode + `</td>
+			//                                 <td>` + debet + `</td>
+			//                                 <td>` + kredit + `</td>
+			//                                 <td>` + datahariini[0][0][1] + `</td>
+			//                             </tr>`)
+
+			//                             }
+			//                         }
+			//                     }
+			//                 })
+			//             }
+			//         } else if (awal != harii[0] && i == harii[0]) {
+			//             for (b = 1; b < datee2 + 1; b++) {
+
+			//                 harrri = b
+			//                 $.ajax({
+			//                     url: baseUrl+'kasumum/bnn/' + i + '/' + b,
+			//                     type: 'GET',
+			//                     success: function(result) {
+			//                         data = JSON.parse(result);
+			//                         let datahariini = []
+			//                         if (data.length != 0) {
+			//                             datahariini.push(data)
+			//                             if (datahariini[0].length > 1) {
+			//                                 datahariini[0].forEach(function(data) {
+			//                                     let dateee = new Date(data[0])
+			//                                     let tgltransaksii = dateee.getDate() + ' - ' + (dateee.getMonth() + 1) + ' - ' + dateee.getFullYear()
+			//                                     let kode = data[3]
+			//                                     let ketkode = kode.substring(0, 2)
+			//                                     let debet = 0
+			//                                     let kredit = 0
+			//                                     if (ketkode === 'KK') {
+			//                                         debet = 'Rp. 0'
+			//                                         kredit = data[2]
+			//                                     } else if (ketkode == 'KM') {
+			//                                         kredit = 'Rp. 0'
+			//                                         debet = data[2]
+			//                                     }
+			//                                     nmr += 1
+			//                                     $("#dataKas").append(`<tr>
+			//                                     <td>` + nmr + `</td>
+			//                                 <td>` + tgltransaksii + `</td>
+			//                                 <td>` + kode + `</td>
+			//                                 <td>` + debet + `</td>
+			//                                 <td>` + kredit + `</td>
+			//                                 <td>` + data[1] + `</td>
+			//                             </tr>`)
+			//                                 })
+
+			//                             } else if (datahariini[0].length == 1) {
+			//                                 let dateee = new Date(datahariini[0][0][0])
+			//                                 let tgltransaksii = dateee.getDate() + ' - ' + (dateee.getMonth() + 1) + ' - ' + dateee.getFullYear()
+			//                                 let kode = datahariini[0][0][3]
+			//                                 let ketkode = kode.substring(0, 2)
+			//                                 let debet = 0
+			//                                 let kredit = 0
+			//                                 if (ketkode === 'KK') {
+			//                                     debet = 'Rp. 0'
+			//                                     kredit = formatRupiah(datahariini[0][0][2].toString(), 'Rp. ')
+			//                                 } else if (ketkode == 'KM') {
+			//                                     kredit = 'Rp. 0'
+			//                                     debet = formatRupiah(datahariini[0][0][2].toString(), 'Rp. ')
+			//                                 }
+			//                                 nmr += 1
+			//                                 $("#dataKas").append(`<tr>
+			//                                  <td>` + nmr + `</td>
+			//                                 <td>` + tgltransaksii + `</td>
+			//                                 <td>` + kode + `</td>
+			//                                 <td>` + debet + `</td>
+			//                                 <td>` + kredit + `</td>
+			//                                 <td>` + datahariini[0][0][1] + `</td>
+			//                             </tr>`)
+
+			//                             }
+			//                         }
+			//                     }
+			//                 })
+			//                 // console.log(b, datee2)
+			//                 if (b == datee2) {
+			//                     $.ajax({
+			//                         url: baseUrl+'kasumum/bnnn/' + awall + '/' + akhirr,
+			//                         type: 'GET',
+			//                         success: function(result) {
+			//                             $("#l").html('')
+			//                             let data = JSON.parse(result)
+
+			//                             $("#dataKas").append(`<tr>
+			//                             <td></td>
+			//                             <td>Total</td>
+			//                             <td></td>
+			//                             <td>` + formatRupiah(data[1].toString(), 'Rp. ') + `</td>
+			//                             <td>` + formatRupiah(data[2].toString(), 'Rp. ') + `</td>
+			//                             <td>Saldo : ` + formatRupiah(data[3].toString(), 'Rp. ') + `</td>
+			//                         </tr>`)
+
+			//                         }
+			//                     })
+			//                 }
+			//             }
+
+			//         }
+			//     })
+			// }
+
+
+		}
+		if (year != yearr) {
+
+			let awall = $('#tglawall').val()
+			let akhirr = $('#tglakhiree').val()
+
+			$.ajax({
+				url: baseUrl + 'kasumum/thnn/' + awall + '/' + akhirr,
+				type: 'GET',
+				beforeSend: function() {
+					$("#dataKas").html('')
+					$("#dataKas").append(`<tr>
+                        <td colspan="6"><center>Loading</center></td>
+                    </tr>`)
+					$("#tt").html('<p id="tt" style="font-weight: bold; font-size: 30px; margin-top: 30px">TOTAL : ' + formatRupiah("0", 'Rp. ') + '</p>')
+
+				},
+				success: function(result) {
+					let data = JSON.parse(result);
+					$("#dataKas").html('')
+					if (data['data1'].length == 0) {
+						$("#dataKas").append(`<tr>
+                        <td colspan="6"><center>Data Kosong</center></td>
+                    </tr>`)
+					} else {
+						let date1 = new Date(awall)
+						let mm = (date1.getMonth() + 1)
+						let dd = date1.getDate()
+						if (mm == 1) {
+							mm = "0" + (date1.getMonth() + 1)
+						} else if (dd == 1) {
+							dd = "0" + date1.getDate()
+						}
+						$("#dataKas").append(`<tr>
+                        <td>1</td>
+                        <td>` + dd + ' - ' + mm + ' - ' + date1.getFullYear() + `</td>
+                        <td></td>
+                        <td>` + formatRupiah(data['data2'][0].toString(), 'Rp. ') + `</td>
+                        <td>` + formatRupiah("0", 'Rp. ') + `</td>
+                        <td>Saldo Awal </td>
+                    </tr>`)
+						let no = 1
+						data['data1'].forEach(function(datathnini) {
+							no++
+							let dateee = new Date(datathnini[0])
+							let mmm = (dateee.getMonth() + 1)
+							let ddd = dateee.getDate()
+							if (mmm == 1) {
+								mmm = "0" + (dateee.getMonth() + 1)
+							} else if (ddd == 1) {
+								ddd = "0" + dateee.getDate()
+							}
+							let tgltransaksii = ddd + ' - ' + mmm + ' - ' + dateee.getFullYear()
+							let kode = datathnini[3]
+							let ketkode = kode.substring(0, 2)
+							let debet = 0
+							let kredit = 0
+							let ket = ""
+							if (ketkode === 'KK') {
+								debet = 'Rp. 0'
+								kredit = formatRupiah(datathnini[2].toString(), 'Rp. ')
+								ket = 'kas keluar'
+							} else if (ketkode == 'KM') {
+								kredit = 'Rp. 0'
+								debet = formatRupiah(datathnini[2].toString(), 'Rp. ')
+								ket = 'kas masuk'
+							}
+							$("#dataKas").append(`<tr>
+                                            <td>` + no + `</td>
+                                            <td>` + tgltransaksii + `</td>
+                                            <td>` + kode + `</td>
+                                            <td>` + debet + `</td>
+                                            <td>` + kredit + `</td>
+                                            <td>
+                                                ` + ket + ` : <br>
+                                                ` + datathnini[1] + `
+                                            </td>
+                                        </tr>`)
+						})
+						$("#dataKas").append(`<tr>
+                                    <td></td>
+                                    <td style="font-size: 15px;font-weight: bold">Total</td>
+                                    <td></td>
+                                    <td style="font-size: 15px;font-weight: bold">` + formatRupiah(data['data2'][1].toString(), 'Rp. ') + `</td>
+                                    <td style="font-size: 15px;font-weight: bold">` + formatRupiah(data['data2'][2].toString(), 'Rp. ') + `</td>
+                                    <td style="font-size: 15px;font-weight: bold">Saldo : ` + formatRupiah(data['data2'][3].toString(), 'Rp. ') + `</td>
+                                </tr>`)
+						$("#tt").html('<p id="tt" style="font-weight: bold; font-size: 30px; margin-top: 30px">TOTAL : ' + formatRupiah(data['data2'][3].toString(), 'Rp. ') + '</p>')
+					}
+				}
+			})
+
+			// $("#dataKas").html('')
+			// for (i = Y_awal; i < yearr + 1; i++) {
+			//     if (Y_awal == i) {
+			//         for (a = M_awal; a < 13; a++) {
+			//             jmlhari.forEach(function(harii) {
+			//                 if (M_awal == harii[0] && a == harii[0]) {
+			//                     for (b = D_awal; b < harii[1] + 1; b++) {
+
+
+			//                     }
+			//                 } else if (M_awal != harii[0] && a == harii[0]) {
+			//                     for (c = 1; c < harii[1] + 1; c++) {
+
+			//                     }
+			//                 }
+
+			//             })
+			//         }
+			//     } else if (Y_awal != i) {
+			//         for (a = 1; a < monthh + 1; a++) {
+			//             jmlhari.forEach(function(harii) {
+			//                 if (monthh != harii[0] && a == harii[0]) {
+			//                     for (b = 1; b < harii[1]; b++) {
+			//                         // $.get(baseUrl+'kasumum/thnn/' + i + '/' + a + '/' + b, function(result) {
+			//                         //     data = JSON.parse(result);
+			//                         //     let datahariini = []
+			//                         //     if (data.length != 0) {
+			//                         //         datahariini.push(data)
+			//                         //         let dateee = new Date(datahariini[0][0][0])
+			//                         //         let tgltransaksii = dateee.getDate() + ' - ' + (dateee.getMonth() + 1) + ' - ' + dateee.getFullYear()
+			//                         //         let kode = datahariini[0][0][3]
+			//                         //         let ketkode = kode.substring(0, 2)
+			//                         //         let debet = 0
+			//                         //         let kredit = 0
+			//                         //         if (ketkode === 'KK') {
+			//                         //             debet = 'Rp. 0'
+			//                         //             kredit = formatRupiah(datahariini[0][0][2].toString(), 'Rp. ')
+			//                         //         } else if (ketkode == 'KM') {
+			//                         //             kredit = 'Rp. 0'
+			//                         //             debet = formatRupiah(datahariini[0][0][2].toString(), 'Rp. ')
+			//                         //         }
+
+			//                         //         $("#dataKas").append(`<tr>
+			//                         //         <td>` + tgltransaksii + `</td>
+			//                         //         <td>` + datahariini[0][0][1] + `</td>
+			//                         //         <td>` + debet + `</td>
+			//                         //         <td>` + kredit + `</td>
+			//                         //         <td>` + formatRupiah(datahariini[0][0][4].toString(), 'Rp. ') + `</td>
+			//                         //     </tr>`)
+			//                         //         // $("#dataKas").append(`<tr>
+			//                         //         //                         <td></td>
+			//                         //         //                         <td>Saldo Akhir</td>
+			//                         //         //                         <td>` + formatRupiah(dbet.toString(), 'Rp. ') + `</td>
+			//                         //         //                         <td>` + formatRupiah(krdii.toString(), 'Rp. ') + `</td>
+			//                         //         //                         <td>` + formatRupiah(sldo.toString(), 'Rp. ') + `</td>
+			//                         //         //                     </tr>`)
+			//                         //     }
+			//                         // })
+			//                     }
+			//                 } else if (monthh == harii[0] && a == harii[0]) {
+			//                     for (c = 1; c < datee2; c++) {
+			//                         // $.get(baseUrl+'kasumum/thnn/' + i + '/' + a + '/' + c, function(result) {
+			//                         //     data = JSON.parse(result);
+			//                         //     let datahariini = []
+			//                         //     if (data.length != 0) {
+			//                         //         datahariini.push(data)
+			//                         //         let dateee = new Date(datahariini[0][0][0])
+			//                         //         let tgltransaksii = dateee.getDate() + ' - ' + (dateee.getMonth() + 1) + ' - ' + dateee.getFullYear()
+			//                         //         let kode = datahariini[0][0][3]
+			//                         //         let ketkode = kode.substring(0, 2)
+			//                         //         let debet = 0
+			//                         //         let kredit = 0
+			//                         //         if (ketkode === 'KK') {
+			//                         //             debet = 'Rp. 0'
+			//                         //             kredit = formatRupiah(datahariini[0][0][2].toString(), 'Rp. ')
+			//                         //         } else if (ketkode == 'KM') {
+			//                         //             kredit = 'Rp. 0'
+			//                         //             debet = formatRupiah(datahariini[0][0][2].toString(), 'Rp. ')
+			//                         //         }
+
+			//                         //         $("#dataKas").append(`<tr>
+			//                         //         <td>` + tgltransaksii + `</td>
+			//                         //         <td>` + datahariini[0][0][1] + `</td>
+			//                         //         <td>` + debet + `</td>
+			//                         //         <td>` + kredit + `</td>
+			//                         //         <td>` + formatRupiah(datahariini[0][0][4].toString(), 'Rp. ') + `</td>
+			//                         //     </tr>`)
+			//                         //         // $("#dataKas").append(`<tr>
+			//                         //         //                         <td></td>
+			//                         //         //                         <td>Saldo Akhir</td>
+			//                         //         //                         <td>` + formatRupiah(dbet.toString(), 'Rp. ') + `</td>
+			//                         //         //                         <td>` + formatRupiah(krdii.toString(), 'Rp. ') + `</td>
+			//                         //         //                         <td>` + formatRupiah(sldo.toString(), 'Rp. ') + `</td>
+			//                         //         //                     </tr>`)
+			//                         //     }
+			//                         // })
+			//                     }
+			//                 }
+			//             })
+			//         }
+			//     }
+			// }
+		}
+
+	})
+
 	// ./modul/FORMAT IMPORT EXCEL.xlsx
 </script>
 <!-- ========== ADD custom.js FILE BELOW WITH YOUR CHANGES ========== -->
 </body>
+
 </html>

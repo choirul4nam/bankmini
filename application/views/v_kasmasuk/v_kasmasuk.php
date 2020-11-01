@@ -80,9 +80,23 @@
                                                         <?php if ($akses['edit'] == 1) { ?>
                                                             <a href="<?= base_url('kas-masuk-edt/') . $data['kode_kas_masuk'] ?>" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
                                                         <?php  } ?>
-                                                        <?php if ($akses['delete'] == 1) { ?>
-                                                            <a href="<?= base_url('kasmasuk/hapus/') . $data['kode_kas_masuk'] ?>" class="btn btn-danger" onclick="return confirm('Yakin Mau Dihapus ?')"><i class="fa fa-trash"></i></a>
-                                                        <?php  } ?>
+
+                                                        <?php
+                                                        $tkaskeluar = $this->db->query("SELECT SUM(nominal) AS kknominal FROM tb_kaskeluar")->row_array();
+                                                        $tkasmasuk = $this->db->query("SELECT SUM(nominal) AS kmnominal FROM tb_kasmasuk")->row_array();
+                                                        $tlastkasmasuk = $this->db->query("SELECT * FROM tb_kasmasuk ORDER BY id_km ASC LIMIT 1")->row_array();
+                                                        // var_dump($tkaskeluar['kknominal']);
+
+                                                        if ($tkasmasuk['kmnominal'] <= $tkaskeluar['kknominal'] || $tkaskeluar['kknominal'] != null && $tlastkasmasuk['id_km'] == $data['id_km']) { ?>
+                                                            <?php if ($akses['delete'] == 1) { ?>
+                                                                <a href="/" class="btn btn-danger" onclick="return false"><i class="fa fa-trash"></i></a>
+                                                            <?php  } ?>
+                                                        <?php } else { ?>
+                                                            <?php if ($akses['delete'] == 1) { ?>
+                                                                <a href="<?= base_url('kasmasuk/hapus/') . $data['kode_kas_masuk'] ?>" class="btn btn-danger" onclick="return confirm('Yakin Mau Dihapus ?')"><i class="fa fa-trash"></i></a>
+                                                            <?php  } ?>
+                                                        <?php } ?>
+
                                                     </div>
                                                 </center>
                                             </td>
@@ -102,4 +116,9 @@
         <!-- /.container-fluid -->
     </section>
     <!-- /.section -->
+</div>
+<!-- /.main-page -->
+<!-- /.right-sidebar -->
+</div>
+<!-- /.content-container -->
 </div>

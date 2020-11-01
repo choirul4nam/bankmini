@@ -1,3 +1,13 @@
+<?php
+$dbet = $this->db->query("SELECT SUM(nominal) AS nominal FROM tb_historikas WHERE jenis = 'kas masuk' AND MONTH(tgltransaksi) = " . date('m') . " AND YEAR(tgltransaksi) = " . date('Y'))->row_array();
+$kreddi = $this->db->query("SELECT SUM(nominal) AS nominal FROM tb_historikas WHERE jenis = 'kas keluar' AND MONTH(tgltransaksi) = " . date('m') . " AND YEAR(tgltransaksi) = " . date('Y'))->row_array();
+$sa = $dbet['nominal'] - $kreddi['nominal'];
+?>
+<?php
+$dbett = $this->db->query("SELECT SUM(nominal) AS nominal FROM tb_historikas WHERE jenis = 'kas masuk' AND MONTH(tgltransaksi) != " . intval(date('m')) . " AND YEAR(tgltransaksi) = " . date('Y'))->row_array();
+$kreddii = $this->db->query("SELECT SUM(nominal) AS nominal FROM tb_historikas WHERE jenis = 'kas keluar' AND MONTH(tgltransaksi) = " . intval(date('m')) . " AND YEAR(tgltransaksi) = " . date('Y'))->row_array();
+$saa = $dbett['nominal'] - $kreddii['nominal'];
+?>
 <div class="main-page">
     <div class="container-fluid">
         <div class="row page-title-div">
@@ -25,8 +35,9 @@
         <!-- /.row -->
     </div>
     <!-- /.container-fluid -->
+
     <section class="section">
-        <div class="container-fluid p-35">
+        <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-7">
                     <?= $this->session->flashdata('alert'); ?>
@@ -34,44 +45,42 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-
                     <div class="panel">
-                        <div class="panel-heading">
-                            <div class="panel-title">
-                                <h5>Kas Umum</h5>
-                                <!-- <div class="bg-primary pull-right mr-15">
-                                    <?php $aaa = $this->db->query("SELECT * FROM tb_historikas WHERE MONTH(tgltransaksi) = " . intval(date('m')) . " ORDER BY id_histori_kas DESC LIMIT 1")->row_array() ?>
-                                    <h3 class="ml-5 mt-5 mr-5 mb-5" id="saldo">Sisa Saldo = <?= 'Rp. ' . number_format($aaa['saldo']) ?></h3>
-                                </div> -->
-                            </div>
+                        <div class="panel-heading mt-10 ml-20">
                             <div class="row">
                                 <div class="col-md-4">
-                                    <select id="blnkas" class="form-control ml-15 blnkas">
-                                        <!-- <option value="">Pilih Bulan</option> -->
-                                        <?php $bulan = array(
-                                            array('Januari', 1),
-                                            array('Februari', 2),
-                                            array('Maret', 3),
-                                            array('April', 4),
-                                            array('Mei', 5),
-                                            array('Juni', 6),
-                                            array('Juli', 7),
-                                            array('Agustus', 8),
-                                            array('September', 9),
-                                            array('Oktober', 10),
-                                            array('November', 11),
-                                            array('Desember', 12)
-                                        );
-                                        var_dump($bulan);
-                                        $no = 1;
-                                        foreach ($bulan as $bulann) {
-                                            if (date('m') == $bulann[1]) { ?>
-                                                <option value="<?= $bulann[1] ?>" selected><?= $bulann[0]  ?></option>
-                                            <?php } else { ?>
-                                                <option value="<?= $bulann[1] ?>"><?= $bulann[0]  ?></option>
-                                        <?php }
-                                        } ?>
-                                    </select>
+                                    <table>
+                                        <tr>
+                                            <td style="min-width: 120px;">Tanggal Awal </td>
+                                            <td colspan=><input type="date" class="form-control" id="tglawall" value="<?= date('Y-m-d') ?>"></td>
+                                            <?php
+                                            $dbett1 = $this->db->query("SELECT SUM(nominal) AS nominal FROM tb_historikas WHERE jenis = 'kas masuk' ")->row_array();
+                                            $kredii2 = $this->db->query("SELECT SUM(nominal) AS nominal FROM tb_historikas WHERE jenis = 'kas keluar' ")->row_array();
+                                            $hh = $dbett1['nominal'] - $kredii2['nominal'];
+                                            ?>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td colspan="3">
+                                                <p id="tt" style="font-weight: bold; font-size: 30px; margin-top: 30px">TOTAL : <?= number_format($hh) ?></p>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                            <td style="min-width: 120px;">Tanggal Akhir </td>
+                                            <td><input type="date" class="form-control" id="tglakhiree" value="<?= date('Y-m-d') ?>"></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td><button class="btn btn-success" id="lporanhri">Laporan Hari Ini</button> </td>
+                                            <td> <button class="btn btn-success" id="lporanbln">laporan Bulanan Ini</button></td>
+                                            <td><button class="btn btn-success" id="lporanthn">Laporan Tahunan Ini</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" align="right"><button class="btn btn-success" id="btnCaridata"><i class="fa fa-search"></i>Cari</button></td>
+                                        </tr>
+
+                                    </table>
                                 </div>
                             </div>
                         </div>
@@ -79,50 +88,54 @@
                             <table id="dataTableKasUmum" class="table table-bordered" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
-                                        <th>Tgl. Transaksi</th>
-                                        <th>Keterangan</th>
+                                        <th>No. </th>
+                                        <th>Tanggal</th>
+                                        <th>Kode</th>
                                         <th>Debet</th>
                                         <th>Kredit</th>
-                                        <th>Saldo</th>
+                                        <th>Keterangan</th>
                                     </tr>
                                 </thead>
                                 <tbody id="dataKas">
+
                                     <?php
+                                    $no = 0;
                                     foreach ($recap as $data) {
+                                        $no++;
                                         $kode = $data[3];
                                         $ketkode = substr($kode, 0, 2);
                                         $debet = 0;
                                         $kredit = 0;
+                                        $ket = "";
                                         $saldo = $data[4];
                                         if ($ketkode == 'KK') {
                                             $kredit = $data[2];
+                                            $ket = "kas keluar";
                                         } else if ($ketkode == 'KM') {
                                             $debet = $data[2];
+                                            $ket = "kas masuk";
                                         }
                                     ?>
 
                                         <tr>
+                                            <td><?= $no ?></td>
                                             <td><?= date('d-m-Y', strtotime($data[0])) ?></td>
-                                            <td><?= $data[1] ?> </td>
+                                            <td><?= $kode ?> </td>
                                             <td><?= 'Rp. ' . number_format($debet) ?></td>
                                             <td><?= 'Rp. ' . number_format($kredit) ?></td>
-                                            <td><?= 'Rp. ' . number_format($saldo) ?></td>
+                                            <td>
+                                                <?= $ket; ?> : <br>
+                                                <?= $data[1] ?>
+                                            </td>
                                         </tr>
                                     <?php } ?>
                                     <tr>
                                         <td></td>
-                                        <td>Saldo Akhir</td>
-                                        <?php $dbet = $this->db->query("SELECT SUM(nominal) AS nominal FROM tb_historikas WHERE jenis = 'kas masuk' AND MONTH(tgltransaksi) = " . intval(date('m')) . " ")->row_array(); ?>
-                                        <td><?= 'Rp. ' . number_format($dbet['nominal']) ?></td>
-
-                                        <?php $kreddi = $this->db->query("SELECT SUM(nominal) AS nominal FROM tb_historikas WHERE jenis = 'kas keluar' AND MONTH(tgltransaksi) = " . intval(date('m')) . "")->row_array(); ?>
-                                        <td><?= 'Rp. ' . number_format($kreddi['nominal']) ?></td>
-                                        <?php
-                                        $dbet = $this->db->query("SELECT SUM(nominal) AS nominal FROM tb_historikas WHERE jenis = 'kas masuk' AND MONTH(tgltransaksi) = " . date('m') . " ")->row_array();
-                                        $kreddi = $this->db->query("SELECT SUM(nominal) AS nominal FROM tb_historikas WHERE jenis = 'kas keluar' AND MONTH(tgltransaksi) = " . date('m') . "")->row_array();
-                                        $sa = intval($dbet['nominal']) - intval($kreddi['nominal']);
-                                        ?>
-                                        <td><?= 'Rp. ' . number_format($sa) ?></td>
+                                        <td style="font-size: 15px;font-weight: bold">TOTAL</td>
+                                        <td></td>
+                                        <td style="font-size: 15px;font-weight: bold"><?= 'Rp. ' . number_format($dbett1['nominal']) ?></td>
+                                        <td style="font-size: 15px;font-weight: bold"><?= 'Rp. ' . number_format($kredii2['nominal']) ?></td>
+                                        <td style="font-size: 15px;font-weight: bold">Saldo : <?= 'Rp. ' . number_format($hh) ?></td>
                                     </tr>
                                 </tbody>
                             </table>

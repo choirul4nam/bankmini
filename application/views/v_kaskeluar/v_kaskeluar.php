@@ -106,3 +106,8 @@
     </section>
     <!-- /.section -->
 </div>
+<!-- /.main-page -->
+<!-- /.right-sidebar -->
+</div>
+<!-- /.content-container -->
+</div>
