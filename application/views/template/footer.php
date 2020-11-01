@@ -54,10 +54,34 @@
 
 	$('#upClass-table').DataTable()
 
-	$('#dataTableTransaksi').DataTable({
-		"order": [[1, "desc"]],
-		'scrollX': true
-	});
+	// let t = $('#dataTableTransaksi').DataTable({
+	// 	"order": [[1, "desc"]],
+	// 	'scrollX': true,
+	// 	render: function (data, type, row, meta) {
+	// 		return meta.row + meta.settings._iDisplayStart + 1;
+	// 	}
+	// });
+
+	$(document).ready(function() {
+		var t = $('#dataTableTransaksi').DataTable( {
+			"columnDefs": [ {
+				"searchable": false,
+				"orderable": false,
+				"targets": 0
+			} ],
+			"order": [[ 1, 'DESC' ]],
+			"sScrollX": "100%",
+			"sScrollXInner": "110%",
+			"bScrollCollapse": true,
+			"responsive": true,
+		} );
+	
+		t.on( 'order.dt search.dt', function () {
+			t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+				cell.innerHTML = i+1;
+			} );
+		} ).draw();
+	} );
 
 	$('#dataTableSiswa').DataTable({
 		'scrollX': true,
@@ -110,11 +134,11 @@
 	});
 
 	$('#tb_histori').DataTable({
-		// 'scrollX' : true,
-		"sort": false,
-		"scrollY": "170px",
-		"scrollX": true,
-		"scrollCollapse": true,
+				// 'scrollX' : true,
+		"sScrollX": "100%",
+		"sScrollXInner": "110%",
+		"bScrollCollapse": true,
+		"responsive": true,		
 		"searching": false,
 		"paging": false,
 		"bInfo": false,
@@ -221,39 +245,161 @@
 	})
 
 	$('#debet').change(function () {
-		if ($(this).val() === 'siswa') {
-			if ($('#kredit').val() === 'Pilih' || $('#kredit').val() === null || $('#kredit').val() === ' ') {
-				$('#kredit').html('<option>Pilih</option><option value="koperasi">Koperasi</option>')
-			} else if ($('#kredit').val() === 'siswa') {
-				$('#kredit').html('<option>Pilih</option><option value="koperasi">Koperasi</option>')
-			}
-		} else if ($(this).val() === 'koperasi') {
-			if ($('#kredit').val() === 'Pilih' || $('#kredit').val() === null || $('#kredit').val() === ' ') {
-				$('#kredit').html('<option>Pilih</option><option value="siswa">siswa</option>')
-			} else if ($('#kredit').val() === 'koperasi') {
-				$('#kredit').html('<option>Pilih</option><option value="siswa">siswa</option>')
-			}
-		} else {
-			$('#kredit').html('<option>Pilih</option><option value="siswa">siswa</option><option value="koperasi">Koperasi</option>')
-		}
+		// let kdval = $("#kredit").val();			
+		// if(kdval === 'salah'){
+		// 	console.log(this.value)
+		// 	$('#kredit').html('')
+		// 	if(this.value !== 'salah') {
+		// 		$.get( baseUrl+'tipeuser/getTipeUser/'+this.value ,function(res){
+		// 			let data = JSON.parse(res)
+		// 			console.log(data)
+		// 			$('#kredit').append('<option value="salah">Pilih</option>')
+		// 			data.forEach(function(row){				
+		// 				$('#kredit').append('<option value="'+row.id_tipeuser+'">'+row.tipeuser+'</option>')
+		// 			})
+		// 		})				
+		// 	}else{
+		// 		$.get( baseUrl+'tipeuser/getTipeUserAll',function(res){
+		// 			let data = JSON.parse(res)
+		// 			console.log(data)
+		// 			$('#kredit').append('<option value="salah">Pilih</option>')
+		// 			data.forEach(function(row){				
+		// 				$('#kredit').append('<option value="'+row.id_tipeuser+'">'+row.tipeuser+'</option>')
+		// 			})
+		// 		})				
+		// 	}
+		// }else{			
+		// 	if(this.value === 'salah'){				
+		// 		$('#kredit').html('')
+		// 		$.get( baseUrl+'tipeuser/getTipeUserAll',function(res){
+		// 			let data = JSON.parse(res)
+		// 			console.log(data)
+		// 			$('#kredit').append('<option value="salah">Pilih</option>')
+		// 			data.forEach(function(row){				
+		// 				$('#kredit').append('<option value="'+row.id_tipeuser+'">'+row.tipeuser+'</option>')
+		// 			})
+		// 		})							
+		// 	}
+		// }
+		// console.log($(this).val())
+		// if ($(this).val() === 'siswa') {
+		// 	// $('#kredit').html('')
+		// 	if ($('#kredit').val() === 'salah') {
+		// 		$('#kredit').html('')
+		// 		$('#kredit').append('<option value="salah">Pilih</option>')
+		// 		$('#kredit').append('<option value="koperasi">Koperasi</option>')
+		// 		$('#kredit').append('<option value="staf">Staf</option>')
+		// 	} else if ($('#kredit').val() === 'siswa') {
+		// 		$('#kredit').html('')
+		// 		$('#kredit').append('<option value="salah">Pilih</option>')
+		// 		$('#kredit').append('<option value="koperasi">Koperasi</option>')
+		// 		$('#kredit').append('<option value="staf">Staf</option>')
+		// 	} else if ($('#kredit').val() === 'staf') {
+		// 		$('#kredit').html('')
+		// 		$('#kredit').append('<option value="salah">Pilih</option>')
+		// 		$('#kredit').append('<option value="koperasi">Koperasi</option>')
+		// 		$('#kredit').append('<option value="siswa">Siswa</option>')
+		// 	} else if ($('#kredit').val() === 'koperasi') {
+		// 		$('#kredit').html('')
+		// 		$('#kredit').append('<option value="salah">Pilih</option>')
+		// 		$('#kredit').append('<option value="staf">Staf</option>')
+		// 		$('#kredit').append('<option value="siswa">Siswa</option>')
+		// 	}
+		// }else if ($(this).val() === 'koperasi') {
+		// 	if ($('#kredit').val() === 'salah') {
+		// 		$('#kredit').html('')
+		// 		$('#kredit').append('<option value="salah">Pilih</option>')
+		// 		$('#kredit').append('<option value="siswa">siswa</option>')
+		// 		$('#kredit').append('<option value="staf">Staf</option>')
+		// 	} else if ($('#kredit').val() === 'siswa') {
+		// 		$('#kredit').html('')
+		// 		$('#kredit').append('<option value="salah">Pilih</option>')
+		// 		$('#kredit').append('<option value="koperasi">Koperasi</option>')
+		// 		$('#kredit').append('<option value="staf">Staf</option>')
+		// 	} else if ($('#kredit').val() === 'staf') {
+		// 		$('#kredit').html('')
+		// 		$('#kredit').append('<option value="salah">Pilih</option>')
+		// 		$('#kredit').append('<option value="koperasi">Koperasi</option>')
+		// 		$('#kredit').append('<option value="siswa">Siswa</option>')
+		// 	} else if ($('#kredit').val() === 'koperasi') {
+		// 		$('#kredit').html('')
+		// 		$('#kredit').append('<option value="salah">Pilih</option>')
+		// 		$('#kredit').append('<option value="staf">Staf</option>')
+		// 		$('#kredit').append('<option value="siswa">Siswa</option>')
+		// 	}
+		// }else if ($(this).val() === 'staf'){
+		// 	if ($('#kredit').val() === 'salah') {
+		// 		$('#kredit').html('')
+		// 		$('#kredit').append('<option value="salah">Pilih</option>')
+		// 		$('#kredit').append('<option value="siswa">siswa</option>')
+		// 		$('#kredit').append('<option value="koperasi">Koperasi</option>')
+		// 	} else if ($('#kredit').val() === 'siswa') {
+		// 		$('#kredit').html('')
+		// 		$('#kredit').append('<option value="salah">Pilih</option>')
+		// 		$('#kredit').append('<option value="koperasi">Koperasi</option>')
+		// 		$('#kredit').append('<option value="staf">Staf</option>')
+		// 	} else if ($('#kredit').val() === 'staf') {
+		// 		$('#kredit').html('')
+		// 		$('#kredit').append('<option value="salah">Pilih</option>')
+		// 		$('#kredit').append('<option value="koperasi">Koperasi</option>')
+		// 		$('#kredit').append('<option value="siswa">Siswa</option>')
+		// 	} else if ($('#kredit').val() === 'koperasi') {
+		// 		$('#kredit').html('')
+		// 		$('#kredit').append('<option value="salah">Pilih</option>')
+		// 		$('#kredit').append('<option value="staf">Staf</option>')
+		// 		$('#kredit').append('<option value="siswa">Siswa</option>')
+		// 	}
+		// }else {
+		// 	$('#kredit').html('<option value="salah">Pilih</option><option value="siswa">siswa</option><option value="koperasi">Koperasi</option> <option value="staf">Staf</option>')
+		// }					
 	})
 
 	$('#kredit').change(function () {
-		if ($(this).val() === 'siswa') {
-			if ($('#debet').val() === 'Pilih' || $('#debet').val() === null || $('#debet').val() === ' ') {
-				$('#debet').html('<option>Pilih</option><option value="koperasi">koperasi</option>')
-			} else if ($('#debet').val() === 'siswa') {
-				$('#debet').html('<option>Pilih</option><option value="koperasi">Koperasi</option>')
-			}
-		} else if ($(this).val() === 'koperasi') {
-			if ($('#debet').val() === 'Pilih' || $('#debet').val() === null || $('#debet').val() === ' ') {
-				$('#debet').html('<option>Pilih</option><option value="siswa">siswa</option>')
-			} else if ($('#debet').val() === 'koperasi') {
-				$('#debet').html('<option>Pilih</option><option value="siswa">siswa</option>')
-			}
-		} else {
-			$('#debet').html('<option>Pilih</option><option value="siswa">siswa</option><option value="koperasi">Koperasi</option>')
-		}
+		// let dbval = $('#debet').val();
+		// if(dbval ===  'salah'){
+		// 	if(this.value !== 'salah'){
+		// 		$.get( baseUrl+'tipeuser/getTipeUser/'+this.value ,function(res){
+		// 			$('#debet').html('')	
+		// 			let data = JSON.parse(res)
+		// 			console.log(data)
+		// 			$('#debet').html('<option value="salah">Pilih</option>')
+		// 			data.forEach(function(row){				
+		// 				$('#debet').append('<option value="'+row.id_tipeuser+'">'+row.tipeuser+'</option>')
+		// 			})
+		// 		})
+		// 	}
+		// }
+		// if ($(this).val() === 'siswa') {
+		// 	if ($('#debet').val() === 'salah') {
+		// 		$('#debet').html('')
+		// 		$('#debet').append('<option value="salah">Pilih</option>')
+		// 		$('#debet').append('<option value="koperasi">Koperasi</option>')
+		// 		$('#debet').append('<option value="staf">Staf</option>')
+		// 	} else if ($('#debet').val() === 'siswa') {
+		// 		$('#debet').html('')
+		// 		$('#debet').append('<option value="salah">Pilih</option>')
+		// 		$('#debet').append('<option value="koperasi">Koperasi</option>')
+		// 		$('#debet').append('<option value="staf">Staf</option>')
+		// 	} else if ($('#debet').val() === 'staf') {
+		// 		$('#debet').html('')
+		// 		$('#debet').append('<option value="salah">Pilih</option>')
+		// 		$('#debet').append('<option value="koperasi">Koperasi</option>')
+		// 		$('#debet').append('<option value="siswa">Siswa</option>')
+		// 	} else if ($('#debet').val() === 'koperasi') {
+		// 		$('#debet').html('')
+		// 		$('#debet').append('<option value="salah">Pilih</option>')
+		// 		$('#debet').append('<option value="staf">Staf</option>')
+		// 		$('#debet').append('<option value="siswa">Siswa</option>')
+		// 	}
+		// } else if ($(this).val() === 'koperasi') {
+		// 	if ($('#debet').val() === 'Pilih' || $('#debet').val() === null || $('#debet').val() === ' ') {
+		// 		$('#debet').html('<option>Pilih</option><option value="siswa">siswa</option>')
+		// 	} else if ($('#debet').val() === 'koperasi') {
+		// 		$('#debet').html('<option>Pilih</option><option value="siswa">siswa</option>')
+		// 	}
+		// } else {
+		// 	$('#debet').html('<option>Pilih</option><option value="siswa">siswa</option><option value="koperasi">Koperasi</option>')
+		// }
 	})
 
 	$('#blnkas').change(function () {
@@ -451,7 +597,7 @@
 					$('.cusName').removeAttr('disabled');
 					$('.cusName').append('<option value="">Pilih Nama</option>')
 					data.forEach(function (res) {
-						$('.cusName').append('<option value="' + res.id_staf + '">' + res.nama + '</option>')
+						$('.cusName').append('<option value="' + res.id_staf + '">' + res.nama + ' ('+ res.nopegawai +')</option>')
 					})
 				});
 				$.get(baseUrl + 'mtransaksi/getMTransaksiStaf/koperasi', function (result) {
@@ -544,7 +690,18 @@
 				//     $('#tipeTransaksi').val('kredit')
 				if (data.debet == 'koperasi') {
 					$('#tipeTransaksi').val('debet')
-					$('.nominalInp').attr('tipe-debet', data.debet)
+					$('.nominalInp').attr('tipe-debet', data.debet)					
+					if (data.nominal > parseInt(saldo)) {
+						$('#warning').css("display", "block")
+						$('.btnAdd').attr('disabled', 'disabled')
+					} else {
+						$('#warning').css("display", "none")
+						$('.btnAdd').removeAttr('disabled')
+					}
+				}else if(data.debet == '' && data.kredit == 'koperasi'){
+					$('#tipeTransaksi').val('kredit')
+					$('.nominalInp').attr('tipe-debet', data.debet)					
+					$('.nominalInp').attr('tipe-kredit', data.kredit)					
 					if (data.nominal > parseInt(saldo)) {
 						$('#warning').css("display", "block")
 						$('.btnAdd').attr('disabled', 'disabled')
@@ -575,12 +732,14 @@
 		let nominal = $(this).val();
 		var one = nominal.slice(4, nominal.length);
 		var res = one.replace(/[^\w\s]/gi, '');
+		console.log(kredit)
+		console.log(debet)
 		if (kredit == 'siswa') {
-			console.log("siswa")
+			// console.log("siswa")
 			$('#warning').css("display", "none")
 			$('.btnAdd').removeAttr('disabled')
 		} else if (debet == 'siswa') {
-			console.log("debet Siswa")
+			// console.log("debet Siswa")
 			if (parseInt(res) <= parseInt(saldo)) {
 				// console.log('bisa transaksi')
 				$('#warning').css("display", "none")
@@ -605,7 +764,13 @@
 				$('#warning').css("display", "block")
 				$('.btnAdd').attr('disabled', true)
 			}
+		}else if(debet == '' && kredit == 'koperasi'){
+			$('#warning').css("display", "none")
+			$('.btnAdd').removeAttr('disabled')
 		}
+		$("#nominal").val(res);
+		// console.log(res)
+		// console.log(one)
 	})
 
 	if ($('#editTransaksi').val() == 'edit') {
@@ -793,12 +958,12 @@
 			} else if (tipe == 1) {
 				let id_staf = $(this).val()
 				$.get(baseUrl + 'Transaksi/getTransaksiStafByid/' + id_staf, function (result) {
-					let data = JSON.parse(result);
-					sssaldo = data.saldo
-					$('#saldoBox').html(formatRupiah(data.saldo.toString(), "Rp. "))
-					$('#saldoBox').attr('data-saldo', parseInt(data.saldo))
-					$('#sisasaldo').val(parseInt(data.saldo))
-					let saldo = parseInt(data.saldo)
+					// let data = JSON.parse(result);
+					sssaldo = result
+					$('#saldoBox').html(formatRupiah(result.toString(), "Rp. "))
+					$('#saldoBox').attr('data-saldo', parseInt(result))
+					$('#sisasaldo').val(parseInt(result))
+					let saldo = parseInt(result)
 					// let kredit = $('.nominalInp').attr('tipe-kredit')
 					let nominal = $('.nominalInp').val();
 					if (nominal == '') {
@@ -809,10 +974,10 @@
 						// }else{
 						if (parseInt(res) <= parseInt(saldo)) {
 							$('#warning').css("display", "none")
-							// $('.btnAdd').removeAttr('disabled')
+							$('.btnAdd').removeAttr('disabled')
 						} else if (parseInt(res) >= parseInt(saldo)) {
 							$('#warning').css("display", "block")
-							// $('.btnAdd').attr('disabled', true)
+							$('.btnAdd').attr('disabled', true)
 						}
 						// }
 					}
@@ -830,10 +995,10 @@
 					let koperKredit = '';
 					data.forEach(function (res) {
 						tanggal = res.tgl_update;
-						tanggalBaru = tanggal.slice(0, 9);
+						tanggalBaru = tanggal.slice(0, 10);
 						if (res.debet == 'koperasi') {
 							koperDebet = 'staf'
-						} else if (res.kredit == 'koeperasi') {
+						} else if (res.kredit == 'koperasi') {
 							koperKredit = 'staf'
 						}
 						if (res.debet == 'siswa' || koperDebet == 'staf') {
@@ -843,10 +1008,10 @@
 						}
 						$('#box-transaksi').append(`<tr>
                                                         <td><b>` + no++ + `. </b></td> 
-                                                        <td style="min-width: 125px;">` + tanggalBaru + `</td>
-                                                        <td style="min-width: 377px;width: 377px;"><b>` + res.keterangan + `</b></td>
-                                                        <td style="min-width: 125px;">` + formatRupiah(res.nominal, 'Rp. ') + `</td>
-                                                        <td style="min-width: 125px;" align="center"><center>` + tipeTransaksi + `</center></td>
+                                                        <td>` + tanggalBaru + `</td>
+                                                        <td><b>` + res.keterangan + `</b></td>
+                                                        <td>` + formatRupiah(res.nominal, 'Rp. ') + `</td>
+                                                        <td align="center"><center>` + tipeTransaksi + `</center></td>
                                                     </tr>`)
 					})
 				} else {

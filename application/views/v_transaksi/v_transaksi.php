@@ -24,6 +24,10 @@
         </div>
         <!-- /.row -->
     </div>
+    <style>
+        	
+    
+    </style>
     <!-- /.container-fluid -->
     <section class="section">
         <div class="container-fluid">
@@ -47,14 +51,15 @@
                             <?php } ?>
                         </div>                        
                         <div class="panel-body p-20">
-                        <table id="dataTableTransaksi" class="display table table-striped table-bordered" cellspacing="0" width="100%">
+                            <!-- <div style="overflow-x:auto;" class="table-responsive"> -->
+                            <table id="dataTableTransaksi" class="display table nowrap" style="max-width:none !important;">
                                 <thead>
                                     <tr>
                                         <th><center>No</center></th>
                                         <th><center>Tanggal Transaksi</center></th>
+                                        <th><center>Kode Transaksi</center></th>
                                         <th><center>Nama</center></th>
                                         <th><center>Transaksi</center></th>
-                                        <th><center>Keterangan</center></th>
                                         <th><center>Nominal</center></th>
                                         <th width="140px"><center>Aksi</center></th>
                                     </tr>
@@ -62,11 +67,11 @@
                                 <tbody>
                                     <?php $no = 1; foreach($transaksi as $row): ?>
                                         <tr>
-                                            <td><?= $no++; ?></td>
-                                            <td><?= $row['tgl_update']; ?></td>
+                                            <td>#</td>
+                                            <td><?= date_format(date_create($row['tgl_update']),'d-m-Y H:m:s'); ?></td>
+                                            <td><?= $row['kodetransaksi']; ?></td>
                                             <td><?= $row['namaTransaksi']?></td>
                                             <td><?= $row['kategori']; ?></td>
-                                            <td><?= $row['keterangan']; ?></td>
                                             <td><?= 'Rp.' . number_format($row['nominal']); ?></td>
                                             <td style="min-width: 140px;">
                                                 <center>
@@ -85,6 +90,7 @@
                                     <?php endforeach; ?>
                                 </tbody>
                             </table>
+                            <!-- </div> -->
                         </div>
                     </div>
                 </div>

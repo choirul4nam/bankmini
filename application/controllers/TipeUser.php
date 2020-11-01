@@ -162,4 +162,14 @@ class TipeUser extends CI_Controller
             redirect('Tipeuser');
         }
     }
+
+    public function getTipeUser($id){
+        $query = $this->db->get_where('tb_tipeuser', ['id_tipeuser != ' => $id ])->result();
+        echo json_encode($query);        
+    }
+
+    public function getTipeUserAll(){
+        $query = $this->db->get('tb_tipeuser')->result();
+        echo json_encode($query);        
+    }
 }

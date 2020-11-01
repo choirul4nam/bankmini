@@ -38,6 +38,7 @@ class MTransaksi extends CI_Controller
 	{
 		$id = $this->session->userdata('tipeuser');
 		$data['menu'] = $this->M_Setting->getmenu1($id);
+		$data['tipeuser'] = $this->db->get('tb_tipeuser')->result();
 		$data['activeMenu'] = $this->db->get_where('tb_submenu', ['submenu' => 'Master Transaksi'])->row()->id_menus;
 
 		$this->load->view('template/header');

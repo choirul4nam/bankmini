@@ -31,7 +31,9 @@
                             <select class="form-control js-states tipeuserAdd inpCus" id="js-states" name="tipeuser" required > 
                                 <option value="salah">Pilih Tipe User</option>
                                 <?php foreach ($tipeuser as $tipeuser) { ?>
-                                    <option value="<?=$tipeuser['id_tipeuser'];?>"><?= ucwords($tipeuser['tipeuser']); ?></option>
+                                    <?php if($tipeuser['tipeuser'] != 'koperasi'): ?>
+                                      <option value="<?=$tipeuser['id_tipeuser'];?>"><?= ucwords($tipeuser['tipeuser']); ?></option>
+                                    <?php endif; ?>
                                 <?php } ?>                                                          
                             </select>	
                           </div>
@@ -90,7 +92,7 @@
                                   <div class="col-lg-12 col-md-12 col-sm-12 mt-25">
                                     <div class="form-group has-feedback">
                                         <label for="name5" style="font-size: 15px;">Nominal*</label>
-                                        <input type="text" class="form-control nominalInp inpt inpCus" style="font-size: 60px; text-align: right; font-weight: 600; height: 80px; background: #f7f774; color: #000;" disabled onkeypress='return event.charCode >= 48 && event.charCode <= 57' required name="no">
+                                        <input type="text" class="form-control nominalInp inpt inpCus" id="" style="font-size: 60px; text-align: right; font-weight: 600; height: 80px; background: #f7f774; color: #000;" disabled onkeypress='return event.charCode >= 48 && event.charCode <= 57' required name="no">
                                         <input type="hidden" name="nominal" id="nominal">                                                
                                         <span class="fa fa-pencil form-control-feedback"></span>                                        
                                     </div>  
@@ -114,14 +116,14 @@
                                     <!-- <div class="table-responsive"> -->
                                     <h4 style="margin: 0; padding: 0; display: inline;">Histori Transaksi</h4>
                                     <!-- <div class="border-danger no-border border-3-top"> -->
-                                      <table id="tb_histori" class="display table" width="100%">
+                                      <table id="tb_histori" class="display table nowrap" style="max-width:none !important;">
                                         <thead>
                                           <tr>
                                             <th>No</th>
-                                            <th style="min-width: 125px;">Tanggal</th>
-                                            <th style="min-width: 377px;">Keterangan</th>
-                                            <th style="min-width: 125px;">Nominal</th>
-                                            <th style="min-width: 125px;"><center>Tipe Transaksi</center></th>
+                                            <th>Tanggal</th>
+                                            <th>Keterangan</th>
+                                            <th>Nominal</th>
+                                            <th><center>Tipe Transaksi</center></th>
                                           </tr>
                                         </thead>
                                         <tbody id="box-transaksi">      

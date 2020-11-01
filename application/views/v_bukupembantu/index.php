@@ -47,7 +47,9 @@
                                                     <select class="form-control js-states" id="bpTipeuser">
                                                         <option value="">Pilih Tipe User</option>
                                                         <?php  foreach($tipeuser as $row): ?>
-                                                            <option value="<?= $row['tipeuser'] ; ?>"><?= ucwords($row['tipeuser']) ; ?></option>
+                                                            <?php if($row['tipeuser'] != 'koperasi'): ?>
+                                                                <option value="<?= $row['tipeuser'] ; ?>"><?= ucwords($row['tipeuser']) ; ?></option>
+                                                            <?php endif; ?>
                                                         <?php  endforeach; ?>
                                                     </select>
                                                 </div>
