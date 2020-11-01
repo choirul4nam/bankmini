@@ -33,6 +33,7 @@ class Siswa extends CI_Controller
 		$id = $this->session->userdata('tipeuser');
 		$data['menu'] = $this->M_Setting->getmenu1($id);				
 		$data['datasiswa'] = $this->M_Siswa->getsiswa();		
+		// var_dump($data);
 		$data['datalulus'] = $this->M_Siswa->getLulus();		
 		$data['akses'] = $this->M_Akses->getByLinkSubMenu(urlPath(), $id);
 		$data['activeMenu'] = $this->db->get_where('tb_submenu', ['submenu' => 'siswa'])->row()->id_menus;
@@ -459,11 +460,6 @@ class Siswa extends CI_Controller
 		$this->load->view('template/footer');
 	}
 
-	public function upload()
-	{
-			
-	}
-
 	public function import()
 	{
 		// echo $this->input->get('id_tahunakademik');	
@@ -574,7 +570,7 @@ class Siswa extends CI_Controller
 		$id = $this->session->userdata('tipeuser');
 		// $data['akses'] = $this->M_Akses->getByLinkSubMenu(urlPath(), $id);
 		$data['menu'] = $this->M_Setting->getmenu1($id);
-		$data['kelas'] = $this->db->get_where('tb_kelas', ['kelas LIKE' => '%XII%'])->result_array();
+		$data['kelas'] = $this->db->query('SELECT DISTINCT(tb_kelas.id_kelas), tb_kelas.kelas, COUNT(tb_siswa.id_kelas) AS jmlsiswa FROM tb_siswa JOIN tb_kelas ON tb_siswa.id_kelas = tb_kelas.id_kelas WHERE tb_siswa.status = "aktif" AND tb_kelas.kelas LIKE "%XII%" GROUP BY tb_siswa.id_kelas')->result_array();
 		$data['activeMenu'] = $this->db->get_where('tb_submenu', ['submenu' => 'siswa lulus'])->row()->id_menus;
 
 		$this->load->view('template/header');
@@ -584,7 +580,7 @@ class Siswa extends CI_Controller
 	}
 
 	public function getSiswaSrch($key){
-		echo json_encode($this->db->query("SELECT tb_siswa.*, tb_kelas.kelas, tb_tahunakademik.tglawal, tb_tahunakademik.tglakhir FROM tb_siswa JOIN tb_kelas ON tb_siswa.id_kelas = tb_kelas.id_kelas JOIN tb_tahunakademik ON tb_siswa.id_tahunakademik = tb_tahunakademik.id_tahunakademik WHERE nis LIKE '%$key%' OR namasiswa LIKE '%$key%' AND tb_siswa.status = 'aktif' AND tb_kelas.kelas LIKE '%XII%'")->result());
+		echo json_encode($this->db->query("SELECT tb_siswa.*, tb_kelas.kelas, tb_tahunakademik.tglawal, tb_tahunakademik.tglakhir FROM tb_siswa JOIN tb_kelas ON tb_siswa.id_kelas = tb_kelas.id_kelas JOIN tb_tahunakademik ON tb_siswa.id_tahunakademik = tb_tahunakademik.id_tahunakademik WHERE tb_siswa.status = 'aktif' AND (tb_siswa.nis LIKE '%$key%' OR tb_siswa.namasiswa LIKE '%$key%') AND tb_kelas.kelas LIKE '%XII%'")->result());
 	}
 
 	public function gradByOne($id)

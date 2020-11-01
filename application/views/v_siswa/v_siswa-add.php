@@ -62,7 +62,7 @@
                                                 <select class="form-control js-states" name="tahun_akademik" required>
                                                     <option value="">Pilih Tahun Akademik</option>
                                                     <?php foreach ($tahunaka as $row): ?>
-                                                        <option value="<?= $row['id_tahunakademik']; ?>"><?= $row['tglawal']; ?> - <?= $row['tglakhir']; ?></option>
+                                                        <option value="<?= $row['id_tahunakademik']; ?>"> ( <?php $tglawal = date_create($row['tglawal']); echo date_format($tglawal,"Y"); ?> ) - ( <?php $tglakhir = date_create($row['tglakhir']); echo date_format($tglakhir,"Y"); ?> )</option>
                                                     <?php endforeach; ?>
                                                 </select>
                                                 <span class="fa fa-building-o form-control-feedback"></span>

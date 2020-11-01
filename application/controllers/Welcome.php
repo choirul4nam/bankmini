@@ -32,8 +32,8 @@ class Welcome extends CI_Controller
 			$nominalKredit = $row->nominal + $nominalKredit;
 		}
 
-		$siswa = $this->db->get('tb_siswa')->num_rows();
-		$staff = $this->db->get('tb_staf')->num_rows();
+		$siswa = $this->db->where('status', 'aktif')->get('tb_siswa')->num_rows();
+		$staff = $this->db->where('status', 'aktif')->get('tb_staf')->num_rows();
 
 		$data['menu'] = $this->M_Setting->getmenu1($id);
 		$data['dataAnggota'] = $siswa + $staff;

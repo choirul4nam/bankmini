@@ -50,7 +50,7 @@
                                         <select id="kelasGrad" class="form-control js-states">
                                             <option value="salah">Pilih Kelas</option>
                                             <?php foreach($kelas as $row): ?>
-                                                <option value="<?=$row['id_kelas']?>">  <?= $row['kelas']; ?> </option>
+                                                <option value="<?=$row['id_kelas']?>">  <?= $row['kelas']; ?> ( <?= $row['jmlsiswa']; ?> ) Siswa</option>
                                             <?php endforeach; ?>
                                         </select>
                                     </div>

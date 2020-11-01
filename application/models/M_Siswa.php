@@ -2,15 +2,8 @@
 
 class M_Siswa extends CI_Model {
 
-    function getsiswa(){
-        $this->db->select('*');
-	    $this->db->from('tb_siswa'); 
-	    // $this->db->join('tb_kelas', 'tb_siswa.id_kelas = tb_kelas.id_kelas');	    
-	    // $this->db->where('tb_siswa.status', 'aktif')->or_where('tb_siswa.status', 'alumni');
-        $this->db->where('tb_siswa.status', 'aktif');
-	    $this->db->order_by('namasiswa', 'asc');
-	    $query = $this->db->get(); 
-        return $query->result();
+    function getsiswa(){         
+        return $this->db->query("SELECT tb_siswa.*, IFNULL(tb_kelas.kelas, 'Belum Punya Kelas') AS kelas, tb_tahunakademik.tglawal,tb_tahunakademik.tglakhir FROM tb_siswa LEFT JOIN tb_kelas ON tb_kelas.id_kelas = tb_siswa.id_kelas JOIN tb_tahunakademik ON tb_siswa.id_tahunakademik = tb_tahunakademik.id_tahunakademik WHERE tb_siswa.status = 'aktif'")->result();
     }
 
     function getLulus(){

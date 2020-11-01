@@ -63,6 +63,12 @@
 		'scrollX': true,
 		'sort': false
 	});
+	
+	$('#dataSiswaIndex').DataTable({
+		"order": [[3, "desc"]],
+		'scrollX': true,
+		'sort': false
+	});
 
 	$('input.blue-style').iCheck({
 		checkboxClass: 'icheckbox_square-blue',
@@ -1177,7 +1183,7 @@
                                             <td>` + no++ + `</td>
                                             <td>` + resu.nis + `</td>
                                             <td id="` + resu.nis + `">` + resu.namasiswa + `</td>
-                                            <td>` + $('#kelasGrad option:selected').html() + `</td>
+                                            <td>` + resu.kelas + `</td>
                                             <td>` + resu.jk + `</td>
                                             <td>` + resu.tglawal + ` - ` + resu.tglakhir + `</td>
                                             <td>
@@ -1756,19 +1762,21 @@
                                 <td id="` + resu.nis + `">` + resu.namasiswa + `</td>
                                 <td>` + resu.jk + `</td>
                                 <td>` + $('#fromClass option:selected').html() + `</td>
-                                <td>` + resu.tglawal + ` - ` + resu.tglakhir + `</td>
+                                <td>` + new Date(resu.tglawal).getFullYear() + ` - ` + new Date(resu.tglakhir).getFullYear() + `</td>
                             </tr>
                         `)
 					})
+					// console.log(idTA)
 					$.get(baseUrl + 'tahunakademik/getTAList/' + idTA, function (hasil) {
-						let data = JSON.parse(hasil)
-						console.log(data)
-						if (data.length != 0) {
+						// console.log(hasil)
+						let tahuna = JSON.parse(hasil)
+						// console.log(tahuna)
+						if (tahuna.length != 0) {
 							$("#upClassTA").html('')
 							$("#upClassTA").html('<option value="salah">Pilih Tahun Akademik</option>')
-							data.forEach(function (row) {
+							tahuna.forEach(function (row) {							
 								$("#upClassTA").append(`
-                                    <option value="` + row.id_tahunakademik + `">` + row.tglawal + ` - ` + row.tglakhir + `</option>
+                                    <option value="` + row.id_tahunakademik + `">` + new Date(row.tglawal).getFullYear() + ` - ` + new Date(row.tglakhir).getFullYear() + `</option>
                                 `)
 							})
 						} else {

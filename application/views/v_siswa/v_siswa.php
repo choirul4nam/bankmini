@@ -61,7 +61,7 @@
                                 <i class="fa fa-check text-white"></i>
                                 Siswa Lulus
                             </a> -->
-                            <table id="dataTableSiswa" class="display table table-striped table-bordered" cellspacing="0" width="100%">
+                            <table id="dataSiswaIndex" class="display table table-striped table-bordered" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
                                         <th>No</th>
@@ -85,19 +85,9 @@
                                             <!-- <td><?= $data->rfid; ?></td> -->
                                             <td><?= $data->namasiswa; ?></td>
                                             <!-- <td><?= $data->alamat; ?></td> -->
-                                            <!-- <td><?= $data->jk; ?></td> -->
-                                            <?php if($data->id_kelas != 0): ?>
-                                            <?php $kelas = $this->db->get_where('tb_kelas', ['id_kelas' => $data->id_kelas])->row()->kelas; ?>
-                                            <td><?= $kelas; ?></td>
-                                            <?php else: ?>
-                                            <td>Belum Punya Kelas</td>
-                                            <?php endif; ?>
-                                            <?php if($data->id_tahunakademik != 0): ?>
-                                            <?php $ta = $this->db->get_where('tb_tahunakademik', ['id_tahunakademik' => $data->id_tahunakademik])->row(); ?>
-                                            <td><?= $ta->tglawal; ?> - <?= $ta->tglakhir; ?></td>
-                                            <?php else: ?>
-                                            <td></td>
-                                            <?php endif; ?>
+                                            <!-- <td><?= $data->jk; ?></td> -->                                            
+                                            <td><?= $data->kelas; ?></td>                                                                                    
+                                            <td>( <?= date_format(date_create($data->tglawal),"Y"); ?> ) - ( <?=date_format(date_create($data->tglakhir),"Y"); ?> )</td>                                            
                                             <!-- <td><?= $data->status; ?></td> -->
                                             <td style="min-width: 175px;">
                                             <center>

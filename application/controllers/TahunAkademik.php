@@ -113,6 +113,7 @@ class TahunAkademik extends CI_Controller
     public function getTAList($id){
         $ta = $this->db->get_where("tb_tahunakademik", ['id_tahunakademik' => $id])->row();        
         $tawal = $ta->tglawal;
+        // date_create($row['tglakhir']); echo date_format($tglakhir,"Y");
         $query = $this->db->query("SELECT * FROM tb_tahunakademik WHERE tglawal >= '$tawal' AND id_tahunakademik != $id")->result();
         echo json_encode($query);
     }

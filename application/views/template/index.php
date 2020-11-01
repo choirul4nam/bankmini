@@ -38,7 +38,7 @@
                 <!-- /.col-lg-3 col-md-3 col-sm-6 col-xs-12 -->
 
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                    <a class="dashboard-stat bg-danger" href="<?php echo base_url('transaksi') ?>">
+                    <a class="dashboard-stat bg-danger" href="<?php echo base_url('jurnal') ?>">
                         <span class="number counter">Rp. <?= number_format($debet); ?></span>
                         <span class="name"><strong>Total Debet</strong></span>
                         <span class="bg-icon"><i class="fa fa-credit-card"></i></span>
@@ -47,7 +47,7 @@
                 <!-- /.col-lg-3 col-md-3 col-sm-6 col-xs-12 -->
 
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                    <a class="dashboard-stat bg-warning" href="<?php echo base_url('transaksi') ?>">
+                    <a class="dashboard-stat bg-warning" href="<?php echo base_url('jurnal') ?>">
                         <span class="number counter">Rp. <?= number_format($kredit); ?></span>
                         <span class="name"><strong>Total Kredit</strong></span>
                         <span class="bg-icon"><i class="fa fa-credit-card"></i></span>
@@ -56,7 +56,7 @@
                 <!-- /.col-lg-3 col-md-3 col-sm-6 col-xs-12 -->
 
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                    <a class="dashboard-stat bg-success" href="<?php echo base_url() ?>">
+                    <a class="dashboard-stat bg-success" href="<?php echo base_url('jurnal') ?>">
                         <span class="number counter">Rp. <?= number_format($saldo); ?> </span>
                         <span class="name"><strong>Total Saldo</strong></span>
                         <span class="bg-icon"><i class="fa fa-bar-chart"></i></span>

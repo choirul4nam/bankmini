@@ -67,8 +67,12 @@
 
                                         <tr>
                                             <td><?= $no++; ?></td>
-                                            <td><?= $data['tglawal'] ?></td>
-                                            <td><?= $data['tglakhir'] ?></td>
+                                            <td>
+                                                <?php $tglawal = date_create($data['tglawal']); echo date_format($tglawal,"d-m-Y"); ?>
+                                            </td>
+                                            <td>
+                                                <?php $tglakhir = date_create($data['tglakhir']); echo date_format($tglakhir,"d-m-Y"); ?>
+                                            </td>
                                             <!-- <td><?= $data['tglupdate'] ?></td> -->
                                             <td style="min-width: 175px;">
                                                 <center>
