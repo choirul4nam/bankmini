@@ -107,26 +107,30 @@ class Transaksi extends CI_Controller
 			$sisasaldo = $saldo - intval($nominal);
 		}else if($tipe == 'kredit'){
 			$sisasaldo = $saldo + intval($nominal);
-		}		
+		}	
+		// var_dump($sisasaldo);	
+		$baseurl = base_url();
+			
 		$id_transaksi = $this->M_Transaksi->addTransaksi($data);
+		// $id_transaksi = 0;
 		$this->session->set_flashdata('alert', '<div class="alert alert-success left-icon-alert" role="alert">
 	                                            		<strong>Sukses!</strong> Transaksi Berhasil.
 													</div>');
 		if($this->input->post('action') == 'cetak'){
-			echo '<script>
-					let myWindow;
-					window.onload = function(){ 
-						myWindow = window.open("'.base_url('transaksi/printOutTransaksi?id_transaksi='.$id_transaksi.'&tipe='.$id_tipeuser->tipeuser.'&ss='.$sisasaldo).'") 						
-						setTimeout(()=>{
-							myWindow.close();
-							window.location.href = "'.base_url().'transaksi/"
-						},950) 						
-					}
-			  </script>';		
+				echo '<script>								
+							window.onload = () => {  
+								let move =  window.open("'.$baseurl.'transaksi/printOutTransaksi?id_transaksi='.$id_transaksi.'&tipe='.$id_tipeuser->tipeuser.'&ss='.$sisasaldo.'");
+								setTimeout( () => {
+									move.close();
+									window.location.href = "'.$baseurl.'transaksi/"									
+								}, 3000)
+							};									
+			  		</script>';		
+			// header(base_url('transaksi/printOutTransaksi?id_transaksi='.$id_transaksi.'&tipe='.$id_tipeuser->tipeuser.'&ss='.$sisasaldo));
 		}else if($this->input->post('action') == 'simpan'){
 			redirect(base_url('transaksi/'));
 		}			
-		redirect(base_url('transaksi/printOutTransaksi?id_transaksi='.$id_transaksi.'&tipe='.$id_tipeuser->tipeuser.'&ss='.$sisasaldo));
+		// redirect(base_url('transaksi/printOutTransaksi?id_transaksi='.$id_transaksi.'&tipe='.$id_tipeuser->tipeuser.'&ss='.$sisasaldo));
 	}
 
 	public function getNewKode($data){
@@ -162,151 +166,109 @@ class Transaksi extends CI_Controller
 	}
 
 	public function printOutTransaksi(){
-		$id = $this->input->get('id_transaksi');
-		$tipe = $this->input->get('tipe');
-		// $saldo = intval($this->input->get('ss'));
-		$saldo = 0;
-		if($tipe == 'siswa'){
-			$query = $this->db->query("SELECT tb_transaksi.*, tb_siswa.namasiswa, tb_siswa.nis, tb_siswa.id_kelas FROM tb_transaksi JOIN tb_mastertransaksi ON tb_transaksi.id_jenistransaksi = tb_mastertransaksi.id_mastertransaksi JOIN tb_siswa ON tb_transaksi.id_siswa = tb_siswa.nis WHERE tb_transaksi.id_transaksi = $id")->row(); 			
-			$query->nama = '';
-			$query->namaTransaksi = $query->namasiswa;
-			$query->kosong = false;
-			$saldo = 0;
-			$kelas = $this->db->get_where('tb_kelas',['id_kelas' => $query->id_kelas])->row()->kelas;
-			$kredit = $this->db->query("SELECT tb_transaksi.nominal FROM tb_transaksi JOIN tb_mastertransaksi ON tb_transaksi.id_jenistransaksi = tb_mastertransaksi.id_mastertransaksi JOIN tb_siswa ON tb_transaksi.id_siswa = tb_siswa.nis WHERE tb_siswa.nis = $query->id_siswa AND tb_mastertransaksi.kredit = 'siswa'")->result_array(); 
-			$debet = $this->db->query("SELECT tb_transaksi.nominal FROM tb_transaksi JOIN tb_mastertransaksi ON tb_transaksi.id_jenistransaksi = tb_mastertransaksi.id_mastertransaksi JOIN tb_siswa ON tb_transaksi.id_siswa = tb_siswa.nis WHERE tb_siswa.nis = $query->id_siswa AND tb_mastertransaksi.debet = 'siswa'")->result_array(); 
-			foreach($kredit as $row){
-				$saldo += $row['nominal'];
-			}
-			foreach($debet as $row){
-				$saldo -= $row['nominal'];
-			}			
-		}else if($tipe == 'staf'){
-			$query = $this->db->query("SELECT tb_transaksi.*, tb_staf.nama, tb_staf.nopegawai FROM tb_transaksi JOIN tb_mastertransaksi ON tb_transaksi.id_jenistransaksi = tb_mastertransaksi.id_mastertransaksi JOIN tb_staf ON tb_transaksi.id_anggota = tb_staf.id_staf WHERE tb_transaksi.id_transaksi = $id")->row(); 			
-			$query->namasiswa = '';
-			$query->namaTransaksi = $query->nama;
-			$query->kosong = false;
-			$kredit = $this->db->query("SELECT tb_transaksi.nominal FROM tb_transaksi JOIN tb_mastertransaksi ON tb_transaksi.id_jenistransaksi = tb_mastertransaksi.id_mastertransaksi JOIN tb_staf ON tb_transaksi.id_anggota = tb_staf.id_staf WHERE tb_staf.id_staf = $query->id_anggota AND tb_mastertransaksi.kredit = 'koperasi'")->result_array(); 
-			$debet = $this->db->query("SELECT tb_transaksi.nominal FROM tb_transaksi JOIN tb_mastertransaksi ON tb_transaksi.id_jenistransaksi = tb_mastertransaksi.id_mastertransaksi JOIN tb_staf ON tb_transaksi.id_anggota = tb_staf.id_staf WHERE tb_staf.id_staf = $query->id_anggota AND tb_mastertransaksi.debet = 'koperasi'")->result_array(); 
-			foreach($kredit as $row){
-				$saldo += $row['nominal'];
-			}
-			foreach($debet as $row){
-				$saldo -= $row['nominal'];
-			}
-			// $kasmasuk = $this->db->query("SELECT SUM(nominal) as saldoKM FROM tb_kasmasuk")->row_array();
-			// $tnsksi = $this->db->query("SELECT SUM(nominal) as jumlah FROM tb_transaksi WHERE id_anggota = '" . $id_staf . "'")->row_array();
+		// $id = $this->input->get('id_transaksi');
+		// $tipe = $this->input->get('tipe');
+		// // $saldo = intval($this->input->get('ss'));
+		// $saldo = 0;
+		// if($tipe == 'siswa'){
+		// 	$query = $this->db->query("SELECT tb_transaksi.*, tb_siswa.namasiswa, tb_siswa.nis, tb_siswa.id_kelas FROM tb_transaksi JOIN tb_mastertransaksi ON tb_transaksi.id_jenistransaksi = tb_mastertransaksi.id_mastertransaksi JOIN tb_siswa ON tb_transaksi.id_siswa = tb_siswa.nis WHERE tb_transaksi.id_transaksi = $id")->row(); 			
+		// 	$query->nama = '';
+		// 	$query->namaTransaksi = $query->namasiswa;
+		// 	$query->kosong = false;
+		// 	$saldo = 0;
+		// 	$kelas = $this->db->get_where('tb_kelas',['id_kelas' => $query->id_kelas])->row()->kelas;
+		// 	$kredit = $this->db->query("SELECT tb_transaksi.nominal FROM tb_transaksi JOIN tb_mastertransaksi ON tb_transaksi.id_jenistransaksi = tb_mastertransaksi.id_mastertransaksi JOIN tb_siswa ON tb_transaksi.id_siswa = tb_siswa.nis WHERE tb_siswa.nis = $query->id_siswa AND tb_mastertransaksi.kredit = 'siswa'")->result_array(); 
+		// 	$debet = $this->db->query("SELECT tb_transaksi.nominal FROM tb_transaksi JOIN tb_mastertransaksi ON tb_transaksi.id_jenistransaksi = tb_mastertransaksi.id_mastertransaksi JOIN tb_siswa ON tb_transaksi.id_siswa = tb_siswa.nis WHERE tb_siswa.nis = $query->id_siswa AND tb_mastertransaksi.debet = 'siswa'")->result_array(); 
+		// 	foreach($kredit as $row){
+		// 		$saldo += $row['nominal'];
+		// 	}
+		// 	foreach($debet as $row){
+		// 		$saldo -= $row['nominal'];
+		// 	}			
+		// }else if($tipe == 'staf'){
+		// 	$query = $this->db->query("SELECT tb_transaksi.*, tb_staf.nama, tb_staf.nopegawai FROM tb_transaksi JOIN tb_mastertransaksi ON tb_transaksi.id_jenistransaksi = tb_mastertransaksi.id_mastertransaksi JOIN tb_staf ON tb_transaksi.id_anggota = tb_staf.id_staf WHERE tb_transaksi.id_transaksi = $id")->row(); 			
+		// 	$query->namasiswa = '';
+		// 	$query->namaTransaksi = $query->nama;
+		// 	$query->kosong = false;
+		// 	$kredit = $this->db->query("SELECT tb_transaksi.nominal FROM tb_transaksi JOIN tb_mastertransaksi ON tb_transaksi.id_jenistransaksi = tb_mastertransaksi.id_mastertransaksi JOIN tb_staf ON tb_transaksi.id_anggota = tb_staf.id_staf WHERE tb_staf.id_staf = $query->id_anggota AND tb_mastertransaksi.kredit = 'koperasi'")->result_array(); 
+		// 	$debet = $this->db->query("SELECT tb_transaksi.nominal FROM tb_transaksi JOIN tb_mastertransaksi ON tb_transaksi.id_jenistransaksi = tb_mastertransaksi.id_mastertransaksi JOIN tb_staf ON tb_transaksi.id_anggota = tb_staf.id_staf WHERE tb_staf.id_staf = $query->id_anggota AND tb_mastertransaksi.debet = 'koperasi'")->result_array(); 
+		// 	foreach($kredit as $row){
+		// 		$saldo += $row['nominal'];
+		// 	}
+		// 	foreach($debet as $row){
+		// 		$saldo -= $row['nominal'];
+		// 	}
+		// 	// $kasmasuk = $this->db->query("SELECT SUM(nominal) as saldoKM FROM tb_kasmasuk")->row_array();
+		// 	// $tnsksi = $this->db->query("SELECT SUM(nominal) as jumlah FROM tb_transaksi WHERE id_anggota = '" . $id_staf . "'")->row_array();
 
-			// $saldo = intval($kasmasuk['saldoKM'] - $tnsksi['jumlah']);		
-		}		
-		$idlogin = $this->session->userdata('id_user'); 
-		$staf = $this->db->get_where('tb_users', ['id' => $idlogin])->row()->nama;	
-		// $print_status = "none";			
-		// var_dump($query);	
-		// $data['query'] = $query;
-		// $data['staf'] = $staf;
-		// $data['sisasaldo'] = $saldo;
-		// $this->load->view('v_transaksi/v_transaksi-print', $data);
-		try{
-			$this->load->library('escpos');
+		// 	// $saldo = intval($kasmasuk['saldoKM'] - $tnsksi['jumlah']);		
+		// }		
+		// $idlogin = $this->session->userdata('id_user'); 
+		// $staf = $this->db->get_where('tb_users', ['id' => $idlogin])->row()->nama;	
+		// $date = date_format(date_create($query->tgl_update),"d-m-Y H:i:s");			
+		// // $print_status = "none";			
+		// // var_dump($query);	
+		// // $data['query'] = $query;
+		// // $data['staf'] = $staf;
+		// // $data['sisasaldo'] = $saldo;
+		// // $this->load->view('v_transaksi/v_transaksi-print', $data);
+		// try{
+		// 	$this->load->library('escpos');
 
-			$connector = new Escpos\PrintConnectors\WindowsPrintConnector("hoster_web");   
-			// var_dump($connector);
-			$printer = new Escpos\Printer($connector);
-			// var_dump($printer);
-			// $printer->E;
-			// die();
-		
-			function buatBaris4Kolom($kolom1, $kolom2) {
-		
-				$lebar_kolom_1 = 12;
-				$lebar_kolom_2 = 8;
-		
-				$kolom1 = wordwrap($kolom1, $lebar_kolom_1, "\n", true);
-				$kolom2 = wordwrap($kolom2, $lebar_kolom_2, "\n", true);
-		
-				$kolom1Array = explode("\n", $kolom1);
-				$kolom2Array = explode("\n", $kolom2);
-		
-				$jmlBarisTerbanyak = max(count($kolom1Array), count($kolom2Array));
-		
-				$hasilBaris = array();
-		
-				for ($i = 0; $i < $jmlBarisTerbanyak; $i++) {
-		
-					// memberikan spasi di setiap cell berdasarkan lebar kolom yang ditentukan, 
-					$hasilKolom1 = str_pad((isset($kolom1Array[$i]) ? $kolom1Array[$i] : ""), $lebar_kolom_1, " ");
-					$hasilKolom2 = str_pad((isset($kolom2Array[$i]) ? $kolom2Array[$i] : ""), $lebar_kolom_2, " ");
-		
-					//   // memberikan rata kanan pada kolom 3 dan 4 karena akan kita gunakan untuk harga dan total harga
-					//   $hasilKolom3 = str_pad((isset($kolom3Array[$i]) ? $kolom3Array[$i] : ""), $lebar_kolom_3, " ", STR_PAD_LEFT);
-					//   $hasilKolom4 = str_pad((isset($kolom4Array[$i]) ? $kolom4Array[$i] : ""), $lebar_kolom_4, " ", STR_PAD_LEFT);
-		
-					// Menggabungkan kolom tersebut menjadi 1 baris dan ditampung ke variabel hasil (ada 1 spasi disetiap kolom)
-					$hasilBaris[] = $hasilKolom1 . " " . $hasilKolom2;
-				}
-		
-				// Hasil yang berupa array, disatukan kembali menjadi string dan tambahkan \n disetiap barisnya.
-				return implode($hasilBaris, "\n") . "\n";
-			}   
-		
-			// Membuat judul
-			$printer->initialize();
-			// $printer->selectPrintMode(Escpos\Printer::MODE_DOUBLE_HEIGHT); // Setting teks menjadi lebih besar
-			$printer->setJustification(Escpos\Printer::JUSTIFY_CENTER); // Setting teks menjadi rata tengah
-			$printer->text("Koperasi Wiyata\n");
-			$printer->text("SMA NEGERI 1 WRINGIN ANOM\n");
-			$printer->text("\n");
-			$printer->text("JL. RAYA SEMBUNG WRINGINANOM, Sembung,\n Kec. Wringin Anom,\n Kab. Gresik Prov.\n Jawa Timur\n");
-			$printer->text("(031) 7762 5226 - www.sman1wringinanom.sch.id\n");
-			$printer->text("------------------------------------------------\n");
-			$date = date_create($query->tgl_update);			
-
-			// Data transaksi
-			$printer->initialize();
-			$printer->text("\n");
-			$printer->text("Tanggal,Waktu : ".date_format($date,"d-m-Y H:i:s")."\n");
-			$printer->text("\n");
-			$printer->text("Kode Transaksi : ".$query->kodetransaksi."\n");
-			$printer->text("\n");
-			$printer->text("------------------------------------------------\n");
-			if($tipe == 'staf'){
-				$printer->text("No Anggota : ".$query->nopegawai."\n");
-				$printer->text("\n");
-			}
-			$printer->text("Nama : ".$query->namaTransaksi."\n");
-			$printer->text("\n");
-			if($tipe == 'siswa'){
-				$printer->text("NIS : ".$query->nis."\n");
-				$printer->text("\n");
-				$printer->text("Kelas : ".$kelas."\n");
-				$printer->text("\n");
-			}
-			$printer->text("------------------------------------------------\n");
-			$printer->text("Keterangan : ".$query->keterangan."\n");
-			$printer->text("\n");
-			$printer->text("Nominal : Rp. ".number_format($query->nominal)."\n");
-			$printer->text("\n");
-			$printer->text("Sisa Saldo : Rp. ".number_format($saldo)."\n");
-			$printer->text("------------------------------------------------\n");
-			$printer->text("\n");		  
-			$printer->text("\n");
-			$printer->text("\n");
-				// Pesan penutup
-			$printer->initialize();
-			$printer->setJustification(Escpos\Printer::JUSTIFY_RIGHT);
-			$printer->text("Petugas\n");
-			$printer->text($staf."\n");
-			$printer->feed(8); // mencetak 5 baris kosong agar terangkat (pemotong kertas saya memiliki jarak 5 baris dari toner)			
-			$this->session->set_flashdata('alert', '<div class="alert alert-success left-icon-alert" role="alert">
-														<strong>Sukses!</strong> Berhasil.
-													</div>');
-			$printer->cut(); 
-			//   $printer->pulse();
-			$printer->close(); 
-		}catch(Exception $e){
-			echo "Ada Masalah: " . $e -> getMessage() . "\n";
-		}
+		// 	$connector = new Escpos\PrintConnectors\WindowsPrintConnector("hoster_web");   
+		// 	// var_dump($connector);
+		// 	$printer = new Escpos\Printer($connector);
+		// 	// var_dump($printer);
+		// 	// $printer->E;
+		// 	// die();				
+		// 	// Membuat judul
+		// 	$printer->initialize();
+		// 	// $printer->selectPrintMode(Escpos\Printer::MODE_DOUBLE_HEIGHT); // Setting teks menjadi lebih besar
+		// 	$printer->setJustification(Escpos\Printer::JUSTIFY_CENTER); // Setting teks menjadi rata tengah
+		// 	$printer->text("Koperasi Siswa\n");
+		// 	$printer->text("SMA NEGERI 1 WRINGIN ANOM\n");
+		// 	$printer->text("\n");
+		// 	$printer->text("JL. RAYA SEMBUNG WRINGINANOM, Sembung,\n Kec. Wringin Anom, Gresik\n");
+		// 	$printer->text("(031) 7762 5226 - www.sman1wringinanom.sch.id\n");
+		// 	// Data transaksi
+		// 	$printer->initialize();
+		// 	$printer->text("------------------------------------------------\n");
+		// 	$printer->text("Tanggal,Waktu : ".$date."\n");
+		// 	$printer->text("Kode Transaksi : ".$query->kodetransaksi."\n");
+		// 	$printer->text("------------------------------------------------\n");
+		// 	if($tipe == 'staf'){
+		// 		$printer->text("No Anggota : ".$query->nopegawai."\n");
+		// 		$printer->text("\n");
+		// 	}
+		// 	$printer->text("Nama : ".$query->namaTransaksi."\n");
+		// 	$printer->text("\n");
+		// 	if($tipe == 'siswa'){
+		// 		$printer->text("NIS : ".$query->nis."\n");
+		// 		$printer->text("\n");
+		// 		$printer->text("Kelas : ".$kelas."\n");
+		// 		$printer->text("\n");
+		// 	}
+		// 	$printer->text("------------------------------------------------\n");
+		// 	$printer->text("Nominal : Rp. ".number_format($query->nominal)."\n");
+		// 	$printer->text("Sisa Saldo : Rp. ".number_format($saldo)."\n");
+		// 	$printer->text("------------------------------------------------\n");
+		// 	$printer->text("\n");
+		// 		// Pesan penutup
+		// 	$printer->initialize();
+		// 	$printer->setJustification(Escpos\Printer::JUSTIFY_RIGHT);
+		// 	$printer->text("\n");
+		// 	$printer->text("Petugas\n");
+		// 	$printer->text($staf."\n");
+		// 	$printer->feed(8); // mencetak 5 baris kosong agar terangkat (pemotong kertas saya memiliki jarak 5 baris dari toner)			
+		// 	$this->session->set_flashdata('alert', '<div class="alert alert-success left-icon-alert" role="alert">
+		// 												<strong>Sukses!</strong> Berhasil.
+		// 											</div>');
+		// 	$printer->cut(); 
+		// 	//   $printer->pulse();
+		// 	$printer->close(); 
+		// }catch(Exception $e){
+		// 	echo "Ada Masalah: " . $e -> getMessage() . "\n";
+		// }
 	}
 
 	public function transaksi_delete($id)
@@ -403,11 +365,11 @@ class Transaksi extends CI_Controller
 
 		if($tipe == 'siswa'){
 			// $this->db->where('id_siswa', intval($id));
-			$query = $this->db->query('SELECT tb_transaksi.*, tb_siswa.nis, tb_siswa.namasiswa, tb_siswa.id_kelas, tb_mastertransaksi.debet, tb_mastertransaksi.kredit, tb_mastertransaksi.deskripsi FROM tb_transaksi JOIN tb_mastertransaksi ON tb_transaksi.id_jenistransaksi = tb_mastertransaksi.id_mastertransaksi JOIN tb_siswa ON tb_transaksi.id_siswa = tb_siswa.nis WHERE tb_transaksi.id_siswa = '.intval($id).' AND tb_transaksi.status = "aktif"')->result();
+			$query = $this->db->query('SELECT tb_transaksi.keterangan, tb_transaksi.nominal, tb_siswa.nis, tb_siswa.namasiswa, tb_siswa.id_kelas, tb_mastertransaksi.debet, tb_mastertransaksi.kredit, tb_mastertransaksi.deskripsi, DATE_FORMAT(tb_transaksi.tgl_update,"%d-%m-%Y %H:%m:%s") AS tgl_update FROM tb_transaksi JOIN tb_mastertransaksi ON tb_transaksi.id_jenistransaksi = tb_mastertransaksi.id_mastertransaksi JOIN tb_siswa ON tb_transaksi.id_siswa = tb_siswa.nis WHERE tb_transaksi.id_siswa = '.intval($id).' AND tb_transaksi.status = "aktif"')->result();
 			echo  json_encode($query);
 			// echo 'siswa';
 		}else if($tipe == 'staf'){
-			$query = $this->db->query('SELECT tb_transaksi.*, tb_staf.nopegawai, tb_staf.nama, tb_mastertransaksi.debet, tb_mastertransaksi.kredit, tb_mastertransaksi.deskripsi FROM tb_transaksi JOIN tb_mastertransaksi ON tb_transaksi.id_jenistransaksi = tb_mastertransaksi.id_mastertransaksi JOIN tb_staf ON tb_transaksi.id_anggota = tb_staf.id_staf WHERE tb_transaksi.id_anggota = '.intval($id).' AND tb_transaksi.status = "aktif"')->result();
+			$query = $this->db->query('SELECT tb_transaksi.keterangan, tb_transaksi.nominal, tb_staf.nopegawai, tb_staf.nama, tb_mastertransaksi.debet, tb_mastertransaksi.kredit, tb_mastertransaksi.deskripsi, DATE_FORMAT(tb_transaksi.tgl_update,"%d-%m-%Y %H:%m:%s") AS tgl_update FROM tb_transaksi JOIN tb_mastertransaksi ON tb_transaksi.id_jenistransaksi = tb_mastertransaksi.id_mastertransaksi JOIN tb_staf ON tb_transaksi.id_anggota = tb_staf.id_staf WHERE tb_transaksi.id_anggota = '.intval($id).' AND tb_transaksi.status = "aktif"')->result();
 			echo  json_encode($query);
 			// echo 'staf';
 		}else{

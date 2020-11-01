@@ -664,6 +664,7 @@
 				})
 				$('#id_jenistransaksi').val(data.id_mastertransaksi)
 				$('#keterangan').val(data.deskripsi)
+				$('#nominal').val(parseInt(data.nominal))
 				$('.nominalInp').val(formatRupiah(data.nominal, "Rp. "))
 				// $('.nominalInp').attr('nominal', data.nominal)
 				let saldo = $('#saldoBox').attr('data-saldo')
@@ -844,6 +845,9 @@
 					let koperasiD = '';
 					let saldoView = 0;
 					data.forEach(function (res) {
+						let tgl = new Date(res.tgl_update);
+						let tglbaru = tgl.getDate()+ '-' + tgl.getMonth() + '-' + tgl.getFullYear();
+						console.log(tglbaru);
 						if (res.kredit == 'koperasi') {
 							koperasiK = 'staf'
 						} else if (res.debet == 'koperasi') {
@@ -934,7 +938,7 @@
 			if (tipe == 2) {
 				$.get(baseUrl + 'transaksi/getSaldoSiswa/' + $(this).val(), function (res) {
 					$('#saldoBox').html(formatRupiah(res, "Rp. "))
-					$('#saldoBox').attr('data-saldo', parseInt(res))
+					$('#saldoBox').attr('data-saldo', parseInt(res))					
 					$('#sisasaldo').val(parseInt(res))
 					let saldo = parseInt(res)
 					let kredit = $('.nominalInp').attr('tipe-kredit')

@@ -84,7 +84,7 @@ class Siswa extends CI_Controller
 	public function getSiswaByKelas($idKelas)
 	{
 		// $this->db->where();
-		echo json_encode($this->db->query("SELECT tb_siswa.*, tb_kelas.kelas, tb_tahunakademik.tglawal, tb_tahunakademik.tglakhir FROM tb_siswa JOIN tb_kelas ON tb_siswa.id_kelas = tb_kelas.id_kelas JOIN tb_tahunakademik ON tb_siswa.id_tahunakademik = tb_tahunakademik.id_tahunakademik WHERE tb_siswa.id_kelas = $idKelas AND tb_siswa.status = 'aktif'")->result());
+		echo json_encode($this->db->query("SELECT tb_siswa.*, tb_kelas.kelas, DATE_FORMAT(tb_tahunakademik.tglawal, '%Y') AS tglawal, DATE_FORMAT(tb_tahunakademik.tglakhir, '%Y') AS tglakhir FROM tb_siswa JOIN tb_kelas ON tb_siswa.id_kelas = tb_kelas.id_kelas JOIN tb_tahunakademik ON tb_siswa.id_tahunakademik = tb_tahunakademik.id_tahunakademik WHERE tb_siswa.id_kelas = $idKelas AND tb_siswa.status = 'aktif'")->result());
 	}
 
 	public function getKecamatan($idkota)

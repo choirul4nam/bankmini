@@ -39,18 +39,16 @@
 		                                        		<label for="exampleInputPassword5" style="font-size: 14px;">Debet*</label>                                     
                                                         <select class="form-control js-states" name="debet" id="debet" style="font-size: 14px; height: 45px;">
                                                             <option value="salah">Pilih</option>   
-                                                            <?php foreach($tipeuser as $row): ?>
-                                                              <option value="<?= $row->tipeuser ?>"><?= ucwords($row->tipeuser) ?></option>                                                           
-                                                            <?php endforeach ; ?>
+                                                            <option value="koperasi">Koperasi</option>      
+                                                            <option value="siswa">Siswa</option>      
                                                         </select>	                                        
 		                                        	</div>
 		                                        	<div class="col-lg-6">                                            		   
 	                                                	<label for="exampleInputPassword5" style="font-size: 14px;">Kredit*</label>
 		                                                 <select class="form-control js-states" name="kredit" id="kredit" style="font-size: 14px; height: 45px;">
                                                         <option value="salah">Pilih</option>      
-                                                        <?php foreach($tipeuser as $row): ?>
-                                                          <option value="<?= $row->tipeuser ?>"><?= ucwords($row->tipeuser) ?></option>                                                           
-                                                        <?php endforeach ; ?>
+                                                        <option value="koperasi">Koperasi</option>      
+                                                        <option value="siswa">Siswa</option>      
                                                       </select>
 		                                            </div>
                                             	</div>
