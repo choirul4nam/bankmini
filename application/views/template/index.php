@@ -69,6 +69,35 @@
         </div>
         <!-- /.container-fluid -->
     </section>
+    <section>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div class="panel panel-body">
+                        <div id="chart1" class="op-chart"></div>
+                        <div class="col-md-12 mt-15 src-code">
+                            <pre class="language-html">
+                                <code class="language-html">
+                                </code>
+                            </pre>
+                        </div>                        
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div class="panel panel-body">
+                        <canvas id="line" class="mb-20"></canvas>
+                        <div class="src-code">
+                            <pre class="language-html">
+                                <code class="language-html">
+                                
+                                </code>
+                            </pre>
+                        </div>                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
     <!-- /.section -->
     <section class="section">
         <div class="container-fluid">

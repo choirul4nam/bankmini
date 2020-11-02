@@ -10,9 +10,7 @@
 <script src="<?php echo base_url() ?>assets/Theme/js/bootstrap/bootstrap.js"></script>
 <script src="<?php echo base_url() ?>assets/Theme/js/pace/pace.min.js"></script>
 <script src="<?php echo base_url() ?>assets/Theme/js/lobipanel/lobipanel.min.js"></script>
-<script src="<?php echo base_url() ?>assets/Theme/js/iscroll/iscroll.js">
-	j
-</script>
+<script src="<?php echo base_url() ?>assets/Theme/js/iscroll/iscroll.js">j</script>
 <script src="<?php echo base_url() ?>assets/Theme/js/DataTables/DataTables-1.10.13/js/jquery.dataTables.js"></script>
 <script src="<?php echo base_url() ?>assets/Theme/js/DataTables/DataTables-1.10.13/js/dataTables.bootstrap.js"></script>
 
@@ -23,12 +21,16 @@
 <script src="<?php echo base_url() ?>assets/Theme/js/amcharts/amcharts.js"></script>
 <script src="<?php echo base_url() ?>assets/Theme/js/amcharts/serial.js"></script>
 <script src="<?php echo base_url() ?>assets/Theme/js/amcharts/plugins/export/export.min.js"></script>
-<link rel="stylesheet" href="<?php echo base_url() ?>assets/Theme/js/amcharts/plugins/export/export.css" type="text/css" media="all" />
+<link rel="stylesheet" href="<?php echo base_url() ?>assets/Theme/js/amcharts/plugins/export/export.css" type="text/css"
+	  media="all"/>
 <script src="<?php echo base_url() ?>assets/Theme/js/amcharts/themes/light.js"></script>
 <script src="<?php echo base_url() ?>assets/Theme/js/toastr/toastr.min.js"></script>
 <script src="<?php echo base_url() ?>assets/Theme/js/icheck/icheck.min.js"></script>
 <script src="<?php echo base_url() ?>assets/Theme/js/bootstrap-tour/bootstrap-tour.js"></script>
 <script src="<?php echo base_url() ?>assets/Theme/js/select2/select2.min.js"></script>
+<script src="<?php echo base_url() ?>assets/Theme/js/chartjs/Chart.bundle.js"></script>
+<script src="<?php echo base_url() ?>assets/Theme/js/chartjs/utils.js"></script>
+<!-- <script src="<?php echo base_url() ?>assets/Theme/js/chartjs/globalchartjs.js"></script> -->
 
 <!-- ========== THEME JS ========== -->
 <script src="<?php echo base_url() ?>assets/Theme/js/main.js"></script>
@@ -39,6 +41,122 @@
 <script>
 	let baseUrl = "<?php echo base_url() ?>"
 	console.log(baseUrl)
+	$.get(baseUrl+'welcome/getTransaksiChart', function(res){		
+		let siswa = []
+		let hasil = JSON.parse(res);
+		let dataSiswa = hasil.dataSiswa
+		let dataTransaksi = hasil.dataTransaksi
+		let dataTglTransaksi = [];
+		let transaksiDebet = [];
+		let transaksiKredit = [];
+		for(let i = 0; i < dataTransaksi.length; i++){
+			dataTglTransaksi.push(dataTransaksi[i].tgl);
+			if(dataTransaksi[i].tipe == 'debet'){
+				transaksiDebet.push(dataTransaksi[i].nominal);
+			}
+			if(dataTransaksi[i].tipe == 'kredit'){
+				transaksiKredit.push(dataTransaksi[i].nominal);
+			}
+		}
+		// console.log(dataTglTransaksi)
+		for(let i = 0; i < dataSiswa.length; i++){
+			siswa.push({kelas : dataSiswa[i].kelas, jumlah : dataSiswa[i].jmlsiswa, color : '#'+(0x1000000+(Math.random())*0xffffff).toString(16).substr(1,6) });
+		}
+		var chart = AmCharts.makeChart("chart1", {
+                  "type": "serial",
+                  "theme": "light",
+                  "fontFamily": "Poppins",
+                  "marginRight": 70,
+                  "dataProvider": siswa,
+                  "valueAxes": [{
+                    "axisAlpha": 0,
+                    "position": "left",
+                    "title": "Data Siswa"
+                  }],
+                  "startDuration": 1,
+                  "graphs": [{
+                    "balloonText": "<b>[[category]]: [[value]]</b>",
+                    "fillColorsField": "color",
+                    "fillAlphas": 0.9,
+                    "lineAlpha": 0.2,
+                    "type": "column",
+                    "valueField": "jumlah"
+                  }],
+                  "chartCursor": {
+                    "categoryBalloonEnabled": false,
+                    "cursorAlpha": 0,
+                    "zoomable": false
+                  },
+                  "categoryField": "kelas",
+                //   "categoryAxis": {
+                //     "gridPosition": "start",
+                //     "labelRotation": 45
+                //   },
+                  "export": {
+                    "enabled": true
+				}
+			});
+		
+		var config = {
+            type: 'line',
+            data: {
+                labels: dataTglTransaksi,
+                datasets: [{
+                    label: "Kredit",
+                    backgroundColor: window.chartColors.red,
+                    borderColor: window.chartColors.red,
+                    data: transaksiKredit,
+                    fill: false,
+                }, {
+                    label: "Debet",
+                    fill: false,
+                    backgroundColor: window.chartColors.blue,
+                    borderColor: window.chartColors.blue,
+                    data: transaksiDebet,
+                }]
+            },
+            options: {
+                responsive: true,
+                fontFamily: 'Poppins',
+                title:{
+                    display:false
+                },
+                tooltips: {
+                    mode: 'index',
+                    intersect: false,
+                    fontFamily: 'Poppins',
+                },
+                hover: {
+                    mode: 'nearest',
+                    intersect: true,
+                    fontFamily: 'Poppins',
+                },
+                scales: {
+                    xAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Per Hari',
+                            fontFamily: 'Poppins',
+                        }
+                    }],
+                    yAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Data Transaksi ',
+                            fontFamily: 'Poppins',
+                        }
+                    }]
+                }
+            }
+		};		
+		var ctxline = document.getElementById("line").getContext("2d");
+		window.myLine = new Chart(ctxline, config);					
+		
+		
+	})	
+		
 	$(".js-states").select2();
 
 	$(".js-states-limit").select2({
