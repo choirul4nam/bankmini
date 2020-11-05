@@ -36,12 +36,12 @@ class C_Login extends CI_Controller {
 
 		$username = $this->input->post('username');
 		$password = $this->input->post('password');
-		$user = $this->M_login->get($username);
+		$user = $this->M_login->get($username,$password);
 
 		if(empty($user)){
 			echo "<script>alert('Data yang anda masukkan salah');history.go(-1);</script>";			
 		} else {
-		    if(md5($password) == $user->password){ // Jika password yang diinput sama dengan password yang didatabase
+		    // if(md5($password) == $user->password){ // Jika password yang diinput sama dengan password yang didatabase
         		$session = array(
 		          'authenticated'=>true, // Buat session authenticated dengan value true
 		          'username'=> $username,  // Buat session nip
@@ -53,14 +53,14 @@ class C_Login extends CI_Controller {
 		        $this->session->set_userdata($session); // Buat session sesuai $session
 		        $this->M_login->userlog();
 		        redirect('Welcome'); // Redirect ke halaman welcome
-		    }else{
+		    // }else{
 		        // $this->session->set_flashdata('message', 'Password salah'); // Buat session flashdata
-		        echo "<script>
-					alert('Password salah');history.go(-1);
-				</script>";
-		        // redirect('C_Login'); 
-		        // Redirect ke halaman login
-		    }
+		    //     echo "<script>
+			// 		alert('Password salah');history.go(-1);
+			// 	</script>";
+		    //     // redirect('C_Login'); 
+		    //     // Redirect ke halaman login
+		    // }
    		}
    	}
 

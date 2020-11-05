@@ -53,8 +53,31 @@ class Welcome extends CI_Controller
 	{
 		$thisM = date('m');		
 		
-		$data['dataTransaksi'] = $this->db->query("SELECT CONVERT(DATE_FORMAT(tb_transaksi.tgl_update, '%d'), SIGNED INTEGER) AS tgl, IF(tb_mastertransaksi.debet = tb_transaksi.tipeuser || tb_mastertransaksi.debet = 'koperasi', CONVERT(CONCAT('-',tb_transaksi.nominal), SIGNED INTEGER), CONVERT(tb_transaksi.nominal, SIGNED INTEGER)) AS nominal, IF(tb_mastertransaksi.debet = tb_transaksi.tipeuser || tb_mastertransaksi.debet = 'koperasi', 'debet', 'kredit') AS tipe FROM tb_transaksi JOIN tb_mastertransaksi ON tb_transaksi.id_jenistransaksi = tb_mastertransaksi.id_mastertransaksi WHERE tb_mastertransaksi.kredit != ' ' OR tb_mastertransaksi.debet != ' ' AND MONTH(tb_transaksi.tgl_update) = $thisM")->result();				
-		$data['dataSiswa'] = $this->db->query('SELECT tb_kelas.kelas, COUNT(tb_siswa.id_kelas) AS jmlsiswa FROM tb_siswa JOIN tb_kelas ON tb_siswa.id_kelas = tb_kelas.id_kelas WHERE tb_siswa.status = "aktif" GROUP BY tb_siswa.id_kelas')->result_array();
+		$data['dataTransaksi'] = $this->db->query("SELECT CONVERT(DATE_FORMAT(tb_transaksi.tgl_update, '%d'), SIGNED INTEGER) AS tgl, IF(tb_mastertransaksi.debet = tb_transaksi.tipeuser || tb_mastertransaksi.debet = 'koperasi', CONVERT(CONCAT('-',tb_transaksi.nominal), SIGNED INTEGER), CONVERT(tb_transaksi.nominal, SIGNED INTEGER)) AS nominal, IF(tb_mastertransaksi.debet = tb_transaksi.tipeuser || tb_mastertransaksi.debet = 'koperasi', 'debet', 'kredit') AS tipe FROM tb_transaksi JOIN tb_mastertransaksi ON tb_transaksi.id_jenistransaksi = tb_mastertransaksi.id_mastertransaksi WHERE tb_mastertransaksi.kredit != ' ' OR tb_mastertransaksi.debet != ' ' AND MONTH(tb_transaksi.tgl_update) = $thisM")->result();						
+		$kelas = $this->db->query('SELECT tb_kelas.kelas, COUNT(tb_siswa.id_kelas) AS jmlsiswa FROM tb_siswa JOIN tb_kelas ON tb_siswa.id_kelas = tb_kelas.id_kelas WHERE tb_siswa.status = "aktif" GROUP BY tb_siswa.id_kelas')->result();
+		$d = [];
+		foreach($kelas as $row){
+			// strlen(explode(' ', $row->kelas)[0]) explode(' ', $row->kelas)[2]
+			$pangkat = explode(' ', $row->kelas)[0];
+			$jurusan = explode(' ', $row->kelas)[1];
+			$no = explode(' ', $row->kelas)[2];	
+			if(count($d) === 0){
+				$dKelas = ['kelas' => $pangkat.' '.$jurusan, 'jmlsiswa' => $row->jmlsiswa];
+				array_push($d, $dKelas);				
+			}else{
+				for($i = 0; $i < count($d); $i++){
+					if($d[$i]['kelas'] == $pangkat.' '.$jurusan){
+						$d[$i]['jmlsiswa'] = $d[$i]['jmlsiswa'] + $row->jmlsiswa;
+						// $dKelas = ['kelas' => $pangkat.' '.$jurusan, 'jmlsiswa' => $row->jmlsiswa];
+						// array_push($d, $dKelas);
+					}else{
+						$dKelas = ['kelas' => $pangkat.' '.$jurusan, 'jmlsiswa' => $row->jmlsiswa];
+						array_push($d, $dKelas);
+					}
+				}			
+			}		
+		}
+		$data['dataSiswa'] = $d;
 		echo json_encode($data);
 		// $data['kredit'] = $nominalKredit;
 		// $data['debet'] = $nominalDebet;

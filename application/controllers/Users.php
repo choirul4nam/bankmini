@@ -11,6 +11,7 @@ class Users extends CI_Controller
         $this->load->library('session');
         $this->load->model('M_Setting');
         $this->load->model('M_TahunAkademik');
+        $this->load->model('M_TipeUser');
         $this->load->model('M_Akses');
         cek_login_user();
     }
@@ -43,13 +44,14 @@ class Users extends CI_Controller
     public function add_process(){
         // var_dump($this->input->post());
         if($this->input->post('password') === $this->input->post('repassword')){
+            $userlevel = $this->input->post('usrlevel', true);
             $data = [
                 'nama' => $this->input->post('nama', true),
                 'username' => $this->input->post('username', true),
                 'password' => md5($this->input->post('password', true)),
-                'user_level' => 1,
+                'user_level' => $userlevel,
             ];
-            $this->db->insert('tb_users',$data);            
+            $this->db->insert('tb_users',$data);         
             $this->session->set_flashdata('message', '<div class="alert alert-success left-icon-alert" role="alert"> <strong>Berhasil!</strong> Berhasil Menambah Kan Pengguna</div>');
             redirect('users');
         }else{
@@ -161,5 +163,73 @@ class Users extends CI_Controller
         $this->session->set_flashdata('message', '<div class="alert alert-success left-icon-alert" role="alert"> <strong>Berhasil!</strong> Ubah Profile</div>');
         redirect('profile');       
     }
+    public function akses($userlevel)
+    {
+        // $datasubmenu = $this->db->query("SELECT * FROM tb_submenu WHERE submenu != 'Tipe User'")->result_array();
+        // $dataakses = $this->db->query("SELECT * FROM tb_akses WHERE id_tipeuser = $userlevel")->num_rows();
+        // if ($dataakses == 0) {
+        //     foreach ($datasubmenu as $daa) {
+        //         $this->db->insert('tb_akses', ['id_submenu' => $daa['id_submenu'], 'id_tipeuser' => $userlevel]);
+        //     }
+        // }
+        // die;
+        $this->load->view('template/header');
+        $id = $this->session->userdata('tipeuser');
+        $data['menu'] = $this->M_Setting->getmenu1($id);
+        $data['tipeuser'] = $this->db->get_where('tb_users', ['user_level' => $userlevel])->row_array();
+        $data['akses'] = $this->db->query("SELECT * FROM tb_submenu a
+                                        JOIN tb_akses b ON a.id_submenu = b.id_submenu 
+                                        WHERE b.id_tipeuser = $userlevel")->result_array();
+        $data['activeMenu'] = $this->db->get_where('tb_submenu', ['submenu' => 'transaksi'])->row()->id_menus;
+        
 
+
+        $this->load->view('template/sidebar', $data);
+        $this->load->view('v_user/v_akses.php', $data);
+        $this->load->view('template/footer');
+    }
+
+    public function editakses()
+    {
+        if (isset($_POST['save'])) {
+
+            $iduser = $this->input->post('id');
+            $this->M_TipeUser->refresh($iduser); //Call the modal
+
+            $submenu = $this->input->post('submenu'); //Pass the userid here
+            $checkbox = $this->input->post('view');
+            for ($i = 0; $i < count($checkbox); $i++) {
+                $sub = $submenu[$i];
+                $view = $checkbox[$i];
+                $this->M_TipeUser->editv($iduser, $sub, $view); //Call the modal
+
+            }
+
+            $addbox = $this->input->post('add');
+            for ($i = 0; $i < count($addbox); $i++) {
+                $sub = $submenu[$i];
+                $add = $addbox[$i];
+                $this->M_TipeUser->edita($iduser, $sub, $add); //Call the modal
+
+            }
+
+            $editbox = $this->input->post('edit');
+            for ($i = 0; $i < count($editbox); $i++) {
+                $sub = $submenu[$i];
+                $edit = $editbox[$i];
+                $this->M_TipeUser->edite($iduser, $sub, $edit); //Call the modal
+
+            }
+
+            $deletebox = $this->input->post('delete');
+            for ($i = 0; $i < count($deletebox); $i++) {
+                $sub = $submenu[$i];
+                $delete = $deletebox[$i];
+                $this->M_TipeUser->editd($iduser, $sub, $delete); //Call the modal
+
+            }
+            $this->session->set_flashdata('message', '<div class="alert alert-success left-icon-alert" role="alert"> <strong>Sukses!</strong> Data Berhasil DiUbah</div>');
+            redirect('users');
+        }
+    }
 }

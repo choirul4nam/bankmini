@@ -85,7 +85,7 @@
                                     <td>Telp</td>
                                     <td>:</td>
                                     <td><?= $staf['tlp'] ?></td>
-                                </tr>                               
+                                </tr>
                                 <!-- <tr>
                                     <td>Tgl Update</td>
                                     <td>:</td>
@@ -93,14 +93,18 @@
                                         $date = date_create($staf['tgl_upddate']);
                                         echo date_format($date, "d-m-Y");
                                         ?></td>
-                                </tr> -->                                   
+                                </tr> -->
                                 <tr>
                                     <td colspan="3"></td>
                                 </tr>
                             </table>
                             <a href="<?= base_url('staff') ?> " class="btn btn-primary"><i class="fa fa-arrow-left"></i> Kembali</a>
-                            <a href="<?= base_url('staff-ubah/') . $staf['id_staf'] ?>" class="btn btn-warning"><i class="fa fa-pencil"></i> Edit</a>
-                            <a href="<?= base_url('staff/hapus/') . $staf['id_staf'] ?>" class="btn btn-danger" onclick="return confirm('Yakin Mau Dihapus ?')"><i class="fa fa-trash"></i>Hapus</a>
+                            <?php if ($akses['edit'] == 1) { ?>
+                                <a href="<?= base_url('staff-ubah/') . $staf['id_staf'] ?>" class="btn btn-warning"><i class="fa fa-pencil"></i> Edit</a>
+                            <?php } ?>
+                            <?php if ($akses['delete'] == 1) { ?>
+                                <a href="<?= base_url('staff/hapus/') . $staf['id_staf'] ?>" class="btn btn-danger" onclick="return confirm('Yakin Mau Dihapus ?')"><i class="fa fa-trash"></i>Hapus</a>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>

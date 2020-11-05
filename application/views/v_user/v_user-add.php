@@ -4,7 +4,7 @@
             <div class="col-sm-6">
                 <h2 class="title">Pengguna</h2>
                 <p class="sub-title">SIMBMS (Sistem Informasi Bank Mini Sekolah)</p>
-            </div>         
+            </div>
         </div>
         <div class="row breadcrumb-div">
             <div class="col-sm-6">
@@ -34,7 +34,7 @@
                             </div>
                         </div>
                         <div class="panel-body p-20">
-                        <i>( * ) Wajib di Isi</i>
+                            <i>( * ) Wajib di Isi</i>
                             <form action="<?= base_url('users/add_process') ?>" method="POST">
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6 col-sm-12">
@@ -49,7 +49,7 @@
                                             <input type="text" class="form-control" name="username" required placeholder="User Name">
                                         </div>
                                     </div>
-                                </div>    
+                                </div>
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
@@ -63,7 +63,20 @@
                                             <input type="password" class="form-control" name="repassword" required placeholder="Ulangi Password">
                                         </div>
                                     </div>
-                                </div>                                
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label for="">User Level*</label>
+                                            <?php $data = $this->db->query("SELECT * FROM tb_userlevel")->result_array(); ?>
+                                            <select class="form-control" id="usrlevel" name="usrlevel">
+                                                <?php foreach ($data as $a) : ?>
+                                                    <option value="<?= $a['id'] ?>"><?= $a['userlevel'] ?></option>
+                                                <?php endforeach; ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
                                 <a href="<?= base_url('users') ?>" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Kembali</a>
                                 <button class="btn btn-success"><i class="fa fa-plus"></i> Tambah</button>
                             </form>

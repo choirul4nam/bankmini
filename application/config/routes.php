@@ -127,6 +127,7 @@ $route['jurnal-add'] = 'jurnal/jurnal_add';
 $route['users-add'] = 'users/users_add';
 $route['users-hps/(:any)'] = 'users/users_delete/$1';
 $route['users-edit/(:any)'] = 'users/users_edit/$1';
+$route['users-akses/(:any)'] = 'users/akses/$1';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

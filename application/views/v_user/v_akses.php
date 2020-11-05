@@ -55,7 +55,7 @@
                             </table>
                             <br>
 
-                            <form action="<?= base_url('tipeuser/editakses') ?>" method="POST">
+                            <form action="<?= base_url('users/editakses') ?>" method="POST">
                                 <table class="table">
                                     <thead>
                                         <tr style="text-align: center;">

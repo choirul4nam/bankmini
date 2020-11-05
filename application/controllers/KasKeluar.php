@@ -66,7 +66,7 @@ class KasKeluar extends CI_Controller
 
         if (preg_replace("/[^0-9]/", "", $this->input->post('nominal')) > $saldo) {
             $this->session->set_flashdata('message', '<div class="alert alert-warning left-icon-alert" role="alert"> <strong>Warning! </strong>Nominal Terlalu Besar Dari Saldo, Saldo tinggal Rp. ' . number_format($saldo) . '</div>');
-            redirect('kaskeluar/tambah');
+            redirect('kas-keluar-add');
         } else {
             $this->M_KasKeluar->tambah($data);
             $this->M_KasKeluar->tambahHisto($dataHistori);
@@ -100,18 +100,22 @@ class KasKeluar extends CI_Controller
         $id = $this->session->userdata('tipeuser');
         $dbet = $this->db->query("SELECT SUM(nominal) AS nominal FROM tb_historikas WHERE jenis = 'kas masuk'")->row_array();
         $kreddi = $this->db->query("SELECT SUM(nominal) AS nominal FROM tb_historikas WHERE jenis = 'kas keluar'")->row_array();
-        $saldo = $dbet['nominal'] - $kreddi['nominal'];
-        $hasil = intval($saldo['saldo']) - intval(preg_replace("/[^0-9]/", "", $this->input->post('nominal')));
+        $nominalSaya = $this->db->query("SELECT * FROM tb_historikas WHERE kode_kas = '". $kodekaskeluar ."'")->row_array();
+        $saldo = $nominalSaya['nominal'] + $dbet['nominal'] - $kreddi['nominal'];
+        // var_dump($saldo ,$nominalSaya['nominal'] , $dbet['nominal'] , $kreddi['nominal']);
+        // die;
+        // $hasil = intval($saldo['saldo']) - intval(preg_replace("/[^0-9]/", "", $this->input->post('nominal')));
         $data = [
-            'tgltransaksi' => $this->input->post('tglTransaksi') . date('h:i:s'),
+            'tgltransaksi' => $this->input->post('tglTransaksi') . date(' h:i:s'),
             'keterangan' => $this->input->post('keterangan'),
             'nominal' => preg_replace("/[^0-9]/", "", $this->input->post('nominal')),
             'kode_kas_keluar' => $kodekaskeluar,
             'id_user' => $id,
         ];
         if (preg_replace("/[^0-9]/", "", $this->input->post('nominal')) > $saldo) {
+        
             $this->session->set_flashdata('message', '<div class="alert alert-warning left-icon-alert" role="alert"> <strong>Warning! </strong>Nominal Terlalu Besar Dari Saldo, Saldo tinggal Rp. ' . number_format($saldo) . '</div>');
-            redirect('kaskeluar/tambah');
+            redirect('kas-keluar-edt/'.$kodekaskeluar);
         } else {
             $this->M_KasKeluar->ubah($data, $kodekaskeluar);
             $this->db->where('kode_kas', $kodekaskeluar);
@@ -121,7 +125,7 @@ class KasKeluar extends CI_Controller
                 'jenis' => 'kas keluar',
                 'nominal' => preg_replace("/[^0-9]/", "", $this->input->post('nominal')),
                 'saldo' => 0,
-                'tgltransaksi' => $this->input->post('tglTransaksi') . date(' h:i:s'),
+                'tgltransaksi' => $this->input->post('tglTransaksi'),
             ];
 
             $this->M_KasKeluar->tambahHisto($dataHistori);

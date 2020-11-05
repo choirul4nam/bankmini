@@ -108,13 +108,13 @@ class KasMasuk extends CI_Controller
         $this->M_KasMasuk->ubah($data, $kodekasmasuk);
         $dataHistori = [
             'kode_kas' => $kodekasmasuk,
-            'jenis' => 'kas keluar',
+            'jenis' => 'kas masuk',
             'nominal' => preg_replace("/[^0-9]/", "", $this->input->post('nominal')),
             'saldo' => 0,
-            'tgltransaksi' => $this->input->post('tglTransaksi') . date(' h:i:s'),
+            'tgltransaksi' => $this->input->post('tglTransaksi'),
         ];
 
-        $this->M_KasKeluar->tambahHisto($dataHistori);
+        $this->M_KasMasuk->tambahHisto($dataHistori,$kodekasmasuk);
         $this->session->set_flashdata('message', '<div class="alert alert-success left-icon-alert" role="alert"> <strong>Sukses!</strong> Data Berhasil DiUbah</div>');
         redirect('kasmasuk');
     }

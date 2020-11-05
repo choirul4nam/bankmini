@@ -57,6 +57,7 @@
                                 </ul>
                             </div>
                             <?php  } ?>
+                            <?php  } ?>
                             <!--     <a href="<?= base_url('siswa-grad/')  ?>" class="btn btn-info mb-20">
                                 <i class="fa fa-check text-white"></i>
                                 Siswa Lulus
@@ -108,77 +109,8 @@
                                     <?php endforeach; ?>
                                 </tbody>
                             </table>                             
-                            <?php  }else{ ?>
-                                <table class="table">
-                                        <tr>
-                                            <td>NIS</td>
-                                            <td>:</td>
-                                            <td><?= $datasiswa['nis']; ?></td>
-                                        </tr>
-                                        <tr>
-                                            <td>RFID</td>
-                                            <td>:</td>
-                                            <td><?= $datasiswa['rfid']; ?></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Nama</td>
-                                            <td>:</td>
-                                            <td><?= $datasiswa['namasiswa']; ?></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Jenis Kelamin</td>
-                                            <td>:</td>
-                                            <td><?= $datasiswa['jk']; ?></td>
-                                        </tr> 
-                                        <tr>
-                                            <td>Kelas</td>
-                                            <td>:</td>
-                                            <?php if($datasiswa['id_kelas'] != 0): ?>
-                                            <?php $kelas = $this->db->get_where('tb_kelas', ['id_kelas' => $datasiswa['id_kelas']])->row()->kelas; ?>
-                                            <td><?= $kelas; ?></td>
-                                            <?php else: ?>
-                                            <td>Belum Punya Kelas</td>
-                                            <?php endif; ?>
-                                        </tr>
-                                        <tr>
-                                            <td>Tempat, Tanggal Lahir</td>
-                                            <td>:</td>
-                                            <td><?= $datasiswa['tempat_lahir']; ?>, <?= $datasiswa['tgl_lahir']; ?></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Alamat</td>
-                                            <td>:</td>
-                                            <td><?= $datasiswa['alamat']; ?></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Kecamatan/Kota/Provinsi</td>
-                                            <td>:</td>
-                                            <td><?= (!empty($datasiswa['kecamatan']) ? $this->db->get_where('tb_kecamatan', ['id_kecamatan' => $datasiswa['kecamatan']])->row()->kecamatan : '').'/'.(!empty($datasiswa['kota']) ? $this->db->get_where('tb_kota', ['id_kota' => $datasiswa['kota']])->row()->name_kota : ' ').'/'.(!empty($datasiswa['provinsi']) ? $this->db->get_where('tb_provinsi', ['id_provinsi' => $datasiswa['provinsi']])->row()->name_prov : '' ) ?></td>
-                                        </tr>
-                                        <!-- <tr>
-                                            <td>Username</td>
-                                            <td>:</td>
-                                            <td><?= $datasiswa['nis']; ?></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Password</td>
-                                            <td>:</td>
-                                            <td><?= $datasiswa['password']; ?></td>
-                                        </tr> -->
-                                        <!-- <tr>
-                                            <td>status</td>
-                                            <td>:</td>
-                                            <td><?= $datasiswa['status']; ?></td>
-                                        </tr> -->
-                                        <!--    <tr>
-                                            <td>Terakhir Di Update</td>
-                                            <td>:</td>
-                                            <td><?= $datasiswa['tglupdate']; ?></td>
-                                        </tr> -->
-                                    </table>                                    
-                                </div>
-                            <?php } ?>
                             </div>
+                                                    
                         </div>
                     </div>
                 </div>

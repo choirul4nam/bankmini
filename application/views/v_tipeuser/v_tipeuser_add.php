@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="row page-title-div">
             <div class="col-sm-6">
-                <h2 class="title">Tipe User</h2>
+                <h2 class="title">Level Pengguna</h2>
                 <p class="sub-title">SIMBMS (Sistem Informasi Bank Mini Sekolah)</p>
             </div>
             <!-- /.col-sm-6 -->
@@ -17,7 +17,7 @@
                 <ul class="breadcrumb">
                     <li><a href="<?php echo base_url() ?>"><i class="fa fa-home"></i> Home</a></li>
                     <li class="active">Data Master</li>
-                    <li class="active">Tipe User</li>
+                    <li class="active">Level Pengguna</li>
                 </ul>
             </div>
             <!-- /.col-sm-6 -->
@@ -40,16 +40,16 @@
                     <div class="panel">
                         <div class="panel-heading">
                             <div class="panel-title">
-                                <h5>Tambah Tipe User</h5>
+                                <h5>Tambah Level Pengguna</h5>
                             </div>
                         </div>
                         <div class="panel-body p-20">
-                        <i>( * ) Wajib di Isi</i>
+                            <i>( * ) Wajib di Isi</i>
                             <form action="<?= base_url('tipeuser/tambah') ?>" method="POST">
                                 <table class="table">
                                     <tr>
                                         <td>
-                                            Tipe User*
+                                           Nama*
                                         </td>
                                         <td>
                                             :

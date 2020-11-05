@@ -37,11 +37,12 @@
                     <div class="panel-title">
                         <h5>Master Code Of Accounting</h5>
                     </div>
-                    <a href="<?= base_url('mastercoa-add') ?> " class="btn btn-primary ml-15">
-                        <i class="fa fa-plus text-white"></i>
-                        Tambah Code Of Accounting
-                    </a>
-
+                    <?php if ($akses['add'] == 1) { ?>
+                        <a href="<?= base_url('mastercoa-add') ?> " class="btn btn-primary ml-15">
+                            <i class="fa fa-plus text-white"></i>
+                            Tambah Code Of Accounting
+                        </a>
+                    <?php } ?>
                 </div>
                 <div class="panel-body p-20">
                     <table id="dataTableSiswa" class="display table table-striped table-bordered" cellspacing="0" width="100%">
@@ -50,6 +51,7 @@
                                 <th>Code Of Accounting</th>
                                 <th>Akun</th>
                                 <th>Keterangan</th>
+                                
                                 <th width="200px">
                                     <center>Aksi</center>
                                 </th>
@@ -73,8 +75,12 @@
                                     <td style="min-width: 140px;">
                                         <center>
                                             <div class="btn-group">
+                                                <?php if ($akses['edit'] == 1) { ?>
                                                 <a href="<?= base_url('mastercoa-edt/') . $data['id_coa'] ?>" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
+                                                <?php } ?>
+                                                <?php if ($akses['delete'] == 1) { ?>
                                                 <a href="<?= base_url('mastercoa/hapus/') . $data['id_coa'] ?>" class="btn btn-danger" onclick="return confirm('Yakin Mau Dihapus ?')"><i class="fa fa-trash"></i></a>
+                                                <?php } ?>
                                                 <!-- <a href="<?= base_url('mastercoa-det/') . $data['id_coa'] ?>" class="btn btn-success"><i class="fa fa-search"></i></a> -->
                                             </div>
                                         </center>

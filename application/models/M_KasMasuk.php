@@ -59,9 +59,10 @@ class M_KasMasuk extends CI_Model
     {
         $this->db->insert('tb_kasmasuk', $data);
     }
-    function tambahHisto($data)
+    function tambahHisto($data,$kode)
     {
-        $this->db->insert('tb_historikas', $data);
+        $this->db->where('kode_kas', $kode);
+        $this->db->update('tb_historikas', $data);
     }
 
     function hapus($kode)

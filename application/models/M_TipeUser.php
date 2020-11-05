@@ -5,29 +5,35 @@ class M_TipeUser extends CI_Model
 {
     function getAll()
     {
-        $query = $this->db->get('tb_tipeuser');
+        $query = $this->db->get('tb_userlevel');
         return $query->result_array();
     }
 
     function hapus($id_tipeuser)
     {
-        $this->db->where('id_tipeuser', $id_tipeuser);
-        $this->db->delete('tb_tipeuser');
+        $this->db->where('id', $id_tipeuser);
+        $this->db->delete('tb_userlevel');
 
-        $this->db->query("ALTER TABLE tb_tipeuser AUTO_INCREMENT 1");
+        $data = $this->db->query("SELECT * FROM tb_userlevel")->num_rows();
+        if($data == 0) {
+        $this->db->query("ALTER TABLE tb_userlevel AUTO_INCREMENT 1");
+        }
     }
 
     function hapusakses($id_tipeuser)
     {
         $this->db->where('id_tipeuser', $id_tipeuser);
         $this->db->delete('tb_akses');
-        
-        $this->db->query("ALTER TABLE tb_akses AUTO_INCREMENT 1");
+
+        $data = $this->db->query("SELECT * FROM tb_akses")->num_rows();
+        if ($data == 0) {
+            $this->db->query("ALTER TABLE tb_akses AUTO_INCREMENT 1");
+        }
     }
 
     function getById($id_tipeuser)
     {
-        $query = $this->db->get_where('tb_tipeuser', ['id_tipeuser' => $id_tipeuser])->row_array();
+        $query = $this->db->get_where('tb_userlevel', ['id' => $id_tipeuser])->row_array();
         return $query;
     }
 
@@ -41,7 +47,7 @@ class M_TipeUser extends CI_Model
 
     function tambah($data)
     {
-        $this->db->insert('tb_tipeuser', $data);    
+        $this->db->insert('tb_userlevel', $data);    
     }
 
      function cekkodetipeuser(){
@@ -64,13 +70,13 @@ class M_TipeUser extends CI_Model
 
     function ubah($data)
     {
-        $this->db->where('id_tipeuser', $data['id_tipeuser']);
-        $this->db->update('tb_tipeuser', ['tipeuser' => $data['tipeuser']]);
+        $this->db->where('id', $data['id']);
+        $this->db->update('tb_userlevel', ['userlevel' => $data['userlevel']]);
     }
 
     function cekData($tipeuser)
     {
-        return $this->db->query("SELECT * FROM tb_tipeuser WHERE tipeuser ='" . $tipeuser . "'")->num_rows();
+        return $this->db->query("SELECT * FROM tb_userlevel WHERE userlevel ='" . $tipeuser . "'")->num_rows();
     }
 
     function refresh($iduser){

@@ -99,7 +99,7 @@ class ImportSiswa extends CI_Controller
                                 $data[$no++] = array(
                                     "nis" => $sheetData[$i][1],
                                     "namasiswa" => $sheetData[$i][2],
-                                    'jk' => $this->M_Siswa->getJK($sheetData[$i][3]),
+                                    'jk' => $this->M_Siswa->getJK(str_replace(' ','',$sheetData[$i][3])),
                                     'id_kelas' => $this->db->get_where('tb_kelas', ['kelas LIKE' => '%'. $sheetData[$i][4].'%' ])->row()->id_kelas,
                                     'tempat_tgl_lahir' => $sheetData[$i][5],
                                     'alamat' => $sheetData[$i][6],
